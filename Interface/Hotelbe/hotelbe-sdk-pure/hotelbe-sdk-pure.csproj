@@ -1,0 +1,893 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>hotelbe-sdk-pure</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>hotelbe-sdk-pure</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+      <HintPath>mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+      <HintPath>System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <Name>System.Core</Name>
+      <HintPath>System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+      <HintPath>System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Name>System.Xml.Linq</Name>
+      <HintPath>System.Xml.Linq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\BaseRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\CancelOrderReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\CityReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\EasyI18NMultiHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\EasyMultiHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\EasySingleHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelbeReq.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelRatePlanStaticInfoCacheReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelResDetailSearchImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelResOutLineSearchImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelResProcessReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelRoomRateStaticInfoCacheReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelRoomTypeStaticInfoCacheReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\HotelStaticInfoCacheReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\LandMarkReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\MultiHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\OfferHotelsReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\OfferRoomTypesReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\OrderHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\PromotionHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\SearchCheckedOrderReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\SingleHotelReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_CityDetailsSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelAvailabilityCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelCancelRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelCheckSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelMultiAvailRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelResDetailSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelResProcessRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelResRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelResSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelSingleAvailRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_HotelStaticInfoCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_LandMarkSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_OfferHotelsRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_OfferRoomTypesRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_RateplanControlCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_RoomTypeStaticInfoCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\TH_UpdateHotelsRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.invoke\UpdateHotelsReqImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.Availability\Rate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.basicproperty\HotelAmenity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\BaseReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\CancelOrderReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\CityReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\Contact.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\EasyI18NMultiHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\EasyMultiHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\EasySingleHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelAvailabilityCacheReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelRatePlanStaticInfoCacheReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelResDetailReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelResOutLineReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelRoomRateStaticInfoCacheReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelRoomTypeStaticInfoCacheReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\HotelStaticInfoCacheReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\LandMarkReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\MultiHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\OfferHotelsReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\OfferRoomTypesReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\OrderHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\OrderRemarkReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\PromotionHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\RoomPrice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\SearchCheckedOrderReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\SingleHotelReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.condition\UpdateHotelsReqCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.brandcode\BrandCodeVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.city\CityVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\BasicHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\HotelRatePlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\HotelRoomRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\HotelRoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\MultiHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\MultiHotelVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\SingleHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.i18nmulti\SingleHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.landmark\LandMarkVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\BasicHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\BookingPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\CancelPolicie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\FavourPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelBookingPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelCancelPolicie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelFavourPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelGuaranteePolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelRatePlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelRoomRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\HotelRoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\MultiHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\MultiHotelVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\SingleHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.multi\SingleHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.orderinfo\CheckedInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.orderinfo\OrderInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.orderinfo\OrderOutLineInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.orderinfo\OrderRemarkInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.order\HotelCreditCardInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\BasicHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelAcceptedPayment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelAmenity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelBookingPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelCancelPolicie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelCommission.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelFavourPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelGuaranteePolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelRatePlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelRoomRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelRoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\HotelTrafficInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\SingleHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\SingleHotelInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models.easyhotel.single\SingleHotelVO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\AcceptedPayment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\AdditionalDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\AdditionalGuestAmount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Amenity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BaseHotelBEXml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BaseOTRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BasicProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BasicPropertyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BookingDateRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\BookingPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CancelPenalty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CancelPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CityDetailsSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CityDetailsSearchRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CityInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Commision.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Commission.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ContactorInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\CreditCardInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Customer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\DateSearchCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\DestinationSystemCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Discount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Error.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\FavourPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\FavPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Feature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Fee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\FrequentFlyerCardInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Guarantee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\GuaranteeInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\GuaranteePolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\GuestCount.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\GuestProfile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\GuestRef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Header.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAcceptedPayment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAmenity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailabilityCacheCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailabilityCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailabilityCacheRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelAvailRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCancelRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCancelRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCheckBrief.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCheckDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCheckInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCheckSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelCheckSearchRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelImage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResBrief.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResDetailSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResDetailSearchRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelReservation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResModifyRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResModifyRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResProcess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResProcessRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResProcessRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResSearchCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelResSearchRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRoomTypeStaticInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRoomTypeStaticInfoCacheCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRoomTypeStaticInfoCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelRoomTypeStaticInfoCacheRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelSearchCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelStaticInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelStaticInfoCacheCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelStaticInfoCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelStaticInfoCacheRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelTrafficInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\HotelVendor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\IdentityCard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\IdentityInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Image.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\LandMarkInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\LandMarkSearchRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\LandMarkSearchRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferHotelsRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferHotelsRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferRoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferRoomTypesRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OfferRoomTypesRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OldCustomerInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OrderStatusMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OTRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\OTResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\PaymentCard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Policies.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Policy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Position.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Profile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ProfileInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Profiles.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Rate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RatePlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RatePlanCandidate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RatePlanControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RateplanControlCacheCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RateplanControlCacheRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RatePlanControlRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RateRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RelativePosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ReqPageInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResCheckInDateRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResCheckOutDateRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResGlobalInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResGuest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResID.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\ResModifyAppInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RespPageInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomQuota.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomStay.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomStayCandidate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\RoomTypeStaticInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Service.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Source.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\StayDateRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Success.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\TimeSpan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Total.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Transportation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\UpdateHotel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\UpdateHotelsRQ.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\UpdateHotelsRS.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Vendor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\VendorInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\VendorMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\VendorsIncluded.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.models\Warnings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.utils\FunctionHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.utils\HashtableSerailizable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.utils\HotelbeException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.utils\SerializableDictionary!2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="com.travelsky.hotelbesdk.utils\Utils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

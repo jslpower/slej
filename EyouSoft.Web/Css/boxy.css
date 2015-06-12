@@ -1,0 +1,14 @@
+img{vertical-align:middle;}
+.boxy-wrapper { position: absolute; border:#363636 solid 6px;}
+.boxy-wrapper.fixed { position: fixed; }
+.boxy-modal-blackout { position: absolute;background-color: black;  left: 0; top: 0;}
+.boxy-wrapper { empty-cells: show;}
+.boxy-wrapper .title-bar { background:#eeeeee; height:32px;  border-bottom:#ccc solid 1px;padding:0 16px; position: relative; }
+.boxy-wrapper .title-bar.dragging { cursor: move; }
+.boxy-wrapper .title-bar h2 {font-size: 14px; color:#333; line-height: 32px; margin: 0; padding: 0; font-weight: bold; float:left; display:inline;}
+.boxy-wrapper .title-bar .close { color: white; position: absolute; display:block; width:11px; height:10px; float:right; top: 11px; right: 16px; font-size: 90%; line-height: 1; text-indent:-9999px; background:url(../images/closebox.gif)}
+.boxy-wrapper .title-bar .close:hover {background:url(../images/closebox2.gif);}
+.boxy-inner { overflow: hidden; background-color: white; padding: 0 }
+.boxy-content { padding: 15px; }
+.boxy-wrapper .question { width: 350px; min-height: 80px; }
+.boxy-wrapper .answers { text-align: right; }

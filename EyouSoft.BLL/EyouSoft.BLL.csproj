@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{93ED3B18-E870-4358-AE68-F4B6A43DC940}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyouSoft.BLL</RootNamespace>
+    <AssemblyName>EyouSoft.BLL</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.DynamicProxy, Version=1.0.4.18998, Culture=neutral, PublicKeyToken=62a6874124340d6e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.1002, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu, Version=3.0.0.1002, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeixinMpSdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\dll\WeixinMpSdk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HotelStructure\BHotel.cs" />
+    <Compile Include="HotelStructure\BHotelCity.cs" />
+    <Compile Include="HotelStructure\BHotelCityAreas.cs" />
+    <Compile Include="HotelStructure\BHotelLandMarks.cs" />
+    <Compile Include="HotelStructure\BHotelOrder.cs" />
+    <Compile Include="HotelStructure\BHotelRoomType.cs" />
+    <Compile Include="HotelStructure\BHotelTourCustoms.cs" />
+    <Compile Include="JiPiaoStructure\BJiPiao.cs" />
+    <Compile Include="JiPiaoStructure\BJiPiaoDingDan.cs" />
+    <Compile Include="JiPiaoStructure\BJiPiaoHangKongGongSi.cs" />
+    <Compile Include="JiPiaoStructure\BJiPiaoSanZiMa.cs" />
+    <Compile Include="OtherStructure\BArticleClass.cs" />
+    <Compile Include="OtherStructure\BDiBiao.cs" />
+    <Compile Include="OtherStructure\BFeedback.cs" />
+    <Compile Include="OtherStructure\BKV.cs" />
+    <Compile Include="OtherStructure\BLink.cs" />
+    <Compile Include="OtherStructure\BMember.cs" />
+    <Compile Include="OtherStructure\BRouteTheme.cs" />
+    <Compile Include="OtherStructure\BSms.cs" />
+    <Compile Include="OtherStructure\BSysAdv.cs" />
+    <Compile Include="OtherStructure\BSysAreaInfo.cs" />
+    <Compile Include="OtherStructure\BSysLogHandle.cs" />
+    <Compile Include="OtherStructure\BSysLogLogin.cs" />
+    <Compile Include="OtherStructure\BSystemLandMark.cs" />
+    <Compile Include="OtherStructure\BTatolProduct.cs" />
+    <Compile Include="OtherStructure\BTravelArticle.cs" />
+    <Compile Include="OtherStructure\BTravelStrategy.cs" />
+    <Compile Include="OtherStructure\BTravelStrategyTheme.cs" />
+    <Compile Include="OtherStructure\BWebmaster.cs" />
+    <Compile Include="OtherStructure\BOnLinePay.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QianZhengStructure\BQianZheng.cs" />
+    <Compile Include="QianZhengStructure\BQianZhengDingDan.cs" />
+    <Compile Include="QianZhengStructure\BQianZhengGuoJia.cs" />
+    <Compile Include="QianZhengStructure\BQianZhengGys.cs" />
+    <Compile Include="ScenicStructure\BScenicArea.cs" />
+    <Compile Include="ScenicStructure\BScenicTickets.cs" />
+    <Compile Include="Web References\VoSmsApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="XianLuStructure\BOrder.cs" />
+    <Compile Include="XianLuStructure\BXianLu.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyouSoft.BackgroundServices\EyouSoft.BackgroundServices.csproj">
+      <Project>{1B911605-491C-43E0-BD08-841DF5128840}</Project>
+      <Name>EyouSoft.BackgroundServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.DAL\EyouSoft.DAL.csproj">
+      <Project>{95CC8E92-4FF8-4641-BD37-4B560BB3976A}</Project>
+      <Name>EyouSoft.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.IDAL\EyouSoft.IDAL.csproj">
+      <Project>{1188435F-671E-4DCE-97AA-441CC05046C1}</Project>
+      <Name>EyouSoft.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.InterfaceLib\EyouSoft.InterfaceLib.csproj">
+      <Project>{399831EC-930B-4867-AFF1-473E8D858D4D}</Project>
+      <Name>EyouSoft.InterfaceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Model\EyouSoft.Model.csproj">
+      <Project>{2CC3A201-7D24-4761-9C60-F107F21FD407}</Project>
+      <Name>EyouSoft.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Toolkit\EyouSoft.Toolkit.csproj">
+      <Project>{F643FD26-4C9B-40C7-8849-0FED59701419}</Project>
+      <Name>EyouSoft.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface\Hotelbe\hotelbe-sdk-pure\hotelbe-sdk-pure.csproj">
+      <Project>{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}</Project>
+      <Name>hotelbe-sdk-pure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{14E7FAEF-BCFA-4058-BA10-37090712CDF2}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://smc.myvo.cn/SMSWebService/Service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VoSmsApi\</RelPath>
+      <UpdateFromURL>http://smc.myvo.cn/SMSWebService/Service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EyouSoft_BLL_VoSmsApi_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\VoSmsApi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VoSmsApi\Service.disco" />
+    <None Include="Web References\VoSmsApi\Service.wsdl" />
+    <Compile Include="AccountStructure\BProvider.cs" />
+    <Compile Include="AccountStructure\BSellers.cs" />
+    <Compile Include="CityStructure\Interface\BHotel_City.cs" />
+    <Compile Include="HotelStructure\BHotel2.cs" />
+    <Compile Include="HotelStructure\Interface\BHotel_HotelInfo.cs" />
+    <Compile Include="HotelStructure\SellerMobileGetter.cs" />
+    <Compile Include="JPStructure\BDingDan.cs" />
+    <Compile Include="JPStructure\BHangBan.cs" />
+    <Compile Include="JPStructure\BJiPiao.cs" />
+    <Compile Include="JPStructure\BZhengCe.cs" />
+    <Compile Include="MallStructure\BDiZhi.cs" />
+    <Compile Include="MallStructure\BLianMeng.cs" />
+    <Compile Include="MallStructure\BShangChengDingDan.cs" />
+    <Compile Include="MallStructure\BShangChengShangPin.cs" />
+    <Compile Include="MallStructure\BShangChengXiLie.cs" />
+    <Compile Include="MemberStructure\BMember.cs" />
+    <Compile Include="MemberStructure\BMember2.cs" />
+    <Compile Include="MoneyStructure\BAccount.cs" />
+    <Compile Include="MoneyStructure\BApplyTiXian.cs" />
+    <Compile Include="MoneyStructure\BChongZhi.cs" />
+    <Compile Include="MoneyStructure\BTiXian.cs" />
+    <Compile Include="OtherStructure\BApply.cs" />
+    <Compile Include="OtherStructure\BChongZhi.cs" />
+    <Compile Include="OtherStructure\BDingDan.cs" />
+    <Compile Include="OtherStructure\BDingDanFanLi.cs" />
+    <Compile Include="OtherStructure\BDuanXin.cs" />
+    <Compile Include="OtherStructure\BJiaoYiMingXi.cs" />
+    <Compile Include="OtherStructure\BJiFen.cs" />
+    <Compile Include="OtherStructure\BPayMents.cs" />
+    <Compile Include="OtherStructure\BTuanGou.cs" />
+    <Compile Include="OtherStructure\BTuanGouDingDan.cs" />
+    <Compile Include="OtherStructure\BTuiGuang.cs" />
+    <Compile Include="OtherStructure\BWeiXin.cs" />
+    <Compile Include="OtherStructure\BXiaJiFenXiaoTiCheng.cs" />
+    <Compile Include="OtherStructure\BYanZhengMa.cs" />
+    <Compile Include="OtherStructure\BYuMing.cs" />
+    <Compile Include="OtherStructure\BZuTuan.cs" />
+    <Compile Include="ScenicStructure\BScenicArea2.cs" />
+    <Compile Include="SystemStructure\BFeeSettings.cs" />
+    <Compile Include="SystemStructure\BSupplier.cs" />
+    <Compile Include="WeiXin\BWeiXin.cs" />
+    <Compile Include="XianLuStructure\BZiZuTuan.cs" />
+    <Compile Include="ZuCheStructure\BZuChe.cs" />
+    <Compile Include="ZuCheStructure\BZuCheOrder.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

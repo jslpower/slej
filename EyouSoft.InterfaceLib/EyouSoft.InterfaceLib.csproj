@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{399831EC-930B-4867-AFF1-473E8D858D4D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyouSoft.InterfaceLib</RootNamespace>
+    <AssemblyName>EyouSoft.InterfaceLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/ZLLY.Lib/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <StartupObject>
+    </StartupObject>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\release\EyouSoft.InterfaceLib.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="hotelbe-sdk, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\hotelbe-sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.DynamicProxy, Version=1.0.4.18998, Culture=neutral, PublicKeyToken=62a6874124340d6e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.1002, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu, Version=3.0.0.1002, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIOrder.cs" />
+    <Compile Include="APITour.cs" />
+    <Compile Include="BokServiceSeeker.cs" />
+    <Compile Include="Common\StringValidate.cs" />
+    <Compile Include="Common\Transformer.cs" />
+    <Compile Include="Common\Utils.cs" />
+    <Compile Include="Common\WebInvoker.cs" />
+    <Compile Include="Common\WebServiceHelper.cs" />
+    <Compile Include="Attributes\ContractNameAttribute.cs" />
+    <Compile Include="HotelBE.cs" />
+    <Compile Include="LYQ_Services.cs" />
+    <Compile Include="Models\GDWX\BaoMingJiHua.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\DengluLeiXing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\Is.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\IsRecommend.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\LuXianMaiDian.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\LuXianShuXing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\QianZhengLeiXing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\QianZhengRenLeiXing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\QueryTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\Sex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\Success.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\WangShangBaoMingFangShi.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\XianLuFenLei.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\YuDingZhuangTai.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GDWX\ZhengJianZhongLei.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Hotelbe\Hotelbe_LandMark.cs" />
+    <Compile Include="Models\Hotelbe\Hotelbe_OrderState.cs" />
+    <Compile Include="Models\LYQ\LyModel.cs" />
+    <Compile Include="Models\MTS\ArgumentBase.cs" />
+    <Compile Include="Models\MTS\ChanPinLeiXing.cs" />
+    <Compile Include="Models\GDWX\CanTuanXingZhi.cs" />
+    <Compile Include="Models\GDWX\Company.cs" />
+    <Compile Include="Models\GDWX\FaBan.cs" />
+    <Compile Include="Models\GDWX\GongGaoZhongXin.cs" />
+    <Compile Include="Models\GDWX\GongGaoZhongXinXiangXi.cs" />
+    <Compile Include="Models\GDWX\LiangShenDingZhi.cs" />
+    <Compile Include="Models\GDWX\LiangShenDingZhiXiangXi.cs" />
+    <Compile Include="Models\GDWX\LoginInfo.cs" />
+    <Compile Include="Models\GDWX\Material.cs" />
+    <Compile Include="Models\GDWX\QianZheng.cs" />
+    <Compile Include="Models\GDWX\QianZhengDingDanXiangXi.cs" />
+    <Compile Include="Models\GDWX\QianZhengGuoJia.cs" />
+    <Compile Include="Models\GDWX\QianZhengXiangXi.cs" />
+    <Compile Include="Models\GDWX\QianZhengYuDing.cs" />
+    <Compile Include="Models\GDWX\TuanGou.cs" />
+    <Compile Include="Models\GDWX\XiangLuXiangQing.cs" />
+    <Compile Include="Models\GDWX\XianLu.cs" />
+    <Compile Include="Models\GDWX\XingCheng.cs" />
+    <Compile Include="Models\GDWX\XiuGaiDingDan.cs" />
+    <Compile Include="Models\GDWX\XiuGaiQianZhengDingDan.cs" />
+    <Compile Include="Models\GDWX\YuDingXinXi.cs" />
+    <Compile Include="Models\Bok\ShouKeZhuangTai.cs" />
+    <Compile Include="Models\Bok\MXianLuInfo_BokServcice.cs" />
+    <Compile Include="Models\Bok\MXianLuFuWuInfo_BokServcice.cs" />
+    <Compile Include="Models\Bok\MXianLuTourInfo_BokServcice.cs" />
+    <Compile Include="Models\Bok\MXianLuXingChengInfo_BokServcice.cs" />
+    <Compile Include="Models\MTS\Grades.cs" />
+    <Compile Include="Models\ZL\GroupAccessory.cs" />
+    <Compile Include="Models\ZL\GroupHeader.cs" />
+    <Compile Include="Models\ZL\Group_Header_Detail.cs" />
+    <Compile Include="Models\Is.cs" />
+    <Compile Include="Models\ZL\JourneyDay.cs" />
+    <Compile Include="Models\MTS\Page.cs" />
+    <Compile Include="Models\MTS\PayStates.cs" />
+    <Compile Include="Models\ZL\OrderHeader.cs" />
+    <Compile Include="Models\ZL\OrderTourists.cs" />
+    <Compile Include="Models\ZL\Providers.cs" />
+    <Compile Include="Models\MTS\Results.cs" />
+    <Compile Include="Models\ZL\Steps.cs" />
+    <Compile Include="Models\ZL\TuanDuiStates.cs" />
+    <Compile Include="Models\ZL\XianluTypes.cs" />
+    <Compile Include="Request\ZL\get_obd_group_detailRequest.cs" />
+    <Compile Include="Request\ZL\get_p_obd_group_listRequest.cs" />
+    <Compile Include="Request\MTS\ProductDetailRequest.cs" />
+    <Compile Include="Request\MTS\RequestBase.cs" />
+    <Compile Include="Request\MTS\ResourceDetailRequest.cs" />
+    <Compile Include="Request\MTS\SelectareaListRequest.cs" />
+    <Compile Include="Request\MTS\SelectProductListPagecountRequest.cs" />
+    <Compile Include="Request\MTS\SelectProductListRequest.cs" />
+    <Compile Include="Request\MTS\SelectResourceCategoryListRequest.cs" />
+    <Compile Include="Request\MTS\SelectResourceListPagecountRequest.cs" />
+    <Compile Include="Request\MTS\SelectResourceListRequest.cs" />
+    <Compile Include="Request\MTS\SendPiaouRequest.cs" />
+    <Compile Include="Request\MTS\SendPiaouRequestArgumentList.cs" />
+    <Compile Include="Request\MTS\SubmitOrderRequest.cs" />
+    <Compile Include="Request\MTS\SubmitOrderRequestArgumentList.cs" />
+    <Compile Include="Request\GDWX\GetQianZhengDingDanXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\GetQianZhengGuoJiaRequest.cs" />
+    <Compile Include="Request\GDWX\GetQianZhengListRequest.cs" />
+    <Compile Include="Request\GDWX\GetQianZhengXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\GetTuanGouListRequest.cs" />
+    <Compile Include="Request\GDWX\GetTuanGouXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\GetXianLuFenLeiRquest.cs" />
+    <Compile Include="Request\GDWX\GetXianLuListRequest.cs" />
+    <Compile Include="Request\GDWX\GetXianLuXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\GongGaoZhongXinRequest.cs" />
+    <Compile Include="Request\GDWX\GongGaoZhongXinXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\LiangShenDingZhiRequest.cs" />
+    <Compile Include="Request\GDWX\LiangShenDingZhiXiangXiRequest.cs" />
+    <Compile Include="Request\GDWX\LianXiWoMenRequest.cs" />
+    <Compile Include="Request\GDWX\LuXianYuDingRequest.cs" />
+    <Compile Include="Request\GDWX\QianZhengYuDingRequest.cs" />
+    <Compile Include="Request\GDWX\QuXiaoDingDanRequest.cs" />
+    <Compile Include="Request\GDWX\QuXiaoQianZhengDingDanRequest.cs" />
+    <Compile Include="Request\GDWX\RequestBase.cs" />
+    <Compile Include="Request\GDWX\XiuGaiDingDanRequest.cs" />
+    <Compile Include="Request\GDWX\XiuGaiQianZhengDingDanRequest.cs" />
+    <Compile Include="Request\GDWX\YongHuDengLuRequest.cs" />
+    <Compile Include="Request\ZL\insert_obd_orderRequest.cs" />
+    <Compile Include="Request\ZL\RequestBase.cs" />
+    <Compile Include="Request\ZL\SendOrderRequestArgumentList.cs" />
+    <Compile Include="Response\GDWX\GetQianZhengDingDanXiangXigResponse.cs" />
+    <Compile Include="Response\GDWX\GetQianZhengGuoJiaResponse.cs" />
+    <Compile Include="Response\GDWX\GetQianZhengListResponse.cs" />
+    <Compile Include="Response\GDWX\GetQianZhengXiangXiResponse.cs" />
+    <Compile Include="Response\GDWX\GetTuanGouListResponse.cs" />
+    <Compile Include="Response\GDWX\GetTuanGouXiangXiResponse.cs" />
+    <Compile Include="Response\GDWX\GetXianLuFenLeiListResponse.cs" />
+    <Compile Include="Response\GDWX\GetXianLuListResponse.cs" />
+    <Compile Include="Response\GDWX\GetXianLuXiangXiResponse.cs" />
+    <Compile Include="Response\GDWX\GongGaoZhongXinResponse.cs" />
+    <Compile Include="Response\GDWX\GongGaoZhongXinXiangXiResponse.cs" />
+    <Compile Include="Response\GDWX\LiangShenDingZhiResponse.cs" />
+    <Compile Include="Response\GDWX\LiangShenDingZhiXiangXiResponse.cs" />
+    <Compile Include="Response\GDWX\LianXiWoMenResponse.cs" />
+    <Compile Include="Response\GDWX\LuXianYuDingResponse.cs" />
+    <Compile Include="Response\GDWX\QianZhengYuDingResponse.cs" />
+    <Compile Include="Response\GDWX\QuXiaoDingDanResponse.cs" />
+    <Compile Include="Response\GDWX\QuXiaoQianZhengDingDanResponse.cs" />
+    <Compile Include="Response\GDWX\ResponseBase.cs" />
+    <Compile Include="Response\GDWX\XiuGaiDingDanResponse.cs" />
+    <Compile Include="Response\GDWX\XiuGaiQianZhengDingDanResponse.cs" />
+    <Compile Include="Response\GDWX\YongHuDengLuResponse.cs" />
+    <Compile Include="Response\ZL\get_obd_group_detailResponse.cs" />
+    <Compile Include="Response\ZL\get_p_obd_group_listResponse.cs" />
+    <Compile Include="Response\MTS\ProductDetailResponse.cs" />
+    <Compile Include="Response\MTS\ResourceDetailResponse.cs" />
+    <Compile Include="Response\MTS\ResponseArray.cs" />
+    <Compile Include="Response\MTS\ResponseBase.cs" />
+    <Compile Include="Response\MTS\ResponsePagecount.cs" />
+    <Compile Include="Response\MTS\SelectareaListResponse.cs" />
+    <Compile Include="Response\MTS\SelectProductListPagecountResponse.cs" />
+    <Compile Include="Response\MTS\SelectProductListResponse.cs" />
+    <Compile Include="Response\MTS\SelectResourceCategoryListResponse.cs" />
+    <Compile Include="Response\MTS\SelectResourceListPagecountResponse.cs" />
+    <Compile Include="Response\MTS\SelectResourceListResponse.cs" />
+    <Compile Include="Response\ZL\insert_obd_orderResponse.cs" />
+    <Compile Include="Serializer\XmlSerialization.cs" />
+    <Compile Include="StringHelper\StringExtensions.cs" />
+    <Compile Include="Hotelbe_HuanCunInterface.cs">
+      <DependentUpon>Hotelbe_ShiShiInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotelbe_ShiShiInterface.cs" />
+    <Compile Include="GDWXSeeker.cs" />
+    <Compile Include="MTSServiceSeeker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZLCommonServiceSeeker.cs" />
+    <Compile Include="Common\WebServiceXmlSeekerBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Cmd\1.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyouSoft.DAL\EyouSoft.DAL.csproj">
+      <Project>{95CC8E92-4FF8-4641-BD37-4B560BB3976A}</Project>
+      <Name>EyouSoft.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.IDAL\EyouSoft.IDAL.csproj">
+      <Project>{1188435F-671E-4DCE-97AA-441CC05046C1}</Project>
+      <Name>EyouSoft.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Model\EyouSoft.Model.csproj">
+      <Project>{2CC3A201-7D24-4761-9C60-F107F21FD407}</Project>
+      <Name>EyouSoft.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Toolkit\EyouSoft.Toolkit.csproj">
+      <Project>{F643FD26-4C9B-40C7-8849-0FED59701419}</Project>
+      <Name>EyouSoft.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface\Hotelbe\hotelbe-sdk-pure\hotelbe-sdk-pure.csproj">
+      <Project>{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}</Project>
+      <Name>hotelbe-sdk-pure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TravelSky\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

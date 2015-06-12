@@ -1,0 +1,7 @@
+.zhifu_tab{ background:#fff;}
+.zhifu_tab .jq_TabTitle li{width:33%;}
+.zhifu_tab .jq_TabContent{padding-bottom:20px; background:#fff;}
+
+.zfb_box{width:90%; margin:20px auto; border:#e9e9e9 solid 1px; background:#f4f4f4; height:62px; line-height:62px; text-align:center;}
+.zfb_box img{ vertical-align:middle; padding-right:5px;}
+.zfb_box a{ display:block; color:#404344; font-size:18px;}

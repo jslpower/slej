@@ -1,0 +1,40 @@
+﻿.wcl_dindan{ margin-top:10px;}
+.wcl_dindan li:first-of-type{ position:relative; padding-left:45px; height:33px; line-height:33px; overflow:hidden;}
+.wcl_dindan li s{width:30px; height:33px; display:inline-block; position:absolute; left:10px; top:8px; background:url(../images/dindan_icon.png) no-repeat;}
+.wcl_dindan li s.ico_dxian{ background-position:0 0;}
+.wcl_dindan li s.ico_chxian{ background-position:0 -70px;}
+.wcl_dindan li s.ico_chujin{ background-position:0 -140px;}
+.wcl_dindan li s.ico_hotel{ background-position:0 -210px;}
+.wcl_dindan li s.ico_jinqu{ background-position:0 -280px;}
+.wcl_dindan li s.ico_dantuan{ background-position:0 -560px;}
+.wcl_dindan li s.ico_car{ background-position:0 -350px;}
+.wcl_dindan li s.ico_mall{ background-position:0 -420px;}
+.wcl_dindan li s.ico_tg{ background-position:0 -490px;}
+
+.wcl_dindan li span{ display:inline-block;}
+.wcl_dindan li .biaoti{ font-size:16px;width:65px;}
+.wcl_dindan li .yd_time{ color:#999;}
+.wcl_dindan li .zt_h{ color:#999; font-size:16px; float:right;}
+.wcl_dindan li .zt_y{ color:#fe6600; font-size:16px; float:right;}
+
+@media screen and (max-width:360px){
+.wcl_dindan li .yd_time{ font-size:12px;}
+	}
+
+.color_9{ color:#999;}
+.price{ color:#fe6600; font-family:Arial;}
+.price em{padding-left:2px; font-size:18px;}
+
+.hui_btn,.yellow_btn{-webkit-border-radius:15px; -moz-border-radius:15px; -ms-border-radius:15px;border-radius:15px;}
+.hui_btn{ border:#a5a4a2 solid 1px; height:27px; line-height:27px; padding:0 6px; display:inline-block; background:#fff; font-size:16px; color:#000;}
+
+.yellow_btn{border:#fe6600 solid 1px; height:27px; line-height:27px; padding:0 6px; display:inline-block; background:#fe6600; font-size:16px; color:#fff;}
+
+
+.wcl_dindan .price{ margin-top:-3px;}
+.wcl_dindan li p:last-of-type{ line-height:29px;}
+
+.dindan_tx{ line-height:24px; padding:7px 3px; margin-top:-1px; background:#fdebdf; text-align:center; border-top:#fe6600 solid 1px;border-bottom:#fe6600 solid 1px; color:#fe6600;}
+@media screen and (max-width:360px){
+.dindan_tx{ font-size:11px;}
+	}

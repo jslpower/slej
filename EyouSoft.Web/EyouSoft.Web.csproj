@@ -1,0 +1,3269 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FA08694F-9F02-4DE4-9A4F-BFC36455D115}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyouSoft.Web</RootNamespace>
+    <AssemblyName>EyouSoft.Web</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Adpost.Common.Office, Version=1.0.3664.30643, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Adpost.Common.Office.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\elmah\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Interface\Hotelbe\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PayAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4374.31987, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommonPage\LoadVisitors.aspx" />
+    <Content Include="Css\webmaster\boxy.css" />
+    <Content Include="Css\webmaster\style.css" />
+    <Content Include="Css\swfupload\default.css" />
+    <Content Include="Css\webmaster\css.css" />
+    <Content Include="Css\webmaster\manager.css" />
+    <Content Include="Css\webmaster\manager2.css" />
+    <Content Include="Images\webmaster\add-xz.gif" />
+    <Content Include="Images\webmaster\add2.gif" />
+    <Content Include="Images\webmaster\addimg.gif" />
+    <Content Include="Images\webmaster\baocunimg.gif" />
+    <Content Include="Images\webmaster\bg001.gif" />
+    <Content Include="Images\webmaster\bg003.gif" />
+    <Content Include="Images\webmaster\bj111.gif" />
+    <Content Include="Images\webmaster\box-images\closebox.gif" />
+    <Content Include="Images\webmaster\box-images\closebox2.gif" />
+    <Content Include="Images\webmaster\box-images\h2bg.gif" />
+    <Content Include="Images\webmaster\box-images\publishLay.gif" />
+    <Content Include="Images\webmaster\btnbg.gif" />
+    <Content Include="Images\webmaster\but03.gif" />
+    <Content Include="Images\webmaster\cha.gif" />
+    <Content Include="Images\webmaster\charuimg.gif" />
+    <Content Include="Images\webmaster\closebox.gif" />
+    <Content Include="Images\webmaster\closebox2.gif" />
+    <Content Include="Images\webmaster\cwgl_1.jpg" />
+    <Content Include="Images\webmaster\cx.gif" />
+    <Content Include="Images\webmaster\daochu-xz.gif" />
+    <Content Include="Images\webmaster\daochu2-xz.gif" />
+    <Content Include="Images\webmaster\daoru.gif" />
+    <Content Include="Images\webmaster\datebtn.gif" />
+    <Content Include="Images\webmaster\dateicon.gif" />
+    <Content Include="Images\webmaster\dateicon.png" />
+    <Content Include="Images\webmaster\dayin-xz.gif" />
+    <Content Include="Images\webmaster\delicon01.gif" />
+    <Content Include="Images\webmaster\delimg.gif" />
+    <Content Include="Images\webmaster\editor2.gif" />
+    <Content Include="Images\webmaster\end.jpg" />
+    <Content Include="Images\webmaster\fbTabbg.gif" />
+    <Content Include="Images\webmaster\fbTabbg02.gif" />
+    <Content Include="Images\webmaster\formT.gif" />
+    <Content Include="Images\webmaster\fujian_x.gif" />
+    <Content Include="Images\webmaster\icon_select.jpg" />
+    <Content Include="Images\webmaster\index-menubg.gif" />
+    <Content Include="Images\webmaster\indexmaintbg.gif" />
+    <Content Include="Images\webmaster\input-bg.gif" />
+    <Content Include="Images\webmaster\jiahao02.gif" />
+    <Content Include="Images\webmaster\jipiao_01.gif" />
+    <Content Include="Images\webmaster\jixusave.gif" />
+    <Content Include="Images\webmaster\jixusave2.gif" />
+    <Content Include="Images\webmaster\lefttitlebg.gif" />
+    <Content Include="Images\webmaster\lefttitlebg02.gif" />
+    <Content Include="Images\webmaster\loadingnew.gif" />
+    <Content Include="Images\webmaster\login02.jpg" />
+    <Content Include="Images\webmaster\login05.jpg" />
+    <Content Include="Images\webmaster\loginbar_bg.gif" />
+    <Content Include="Images\webmaster\loginbtn.gif" />
+    <Content Include="Images\webmaster\logintopbg.gif" />
+    <Content Include="Images\webmaster\login_04.gif" />
+    <Content Include="Images\webmaster\login_05.jpg" />
+    <Content Include="Images\webmaster\login_07.gif" />
+    <Content Include="Images\webmaster\login_bodybg.gif" />
+    <Content Include="Images\webmaster\login_btn.png" />
+    <Content Include="Images\webmaster\login_mainbg_01.gif" />
+    <Content Include="Images\webmaster\login_mainbg_02.gif" />
+    <Content Include="Images\webmaster\login_topbg.gif" />
+    <Content Include="Images\webmaster\open-dx.gif" />
+    <Content Include="Images\webmaster\organization_01.gif" />
+    <Content Include="Images\webmaster\organization_02.gif" />
+    <Content Include="Images\webmaster\organization_03.gif" />
+    <Content Include="Images\webmaster\organization_04.gif" />
+    <Content Include="Images\webmaster\organization_06.gif" />
+    <Content Include="Images\webmaster\pngclear.gif" />
+    <Content Include="Images\webmaster\ptjh_09.gif" />
+    <Content Include="Images\webmaster\quanxian-xt.gif" />
+    <Content Include="Images\webmaster\sanping_02.gif" />
+    <Content Include="Images\webmaster\sanping_05.gif" />
+    <Content Include="Images\webmaster\searchbtn.gif" />
+    <Content Include="Images\webmaster\shangyiimg.gif" />
+    <Content Include="Images\swfupload\XPButtonNoText_160x22.png" />
+    <Content Include="Images\swfupload\XPButtonNoText_178_34.gif" />
+    <Content Include="Images\swfupload\XPButtonNoText_92_24.gif" />
+    <Content Include="Images\swfupload\XPButtonUploadText_61x22.png" />
+    <Content Include="Images\webmaster\tablebtnbg.gif" />
+    <Content Include="Images\webmaster\tianjiaicon01.gif" />
+    <Content Include="Images\webmaster\time02.gif" />
+    <Content Include="Images\webmaster\tjbtnbg.gif" />
+    <Content Include="Images\webmaster\tjbtnbg02.gif" />
+    <Content Include="Images\webmaster\topbg.gif" />
+    <Content Include="Images\webmaster\wannianlibg.gif" />
+    <Content Include="Images\webmaster\200801081258490.gif" />
+    <Content Include="Images\webmaster\200801081259040.gif" />
+    <Content Include="Images\webmaster\a.gif" />
+    <Content Include="Images\webmaster\a3.gif" />
+    <Content Include="Images\webmaster\a3_xz.gif" />
+    <Content Include="Images\webmaster\Ajaxopen-flash-chart.swf" />
+    <Content Include="Images\webmaster\anniured-cy.gif" />
+    <Content Include="Images\webmaster\a_xz.gif" />
+    <Content Include="Images\webmaster\baocun_btn.jpg" />
+    <Content Include="Images\webmaster\bar_img.gif" />
+    <Content Include="Images\webmaster\bc_btn.jpg" />
+    <Content Include="Images\webmaster\btn01.jpg" />
+    <Content Include="Images\webmaster\btn02.jpg" />
+    <Content Include="Images\webmaster\btn03.jpg" />
+    <Content Include="Images\webmaster\btn04.jpg" />
+    <Content Include="Images\webmaster\button_down.gif" />
+    <Content Include="Images\webmaster\button_up.gif" />
+    <Content Include="Images\webmaster\cal.gif" />
+    <Content Include="Images\webmaster\cardico2.gif" />
+    <Content Include="Images\webmaster\cardico3.gif" />
+    <Content Include="Images\webmaster\ccc.gif" />
+    <Content Include="Images\webmaster\chaxun.gif" />
+    <Content Include="Images\webmaster\chaxunbg.gif" />
+    <Content Include="Images\webmaster\earebar.gif" />
+    <Content Include="Images\webmaster\func_default.gif" />
+    <Content Include="Images\webmaster\ge_d.gif" />
+    <Content Include="Images\webmaster\ge_da.gif" />
+    <Content Include="Images\webmaster\ge_hang.gif" />
+    <Content Include="Images\webmaster\gg.gif" />
+    <Content Include="Images\webmaster\gongneng_bg.gif" />
+    <Content Include="Images\webmaster\guestmenu.gif" />
+    <Content Include="Images\webmaster\hangbg.gif" />
+    <Content Include="Images\webmaster\headtopic_1.gif" />
+    <Content Include="Images\webmaster\htlogo.gif" />
+    <Content Include="Images\webmaster\icn_pen02.gif" />
+    <Content Include="Images\webmaster\ico.gif" />
+    <Content Include="Images\webmaster\iconPic.gif" />
+    <Content Include="Images\webmaster\jdsymk.gif" />
+    <Content Include="Images\webmaster\jdsymk2.gif" />
+    <Content Include="Images\webmaster\jingyingquyu.gif" />
+    <Content Include="Images\webmaster\lmnavm.gif" />
+    <Content Include="Images\webmaster\login_l.gif" />
+    <Content Include="Images\webmaster\login_m.gif" />
+    <Content Include="Images\webmaster\login_r.gif" />
+    <Content Include="Images\webmaster\manager.css" />
+    <Content Include="Images\webmaster\MQWORDjin.gif" />
+    <Content Include="Images\webmaster\noheadtopic_1.gif" />
+    <Content Include="Images\webmaster\nostate.gif" />
+    <Content Include="Images\webmaster\ns-expand.gif" />
+    <Content Include="Images\webmaster\ns-expand2.gif" />
+    <Content Include="Images\webmaster\pic23.gif" />
+    <Content Include="Images\webmaster\pic24.gif" />
+    <Content Include="Images\webmaster\point16.gif" />
+    <Content Include="Images\webmaster\qqonline.gif" />
+    <Content Include="Images\webmaster\quanxian_01.gif" />
+    <Content Include="Images\webmaster\quanxian_05.gif" />
+    <Content Include="Images\webmaster\qx_btn.jpg" />
+    <Content Include="Images\webmaster\search_bg.gif" />
+    <Content Include="Images\webmaster\shanchu.gif" />
+    <Content Include="Images\webmaster\shangpai.gif" />
+    <Content Include="Images\webmaster\siteimg\chedui.jpg" />
+    <Content Include="Images\webmaster\siteimg\gq.jpg" />
+    <Content Include="Images\webmaster\siteimg\gwd.jpg" />
+    <Content Include="Images\webmaster\siteimg\index.jpg" />
+    <Content Include="Images\webmaster\siteimg\jingqu.jpg" />
+    <Content Include="Images\webmaster\siteimg\jipiao.jpg" />
+    <Content Include="Images\webmaster\siteimg\jiudian.jpg" />
+    <Content Include="Images\webmaster\siteimg\lyyp.jpg" />
+    <Content Include="Images\webmaster\siteimg\xianlu.jpg" />
+    <Content Include="Images\webmaster\siteimg\xiaotu.gif" />
+    <Content Include="Images\webmaster\span.gif" />
+    <Content Include="Images\webmaster\span3.gif" />
+    <Content Include="Images\webmaster\span3_xz.gif" />
+    <Content Include="Images\webmaster\span_xz.gif" />
+    <Content Include="Images\webmaster\sqq.gif" />
+    <Content Include="Images\webmaster\state1.gif" />
+    <Content Include="Images\webmaster\state2.gif" />
+    <Content Include="Images\webmaster\state3.gif" />
+    <Content Include="Images\webmaster\state4.gif" />
+    <Content Include="Images\webmaster\state5.gif" />
+    <Content Include="Images\webmaster\state6.gif" />
+    <Content Include="Images\webmaster\sub.gif" />
+    <Content Include="Images\webmaster\tianjiabaocun.gif" />
+    <Content Include="Images\webmaster\tiao.jpg" />
+    <Content Include="Images\webmaster\tuic.gif" />
+    <Content Include="Images\webmaster\use16.gif" />
+    <Content Include="Images\webmaster\weichulidingdan.gif" />
+    <Content Include="Images\webmaster\xia.gif" />
+    <Content Include="Images\webmaster\xianpai.gif" />
+    <Content Include="Images\webmaster\xiayiimg.gif" />
+    <Content Include="Images\webmaster\xinzeng.gif" />
+    <Content Include="Images\webmaster\xinzengjiabing.gif" />
+    <Content Include="Images\webmaster\xiugai.gif" />
+    <Content Include="Images\webmaster\yijingxiang.gif" />
+    <Content Include="Images\webmaster\zhibiao.gif" />
+    <Content Include="Images\webmaster\xtnavbg.gif" />
+    <Content Include="Images\webmaster\xtnavbg2.gif" />
+    <Content Include="Images\webmaster\y-tanhao.gif" />
+    <Content Include="Images\webmaster\yuancenter.gif" />
+    <Content Include="Images\webmaster\yuanleft.gif" />
+    <Content Include="Images\webmaster\yuanright.gif" />
+    <Content Include="JS\ajaxpagecontrols.js" />
+    <Content Include="JS\bt.min.js" />
+    <Content Include="JS\datepicker\calendar.js" />
+    <Content Include="JS\datepicker\config.js" />
+    <Content Include="JS\datepicker\DatePicker.htm" />
+    <Content Include="JS\datepicker\lang\en.js" />
+    <Content Include="JS\datepicker\lang\zh-cn.js" />
+    <Content Include="JS\datepicker\lang\zh-tw.js" />
+    <Content Include="JS\datepicker\skin\datePicker.gif" />
+    <Content Include="JS\datepicker\skin\default\datepicker.css" />
+    <Content Include="JS\datepicker\skin\default\img.gif" />
+    <Content Include="JS\datepicker\skin\WdatePicker.css" />
+    <Content Include="JS\datepicker\skin\whyGreen\bg.jpg" />
+    <Content Include="JS\datepicker\skin\whyGreen\datepicker.css" />
+    <Content Include="JS\datepicker\skin\whyGreen\img.gif" />
+    <Content Include="JS\datepicker\WdatePicker.js" />
+    <Content Include="JS\excanvas.js" />
+    <Content Include="JS\jquery-1.4.4.js" />
+    <Content Include="JS\jquery.blockUI.js" />
+    <Content Include="JS\jquery.boxy.js" />
+    <Content Include="JS\kindeditor-4.1\kindeditor-min.js" />
+    <Content Include="JS\kindeditor-4.1\kindeditor.js" />
+    <Content Include="JS\kindeditor-4.1\lang\ar.js" />
+    <Content Include="JS\kindeditor-4.1\lang\en.js" />
+    <Content Include="JS\kindeditor-4.1\lang\zh_CN.js" />
+    <Content Include="JS\kindeditor-4.1\lang\zh_TW.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\anchor\anchor.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\baidumap\baidumap.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\baidumap\map.html" />
+    <Content Include="JS\kindeditor-4.1\plugins\clearhtml\clearhtml.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\code\code.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\code\prettify.css" />
+    <Content Include="JS\kindeditor-4.1\plugins\code\prettify.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\emoticons.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\0.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\1.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\10.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\100.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\101.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\102.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\103.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\104.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\105.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\106.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\107.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\108.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\109.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\11.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\110.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\111.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\112.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\113.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\114.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\115.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\116.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\117.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\118.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\119.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\12.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\120.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\121.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\122.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\123.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\124.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\125.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\126.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\127.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\128.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\129.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\13.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\130.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\131.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\132.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\133.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\134.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\14.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\15.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\16.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\17.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\18.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\19.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\2.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\20.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\21.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\22.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\23.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\24.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\25.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\26.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\27.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\28.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\29.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\3.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\30.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\31.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\32.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\33.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\34.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\35.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\36.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\37.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\38.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\39.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\4.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\40.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\41.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\42.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\43.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\44.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\45.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\46.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\47.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\48.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\49.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\5.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\50.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\51.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\52.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\53.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\54.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\55.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\56.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\57.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\58.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\59.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\6.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\60.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\61.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\62.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\63.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\64.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\65.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\66.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\67.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\68.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\69.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\7.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\70.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\71.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\72.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\73.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\74.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\75.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\76.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\77.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\78.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\79.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\8.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\80.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\81.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\82.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\83.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\84.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\85.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\86.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\87.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\88.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\89.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\9.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\90.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\91.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\92.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\93.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\94.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\95.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\96.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\97.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\98.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\99.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\emoticons\images\static.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\filemanager.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\images\file-16.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\images\file-64.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\filemanager\images\go-up.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\flash\flash.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\image\image.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\image\images\align_left.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\image\images\align_right.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\image\images\align_top.gif" />
+    <Content Include="JS\kindeditor-4.1\plugins\image\images\refresh.png" />
+    <Content Include="JS\kindeditor-4.1\plugins\insertfile\insertfile.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\lineheight\lineheight.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\link\link.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\map\map.html" />
+    <Content Include="JS\kindeditor-4.1\plugins\map\map.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\media\media.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\multiimage\images\image.png" />
+    <Content Include="JS\kindeditor-4.1\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="JS\kindeditor-4.1\plugins\multiimage\images\select-files-zh_CN.png" />
+    <Content Include="JS\kindeditor-4.1\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="JS\kindeditor-4.1\plugins\multiimage\multiimage.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\pagebreak\pagebreak.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\plainpaste\plainpaste.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\preview\preview.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\quickformat\quickformat.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\table\table.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\template\html\1.html" />
+    <Content Include="JS\kindeditor-4.1\plugins\template\html\2.html" />
+    <Content Include="JS\kindeditor-4.1\plugins\template\html\3.html" />
+    <Content Include="JS\kindeditor-4.1\plugins\template\template.js" />
+    <Content Include="JS\kindeditor-4.1\plugins\wordpaste\wordpaste.js" />
+    <Content Include="JS\kindeditor-4.1\themes\common\anchor.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\common\blank.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\common\flash.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\common\loading.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\common\media.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\common\rm.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\default\background.png" />
+    <Content Include="JS\kindeditor-4.1\themes\default\default.css" />
+    <Content Include="JS\kindeditor-4.1\themes\default\default.png" />
+    <Content Include="JS\kindeditor-4.1\themes\qq\editor.gif" />
+    <Content Include="JS\kindeditor-4.1\themes\qq\qq.css" />
+    <Content Include="JS\kindeditor-4.1\themes\simple\simple.css" />
+    <Content Include="JS\loadExcel.js" />
+    <Content Include="JS\Loading.js" />
+    <Content Include="JS\moveScroll.js" />
+    <Content Include="JS\Newjquery.autocomplete.js" />
+    <Content Include="JS\slogin.js" />
+    <Content Include="JS\swfupload\swfupload.js" />
+    <Content Include="JS\swfupload\swfupload.swf" />
+    <Content Include="JS\swfupload\swfupload.swfobject.js" />
+    <Content Include="JS\table-toolbar.js" />
+    <Content Include="JS\unitpngfix.js" />
+    <Content Include="JS\utilsUri.js" />
+    <Content Include="JS\ValiDatorForm.js" />
+    <Content Include="Web.config" />
+    <Content Include="CommonPage\upload.aspx" />
+    <Content Include="WebMaster\CompanyInfo.aspx" />
+    <Content Include="WebMaster\Default.aspx" />
+    <Content Include="WebMaster\LeftMenuList.aspx" />
+    <Content Include="WebMaster\Login.aspx" />
+    <Content Include="WebMaster\logout.aspx" />
+    <Content Include="WebMaster\MemberCenter\MemberEdit.aspx" />
+    <Content Include="WebMaster\MemberCenter\MemberList.aspx" />
+    <Content Include="WebMaster\OrderEdit.aspx" />
+    <Content Include="WebMaster\OrderList.aspx" />
+    <Content Include="WebMaster\RouteEdit.aspx" />
+    <Content Include="WebMaster\RouteList.aspx" />
+    <Content Include="WebMaster\swich.html" />
+    <Content Include="WebMaster\Top.aspx" />
+    <Content Include="WebMaster\UserControl\ExcelFileUploadControl.ascx" />
+    <Content Include="WebMaster\UserControl\Journey.ascx" />
+    <Content Include="WebMaster\UserControl\OrderCustomer.ascx" />
+    <Content Include="WebMaster\WebSiteInfo.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="99bill\receive.aspx.cs">
+      <DependentUpon>receive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="99bill\receive.aspx.designer.cs">
+      <DependentUpon>receive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="99bill\send.aspx.cs">
+      <DependentUpon>send.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="99bill\send.aspx.designer.cs">
+      <DependentUpon>send.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AliPay\Alipay_Notify.aspx.cs">
+      <DependentUpon>Alipay_Notify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AliPay\Alipay_Notify.aspx.designer.cs">
+      <DependentUpon>Alipay_Notify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AliPay\Alipay_Return.aspx.cs">
+      <DependentUpon>Alipay_Return.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AliPay\Alipay_Return.aspx.designer.cs">
+      <DependentUpon>Alipay_Return.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AliPay\AliTradeTourOrder.aspx.cs">
+      <DependentUpon>AliTradeTourOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AliPay\AliTradeTourOrder.aspx.designer.cs">
+      <DependentUpon>AliTradeTourOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplyUser.aspx.cs">
+      <DependentUpon>ApplyUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplyUser.aspx.designer.cs">
+      <DependentUpon>ApplyUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\CityHandler.ashx.cs">
+      <DependentUpon>CityHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\ExcelConvert.ashx.cs">
+      <DependentUpon>ExcelConvert.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\ExistUserName.ashx.cs">
+      <DependentUpon>ExistUserName.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\GetProvinceAndCity.ashx.cs">
+      <DependentUpon>GetProvinceAndCity.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ashx\Handler.ashx.cs">
+      <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Baoming.aspx.cs">
+      <DependentUpon>Baoming.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Baoming.aspx.designer.cs">
+      <DependentUpon>Baoming.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="biangeng.aspx.cs">
+      <DependentUpon>biangeng.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="biangeng.aspx.designer.cs">
+      <DependentUpon>biangeng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\Lg.aspx.cs">
+      <DependentUpon>Lg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\Lg.aspx.designer.cs">
+      <DependentUpon>Lg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\LoadVisitors.aspx.cs">
+      <DependentUpon>LoadVisitors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\LoadVisitors.aspx.designer.cs">
+      <DependentUpon>LoadVisitors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\RegBox.aspx.cs">
+      <DependentUpon>RegBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\RegBox.aspx.designer.cs">
+      <DependentUpon>RegBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\RiliBox.aspx.cs">
+      <DependentUpon>RiliBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\RiliBox.aspx.designer.cs">
+      <DependentUpon>RiliBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\uploadFile.aspx.cs">
+      <DependentUpon>uploadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\uploadFile.aspx.designer.cs">
+      <DependentUpon>uploadFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\ValidateCode.ashx.cs">
+      <DependentUpon>ValidateCode.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\XianLuRiLi.aspx.cs">
+      <DependentUpon>XianLuRiLi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\XianLuRiLi.aspx.designer.cs">
+      <DependentUpon>XianLuRiLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyContent.aspx.cs">
+      <DependentUpon>CompanyContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompanyContent.aspx.designer.cs">
+      <DependentUpon>CompanyContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebao.aspx.cs">
+      <DependentUpon>Ebao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebao.aspx.designer.cs">
+      <DependentUpon>Ebao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErWeiMa.aspx.cs">
+      <DependentUpon>ErWeiMa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErWeiMa.aspx.designer.cs">
+      <DependentUpon>ErWeiMa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetAddress.aspx.cs">
+      <DependentUpon>GetAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetAddress.aspx.designer.cs">
+      <DependentUpon>GetAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetMiMa.aspx.cs">
+      <DependentUpon>GetMiMa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetMiMa.aspx.designer.cs">
+      <DependentUpon>GetMiMa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel.aspx.cs">
+      <DependentUpon>Hotel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel.aspx.designer.cs">
+      <DependentUpon>Hotel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelMap.aspx.cs">
+      <DependentUpon>HotelMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelMap.aspx.designer.cs">
+      <DependentUpon>HotelMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelOrder.aspx.cs">
+      <DependentUpon>HotelOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelOrder.aspx.designer.cs">
+      <DependentUpon>HotelOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing.aspx.cs">
+      <DependentUpon>HotelXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing.aspx.designer.cs">
+      <DependentUpon>HotelXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing2.aspx.cs">
+      <DependentUpon>HotelXiangQing2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing2.aspx.designer.cs">
+      <DependentUpon>HotelXiangQing2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing2Room.aspx.cs">
+      <DependentUpon>HotelXiangQing2Room.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQing2Room.aspx.designer.cs">
+      <DependentUpon>HotelXiangQing2Room.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQingImg.aspx.cs">
+      <DependentUpon>HotelXiangQingImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQingImg.aspx.designer.cs">
+      <DependentUpon>HotelXiangQingImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQingRoom.aspx.cs">
+      <DependentUpon>HotelXiangQingRoom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelXiangQingRoom.aspx.designer.cs">
+      <DependentUpon>HotelXiangQingRoom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JinRiApi\JinRi_Notify.aspx.cs">
+      <DependentUpon>JinRi_Notify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JinRiApi\JinRi_Notify.aspx.designer.cs">
+      <DependentUpon>JinRi_Notify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JiPiao.aspx.cs">
+      <DependentUpon>JiPiao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JiPiao.aspx.designer.cs">
+      <DependentUpon>JiPiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginOrReg.aspx.cs">
+      <DependentUpon>LoginOrReg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginOrReg.aspx.designer.cs">
+      <DependentUpon>LoginOrReg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DuiHuanList.aspx.cs">
+      <DependentUpon>DuiHuanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DuiHuanList.aspx.designer.cs">
+      <DependentUpon>DuiHuanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSiJiangLi.aspx.cs">
+      <DependentUpon>FenSiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSiJiangLi.aspx.designer.cs">
+      <DependentUpon>FenSiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\JiFenDuiHuan.aspx.cs">
+      <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\JiFenDuiHuan.aspx.designer.cs">
+      <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserCentent.aspx.cs">
+      <DependentUpon>UserCentent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserCentent.aspx.designer.cs">
+      <DependentUpon>UserCentent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DaiLiDefault.ascx.cs">
+      <DependentUpon>DaiLiDefault.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DaiLiDefault.ascx.designer.cs">
+      <DependentUpon>DaiLiDefault.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DaiLiNav.ascx.cs">
+      <DependentUpon>DaiLiNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DaiLiNav.ascx.designer.cs">
+      <DependentUpon>DaiLiNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DingDanNav.ascx.cs">
+      <DependentUpon>DingDanNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DingDanNav.ascx.designer.cs">
+      <DependentUpon>DingDanNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MainDefault.ascx.cs">
+      <DependentUpon>MainDefault.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MainDefault.ascx.designer.cs">
+      <DependentUpon>MainDefault.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MainNav.ascx.cs">
+      <DependentUpon>MainNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MainNav.ascx.designer.cs">
+      <DependentUpon>MainNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserNav.ascx.cs">
+      <DependentUpon>UserNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserNav.ascx.designer.cs">
+      <DependentUpon>UserNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DaiLiCompany.aspx.cs">
+      <DependentUpon>DaiLiCompany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DaiLiCompany.aspx.designer.cs">
+      <DependentUpon>DaiLiCompany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\JiFenDuiHuan.aspx.cs">
+      <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\JiFenDuiHuan.aspx.designer.cs">
+      <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\JiPiaoOrderList.aspx.cs">
+      <DependentUpon>JiPiaoOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\JiPiaoOrderList.aspx.designer.cs">
+      <DependentUpon>JiPiaoOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\JiPiaoOrderXX.aspx.cs">
+      <DependentUpon>JiPiaoOrderXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\JiPiaoOrderXX.aspx.designer.cs">
+      <DependentUpon>JiPiaoOrderXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\NavNum.aspx.cs">
+      <DependentUpon>NavNum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\NavNum.aspx.designer.cs">
+      <DependentUpon>NavNum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\PaiXu.aspx.cs">
+      <DependentUpon>PaiXu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\PaiXu.aspx.designer.cs">
+      <DependentUpon>PaiXu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShowHidden.aspx.cs">
+      <DependentUpon>ShowHidden.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShowHidden.aspx.designer.cs">
+      <DependentUpon>ShowHidden.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\XieYi.aspx.cs">
+      <DependentUpon>XieYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\XieYi.aspx.designer.cs">
+      <DependentUpon>XieYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="__JiPiaoCeShi.aspx.cs">
+      <DependentUpon>__JiPiaoCeShi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="__JiPiaoCeShi.aspx.designer.cs">
+      <DependentUpon>__JiPiaoCeShi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Lg.aspx.cs">
+      <DependentUpon>Lg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Lg.aspx.designer.cs">
+      <DependentUpon>Lg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logindomain.aspx.cs">
+      <DependentUpon>Logindomain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logindomain.aspx.designer.cs">
+      <DependentUpon>Logindomain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Front.Master.cs">
+      <DependentUpon>Front.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Front.Master.designer.cs">
+      <DependentUpon>Front.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\FrontFixed.Master.cs">
+      <DependentUpon>FrontFixed.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\FrontFixed.Master.designer.cs">
+      <DependentUpon>FrontFixed.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Print.Master.cs">
+      <DependentUpon>Print.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Print.Master.designer.cs">
+      <DependentUpon>Print.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Webmaster.Master.cs">
+      <DependentUpon>Webmaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Webmaster.Master.designer.cs">
+      <DependentUpon>Webmaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Front2.Master.cs">
+      <DependentUpon>Front2.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Front2.Master.designer.cs">
+      <DependentUpon>Front2.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Front3.Master.cs">
+      <DependentUpon>Front3.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Front3.Master.designer.cs">
+      <DependentUpon>Front3.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChangXianOrder.aspx.cs">
+      <DependentUpon>ChangXianOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChangXianOrder.aspx.designer.cs">
+      <DependentUpon>ChangXianOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChongzhiList.aspx.cs">
+      <DependentUpon>ChongzhiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChongzhiList.aspx.designer.cs">
+      <DependentUpon>ChongzhiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChuJingOrder.aspx.cs">
+      <DependentUpon>ChuJingOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ChuJingOrder.aspx.designer.cs">
+      <DependentUpon>ChuJingOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DingDanList.aspx.cs">
+      <DependentUpon>DingDanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DingDanList.aspx.designer.cs">
+      <DependentUpon>DingDanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DuanXianOrder.aspx.cs">
+      <DependentUpon>DuanXianOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\DuanXianOrder.aspx.designer.cs">
+      <DependentUpon>DuanXianOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FanLiList.aspx.cs">
+      <DependentUpon>FanLiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FanLiList.aspx.designer.cs">
+      <DependentUpon>FanLiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSi.aspx.cs">
+      <DependentUpon>FenSi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSi.aspx.designer.cs">
+      <DependentUpon>FenSi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSiJiaoYi.aspx.cs">
+      <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenSiJiaoYi.aspx.designer.cs">
+      <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\GongGao.aspx.cs">
+      <DependentUpon>GongGao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\GongGao.aspx.designer.cs">
+      <DependentUpon>GongGao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\GongGaoXX.aspx.cs">
+      <DependentUpon>GongGaoXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\GongGaoXX.aspx.designer.cs">
+      <DependentUpon>GongGaoXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\HotelDetails.aspx.cs">
+      <DependentUpon>HotelDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\HotelDetails.aspx.designer.cs">
+      <DependentUpon>HotelDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\HotelOrderList.aspx.cs">
+      <DependentUpon>HotelOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\HotelOrderList.aspx.designer.cs">
+      <DependentUpon>HotelOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MemberInfo.aspx.cs">
+      <DependentUpon>MemberInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MemberInfo.aspx.designer.cs">
+      <DependentUpon>MemberInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MyChongzhi.aspx.cs">
+      <DependentUpon>MyChongzhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MyChongzhi.aspx.designer.cs">
+      <DependentUpon>MyChongzhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MyTiXian.aspx.cs">
+      <DependentUpon>MyTiXian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MyTiXian.aspx.designer.cs">
+      <DependentUpon>MyTiXian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\OrderPay.aspx.cs">
+      <DependentUpon>OrderPay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\OrderPay.aspx.designer.cs">
+      <DependentUpon>OrderPay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\PayMoney.aspx.cs">
+      <DependentUpon>PayMoney.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\PayMoney.aspx.designer.cs">
+      <DependentUpon>PayMoney.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\QueRenCz.aspx.cs">
+      <DependentUpon>QueRenCz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\QueRenCz.aspx.designer.cs">
+      <DependentUpon>QueRenCz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ScenicDetails.aspx.cs">
+      <DependentUpon>ScenicDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ScenicDetails.aspx.designer.cs">
+      <DependentUpon>ScenicDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ScenicList.aspx.cs">
+      <DependentUpon>ScenicList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ScenicList.aspx.designer.cs">
+      <DependentUpon>ScenicList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SCOrderList.aspx.cs">
+      <DependentUpon>SCOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SCOrderList.aspx.designer.cs">
+      <DependentUpon>SCOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SetPassWord.aspx.cs">
+      <DependentUpon>SetPassWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\SetPassWord.aspx.designer.cs">
+      <DependentUpon>SetPassWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TiXianList.aspx.cs">
+      <DependentUpon>TiXianList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TiXianList.aspx.designer.cs">
+      <DependentUpon>TiXianList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TransactionList.aspx.cs">
+      <DependentUpon>TransactionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TransactionList.aspx.designer.cs">
+      <DependentUpon>TransactionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuanGouDingDan.aspx.cs">
+      <DependentUpon>TuanGouDingDan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuanGouDingDan.aspx.designer.cs">
+      <DependentUpon>TuanGouDingDan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuiGuangFanLi.aspx.cs">
+      <DependentUpon>TuiGuangFanLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuiGuangFanLi.aspx.designer.cs">
+      <DependentUpon>TuiGuangFanLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuiGuangDaiMa.aspx.cs">
+      <DependentUpon>TuiGuangDaiMa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\TuiGuangDaiMa.aspx.designer.cs">
+      <DependentUpon>TuiGuangDaiMa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpCompanyJieShao.aspx.cs">
+      <DependentUpon>UpCompanyJieShao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpCompanyJieShao.aspx.designer.cs">
+      <DependentUpon>UpCompanyJieShao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpdateMember.aspx.cs">
+      <DependentUpon>UpdateMember.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpdateMember.aspx.designer.cs">
+      <DependentUpon>UpdateMember.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpdatePassWord.aspx.cs">
+      <DependentUpon>UpdatePassWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpdatePassWord.aspx.designer.cs">
+      <DependentUpon>UpdatePassWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UserTransaction.aspx.cs">
+      <DependentUpon>UserTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UserTransaction.aspx.designer.cs">
+      <DependentUpon>UserTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\VisaOrderList.aspx.cs">
+      <DependentUpon>VisaOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\VisaOrderList.aspx.designer.cs">
+      <DependentUpon>VisaOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XiaJiJiangLi.aspx.cs">
+      <DependentUpon>XiaJiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XiaJiJiangLi.aspx.designer.cs">
+      <DependentUpon>XiaJiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XiaJiJiangLiJieSuan.aspx.cs">
+      <DependentUpon>XiaJiJiangLiJieSuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XiaJiJiangLiJieSuan.aspx.designer.cs">
+      <DependentUpon>XiaJiJiangLiJieSuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XianLuDetail.aspx.cs">
+      <DependentUpon>XianLuDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XianLuDetail.aspx.designer.cs">
+      <DependentUpon>XianLuDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XianLuOrderList.aspx.cs">
+      <DependentUpon>XianLuOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\XianLuOrderList.aspx.designer.cs">
+      <DependentUpon>XianLuOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZengZhi.aspx.cs">
+      <DependentUpon>ZengZhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZengZhi.aspx.designer.cs">
+      <DependentUpon>ZengZhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuCheDetails.aspx.cs">
+      <DependentUpon>ZuCheDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\ZuCheDetails.aspx.designer.cs">
+      <DependentUpon>ZuCheDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuCheOrderList.aspx.cs">
+      <DependentUpon>ZuCheOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuCheOrderList.aspx.designer.cs">
+      <DependentUpon>ZuCheOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuTuanDetails.aspx.cs">
+      <DependentUpon>ZuTuanDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\ZuTuanDetails.aspx.designer.cs">
+      <DependentUpon>ZuTuanDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuTuanOrderList.aspx.cs">
+      <DependentUpon>ZuTuanOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\ZuTuanOrderList.aspx.designer.cs">
+      <DependentUpon>ZuTuanOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="print\xingchengdan.aspx.cs">
+      <DependentUpon>xingchengdan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="print\xingchengdan.aspx.designer.cs">
+      <DependentUpon>xingchengdan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CommonPage\upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QianZheng.aspx.cs">
+      <DependentUpon>QianZheng.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QianZheng.aspx.designer.cs">
+      <DependentUpon>QianZheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistSuccess.aspx.cs">
+      <DependentUpon>RegistSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistSuccess.aspx.designer.cs">
+      <DependentUpon>RegistSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="searchlist.aspx.cs">
+      <DependentUpon>searchlist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="searchlist.aspx.designer.cs">
+      <DependentUpon>searchlist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangCheng.aspx.cs">
+      <DependentUpon>ShangCheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangCheng.aspx.designer.cs">
+      <DependentUpon>ShangCheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangChengLianMeng.aspx.cs">
+      <DependentUpon>ShangChengLianMeng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangChengLianMeng.aspx.designer.cs">
+      <DependentUpon>ShangChengLianMeng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangChengXiangQing.aspx.cs">
+      <DependentUpon>ShangChengXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangChengXiangQing.aspx.designer.cs">
+      <DependentUpon>ShangChengXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangLvEJia.aspx.cs">
+      <DependentUpon>ShangLvEJia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShangLvEJia.aspx.designer.cs">
+      <DependentUpon>ShangLvEJia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TiJiaoXX.aspx.cs">
+      <DependentUpon>TiJiaoXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TiJiaoXX.aspx.designer.cs">
+      <DependentUpon>TiJiaoXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TuanGou.aspx.cs">
+      <DependentUpon>TuanGou.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TuanGou.aspx.designer.cs">
+      <DependentUpon>TuanGou.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TuanGouTJ.aspx.cs">
+      <DependentUpon>TuanGouTJ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TuanGouTJ.aspx.designer.cs">
+      <DependentUpon>TuanGouTJ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TuanGouXX.aspx.cs">
+      <DependentUpon>TuanGouXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TuanGouXX.aspx.designer.cs">
+      <DependentUpon>TuanGouXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="joinus.aspx.cs">
+      <DependentUpon>joinus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="joinus.aspx.designer.cs">
+      <DependentUpon>joinus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Hotel.ascx.cs">
+      <DependentUpon>Hotel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Hotel.ascx.designer.cs">
+      <DependentUpon>Hotel.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Hotel2.ascx.cs">
+      <DependentUpon>Hotel2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Hotel2.ascx.designer.cs">
+      <DependentUpon>Hotel2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Menu.ascx.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Menu.ascx.designer.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Share.ascx.cs">
+      <DependentUpon>Share.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Share.ascx.designer.cs">
+      <DependentUpon>Share.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TuanGou.ascx.cs">
+      <DependentUpon>TuanGou.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\TuanGou.ascx.designer.cs">
+      <DependentUpon>TuanGou.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\uploadFile.ascx.cs">
+      <DependentUpon>uploadFile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\uploadFile.ascx.designer.cs">
+      <DependentUpon>uploadFile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserLeft.ascx.cs">
+      <DependentUpon>UserLeft.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserLeft.ascx.designer.cs">
+      <DependentUpon>UserLeft.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\XianLu.ascx.cs">
+      <DependentUpon>XianLu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\XianLu.ascx.designer.cs">
+      <DependentUpon>XianLu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ZhuCe.ascx.cs">
+      <DependentUpon>ZhuCe.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ZhuCe.ascx.designer.cs">
+      <DependentUpon>ZhuCe.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder1.ascx.cs">
+      <DependentUpon>ZuCheOrder1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder1.ascx.designer.cs">
+      <DependentUpon>ZuCheOrder1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder.ascx.cs">
+      <DependentUpon>ZuCheOrder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder.ascx.designer.cs">
+      <DependentUpon>ZuCheOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder2.ascx.cs">
+      <DependentUpon>ZuCheOrder2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ZuCheOrder2.ascx.designer.cs">
+      <DependentUpon>ZuCheOrder2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Visa.aspx.cs">
+      <DependentUpon>Visa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Visa.aspx.designer.cs">
+      <DependentUpon>Visa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisaBox.aspx.cs">
+      <DependentUpon>VisaBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisaBox.aspx.designer.cs">
+      <DependentUpon>VisaBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisaList.aspx.cs">
+      <DependentUpon>VisaList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisaList.aspx.designer.cs">
+      <DependentUpon>VisaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisaXX.aspx.cs">
+      <DependentUpon>VisaXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisaXX.aspx.designer.cs">
+      <DependentUpon>VisaXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Weather.aspx.cs">
+      <DependentUpon>Weather.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Weather.aspx.designer.cs">
+      <DependentUpon>Weather.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DanDuZuTuan.aspx.cs">
+      <DependentUpon>DanDuZuTuan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\DanDuZuTuan.aspx.designer.cs">
+      <DependentUpon>DanDuZuTuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\default.Master.cs">
+      <DependentUpon>default.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\default.Master.designer.cs">
+      <DependentUpon>default.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DingDanList.aspx.cs">
+      <DependentUpon>DingDanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DingDanList.aspx.designer.cs">
+      <DependentUpon>DingDanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\EBaoInfo.aspx.cs">
+      <DependentUpon>EBaoInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\EBaoInfo.aspx.designer.cs">
+      <DependentUpon>EBaoInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FanLianMengTuiGuangBiLi.aspx.cs">
+      <DependentUpon>FanLianMengTuiGuangBiLi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\FanLianMengTuiGuangBiLi.aspx.designer.cs">
+      <DependentUpon>FanLianMengTuiGuangBiLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FeeSetting.aspx.cs">
+      <DependentUpon>FeeSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FeeSetting.aspx.designer.cs">
+      <DependentUpon>FeeSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftSalesProduct.ascx.cs">
+      <DependentUpon>LeftSalesProduct.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftSalesProduct.ascx.designer.cs">
+      <DependentUpon>LeftSalesProduct.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Links.ascx.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Links.ascx.designer.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Search.ascx.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Search.ascx.designer.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TopBar.ascx.cs">
+      <DependentUpon>TopBar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\TopBar.ascx.designer.cs">
+      <DependentUpon>TopBar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TravelTools.ascx.cs">
+      <DependentUpon>TravelTools.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\TravelTools.ascx.designer.cs">
+      <DependentUpon>TravelTools.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UploadControl.ascx.cs">
+      <DependentUpon>UploadControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UploadControl.ascx.designer.cs">
+      <DependentUpon>UploadControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserLoginOrReg.ascx.cs">
+      <DependentUpon>UserLoginOrReg.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserLoginOrReg.ascx.designer.cs">
+      <DependentUpon>UserLoginOrReg.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ShopUserRegisterService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AdvEdit.aspx.cs">
+      <DependentUpon>AdvEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AdvEdit.aspx.designer.cs">
+      <DependentUpon>AdvEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AdvList.aspx.cs">
+      <DependentUpon>AdvList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AdvList.aspx.designer.cs">
+      <DependentUpon>AdvList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AreaEdit.aspx.cs">
+      <DependentUpon>AreaEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AreaEdit.aspx.designer.cs">
+      <DependentUpon>AreaEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AreaList.aspx.cs">
+      <DependentUpon>AreaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\AreaList.aspx.designer.cs">
+      <DependentUpon>AreaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CityEdit.aspx.cs">
+      <DependentUpon>CityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CityEdit.aspx.designer.cs">
+      <DependentUpon>CityEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CityManage.aspx.cs">
+      <DependentUpon>CityManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CityManage.aspx.designer.cs">
+      <DependentUpon>CityManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CompanyInfo.aspx.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\CompanyInfo.aspx.designer.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DiBiao.aspx.cs">
+      <DependentUpon>DiBiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DiBiao.aspx.designer.cs">
+      <DependentUpon>DiBiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DiBiaoEdit.aspx.cs">
+      <DependentUpon>DiBiaoEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\DiBiaoEdit.aspx.designer.cs">
+      <DependentUpon>DiBiaoEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\EditRouteDate.aspx.cs">
+      <DependentUpon>EditRouteDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\EditRouteDate.aspx.designer.cs">
+      <DependentUpon>EditRouteDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FeedbackEdit.aspx.cs">
+      <DependentUpon>FeedbackEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\FeedbackEdit.aspx.designer.cs">
+      <DependentUpon>FeedbackEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FeedbackManage.aspx.cs">
+      <DependentUpon>FeedbackManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FeedbackManage.aspx.designer.cs">
+      <DependentUpon>FeedbackManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\FenSi.aspx.cs">
+      <DependentUpon>FenSi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\FenSi.aspx.designer.cs">
+      <DependentUpon>FenSi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\FenSiJiaoYi.aspx.cs">
+      <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\FenSiJiaoYi.aspx.designer.cs">
+      <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\AddRoomMode.aspx.cs">
+      <DependentUpon>AddRoomMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\AddRoomMode.aspx.designer.cs">
+      <DependentUpon>AddRoomMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelEdit.aspx.cs">
+      <DependentUpon>HotelEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelEdit.aspx.designer.cs">
+      <DependentUpon>HotelEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelInfo.aspx.cs">
+      <DependentUpon>HotelInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelInfo.aspx.designer.cs">
+      <DependentUpon>HotelInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelList.aspx.cs">
+      <DependentUpon>HotelList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelList.aspx.designer.cs">
+      <DependentUpon>HotelList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderEdit.aspx.cs">
+      <DependentUpon>HotelOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderEdit.aspx.designer.cs">
+      <DependentUpon>HotelOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderList.aspx.cs">
+      <DependentUpon>HotelOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderList.aspx.designer.cs">
+      <DependentUpon>HotelOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderLog.aspx.cs">
+      <DependentUpon>HotelOrderLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderLog.aspx.designer.cs">
+      <DependentUpon>HotelOrderLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderMsg.aspx.cs">
+      <DependentUpon>HotelOrderMsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\HotelOrderMsg.aspx.designer.cs">
+      <DependentUpon>HotelOrderMsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomEdit.aspx.cs">
+      <DependentUpon>RoomEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomEdit.aspx.designer.cs">
+      <DependentUpon>RoomEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomImgInfo.aspx.cs">
+      <DependentUpon>RoomImgInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomImgInfo.aspx.designer.cs">
+      <DependentUpon>RoomImgInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomModeList.aspx.cs">
+      <DependentUpon>RoomModeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomModeList.aspx.designer.cs">
+      <DependentUpon>RoomModeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomPrice.aspx.cs">
+      <DependentUpon>RoomPrice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomPrice.aspx.designer.cs">
+      <DependentUpon>RoomPrice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomPriceAll.aspx.cs">
+      <DependentUpon>RoomPriceAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomPriceAll.aspx.designer.cs">
+      <DependentUpon>RoomPriceAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomShenqing.aspx.cs">
+      <DependentUpon>RoomShenqing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\RoomShenqing.aspx.designer.cs">
+      <DependentUpon>RoomShenqing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\SetHotelImg.aspx.cs">
+      <DependentUpon>SetHotelImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\SetHotelImg.aspx.designer.cs">
+      <DependentUpon>SetHotelImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\TourOrderList.aspx.cs">
+      <DependentUpon>TourOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\TourOrderList.aspx.designer.cs">
+      <DependentUpon>TourOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\TourOrderReply.aspx.cs">
+      <DependentUpon>TourOrderReply.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\HotelManage\TourOrderReply.aspx.designer.cs">
+      <DependentUpon>TourOrderReply.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LeftMenuList.aspx.cs">
+      <DependentUpon>LeftMenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LeftMenuList.aspx.designer.cs">
+      <DependentUpon>LeftMenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LinkEdit.aspx.cs">
+      <DependentUpon>LinkEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LinkEdit.aspx.designer.cs">
+      <DependentUpon>LinkEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LinkList.aspx.cs">
+      <DependentUpon>LinkList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\LinkList.aspx.designer.cs">
+      <DependentUpon>LinkList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\ApplyUserList.aspx.cs">
+      <DependentUpon>ApplyUserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\ApplyUserList.aspx.designer.cs">
+      <DependentUpon>ApplyUserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\CompanyContent.aspx.cs">
+      <DependentUpon>CompanyContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\CompanyContent.aspx.designer.cs">
+      <DependentUpon>CompanyContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\MemberEdit.aspx.cs">
+      <DependentUpon>MemberEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\MemberEdit.aspx.designer.cs">
+      <DependentUpon>MemberEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\MemberList.aspx.cs">
+      <DependentUpon>MemberList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MemberCenter\MemberList.aspx.designer.cs">
+      <DependentUpon>MemberList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\FanLiList.aspx.cs">
+      <DependentUpon>FanLiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\FanLiList.aspx.designer.cs">
+      <DependentUpon>FanLiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\InterestrateSet.aspx.cs">
+      <DependentUpon>InterestrateSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\InterestrateSet.aspx.designer.cs">
+      <DependentUpon>InterestrateSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\JiaoYiList.aspx.cs">
+      <DependentUpon>JiaoYiList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\JiaoYiList.aspx.designer.cs">
+      <DependentUpon>JiaoYiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\PayMentRecord.aspx.cs">
+      <DependentUpon>PayMentRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\PayMentRecord.aspx.designer.cs">
+      <DependentUpon>PayMentRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\TiXianEdit.aspx.cs">
+      <DependentUpon>TiXianEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\TiXianEdit.aspx.designer.cs">
+      <DependentUpon>TiXianEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\TiXianList.aspx.cs">
+      <DependentUpon>TiXianList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\TiXianList.aspx.designer.cs">
+      <DependentUpon>TiXianList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ZhangHuMingXi.aspx.cs">
+      <DependentUpon>ZhangHuMingXi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ZhangHuMingXi.aspx.designer.cs">
+      <DependentUpon>ZhangHuMingXi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderEdit.aspx.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderEdit.aspx.designer.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderEdit1.aspx.cs">
+      <DependentUpon>OrderEdit1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderEdit1.aspx.designer.cs">
+      <DependentUpon>OrderEdit1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderInfo.aspx.cs">
+      <DependentUpon>OrderInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderInfo.aspx.designer.cs">
+      <DependentUpon>OrderInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderList.aspx.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\OrderList.aspx.designer.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ProvinceEdit.aspx.cs">
+      <DependentUpon>ProvinceEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ProvinceEdit.aspx.designer.cs">
+      <DependentUpon>ProvinceEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\DingDan.aspx.cs">
+      <DependentUpon>DingDan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\DingDan.aspx.designer.cs">
+      <DependentUpon>DingDan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\DingDanEdit.aspx.cs">
+      <DependentUpon>DingDanEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\DingDanEdit.aspx.designer.cs">
+      <DependentUpon>DingDanEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\QianZheng.aspx.cs">
+      <DependentUpon>QianZheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\QianZheng.aspx.designer.cs">
+      <DependentUpon>QianZheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\QianZhengEdit.aspx.cs">
+      <DependentUpon>QianZhengEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\QianZheng\QianZhengEdit.aspx.designer.cs">
+      <DependentUpon>QianZhengEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Ref.Master.cs">
+      <DependentUpon>Ref.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\Ref.Master.designer.cs">
+      <DependentUpon>Ref.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteEdit.aspx.cs">
+      <DependentUpon>RouteEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteEdit.aspx.designer.cs">
+      <DependentUpon>RouteEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteList.aspx.cs">
+      <DependentUpon>RouteList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteList.aspx.designer.cs">
+      <DependentUpon>RouteList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteTheme.aspx.cs">
+      <DependentUpon>RouteTheme.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteTheme.aspx.designer.cs">
+      <DependentUpon>RouteTheme.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteThemeEdit.aspx.cs">
+      <DependentUpon>RouteThemeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\RouteThemeEdit.aspx.designer.cs">
+      <DependentUpon>RouteThemeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\InterfaceDataList.aspx.cs">
+      <DependentUpon>InterfaceDataList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\InterfaceDataList.aspx.designer.cs">
+      <DependentUpon>InterfaceDataList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicEdit.aspx.cs">
+      <DependentUpon>ScenicEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicEdit.aspx.designer.cs">
+      <DependentUpon>ScenicEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicList.aspx.cs">
+      <DependentUpon>ScenicList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicList.aspx.designer.cs">
+      <DependentUpon>ScenicList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicOrderEdit.aspx.cs">
+      <DependentUpon>ScenicOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicOrderEdit.aspx.designer.cs">
+      <DependentUpon>ScenicOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicOrderList.aspx.cs">
+      <DependentUpon>ScenicOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\ScenicOrderList.aspx.designer.cs">
+      <DependentUpon>ScenicOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\SetGoogleMap.aspx.cs">
+      <DependentUpon>SetGoogleMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\SetGoogleMap.aspx.designer.cs">
+      <DependentUpon>SetGoogleMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\SetScenicImg.aspx.cs">
+      <DependentUpon>SetScenicImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\SetScenicImg.aspx.designer.cs">
+      <DependentUpon>SetScenicImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\Ticket.aspx.cs">
+      <DependentUpon>Ticket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\Ticket.aspx.designer.cs">
+      <DependentUpon>Ticket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\TicketEdit.aspx.cs">
+      <DependentUpon>TicketEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ScenicAndTicketManage\TicketEdit.aspx.designer.cs">
+      <DependentUpon>TicketEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\SelectChildTourDate.aspx.cs">
+      <DependentUpon>SelectChildTourDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\SelectChildTourDate.aspx.designer.cs">
+      <DependentUpon>SelectChildTourDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\SelectCustomer.aspx.cs">
+      <DependentUpon>SelectCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\SelectCustomer.aspx.designer.cs">
+      <DependentUpon>SelectCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\SelectRoute.aspx.cs">
+      <DependentUpon>SelectRoute.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\SelectRoute.aspx.designer.cs">
+      <DependentUpon>SelectRoute.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\setRouteState.aspx.cs">
+      <DependentUpon>setRouteState.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\setRouteState.aspx.designer.cs">
+      <DependentUpon>setRouteState.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\AccountManage.aspx.cs">
+      <DependentUpon>AccountManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\AccountManage.aspx.designer.cs">
+      <DependentUpon>AccountManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengE.aspx.cs">
+      <DependentUpon>LianMengE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengE.aspx.designer.cs">
+      <DependentUpon>LianMengE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengLBE.aspx.cs">
+      <DependentUpon>LianMengLBE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengLBE.aspx.designer.cs">
+      <DependentUpon>LianMengLBE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengLBs.aspx.cs">
+      <DependentUpon>LianMengLBs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengLBs.aspx.designer.cs">
+      <DependentUpon>LianMengLBs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengs.aspx.cs">
+      <DependentUpon>LianMengs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\LianMengs.aspx.designer.cs">
+      <DependentUpon>LianMengs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\OrderEdit.aspx.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\OrderEdit.aspx.designer.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\OrderList.aspx.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\OrderList.aspx.designer.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\ProductEdit.aspx.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\ProductEdit.aspx.designer.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\ProductList.aspx.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\ProductList.aspx.designer.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\TypeEdit.aspx.cs">
+      <DependentUpon>TypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\TypeEdit.aspx.designer.cs">
+      <DependentUpon>TypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\TypeList.aspx.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ShangCheng\TypeList.aspx.designer.cs">
+      <DependentUpon>TypeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyCheck.aspx.cs">
+      <DependentUpon>StrategyCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyCheck.aspx.designer.cs">
+      <DependentUpon>StrategyCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyEdit.aspx.cs">
+      <DependentUpon>StrategyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyEdit.aspx.designer.cs">
+      <DependentUpon>StrategyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyList.aspx.cs">
+      <DependentUpon>StrategyList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyList.aspx.designer.cs">
+      <DependentUpon>StrategyList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyThemeEdit.aspx.cs">
+      <DependentUpon>StrategyThemeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyThemeEdit.aspx.designer.cs">
+      <DependentUpon>StrategyThemeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyThemeList.aspx.cs">
+      <DependentUpon>StrategyThemeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Strategy\StrategyThemeList.aspx.designer.cs">
+      <DependentUpon>StrategyThemeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ProductEdit.aspx.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ProductEdit.aspx.designer.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ChongZhiList.aspx.cs">
+      <DependentUpon>ChongZhiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MoneyManagement\ChongZhiList.aspx.designer.cs">
+      <DependentUpon>ChongZhiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierEdit.aspx.cs">
+      <DependentUpon>SupplierEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierEdit.aspx.designer.cs">
+      <DependentUpon>SupplierEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierList.aspx.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierList.aspx.designer.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Top.aspx.cs">
+      <DependentUpon>Top.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\Top.aspx.designer.cs">
+      <DependentUpon>Top.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleClass.aspx.cs">
+      <DependentUpon>TravelArticleClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleClass.aspx.designer.cs">
+      <DependentUpon>TravelArticleClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleList.aspx.cs">
+      <DependentUpon>TravelArticleList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleList.aspx.designer.cs">
+      <DependentUpon>TravelArticleList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleEdit.aspx.cs">
+      <DependentUpon>TravelArticleEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleEdit.aspx.designer.cs">
+      <DependentUpon>TravelArticleEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleLYEdit.aspx.cs">
+      <DependentUpon>TravelArticleLYEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleLYEdit.aspx.designer.cs">
+      <DependentUpon>TravelArticleLYEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleLYList.aspx.cs">
+      <DependentUpon>TravelArticleLYList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelArticleLYList.aspx.designer.cs">
+      <DependentUpon>TravelArticleLYList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelClassEdit.aspx.cs">
+      <DependentUpon>TravelClassEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TravelClassEdit.aspx.designer.cs">
+      <DependentUpon>TravelClassEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuangouEdit.aspx.cs">
+      <DependentUpon>TuangouEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuangouEdit.aspx.designer.cs">
+      <DependentUpon>TuangouEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuangouList.aspx.cs">
+      <DependentUpon>TuangouList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuangouList.aspx.designer.cs">
+      <DependentUpon>TuangouList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouDingDans.aspx.cs">
+      <DependentUpon>TuanGouDingDans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouDingDans.aspx.designer.cs">
+      <DependentUpon>TuanGouDingDans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouEdit.aspx.cs">
+      <DependentUpon>TuanGouEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouEdit.aspx.designer.cs">
+      <DependentUpon>TuanGouEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouList.aspx.cs">
+      <DependentUpon>TuanGouList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\TuanGou\TuanGouList.aspx.designer.cs">
+      <DependentUpon>TuanGouList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FanLianMengTuiGuangFanLi.aspx.cs">
+      <DependentUpon>FanLianMengTuiGuangFanLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\FanLianMengTuiGuangFanLi.aspx.designer.cs">
+      <DependentUpon>FanLianMengTuiGuangFanLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UntreatedOrders.aspx.cs">
+      <DependentUpon>UntreatedOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UntreatedOrders.aspx.designer.cs">
+      <DependentUpon>UntreatedOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\ExcelFileUploadControl.ascx.cs">
+      <DependentUpon>ExcelFileUploadControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\ExcelFileUploadControl.ascx.designer.cs">
+      <DependentUpon>ExcelFileUploadControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\Journey.ascx.cs">
+      <DependentUpon>Journey.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\Journey.ascx.designer.cs">
+      <DependentUpon>Journey.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\OrderCustomer.ascx.cs">
+      <DependentUpon>OrderCustomer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\OrderCustomer.ascx.designer.cs">
+      <DependentUpon>OrderCustomer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\SelectCustomer.ascx.cs">
+      <DependentUpon>SelectCustomer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\SelectCustomer.ascx.designer.cs">
+      <DependentUpon>SelectCustomer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\SelectRoute.ascx.cs">
+      <DependentUpon>SelectRoute.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\SelectRoute.ascx.designer.cs">
+      <DependentUpon>SelectRoute.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserEdit.aspx.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserEdit.aspx.designer.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserPer.aspx.cs">
+      <DependentUpon>UserPer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserPer.aspx.designer.cs">
+      <DependentUpon>UserPer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\WebSiteInfo.aspx.cs">
+      <DependentUpon>WebSiteInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\WebSiteInfo.aspx.designer.cs">
+      <DependentUpon>WebSiteInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\XiaJiJiangLi.aspx.cs">
+      <DependentUpon>XiaJiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\XiaJiJiangLi.aspx.designer.cs">
+      <DependentUpon>XiaJiJiangLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\XiaJiJiangLiBiLi.aspx.cs">
+      <DependentUpon>XiaJiJiangLiBiLi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\XiaJiJiangLiBiLi.aspx.designer.cs">
+      <DependentUpon>XiaJiJiangLiBiLi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZiZuTuanList.aspx.cs">
+      <DependentUpon>ZiZuTuanList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\ZiZuTuanList.aspx.designer.cs">
+      <DependentUpon>ZiZuTuanList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZiZuTuanXX.aspx.cs">
+      <DependentUpon>ZiZuTuanXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZiZuTuanXX.aspx.designer.cs">
+      <DependentUpon>ZiZuTuanXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZucheEdit.aspx.cs">
+      <DependentUpon>ZucheEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZucheEdit.aspx.designer.cs">
+      <DependentUpon>ZucheEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\zuchelist.aspx.cs">
+      <DependentUpon>zuchelist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\zuchelist.aspx.designer.cs">
+      <DependentUpon>zuchelist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZuCheOrderEdit.aspx.cs">
+      <DependentUpon>ZuCheOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZuCheOrderEdit.aspx.designer.cs">
+      <DependentUpon>ZuCheOrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZuCheOrderList.aspx.cs">
+      <DependentUpon>ZuCheOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\ZuChe\ZuCheOrderList.aspx.designer.cs">
+      <DependentUpon>ZuCheOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLu.aspx.cs">
+      <DependentUpon>XianLu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLu.aspx.designer.cs">
+      <DependentUpon>XianLu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLuBox.aspx.cs">
+      <DependentUpon>XianLuBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLuBox.aspx.designer.cs">
+      <DependentUpon>XianLuBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLuYuDing.aspx.cs">
+      <DependentUpon>XianLuYuDing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XianLuYuDing.aspx.designer.cs">
+      <DependentUpon>XianLuYuDing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XingCheLuXian.aspx.cs">
+      <DependentUpon>XingCheLuXian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="XingCheLuXian.aspx.designer.cs">
+      <DependentUpon>XingCheLuXian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XingCheng.aspx.cs">
+      <DependentUpon>XingCheng.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="XingCheng.aspx.designer.cs">
+      <DependentUpon>XingCheng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XiuXianYuLe.aspx.cs">
+      <DependentUpon>XiuXianYuLe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="XiuXianYuLe.aspx.designer.cs">
+      <DependentUpon>XiuXianYuLe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiao.aspx.cs">
+      <DependentUpon>YouHuiMenPiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiao.aspx.designer.cs">
+      <DependentUpon>YouHuiMenPiao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoMap.aspx.cs">
+      <DependentUpon>YouHuiMenPiaoMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoMap.aspx.designer.cs">
+      <DependentUpon>YouHuiMenPiaoMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoOrder.aspx.cs">
+      <DependentUpon>YouHuiMenPiaoOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoOrder.aspx.designer.cs">
+      <DependentUpon>YouHuiMenPiaoOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoXiangQing.aspx.cs">
+      <DependentUpon>YouHuiMenPiaoXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YouHuiMenPiaoXiangQing.aspx.designer.cs">
+      <DependentUpon>YouHuiMenPiaoXiangQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YuDing.aspx.cs">
+      <DependentUpon>YuDing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YuDing.aspx.designer.cs">
+      <DependentUpon>YuDing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZiXun.aspx.cs">
+      <DependentUpon>ZiXun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZiXun.aspx.designer.cs">
+      <DependentUpon>ZiXun.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZiXunDetails.aspx.cs">
+      <DependentUpon>ZiXunDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZiXunDetails.aspx.designer.cs">
+      <DependentUpon>ZiXunDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZiXunXX.aspx.cs">
+      <DependentUpon>ZiXunXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZiXunXX.aspx.designer.cs">
+      <DependentUpon>ZiXunXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZiZhuTuan.aspx.cs">
+      <DependentUpon>ZiZhuTuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZiZhuTuan.aspx.designer.cs">
+      <DependentUpon>ZiZhuTuan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZuChe.aspx.cs">
+      <DependentUpon>ZuChe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZuChe.aspx.designer.cs">
+      <DependentUpon>ZuChe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZuCheBox.aspx.cs">
+      <DependentUpon>ZuCheBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZuCheBox.aspx.designer.cs">
+      <DependentUpon>ZuCheBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZuCheXX.aspx.cs">
+      <DependentUpon>ZuCheXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZuCheXX.aspx.designer.cs">
+      <DependentUpon>ZuCheXX.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0953418F-4565-4DFC-A788-C886E7001696}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlLibrary\ControlLibrary.csproj">
+      <Project>{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}</Project>
+      <Name>ControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.BLL\EyouSoft.BLL.csproj">
+      <Project>{93ED3B18-E870-4358-AE68-F4B6A43DC940}</Project>
+      <Name>EyouSoft.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.DAL\EyouSoft.DAL.csproj">
+      <Project>{95CC8E92-4FF8-4641-BD37-4B560BB3976A}</Project>
+      <Name>EyouSoft.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.InterfaceLib\EyouSoft.InterfaceLib.csproj">
+      <Project>{399831EC-930B-4867-AFF1-473E8D858D4D}</Project>
+      <Name>EyouSoft.InterfaceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Model\EyouSoft.Model.csproj">
+      <Project>{2CC3A201-7D24-4761-9C60-F107F21FD407}</Project>
+      <Name>EyouSoft.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Security.Membership\EyouSoft.Security.Membership.csproj">
+      <Project>{AFA01A24-E10D-4B4C-BC41-C88537B7B314}</Project>
+      <Name>EyouSoft.Security.Membership</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Toolkit\EyouSoft.Toolkit.csproj">
+      <Project>{F643FD26-4C9B-40C7-8849-0FED59701419}</Project>
+      <Name>EyouSoft.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{14E7FAEF-BCFA-4058-BA10-37090712CDF2}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="99bill\receive.aspx" />
+    <Content Include="99bill\send.aspx" />
+    <Content Include="About.aspx" />
+    <Content Include="AliPay\AliPayCode.dll" />
+    <Content Include="AliPay\Alipay_Notify.aspx" />
+    <Content Include="AliPay\Alipay_Return.aspx" />
+    <Content Include="AliPay\AliTradeTourOrder.aspx" />
+    <Content Include="AliPay\PayAPI.dll" />
+    <Content Include="AliPay\PayAPI.XML" />
+    <Content Include="ApplyUser.aspx" />
+    <Content Include="ashx\ExcelConvert.ashx" />
+    <Content Include="Baoming.aspx" />
+    <Content Include="biangeng.aspx" />
+    <Content Include="CommonPage\Lg.aspx" />
+    <Content Include="CommonPage\RegBox.aspx" />
+    <Content Include="CommonPage\RiliBox.aspx" />
+    <Content Include="CommonPage\uploadFile.aspx" />
+    <Content Include="CommonPage\XianLuRiLi.aspx" />
+    <Content Include="CompanyContent.aspx" />
+    <Content Include="Css\boxy.css" />
+    <Content Include="Css\icore.css" />
+    <Content Include="Css\jquery.autocomplete.jipiao.css" />
+    <Content Include="Css\login.css" />
+    <Content Include="Css\print.css" />
+    <Content Include="Css\ref.css" />
+    <Content Include="Css\scroll.css" />
+    <Content Include="Css\style.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Ebao.aspx" />
+    <Content Include="ErWeiMa.aspx" />
+    <Content Include="Images\baoji_step.gif" />
+    <Content Include="Images\copy.gif" />
+    <Content Include="Images\navon.png" />
+    <Content Include="Images\zt-001.png" />
+    <Content Include="index.aspx" />
+    <Content Include="JinRiApi\JinRi_Notify.aspx" />
+    <Content Include="JS\jquery.cxscroll.min.js" />
+    <Content Include="JS\jquery.switchable[all].min.js" />
+    <Content Include="LoginOrReg.aspx" />
+    <Content Include="Member\DuiHuanList.aspx" />
+    <Content Include="Member\FenSiJiangLi.aspx" />
+    <Content Include="Member\JiFenDuiHuan.aspx" />
+    <Content Include="UserCentent.aspx" />
+    <Content Include="UserControl\DaiLiDefault.ascx" />
+    <Content Include="UserControl\DaiLiNav.ascx" />
+    <Content Include="UserControl\DingDanNav.ascx" />
+    <Content Include="UserControl\MainDefault.ascx" />
+    <Content Include="UserControl\MainNav.ascx" />
+    <Content Include="UserControl\UserNav.ascx" />
+    <Content Include="WebMaster\DaiLiCompany.aspx" />
+    <Content Include="WebMaster\JiFenDuiHuan.aspx" />
+    <Content Include="WebMaster\JiPiaoOrderList.aspx" />
+    <Content Include="WebMaster\JiPiaoOrderXX.aspx" />
+    <Content Include="WebMaster\NavNum.aspx" />
+    <Content Include="WebMaster\PaiXu.aspx" />
+    <Content Include="WebMaster\ShowHidden.aspx" />
+    <Content Include="WebMaster\XieYi.aspx" />
+    <Content Include="__JiPiaoCeShi.aspx" />
+    <Content Include="JS\jquery.form.js" />
+    <Content Include="GetAddress.aspx" />
+    <Content Include="GetMiMa.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Hotel.aspx" />
+    <Content Include="HotelMap.aspx" />
+    <Content Include="HotelOrder.aspx" />
+    <Content Include="HotelXiangQing.aspx" />
+    <Content Include="HotelXiangQing2.aspx" />
+    <Content Include="HotelXiangQing2Room.aspx" />
+    <Content Include="HotelXiangQingImg.aspx" />
+    <Content Include="HotelXiangQingRoom.aspx" />
+    <Content Include="Images\12.png" />
+    <Content Include="Images\about-1.jpg" />
+    <Content Include="Images\about-logo.jpg" />
+    <Content Include="Images\about_t01.gif" />
+    <Content Include="Images\about_t02.gif" />
+    <Content Include="Images\about_t03.gif" />
+    <Content Include="Images\about_t04.gif" />
+    <Content Include="Images\about_t05.gif" />
+    <Content Include="Images\about_t06.gif" />
+    <Content Include="Images\about_t07.gif" />
+    <Content Include="Images\add.gif" />
+    <Content Include="Images\address_btn.gif" />
+    <Content Include="Images\b-btn01.gif" />
+    <Content Include="Images\banklogo\bank_99bill.jpg" />
+    <Content Include="Images\banklogo\bank_abc.gif" />
+    <Content Include="Images\banklogo\bank_alipay.jpg" />
+    <Content Include="Images\banklogo\bank_bcom.gif" />
+    <Content Include="Images\banklogo\bank_bea.gif" />
+    <Content Include="Images\banklogo\bank_bjrcb.gif" />
+    <Content Include="Images\banklogo\bank_bob.gif" />
+    <Content Include="Images\banklogo\bank_boc.gif" />
+    <Content Include="Images\banklogo\bank_cbhb.gif" />
+    <Content Include="Images\banklogo\bank_ccb.gif" />
+    <Content Include="Images\banklogo\bank_ceb.gif" />
+    <Content Include="Images\banklogo\bank_cib.gif" />
+    <Content Include="Images\banklogo\bank_citic.gif" />
+    <Content Include="Images\banklogo\bank_cmb.gif" />
+    <Content Include="Images\banklogo\bank_cmbc.gif" />
+    <Content Include="Images\banklogo\bank_czb.gif" />
+    <Content Include="Images\banklogo\bank_gdb.gif" />
+    <Content Include="Images\banklogo\bank_gzcb.gif" />
+    <Content Include="Images\banklogo\bank_gzrcc.gif" />
+    <Content Include="Images\banklogo\bank_hsb.gif" />
+    <Content Include="Images\banklogo\bank_hxb.gif" />
+    <Content Include="Images\banklogo\bank_hzb.gif" />
+    <Content Include="Images\banklogo\bank_icbc.gif" />
+    <Content Include="Images\banklogo\bank_nbcb.gif" />
+    <Content Include="Images\banklogo\bank_njcb.gif" />
+    <Content Include="Images\banklogo\bank_pab.gif" />
+    <Content Include="Images\banklogo\bank_post.gif" />
+    <Content Include="Images\banklogo\bank_sdb.gif" />
+    <Content Include="Images\banklogo\bank_shb.gif" />
+    <Content Include="Images\banklogo\bank_shrcc.gif" />
+    <Content Include="Images\banklogo\bank_spdb.gif" />
+    <Content Include="Images\bank\bank_boc.gif" />
+    <Content Include="Images\banner01.jpg" />
+    <Content Include="Images\bed.gif" />
+    <Content Include="Images\biangen.gif" />
+    <Content Include="Images\blue_jtb.gif" />
+    <Content Include="Images\blue_jtt.gif" />
+    <Content Include="Images\bm_line.gif" />
+    <Content Include="Images\bm_num.gif" />
+    <Content Include="Images\btn001.gif" />
+    <Content Include="Images\btn002.gif" />
+    <Content Include="Images\car-001.jpg" />
+    <Content Include="Images\car-002.jpg" />
+    <Content Include="Images\car-003.jpg" />
+    <Content Include="Images\car001.jpg" />
+    <Content Include="Images\car_bg.jpg" />
+    <Content Include="Images\car_img001.jpg" />
+    <Content Include="Images\car_jsq.gif" />
+    <Content Include="Images\chakan.png" />
+    <Content Include="Images\chz-btn.gif" />
+    <Content Include="Images\chzh_thbg.gif" />
+    <Content Include="Images\ck_btn.gif" />
+    <Content Include="Images\closebox.gif" />
+    <Content Include="Images\closebox2.gif" />
+    <Content Include="Images\code.gif" />
+    <Content Include="Images\cuxiao.png" />
+    <Content Include="Images\cx001.gif" />
+    <Content Include="Images\daochu-cy.gif" />
+    <Content Include="Images\date_jt.gif" />
+    <Content Include="Images\dayin1-cy.gif" />
+    <Content Include="Images\dian.gif" />
+    <Content Include="Images\dian.png" />
+    <Content Include="Images\dibao_on.gif" />
+    <Content Include="Images\ErWeiMa\8191.png" />
+    <Content Include="Images\head01-0.gif" />
+    <Content Include="Images\head01.gif" />
+    <Content Include="Images\head02-0.gif" />
+    <Content Include="Images\head02.gif" />
+    <Content Include="Images\hotel_cont2.gif" />
+    <Content Include="Images\jt_b.gif" />
+    <Content Include="Images\jt_grayb.gif" />
+    <Content Include="Images\jt_t.png" />
+    <Content Include="Images\login-basicbtn.gif" />
+    <Content Include="Images\loginbg1.gif" />
+    <Content Include="Images\login_listT.gif" />
+    <Content Include="Images\login.gif" />
+    <Content Include="Images\logo1.jpg" />
+    <Content Include="Images\logo_fxs.jpg" />
+    <Content Include="Images\m_icon.png" />
+    <Content Include="Images\m_searchbg.png" />
+    <Content Include="Images\none_img.jpg" />
+    <Content Include="Images\QQ.gif" />
+    <Content Include="Images\sj-001.gif" />
+    <Content Include="Images\slej.png" />
+    <Content Include="Images\fanhui.gif" />
+    <Content Include="Images\fenxiang.jpg" />
+    <Content Include="Images\fj.jpg" />
+    <Content Include="Images\guanlihoutai.jpg" />
+    <Content Include="Images\guild.png" />
+    <Content Include="Images\guojia\0223ee0f-82e3-40a9-9be1-c6591b47af30.gif" />
+    <Content Include="Images\guojia\06a57d18-1190-4b90-b1d1-8d0051c1f634.gif" />
+    <Content Include="Images\guojia\074b965c-09fb-4530-b9e3-3f1acd633247.gif" />
+    <Content Include="Images\guojia\090a1599-d561-4de4-899b-5bb30780c0ed.gif" />
+    <Content Include="Images\guojia\0a5157ae-e969-4954-978f-510ce1bacff4.gif" />
+    <Content Include="Images\guojia\0d6febf3-c0dc-4dbe-ab2c-dfe900cd9567.gif" />
+    <Content Include="Images\guojia\0dbd2422-62b5-4045-bf34-1bab77bb028e.gif" />
+    <Content Include="Images\guojia\1029200b-effc-41db-be09-885ca6a3ce4c.gif" />
+    <Content Include="Images\guojia\1899eaf3-e4e0-4553-9b8f-6d6b1974b2ac.gif" />
+    <Content Include="Images\guojia\1e3f3c32-a968-4c8e-8ae3-c4002adf9163.gif" />
+    <Content Include="Images\guojia\1ee67142-74fc-4f70-b607-0d2fd29bde06.gif" />
+    <Content Include="Images\guojia\1eefefdf-f5e2-4e97-a51a-ef2b7ca3118c.gif" />
+    <Content Include="Images\guojia\20786cea-c985-4445-b7fc-64a56ccb3b1d.gif" />
+    <Content Include="Images\guojia\27c6011c-dd16-418f-9fab-32b1323f25df.gif" />
+    <Content Include="Images\guojia\2b3494a3-00e4-4fdd-a30e-c88b5a54bc0f.gif" />
+    <Content Include="Images\guojia\2b9a06de-8047-4e0a-b8c7-a2e10f5d2516.gif" />
+    <Content Include="Images\guojia\2bfa4036-b879-4288-859e-113dfe4e811e.gif" />
+    <Content Include="Images\guojia\2e45df1b-7008-4b73-9d9c-85ad2fbf63f1.gif" />
+    <Content Include="Images\guojia\306f79b0-e03d-4896-9753-7f140d411707.gif" />
+    <Content Include="Images\guojia\327bde4c-faa4-4a22-9262-15b5c8fe157c.gif" />
+    <Content Include="Images\guojia\359f9f0e-d929-4dd1-b311-a3ea7d36e335.gif" />
+    <Content Include="Images\guojia\3699ebf5-78c1-41d8-8bcc-e710fb08ee14.gif" />
+    <Content Include="Images\guojia\370ffc2a-2d3f-48d2-b005-cbd875140549.gif" />
+    <Content Include="Images\guojia\385b25b8-86ff-4134-96c0-2e62f484d5a7.gif" />
+    <Content Include="Images\guojia\3935abcc-6615-4fb0-abae-7219a3f3e22a.gif" />
+    <Content Include="Images\guojia\3b02897c-0bca-4c44-9f1c-ca2da0b0ab3a.gif" />
+    <Content Include="Images\guojia\3bda9714-a84d-4a0c-91df-c08b9a8773ea.gif" />
+    <Content Include="Images\guojia\46a779a5-f30b-4041-8217-e1548fc6afab.gif" />
+    <Content Include="Images\guojia\4949da66-8d0f-4637-8f39-b3f2fcd2a92a.gif" />
+    <Content Include="Images\guojia\49a3f47a-0dda-49e0-a50d-11b550fbc482.gif" />
+    <Content Include="Images\guojia\4b371fa4-b591-4639-8142-e0b0bf4ccaaf.gif" />
+    <Content Include="Images\guojia\4d24ff23-4b9d-48ee-8f38-c831c38fae23.gif" />
+    <Content Include="Images\guojia\50197d14-6fb0-4489-9415-94d9f91c61d0.gif" />
+    <Content Include="Images\guojia\51733908-c0c8-4352-b26a-f5dc8b832a5d.gif" />
+    <Content Include="Images\guojia\53f6e18c-a02c-4141-b4fb-828c4e65446c.gif" />
+    <Content Include="Images\guojia\540c66bc-852d-4945-be76-4337543e0a1a.gif" />
+    <Content Include="Images\guojia\5943934f-6c5b-4bcd-99a6-b185e18428be.gif" />
+    <Content Include="Images\guojia\594e6e8b-7d74-4d82-8be1-4dde0db26c10.gif" />
+    <Content Include="Images\guojia\59b0e2d6-7e3a-41e8-8aaf-19f1e56a4fe0.gif" />
+    <Content Include="Images\guojia\5a839086-a6ff-4c6b-9220-23546bfa4962.gif" />
+    <Content Include="Images\guojia\5c9a9b4a-4f37-4c9b-956b-a9e5da6dbfb9.gif" />
+    <Content Include="Images\guojia\5d9f7893-9856-46b5-9d33-17db67f3a4ae.gif" />
+    <Content Include="Images\guojia\5da1fd2d-5379-474c-a3ba-ce98227e2ad1.gif" />
+    <Content Include="Images\guojia\5fac2c48-020e-43bb-aa84-8e6dcb0b1bcb.gif" />
+    <Content Include="Images\guojia\62007517-ef5d-405f-96c9-ee39abcf2d60.gif" />
+    <Content Include="Images\guojia\68020990-ea3a-43af-ba5f-dde6a17e6c89.gif" />
+    <Content Include="Images\guojia\69042ef7-bb7c-41e0-a2b3-e53566693daf.gif" />
+    <Content Include="Images\guojia\6ce34fc0-c153-4a0c-90f1-7a8b3293cecc.gif" />
+    <Content Include="Images\guojia\6f704b1a-8489-441e-8824-6a4557f6810e.gif" />
+    <Content Include="Images\guojia\71c77842-5fd5-485d-88f1-4295723617c2.gif" />
+    <Content Include="Images\guojia\737848df-dac5-4687-a0ea-45c60361fcd0.gif" />
+    <Content Include="Images\guojia\73d37cc6-4c16-40b5-8fcc-7635db090a7e.gif" />
+    <Content Include="Images\guojia\755311db-4a12-430b-a46d-d2ca97136d02.gif" />
+    <Content Include="Images\guojia\7737a716-bbc7-42cb-839d-50b1a13ddb17.gif" />
+    <Content Include="Images\guojia\78fe1e53-b239-4b56-b30c-ff2f8734a48d.gif" />
+    <Content Include="Images\guojia\7b034399-e865-4756-a82f-8a9e98f8aae6.gif" />
+    <Content Include="Images\guojia\7b6c73cf-f3a4-4a28-b048-0f150e09355b.gif" />
+    <Content Include="Images\guojia\7bd9fa25-d2fa-46d7-a864-301c4f1015f0.gif" />
+    <Content Include="Images\guojia\7ce0e381-4404-48fb-9f52-868dad76179d.gif" />
+    <Content Include="Images\guojia\7d7df269-6195-4a47-adc9-1f00a69d7e74.gif" />
+    <Content Include="Images\guojia\7eedd325-d0d2-408c-a019-1ebaab08e8b1.gif" />
+    <Content Include="Images\guojia\8203f295-e2a6-4c81-aef6-cd0c8cdbef6f.gif" />
+    <Content Include="Images\guojia\8264f24e-8a56-43b2-8468-44ac3eff5bb9.gif" />
+    <Content Include="Images\guojia\8342db63-e7c8-43c3-bc89-106833af11de.gif" />
+    <Content Include="Images\guojia\83ec210e-9f86-4202-92d1-ed4a971385c6.gif" />
+    <Content Include="Images\guojia\86e03233-2395-4b2f-bc74-79cc2936d580.gif" />
+    <Content Include="Images\guojia\875ce568-76f9-48a6-ae91-81503e261174.gif" />
+    <Content Include="Images\guojia\87e0f0dd-2e68-4596-b16d-1c1ea1282896.gif" />
+    <Content Include="Images\guojia\8a0976e1-7163-407c-8c76-346a54ca58a8.gif" />
+    <Content Include="Images\guojia\8f1f6cc9-ae0c-455e-b563-d7096757d0f8.gif" />
+    <Content Include="Images\guojia\907b7f3b-c525-45bf-b2b5-eff47dc43fd7.gif" />
+    <Content Include="Images\guojia\95b45f83-4036-4657-887c-175fb4df2b8e.gif" />
+    <Content Include="Images\guojia\96953910-5eba-4e15-8c1b-af3a566be8de.gif" />
+    <Content Include="Images\guojia\984caa44-ea4e-4b81-a8a1-6b7cefe9ef46.gif" />
+    <Content Include="Images\guojia\9e14693e-c10b-4fae-9d12-f0e222d4579a.gif" />
+    <Content Include="Images\guojia\9eb04a36-82f4-4529-9dbe-484e80784880.gif" />
+    <Content Include="Images\guojia\9f76a730-e728-4a61-8925-443c0729a692.gif" />
+    <Content Include="Images\guojia\a1d87a5f-fc2a-45e4-92bf-8bb9496470b9.gif" />
+    <Content Include="Images\guojia\a8fc61ea-847a-40f2-a410-7d0ccfba6b0e.gif" />
+    <Content Include="Images\guojia\aa7263bf-7395-4e35-b4e0-f0ee8cc870c8.gif" />
+    <Content Include="Images\guojia\ab1b1bf1-620b-43d7-908e-3cfb4ea0b2db.gif" />
+    <Content Include="Images\guojia\ab1def10-2641-4bb3-b727-c68e3185a005.gif" />
+    <Content Include="Images\guojia\b44ddd71-5d67-443c-b4fc-9da7e3f2897c.gif" />
+    <Content Include="Images\guojia\b834ca0b-5d4f-43fe-81a7-586f9495a82c.gif" />
+    <Content Include="Images\guojia\b914f6d0-dd6e-4c30-ba1a-ab9981be2ffa.gif" />
+    <Content Include="Images\guojia\ba979167-5830-4f99-9cb4-0c69662ce785.gif" />
+    <Content Include="Images\guojia\bbffa5ca-a145-4914-ba12-20366b2c02e4.gif" />
+    <Content Include="Images\guojia\bcd618b3-0bdf-4735-be79-9100a5d177b8.gif" />
+    <Content Include="Images\guojia\c10c18b2-a1d9-48b9-bade-e7f7d27a1d88.gif" />
+    <Content Include="Images\guojia\c5647c1f-bdc9-45d7-8e03-3e65e862d378.gif" />
+    <Content Include="Images\guojia\c5a7e121-5a67-430a-8658-fe70303ff9d3.gif" />
+    <Content Include="Images\guojia\c616a767-a98e-4e35-aa18-397b8b43545c.gif" />
+    <Content Include="Images\guojia\c72476b3-22b7-4216-ba7d-d9f7e32fe5d7.gif" />
+    <Content Include="Images\guojia\c8f5c1bb-c8c2-4884-9456-5e911759cdcb.gif" />
+    <Content Include="Images\guojia\c95d9781-bf3a-430c-82e5-6626e55c2cad.gif" />
+    <Content Include="Images\guojia\ca760ad3-ac0d-45e6-bf70-54a0647e368f.gif" />
+    <Content Include="Images\guojia\cb47db41-3f87-4589-b9b5-9eca69f921c3.gif" />
+    <Content Include="Images\guojia\cd1ffcb6-8c64-4b0e-b832-6110e0e611bd.gif" />
+    <Content Include="Images\guojia\cdfdd9a5-f714-4e26-a727-dd7348f1c705.gif" />
+    <Content Include="Images\guojia\d302f063-bb96-42b7-9c56-2e06f55b656b.gif" />
+    <Content Include="Images\guojia\d55e8832-4f26-4200-ab98-fcb467fd9abf.gif" />
+    <Content Include="Images\guojia\d78ce6af-915e-437c-ba3d-8d37064ac4bf.gif" />
+    <Content Include="Images\guojia\d826feb8-7f44-4a34-820f-ddc00b600e83.gif" />
+    <Content Include="Images\guojia\d8f22e98-c11f-42de-93e2-e8e087776ae3.gif" />
+    <Content Include="Images\guojia\da3d36eb-2e46-42a7-b848-6b363d81e6eb.gif" />
+    <Content Include="Images\guojia\da82b0fc-98a2-4257-ad9e-1c0796077778.gif" />
+    <Content Include="Images\guojia\dcaeca79-0a9e-4dfe-acd3-74d78d313dea.gif" />
+    <Content Include="Images\guojia\dd32eb36-be83-4e3d-aa10-d63f8bb9c456.gif" />
+    <Content Include="Images\guojia\e0030476-aa3e-4a15-ac35-017b4cb296a6.gif" />
+    <Content Include="Images\guojia\e2259dac-e8cc-40ca-8a84-50a18f07e65b.gif" />
+    <Content Include="Images\guojia\e5efda95-01ed-46b0-ac3c-fc1826c1f917.gif" />
+    <Content Include="Images\guojia\edfc18ad-f240-465d-9b8f-8da9b854b25d.gif" />
+    <Content Include="Images\guojia\f1137ba8-5c20-4d17-970b-8d47cfdd972d.gif" />
+    <Content Include="Images\guojia\f4127b50-c4b5-4ba6-aa61-280b2dbd3f3a.gif" />
+    <Content Include="Images\guojia\f9b7856d-a91f-4132-90bd-7c0d974ccd2f.gif" />
+    <Content Include="Images\guojia\fabb671e-a9bb-42b8-882c-7ae3f242e7fb.gif" />
+    <Content Include="Images\guojia\ffd10b66-3a3d-4e3b-b94b-bcdd22e021ef.gif" />
+    <Content Include="Images\hb-btn.gif" />
+    <Content Include="Images\hotel001.jpg" />
+    <Content Include="Images\hotel01.jpg" />
+    <Content Include="Images\hotel_002.jpg" />
+    <Content Include="Images\hotel_banner.jpg" />
+    <Content Include="Images\hotel_border.gif" />
+    <Content Include="Images\hotel_map.jpg" />
+    <Content Include="Images\hotel_tabl.gif" />
+    <Content Include="Images\hotel_tabr.gif" />
+    <Content Include="Images\huiyuan_tip.png" />
+    <Content Include="Images\hy_T.jpg" />
+    <Content Include="Images\h_jtleft.gif" />
+    <Content Include="Images\h_jtright.gif" />
+    <Content Include="Images\icon_h.gif" />
+    <Content Include="Images\icon_y.gif" />
+    <Content Include="Images\img01.jpg" />
+    <Content Include="Images\img02.jpg" />
+    <Content Include="Images\img03.jpg" />
+    <Content Include="Images\img04.jpg" />
+    <Content Include="Images\jiantou.png" />
+    <Content Include="Images\jiantoub.gif" />
+    <Content Include="Images\jiantoul.gif" />
+    <Content Include="Images\jiantour.gif" />
+    <Content Include="Images\jiantou_b.gif" />
+    <Content Include="Images\jiantou_fl.gif" />
+    <Content Include="Images\jiantou_l.png" />
+    <Content Include="Images\jiantou_r.png" />
+    <Content Include="Images\jiantou_t.gif" />
+    <Content Include="Images\jiant_gray.gif" />
+    <Content Include="Images\jinqu_banner.jpg" />
+    <Content Include="Images\jinqu_bg0.jpg" />
+    <Content Include="Images\join_01.gif" />
+    <Content Include="Images\join_02.gif" />
+    <Content Include="Images\join_03.gif" />
+    <Content Include="Images\join_04.gif" />
+    <Content Include="Images\join_05.gif" />
+    <Content Include="Images\jqu_001.jpg" />
+    <Content Include="Images\jqu_xx001.jpg" />
+    <Content Include="Images\jq_img001.jpg" />
+    <Content Include="Images\jq_searb.gif" />
+    <Content Include="Images\jt_top.gif" />
+    <Content Include="Images\last_a.gif" />
+    <Content Include="Images\left_foucs.gif" />
+    <Content Include="Images\line-001.jpg" />
+    <Content Include="Images\line-002.jpg" />
+    <Content Include="Images\line-tbg.png" />
+    <Content Include="Images\line-xx-001.jpg" />
+    <Content Include="Images\line_banner.jpg" />
+    <Content Include="Images\line_bg1.gif" />
+    <Content Include="Images\line_bghover.gif" />
+    <Content Include="Images\line_bgon.gif" />
+    <Content Include="Images\link001.jpg" />
+    <Content Include="Images\linkbg.jpg" />
+    <Content Include="Images\login-y.png" />
+    <Content Include="Images\login_100.gif" />
+    <Content Include="Images\login_bg.jpg" />
+    <Content Include="Images\login_bg.png" />
+    <Content Include="Images\login_bodybg.jpg" />
+    <Content Include="Images\login_boxbg.png" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\log_btn.gif" />
+    <Content Include="Images\log_t.png" />
+    <Content Include="Images\l_001.jpg" />
+    <Content Include="Images\l_002.jpg" />
+    <Content Include="Images\l_003.jpg" />
+    <Content Include="Images\l_jiantou.gif" />
+    <Content Include="Images\main_gg.jpg" />
+    <Content Include="Images\mall_banner.jpg" />
+    <Content Include="Images\mall_bg1.gif" />
+    <Content Include="Images\mall_btn.gif" />
+    <Content Include="Images\mall_img001.gif" />
+    <Content Include="Images\mall_img002.jpg" />
+    <Content Include="Images\map.png" />
+    <Content Include="Images\menul.gif" />
+    <Content Include="Images\menur.gif" />
+    <Content Include="Images\menu_on.gif" />
+    <Content Include="Images\miaosha.png" />
+    <Content Include="Images\msh001.jpg" />
+    <Content Include="Images\NoPic.jpg" />
+    <Content Include="Images\n_dian.png" />
+    <Content Include="Images\off.jpg" />
+    <Content Include="Images\ok.gif" />
+    <Content Include="Images\on.jpg" />
+    <Content Include="Images\print-yemei.gif" />
+    <Content Include="Images\print_xc.gif" />
+    <Content Include="Images\qch.jpg" />
+    <Content Include="Images\qianzh001.gif" />
+    <Content Include="Images\qzh001.gif" />
+    <Content Include="Images\qzh_banner.jpg" />
+    <Content Include="Images\qzh_img.jpg" />
+    <Content Include="Images\qzh_tip.gif" />
+    <Content Include="Images\reg_b.gif" />
+    <Content Include="Images\rili.gif" />
+    <Content Include="Images\ry1.jpg" />
+    <Content Include="Images\ry2.jpg" />
+    <Content Include="Images\ry3.jpg" />
+    <Content Include="Images\ry4.jpg" />
+    <Content Include="Images\ry5.jpg" />
+    <Content Include="Images\ry6.jpg" />
+    <Content Include="Images\ry7.jpg" />
+    <Content Include="Images\ry8.jpg" />
+    <Content Include="Images\ry9.jpg" />
+    <Content Include="Images\ry_01.jpg" />
+    <Content Include="Images\ry_02.jpg" />
+    <Content Include="Images\ry_03.jpg" />
+    <Content Include="Images\ry_04.jpg" />
+    <Content Include="Images\ry_05.jpg" />
+    <Content Include="Images\ry_06.jpg" />
+    <Content Include="Images\ry_07.jpg" />
+    <Content Include="Images\ry_08.jpg" />
+    <Content Include="Images\ry_09.jpg" />
+    <Content Include="Images\ry_10.jpg" />
+    <Content Include="Images\r_jiantou.gif" />
+    <Content Include="Images\s-onbg.png" />
+    <Content Include="Images\searbg.gif" />
+    <Content Include="Images\searchbg.gif" />
+    <Content Include="Images\sear_icon.png" />
+    <Content Include="Images\shc001.jpg" />
+    <Content Include="Images\SK_B_02[1].gif" />
+    <Content Include="Images\SK_B_02_2[1].gif" />
+    <Content Include="Images\star-hui.gif" />
+    <Content Include="Images\star-kong.gif" />
+    <Content Include="Images\star.gif" />
+    <Content Include="Images\star1.jpg" />
+    <Content Include="Images\star2.jpg" />
+    <Content Include="Images\s_banner.gif" />
+    <Content Include="Images\s_btn.jpg" />
+    <Content Include="Images\s_icon.png" />
+    <Content Include="Images\tableftbg.gif" />
+    <Content Include="Images\tabrightbg.gif" />
+    <Content Include="Images\tc_btn.gif" />
+    <Content Include="Images\tel.gif" />
+    <Content Include="Images\tg_001.jpg" />
+    <Content Include="Images\tg_banner.jpg" />
+    <Content Include="Images\tg_btn.jpg" />
+    <Content Include="Images\tg_btn01.jpg" />
+    <Content Include="Images\tg_icon.png" />
+    <Content Include="Images\tg_sbtn.png" />
+    <Content Include="Images\tg_searchbg.png" />
+    <Content Include="Images\tg_xx01.jpg" />
+    <Content Include="Images\tg_xx02.jpg" />
+    <Content Include="Images\tg_xxT.jpg" />
+    <Content Include="Images\th_line.gif" />
+    <Content Include="Images\tj001.jpg" />
+    <Content Include="Images\tj_btn.gif" />
+    <Content Include="Images\toolspage\weather\bg.gif" />
+    <Content Include="Images\toolspage\weather\dot_01.gif" />
+    <Content Include="Images\toolspage\weather\dot_02.gif" />
+    <Content Include="Images\toolspage\weather\io_script-1.0.js" />
+    <Content Include="Images\toolspage\weather\jscookie.js" />
+    <Content Include="Images\toolspage\weather\news_law_hz_012.gif" />
+    <Content Include="Images\toolspage\weather\title.gif" />
+    <Content Include="Images\toolspage\weather\weather_process-1.0.js" />
+    <Content Include="Images\toolspage\weather\xiaoyu_small.gif" />
+    <Content Include="Images\toolspage\weather\yin_small.gif" />
+    <Content Include="Images\toolspage\weather\zhenyu_small.gif" />
+    <Content Include="Images\toolspage\weather\zhongyu_small.gif" />
+    <Content Include="Images\tool_icon.png" />
+    <Content Include="Images\tuijian.png" />
+    <Content Include="Images\u-btn.gif" />
+    <Content Include="Images\u-closebox.gif" />
+    <Content Include="Images\u-closebox2.gif" />
+    <Content Include="Images\u-libg.gif" />
+    <Content Include="Images\u-mima.gif" />
+    <Content Include="Images\u-name.gif" />
+    <Content Include="Images\u-titlebar.gif" />
+    <Content Include="Images\update.gif" />
+    <Content Include="Images\user-sbg.gif" />
+    <Content Include="Images\user-sbtn.gif" />
+    <Content Include="Images\user-y.png" />
+    <Content Include="Images\user_bg.png" />
+    <Content Include="Images\user_thbg01.gif" />
+    <Content Include="Images\wangdian_map.gif" />
+    <Content Include="Images\wdian.gif" />
+    <Content Include="Images\webmaster\googleMapRed.png" />
+    <Content Include="Images\webmaster\google_search.png" />
+    <Content Include="Images\webmaster\search.gif" />
+    <Content Include="Images\weixinm.png" />
+    <Content Include="Images\xian.jpg" />
+    <Content Include="Images\xinchenl.jpg" />
+    <Content Include="Images\xingchen01.jpg" />
+    <Content Include="Images\xx_bg1.gif" />
+    <Content Include="Images\yd_btn02.gif" />
+    <Content Include="Images\yudin_btn.gif" />
+    <Content Include="Images\yzm.gif" />
+    <Content Include="Images\zf_line.gif" />
+    <Content Include="Images\zf_tabbg.gif" />
+    <Content Include="Images\zhaop_banner.jpg" />
+    <Content Include="Images\zhe.gif" />
+    <Content Include="JiPiao.aspx" />
+    <Content Include="JS\city.js" />
+    <Content Include="JS\googleMap_UC.js" />
+    <Content Include="JS\HotelJSData.js" />
+    <Content Include="JS\InitialPageInputTagValue.js" />
+    <Content Include="JS\jipiao.sanzima.js" />
+    <Content Include="JS\jquery-1.4.2.min.js" />
+    <Content Include="JS\jquery.autocomplete.jipiao.js" />
+    <Content Include="JS\jquery.floating.js" />
+    <Content Include="JS\jquery.tipsy.js" />
+    <Content Include="JS\jquery.zclip.js" />
+    <Content Include="JS\json2.js" />
+    <Content Include="JS\left_focus.js" />
+    <Content Include="JS\menu_min.js" />
+    <Content Include="JS\MouseFollow.js" />
+    <Content Include="JS\PageSubmitForm.js" />
+    <Content Include="JS\qianzheng.core.js" />
+    <Content Include="JS\Rili.js" />
+    <Content Include="JS\jipiao.core.js" />
+    <Content Include="JS\toolspage\weather\io_script-1.0.js" />
+    <Content Include="JS\toolspage\weather\jscookie.js" />
+    <Content Include="JS\toolspage\weather\weather_process-1.0.js" />
+    <Content Include="JS\topbtn.js" />
+    <Content Include="JS\TourCalendar.js" />
+    <Content Include="Images\webmaster\rili_l.gif" />
+    <Content Include="Images\webmaster\rili_r.gif" />
+    <Content Include="Images\webmaster\sanping_04.gif" />
+    <Content Include="Images\webmaster\xtxinceng.gif" />
+    <Content Include="JS\foucs.js" />
+    <Content Include="JS\groupdate.js" />
+    <Content Include="JS\PNG.js" />
+    <Content Include="JS\ZeroClipboard.swf" />
+    <Content Include="JS\_jquery-1.4.4.js" />
+    <Content Include="JS\_tourDate.js" />
+    <Content Include="JS\_tourDatePP.js" />
+    <Content Include="Lg.aspx" />
+    <Content Include="Logindomain.aspx" />
+    <Content Include="LogOut.aspx" />
+    <Content Include="MasterPage\Webmaster.Master" />
+    <Content Include="MasterPage\Front.Master" />
+    <Content Include="MasterPage\Front2.Master" />
+    <Content Include="MasterPage\FrontFixed.Master" />
+    <Content Include="MasterPage\Front3.Master" />
+    <None Include="99bill\99bill-rsa-yl.pfx" />
+    <None Include="99bill\99bill-rsa.pfx" />
+    <None Include="99bill\99bill.cert.rsa.20140728-yl.cer" />
+    <None Include="99bill\99bill.cert.rsa.20340630.cer" />
+    <None Include="99bill\99bill[1].cert.rsa.20140803.cer" />
+    <None Include="99bill\99bill[1].cert.rsa.20140803.yl.cer" />
+    <None Include="99bill\public-rsa-yl.cer" />
+    <None Include="99bill\public-rsa.cer" />
+    <None Include="99bill\tester-rsa.pfx" />
+    <Content Include="MasterPage\Print.Master" />
+    <Content Include="ashx\CityHandler.ashx" />
+    <None Include="ExcelDownTemp\default.dot" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ShopUserRegisterService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ShopUserRegisterService\UserReg.disco" />
+    <Content Include="Member\ChangXianOrder.aspx" />
+    <Content Include="Member\ChongzhiList.aspx" />
+    <Content Include="Member\ChuJingOrder.aspx" />
+    <Content Include="Member\DingDanList.aspx" />
+    <Content Include="Member\DuanXianOrder.aspx" />
+    <Content Include="Member\FanLiList.aspx" />
+    <Content Include="Member\FenSi.aspx" />
+    <Content Include="Member\FenSiJiaoYi.aspx" />
+    <Content Include="Member\GongGao.aspx" />
+    <Content Include="Member\GongGaoXX.aspx" />
+    <Content Include="Member\HotelDetails.aspx" />
+    <Content Include="Member\HotelOrderList.aspx" />
+    <Content Include="Member\MemberInfo.aspx" />
+    <Content Include="Member\MyChongzhi.aspx" />
+    <Content Include="Member\MyTiXian.aspx" />
+    <Content Include="Member\OrderPay.aspx" />
+    <Content Include="Member\PayMoney.aspx" />
+    <Content Include="Member\QueRenCz.aspx" />
+    <Content Include="Member\ScenicDetails.aspx" />
+    <Content Include="Member\ScenicList.aspx" />
+    <Content Include="Member\SCOrderList.aspx" />
+    <Content Include="Member\SetPassWord.aspx" />
+    <Content Include="Member\TiXianList.aspx" />
+    <Content Include="Member\TransactionList.aspx" />
+    <Content Include="Member\TuanGouDingDan.aspx" />
+    <Content Include="Member\TuiGuangFanLi.aspx" />
+    <Content Include="Member\TuiGuangDaiMa.aspx" />
+    <Content Include="Member\UpCompanyJieShao.aspx" />
+    <Content Include="Member\UpdateMember.aspx" />
+    <Content Include="Member\UpdatePassWord.aspx" />
+    <Content Include="Member\UserTransaction.aspx" />
+    <Content Include="Member\VisaOrderList.aspx" />
+    <Content Include="Member\XiaJiJiangLi.aspx" />
+    <Content Include="Member\XiaJiJiangLiJieSuan.aspx" />
+    <Content Include="Member\XianLuDetail.aspx" />
+    <Content Include="Member\XianLuOrderList.aspx" />
+    <Content Include="Member\ZengZhi.aspx" />
+    <Content Include="Member\ZuCheDetails.aspx" />
+    <Content Include="Member\ZuCheOrderList.aspx" />
+    <Content Include="Member\ZuTuanDetails.aspx" />
+    <Content Include="Member\ZuTuanOrderList.aspx" />
+    <Content Include="print\xingchengdan.aspx" />
+    <Content Include="QianZheng.aspx" />
+    <Content Include="RegistSuccess.aspx" />
+    <Content Include="searchlist.aspx" />
+    <Content Include="ShangCheng.aspx" />
+    <Content Include="ShangChengLianMeng.aspx" />
+    <Content Include="ShangChengXiangQing.aspx" />
+    <Content Include="ShangLvEJia.aspx" />
+    <Content Include="TiJiaoXX.aspx" />
+    <Content Include="TuanGou.aspx" />
+    <Content Include="TuanGouTJ.aspx" />
+    <Content Include="TuanGouXX.aspx" />
+    <Content Include="joinus.aspx" />
+    <Content Include="UserControl\Hotel.ascx" />
+    <Content Include="UserControl\Hotel2.ascx" />
+    <Content Include="UserControl\Menu.ascx" />
+    <Content Include="UserControl\Share.ascx" />
+    <Content Include="UserControl\TuanGou.ascx" />
+    <Content Include="UserControl\uploadFile.ascx" />
+    <Content Include="UserControl\UserLeft.ascx" />
+    <Content Include="UserControl\XianLu.ascx" />
+    <Content Include="UserControl\ZhuCe.ascx" />
+    <Content Include="UserControl\ZuCheOrder1.ascx" />
+    <Content Include="UserControl\ZuCheOrder.ascx" />
+    <Content Include="UserControl\ZuCheOrder2.ascx" />
+    <Content Include="Visa.aspx" />
+    <Content Include="VisaBox.aspx" />
+    <Content Include="VisaList.aspx" />
+    <Content Include="VisaXX.aspx" />
+    <Content Include="Weather.aspx" />
+    <Content Include="WebMaster\DanDuZuTuan.aspx" />
+    <Content Include="WebMaster\DingDanList.aspx" />
+    <Content Include="WebMaster\EBaoInfo.aspx" />
+    <Content Include="WebMaster\FanLianMengTuiGuangBiLi.aspx" />
+    <Content Include="WebMaster\FeeSetting.aspx" />
+    <Content Include="UserControl\Footer.ascx" />
+    <Content Include="UserControl\LeftSalesProduct.ascx" />
+    <Content Include="UserControl\Links.ascx" />
+    <Content Include="UserControl\Search.ascx" />
+    <Content Include="UserControl\TopBar.ascx" />
+    <Content Include="UserControl\TravelTools.ascx" />
+    <Content Include="UserControl\UploadControl.ascx" />
+    <Content Include="UserControl\UserLoginOrReg.ascx" />
+    <Content Include="WebMaster\AdvEdit.aspx" />
+    <Content Include="WebMaster\AdvList.aspx" />
+    <Content Include="WebMaster\AreaEdit.aspx" />
+    <Content Include="WebMaster\AreaList.aspx" />
+    <Content Include="WebMaster\CityEdit.aspx" />
+    <Content Include="WebMaster\CityManage.aspx" />
+    <Content Include="JS\jquery.bigcolorpicker.js" />
+    <Content Include="WebMaster\DiBiao.aspx" />
+    <Content Include="WebMaster\DiBiaoEdit.aspx" />
+    <Content Include="WebMaster\EditRouteDate.aspx" />
+    <Content Include="WebMaster\FeedbackEdit.aspx" />
+    <Content Include="WebMaster\FeedbackManage.aspx" />
+    <Content Include="WebMaster\MemberCenter\FenSi.aspx" />
+    <Content Include="WebMaster\MemberCenter\FenSiJiaoYi.aspx" />
+    <Content Include="WebMaster\HotelManage\AddRoomMode.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelEdit.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelInfo.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelList.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelOrderEdit.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelOrderList.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelOrderLog.aspx" />
+    <Content Include="WebMaster\HotelManage\HotelOrderMsg.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomEdit.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomImgInfo.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomModeList.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomPrice.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomPriceAll.aspx" />
+    <Content Include="WebMaster\HotelManage\RoomShenqing.aspx" />
+    <Content Include="WebMaster\HotelManage\SetHotelImg.aspx" />
+    <Content Include="WebMaster\HotelManage\TourOrderList.aspx" />
+    <Content Include="WebMaster\HotelManage\TourOrderReply.aspx" />
+    <Content Include="WebMaster\LinkEdit.aspx" />
+    <Content Include="WebMaster\LinkList.aspx" />
+    <Content Include="WebMaster\MemberCenter\ApplyUserList.aspx" />
+    <Content Include="WebMaster\MemberCenter\CompanyContent.aspx" />
+    <Content Include="WebMaster\MoneyManagement\FanLiList.aspx" />
+    <Content Include="WebMaster\MoneyManagement\InterestrateSet.aspx" />
+    <Content Include="WebMaster\MoneyManagement\JiaoYiList.aspx" />
+    <Content Include="WebMaster\MoneyManagement\PayMentRecord.aspx" />
+    <Content Include="WebMaster\MoneyManagement\TiXianEdit.aspx" />
+    <Content Include="WebMaster\MoneyManagement\TiXianList.aspx" />
+    <Content Include="WebMaster\MoneyManagement\ZhangHuMingXi.aspx" />
+    <Content Include="WebMaster\OrderEdit1.aspx" />
+    <Content Include="WebMaster\OrderInfo.aspx" />
+    <Content Include="WebMaster\ProvinceEdit.aspx" />
+    <Content Include="WebMaster\QianZheng\DingDan.aspx" />
+    <Content Include="WebMaster\QianZheng\DingDanEdit.aspx" />
+    <Content Include="WebMaster\QianZheng\QianZheng.aspx" />
+    <Content Include="WebMaster\QianZheng\QianZhengEdit.aspx" />
+    <Content Include="WebMaster\RouteTheme.aspx" />
+    <Content Include="WebMaster\RouteThemeEdit.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\InterfaceDataList.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\ScenicEdit.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\ScenicList.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\ScenicOrderEdit.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\ScenicOrderList.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\SetGoogleMap.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\SetScenicImg.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\Ticket.aspx" />
+    <Content Include="WebMaster\ScenicAndTicketManage\TicketEdit.aspx" />
+    <Content Include="WebMaster\SelectChildTourDate.aspx" />
+    <Content Include="WebMaster\SelectCustomer.aspx" />
+    <Content Include="WebMaster\SelectRoute.aspx" />
+    <Content Include="WebMaster\setRouteState.aspx" />
+    <Content Include="WebMaster\ShangCheng\AccountManage.aspx" />
+    <Content Include="WebMaster\ShangCheng\LianMengE.aspx" />
+    <Content Include="WebMaster\ShangCheng\LianMengLBE.aspx" />
+    <Content Include="WebMaster\ShangCheng\LianMengLBs.aspx" />
+    <Content Include="WebMaster\ShangCheng\LianMengs.aspx" />
+    <Content Include="WebMaster\ShangCheng\OrderEdit.aspx" />
+    <Content Include="WebMaster\ShangCheng\OrderList.aspx" />
+    <Content Include="WebMaster\ShangCheng\ProductEdit.aspx" />
+    <Content Include="WebMaster\ShangCheng\ProductList.aspx" />
+    <Content Include="WebMaster\ShangCheng\TypeEdit.aspx" />
+    <Content Include="WebMaster\ShangCheng\TypeList.aspx" />
+    <Content Include="WebMaster\Strategy\StrategyCheck.aspx" />
+    <Content Include="WebMaster\Strategy\StrategyEdit.aspx" />
+    <Content Include="WebMaster\Strategy\StrategyList.aspx" />
+    <Content Include="WebMaster\Strategy\StrategyThemeEdit.aspx" />
+    <Content Include="WebMaster\Strategy\StrategyThemeList.aspx" />
+    <Content Include="WebMaster\MoneyManagement\ProductEdit.aspx" />
+    <Content Include="WebMaster\MoneyManagement\ChongZhiList.aspx" />
+    <Content Include="WebMaster\Supplier\SupplierEdit.aspx" />
+    <Content Include="WebMaster\Supplier\SupplierList.aspx" />
+    <Content Include="WebMaster\TravelArticleClass.aspx" />
+    <Content Include="WebMaster\TravelArticleList.aspx" />
+    <Content Include="WebMaster\TravelArticleEdit.aspx" />
+    <Content Include="WebMaster\TravelArticleLYEdit.aspx" />
+    <Content Include="WebMaster\TravelArticleLYList.aspx" />
+    <Content Include="WebMaster\TravelClassEdit.aspx" />
+    <Content Include="WebMaster\TuangouEdit.aspx" />
+    <Content Include="WebMaster\TuangouList.aspx" />
+    <Content Include="WebMaster\TuanGou\TuanGouDingDans.aspx" />
+    <Content Include="WebMaster\TuanGou\TuanGouEdit.aspx" />
+    <Content Include="WebMaster\TuanGou\TuanGouList.aspx" />
+    <Content Include="WebMaster\FanLianMengTuiGuangFanLi.aspx" />
+    <Content Include="WebMaster\UntreatedOrders.aspx" />
+    <Content Include="WebMaster\UserControl\SelectCustomer.ascx" />
+    <Content Include="WebMaster\UserControl\SelectRoute.ascx" />
+    <Content Include="WebMaster\UserEdit.aspx" />
+    <Content Include="WebMaster\UserInfo.aspx" />
+    <Content Include="WebMaster\UserList.aspx" />
+    <Content Include="ashx\GetProvinceAndCity.ashx" />
+    <Content Include="CommonPage\ValidateCode.ashx" />
+    <Content Include="ashx\ExistUserName.ashx" />
+    <Content Include="ashx\Handler.ashx" />
+    <None Include="JS\kindeditor-4.1\themes\common\Thumbs.db" />
+    <Content Include="WebMaster\UserPer.aspx" />
+    <Content Include="WebMaster\XiaJiJiangLi.aspx" />
+    <Content Include="WebMaster\XiaJiJiangLiBiLi.aspx" />
+    <Content Include="WebMaster\ZiZuTuanList.aspx" />
+    <Content Include="WebMaster\ZiZuTuanXX.aspx" />
+    <Content Include="WebMaster\ZuChe\ZucheEdit.aspx" />
+    <Content Include="WebMaster\ZuChe\zuchelist.aspx" />
+    <Content Include="WebMaster\ZuChe\ZuCheOrderEdit.aspx" />
+    <Content Include="WebMaster\ZuChe\ZuCheOrderList.aspx" />
+    <Content Include="XianLu.aspx" />
+    <Content Include="XianLuBox.aspx" />
+    <Content Include="XianLuYuDing.aspx" />
+    <Content Include="XingCheLuXian.aspx" />
+    <Content Include="XingCheng.aspx" />
+    <Content Include="XiuXianYuLe.aspx" />
+    <Content Include="YouHuiMenPiao.aspx" />
+    <Content Include="YouHuiMenPiaoMap.aspx" />
+    <Content Include="YouHuiMenPiaoOrder.aspx" />
+    <Content Include="YouHuiMenPiaoXiangQing.aspx" />
+    <Content Include="YuDing.aspx" />
+    <Content Include="ZiXun.aspx" />
+    <Content Include="ZiXunDetails.aspx" />
+    <Content Include="ZiXunXX.aspx" />
+    <Content Include="ZiZhuTuan.aspx" />
+    <Content Include="ZuChe.aspx" />
+    <Content Include="ZuCheBox.aspx" />
+    <Content Include="ZuCheXX.aspx" />
+    <None Include="Web References\ShopUserRegisterService\UserReg.wsdl" />
+    <Content Include="WebMaster\default.Master" />
+    <None Include="WebMaster\PrintTemplate\importtemplate.xls" />
+    <Content Include="WebMaster\Ref.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://shop.4000571780.com/webservice/UserReg.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ShopUserRegisterService\</RelPath>
+      <UpdateFromURL>http://shop.4000571780.com/webservice/UserReg.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EyouSoft_Web_ShopUserRegisterService_UserReg</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Config\" />
+    <Folder Include="DLL\" />
+    <Folder Include="Images\JingQu_Interface\" />
+    <Folder Include="Images\UploadImages\ShangChengChanPin\" />
+    <Folder Include="Temp\word\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>2767</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

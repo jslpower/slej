@@ -1,0 +1,1311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PayAPI</name>
+    </assembly>
+    <members>
+        <member name="T:PayAPI.Tencent.Core.MD5Util">
+            <summary>
+            MD5Util 的摘要说明。
+            </summary>
+        </member>
+        <member name="M:PayAPI.Tencent.Core.MD5Util.GetMD5(System.String,System.String)">
+            获取大写的MD5签名结果 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ClientResponseHandler.key">
+            密钥 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ClientResponseHandler.parameters">
+            应答的参数 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ClientResponseHandler.debugInfo">
+            debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.getKey">
+            获取密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.setKey(System.String)">
+            设置密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.getParameter(System.String)">
+            获取参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.setParameter(System.String,System.String)">
+            设置参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.isTenpaySign">
+            是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
+            @return boolean 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.getDebugInfo">
+            获取debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler.setDebugInfo(System.String)">
+            设置debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ClientResponseHandler._isTenpaySign(System.Collections.ArrayList)">
+            是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
+            @return boolean 
+        </member>
+        <member name="T:PayAPI.Ali.Core.Refund_Distribute_Parameter">
+            <summary>
+            退款接口中使用到的，分润方退款数据格式
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Parameter.Trade_No">
+            <summary>
+            原付款支付宝交易号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Parameter.Distribute_Account">
+            <summary>
+            转出人Email（原分润帐户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Parameter.PlatformIntermediate_Account">
+            <summary>
+            转入人Email（平台中间帐户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Parameter.RefundPrice">
+            <summary>
+            退款金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Parameter.RefundRemark">
+            <summary>
+            退款理由
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Distribute_royalty_Result">
+            <summary>
+            分润返回XML结果解析
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Ali.AliPayTrade">
+            <summary>
+            支付宝交易业务实体
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.PayTrade">
+            <summary>
+            支付的基本业务信息基类
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.PayTrade.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTrade.OrderInfo">
+            <summary>
+            订单信息
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTrade.Totalfee">
+            <summary>
+            支付的总金额(0.01～100000000.00，最多2位小数，四舍五入)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTrade.OutTradeNo">
+            <summary>
+            获得外部支付流水号(由我们传给支付接口的唯一订单号),默认值为:按当前时间构造订单号(年+月+日+小时+分+秒+毫秒)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTrade.AttachList">
+            <summary>
+            商家数据包集合
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTrade.SellerAccount">
+            <summary>
+            收款人(即卖家)帐号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTrade.ShowUrl">
+            <summary>
+            商品展示网址，在收银台里商品名称的链接(为空则无连接)注：url中不允许包含特殊符号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTrade.IsRoyalty">
+             <summary>
+            该笔交易是否要提成、分润，默认为true
+             </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTrade.RoyaltyType">
+            <summary>
+            分润方式，默认为平级分润
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTrade.RoyaltyList">
+            <summary>
+            分润、提成信息集合
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Ali.AliPayTradeNotify">
+            <summary>
+            支付宝的返回通知交易业务实体
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.PayTradeNotify">
+            <summary>
+            支付的返回通知基本业务信息基类
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.OutTradeNo">
+            <summary>
+            获得外部支付流水号(由我们传给支付接口的唯一订单号)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.TradeNo">
+            <summary>
+            获得支付接口的支付流水号(由支付接口传给我们的唯一订单号)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.IsTradeSuccess">
+            <summary>
+            交易是否成功
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.BuyerAccount">
+            <summary>
+            付款人(即买家)账号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.NotifyTime">
+            <summary>
+            返回通知时间[并不保证该字段都有值]
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.PayAPICallBackMsg">
+            <summary>
+            接收到支付接口通知后，支付接口要回调的消息内容
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.PayTradeNotify.DebugOutPut">
+            <summary>
+            需要调试的消息输出
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.AliPayTradeNotify.SellerAccount">
+            <summary>
+            收款人(即卖家)帐号
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.RefundNoPwd">
+            <summary>
+            即时到账退款（无密）
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.RefundNoPwd.Create_url">
+            <summary>
+            构造请求URL（GET方式请求）
+            </summary>
+            <returns>请求url</returns>
+        </member>
+        <member name="T:PayAPI.Ali.Alipay">
+            <summary>
+            支付宝接口
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.Create_url(PayAPI.Model.Ali.AliPayTrade)">
+            <summary>
+            构造支付URL（GET方式请求）
+            </summary>
+            <param name="trade">交易业务实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetNotifyAsync">
+            <summary>
+            获得支付宝的异步通知信息[注意:处理完消息后请将返回结果中的PayAPICallBackMsg属性传回给支付宝，通过Response.Write()方式]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetReturn">
+            <summary>
+            获得支付宝的同步页面跳转通知信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetNotifyComm(System.String)">
+            <summary>
+            获得支付宝的通知信息
+            </summary>
+            <param name="action">返回的方式post,get</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetRequestPost">
+            <summary>
+            获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetRequestGet">
+            <summary>
+            获取支付宝GET过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Alipay.GetFormValue(System.String,System.String)">
+            <summary>
+            获得表单的值
+            </summary>
+            <param name="key">键值</param>
+            <param name="action">返回的方式post,get</param>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Ali.Alipay.Create">
+            <summary>
+            创建支付对象
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.BaseSplitRequestHandler">
+            <summary>
+            BaseSplitRequestHandler 的摘要说明。
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.RequestHandler">
+            <summary>
+            RequestHandler 的摘要说明。
+            </summary>
+        </member>
+        <member name="F:PayAPI.Tencent.Core.RequestHandler.gateUrl">
+            网关url地址 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.RequestHandler.key">
+            密钥 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.RequestHandler.parameters">
+            请求的参数 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.RequestHandler.debugInfo">
+            debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.init">
+            初始化函数。
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.getGateUrl">
+            获取入口地址,不包含参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.setGateUrl(System.String)">
+            设置入口地址,不包含参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.getKey">
+            获取密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.setKey(System.String)">
+            设置密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.getRequestURL">
+            获取带参数的请求URL  @return String 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.createSign">
+            创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.getParameter(System.String)">
+            获取参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.setParameter(System.String,System.String)">
+            设置参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.getDebugInfo">
+            获取debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.RequestHandler.setDebugInfo(System.String)">
+            设置debug信息 
+        </member>
+        <member name="T:PayAPI.Ali.Core.CreateSSL">
+            <summary>
+            CreateSSL 的摘要说明
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Tencent.RoyaltyRole">
+            <summary>
+            分润角色
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Tencent.RoyaltyRole.供应商">
+            <summary>
+            供应商/供货商 = 1
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Tencent.RoyaltyRole.平台服务方">
+            <summary>
+            平台服务方 = 2
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Tencent.RoyaltyRole.独立分润方">
+            <summary>
+            独立分润方 = 4
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Tencent.Royalty">
+            <summary>
+            分润信息
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Tencent.Royalty._price">
+            业务参数
+            帐号^分帐金额^角色
+            角色说明:	1:供应商 2:平台服务方 4:独立分润方
+            帐号1^分帐金额1^角色1|帐号2^分帐金额2^角色2|...
+        </member>
+        <member name="P:PayAPI.Model.Tencent.Royalty.Account">
+            <summary>
+            接受分润、提成的账户
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Tencent.Royalty.Price">
+            <summary>
+            分润、提成金额(0.01～100000000.00，最多2位小数，四舍五入)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Tencent.Royalty.Role">
+            <summary>
+            分润角色
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Tencent.RoyaltyList">
+            <summary>
+            分润提成信息集合
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Tencent.RoyaltyList._totalmoney">
+            <summary>
+            所有分润的总金额[单位：元]
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.Tencent.RoyaltyList.Add(PayAPI.Model.Tencent.Royalty)">
+            <summary>
+            添加分润信息
+            </summary>
+            <param name="royalty"></param>
+        </member>
+        <member name="M:PayAPI.Model.Tencent.RoyaltyList.ToString(System.Decimal)">
+            <summary>
+            输出分润，拼接后的分润字符串信息
+            </summary>
+            <param name="totalfee">要支付的总金额[单位：元]</param>
+            <returns></returns>
+        </member>
+        <member name="T:PayAPI.Model.Tencent.BusinessDescribe">
+            <summary>
+            业务描述集合
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.Tencent.BusinessDescribe.Add(System.String)">
+            <summary>
+            添加业务描述信息
+            </summary>
+            <param name="describe">描述信息</param>
+        </member>
+        <member name="M:PayAPI.Model.Tencent.BusinessDescribe.ToString">
+            <summary>
+            输出拼接后的业务描述字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Refund_Platform_Parameter">
+            <summary>
+             退款接口中使用到的，平台退款数据格式
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.Trade_No">
+            <summary>
+            原付款支付宝交易号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.RefundPrice">
+            <summary>
+            退交易金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.RefundRemark">
+            <summary>
+            退交易理由
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.Refund_Charges_Account">
+            <summary>
+            被收费人Email（也就是在交易的时候支付宝收取服务费的账户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.Refund_Charges_Price">
+            <summary>
+            退收费金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Parameter.Refund_Charges_Remark">
+            <summary>
+            退收费理由
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Distribute_royalty">
+            <summary>
+            分润
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.Distribute_royalty.Create_url">
+            <summary>
+            构造请求URL（GET方式请求）
+            </summary>
+            <returns>请求url</returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.AlipayNotify">
+            <summary>
+            类名：alipay_notify
+            功能：付款过程中服务器通知类
+            详细：该页面是通知返回核心处理文件，不需要修改
+            版本：3.0
+            修改日期：2010-06-13
+            '说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            
+            //////////////////////注意/////////////////////////////
+            调试通知返回时，可查看或改写log日志的写入TXT里的数据，来检查通知返回是否正常 
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayNotify.#ctor(System.Collections.Generic.SortedDictionary{System.String,System.String},System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            从配置文件中初始化变量
+            </summary>
+            <param name="inputPara">通知返回来的参数数组</param>
+            <param name="notify_id">验证通知ID</param>
+            <param name="partner">合作身份者ID</param>
+            <param name="key">安全校验码</param>
+            <param name="input_charset">编码格式</param>
+            <param name="sign_type">加密类型</param>
+            <param name="transport">访问模式</param>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayNotify.Verify(System.String)">
+            <summary>
+            验证是否是支付宝服务器发来的请求
+            </summary>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayNotify.Get_Http(System.String,System.Int32)">
+            <summary>
+            获取远程服务器ATN结果
+            </summary>
+            <param name="strUrl">指定URL路径地址</param>
+            <param name="timeout">超时时间设置</param>
+            <returns>服务器ATN结果</returns>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AlipayNotify.Mysign">
+            <summary>
+            获取通知返回后计算后（验证）的加密结果
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AlipayNotify.ResponseTxt">
+            <summary>
+            获取验证是否是支付宝服务器发来的请求结果
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AlipayNotify.PreSignStr">
+            <summary>
+            获取待签名的字符串（调试用）
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.TrustRefundResponseHandler">
+            <summary>
+            TrustRefundResponseHandler 的摘要说明。
+            </summary>
+             委托退款签约应答类
+             ============================================================================
+             api说明：
+             getKey()/setKey(),获取/设置密钥
+             getParameter()/setParameter(),获取/设置参数值
+             getAllParameters(),获取所有参数
+             isTenpaySign(),是否财付通签名,true:是 false:否
+             doShow(),显示处理结果
+             getDebugInfo(),获取debug信息
+             
+             ============================================================================
+            
+        </member>
+        <member name="T:PayAPI.Tencent.Core.ResponseHandler">
+            <summary>
+            ResponseHandler 的摘要说明。
+            </summary>
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ResponseHandler.key">
+            密钥 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ResponseHandler.parameters">
+            应答的参数 
+        </member>
+        <member name="F:PayAPI.Tencent.Core.ResponseHandler.debugInfo">
+            debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.getKey">
+            获取密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.setKey(System.String)">
+            设置密钥 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.getParameter(System.String)">
+            获取参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.setParameter(System.String,System.String)">
+            设置参数值 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.isTenpaySign">
+            是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
+            @return boolean 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.doShow(System.String)">
+            显示处理结果。
+            @param show_url 显示处理结果的url地址,绝对url地址的形式(http://www.xxx.com/xxx.aspx)。
+            @throws IOException 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.getDoShow(System.String)">
+                    * 返回处理结果。
+                    * @param show_url 显示处理结果的url地址,绝对url地址的形式(http://www.xxx.com/xxx.aspx)。
+                    * @throws IOException 
+                     * 编写人：张志瑜   修改时间：2011-1-24  修改内容：增加判断show_url是否为空的条件
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.getDebugInfo">
+            获取debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler.setDebugInfo(System.String)">
+            设置debug信息 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.ResponseHandler._isTenpaySign(System.Collections.ArrayList)">
+            是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
+            @return boolean 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.TrustRefundResponseHandler.isTenpaySign">
+            是否财付通签名
+            @Override
+            @return boolean
+        </member>
+        <member name="T:PayAPI.Model.Tencent.TenPayTrade">
+            <summary>
+            财付通交易业务实体
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.Tencent.TenPayTrade.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Tencent.TenPayTrade.IsRoyalty">
+             <summary>
+            该笔交易是否要提成、分润，默认为true
+             </summary>
+        </member>
+        <member name="P:PayAPI.Model.Tencent.TenPayTrade.RoyaltyList">
+            <summary>
+            分润、提成信息集合
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Tencent.TenPayTrade.OutTradeNo">
+            <summary>
+            获得外部支付流水号(由我们传给支付接口的唯一订单号),默认值为:10位商户号+8位时间（YYYYmmdd)+10位流水号
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Tencent.TenPayTradeNotify">
+            <summary>
+            财务通的返回通知交易业务实体
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Ali.RoyaltyType">
+            <summary>
+            分润方式
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Ali.RoyaltyType.平级分润">
+            <summary>
+            平级分润 = 1
+            </summary>
+        </member>
+        <member name="F:PayAPI.Model.Ali.RoyaltyType.多级分润">
+            <summary>
+            多级分润 = 2 [暂未支持]
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Ali.Royalty">
+            <summary>
+            分润信息实体
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.Royalty.Level">
+            <summary>
+            分润级别(多级分润的时候需要设置该值)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.Royalty.Account">
+            <summary>
+            接受分润、提成的账户
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.Royalty.Price">
+            <summary>
+            分润、提成金额(0.01～100000000.00，最多2位小数，四舍五入)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Ali.Royalty.Remark">
+            <summary>
+            备注(分润说明)
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Ali.RoyaltyList">
+            <summary>
+            分润提成信息集合
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.Ali.RoyaltyList.HasKey(System.String)">
+            <summary>
+            判断集合中是否存在该账户
+            </summary>
+            <param name="account">账户名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Model.Ali.RoyaltyList.Add(PayAPI.Model.Ali.Royalty)">
+            <summary>
+            添加分润信息
+            </summary>
+            <param name="royalty"></param>
+        </member>
+        <member name="M:PayAPI.Model.Ali.RoyaltyList.Compare(PayAPI.Model.Ali.Royalty,PayAPI.Model.Ali.Royalty)">
+            <summary>
+            比较
+            </summary>
+            <param name="royalty1">分润实体1</param>
+            <param name="royalty2">分润实体2</param>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Model.Ali.RoyaltyList.MultiLevelString">
+            <summary>
+            获得多级分润，拼接后的分润字符串信息[暂未支持]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Model.Ali.RoyaltyList.EqualLevelString">
+            <summary>
+            获得平级分润，拼接后的分润字符串信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Query_Customer">
+            <summary>
+            查询电子协议签约接口
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.Query_Customer.Create_url">
+            <summary>
+            构造请求URL（GET方式请求）
+            </summary>
+            <returns>请求url</returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.AlipayFunction">
+            <summary>
+            功能：支付宝接口公用函数类
+            详细：该类是请求、通知返回两个文件所调用的公用函数核心处理文件，不需要修改
+            版本：3.0
+            修改日期：2010-06-13
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
+            </summary>
+        </member>
+        <!-- 对于成员“M:PayAPI.Ali.Core.AlipayFunction.Create_linkstring_urlencode(System.Collections.Generic.Dictionary{System.String,System.String})”忽略有格式错误的 XML 注释 -->
+        <member name="M:PayAPI.Ali.Core.AlipayFunction.Build_mysign(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String,System.String)">
+            <summary>
+            生成签名结果
+            </summary>
+            <param name="sArray">要加密的数组</param>
+            <param name="key">安全校验码</param>
+            <param name="sign_type">加密类型</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>签名结果字符串</returns>
+        </member>
+        <!-- 对于成员“M:PayAPI.Ali.Core.AlipayFunction.Create_linkstring(System.Collections.Generic.Dictionary{System.String,System.String})”忽略有格式错误的 XML 注释 -->
+        <member name="M:PayAPI.Ali.Core.AlipayFunction.Para_filter(System.Collections.Generic.SortedDictionary{System.String,System.String})">
+            <summary>
+            除去数组中的空值和签名参数并以字母a到z的顺序排序
+            </summary>
+            <param name="dicArrayPre">过滤前的参数组</param>
+            <returns>过滤后的参数组</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayFunction.Sign(System.String,System.String,System.String)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="prestr">需要加密的字符串</param>
+            <param name="sign_type">加密类型</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayFunction.log_result(System.String,System.String)">
+            <summary>
+            写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
+            </summary>
+            <param name="sPath">日志的本地绝对路径</param>
+            <param name="sWord">要写入日志里的文本内容</param>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayFunction.Query_timestamp(System.String)">
+            <summary>
+            用于防钓鱼，调用接口query_timestamp来获取时间戳的处理函数
+            注意：远程解析XML出错，与IIS服务器配置有关
+            </summary>
+            <param name="partner">合作身份者ID</param>
+            <returns>时间戳字符串</returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Refund_Platform_Result">
+            <summary>
+            退款接口中使用到的，平台退款结果数据格式
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.Trade_No">
+            <summary>
+            原付款支付宝交易号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.RefundPrice">
+            <summary>
+            退交易金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.IsRefundSuccess">
+            <summary>
+            退交易是否成功
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.Refund_Charges_Account">
+            <summary>
+            被收费人Email（也就是在交易的时候支付宝收取服务费的账户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.Refund_Charges_Price">
+            <summary>
+            退收费金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Platform_Result.IsRefund_ChargesSuccess">
+            <summary>
+            退收费是否成功
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Tenpay">
+            <summary>
+            财付通接口
+            </summary>
+        </member>
+        <member name="M:PayAPI.Tencent.Tenpay.Create_url(PayAPI.Model.Tencent.TenPayTrade)">
+            <summary>
+            构造支付URL（GET方式请求）
+            </summary>
+            <param name="trade">交易业务实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Tencent.Tenpay.GetNotifyAsync(System.Boolean)">
+            <summary>
+            获得财付通的异步通知信息[注意:处理完消息后请将返回结果中的PayAPICallBackMsg属性传回给财付通，通过Response.Write()方式]
+            </summary>
+            <param name="isRoyalty">是否带分润功能</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Tencent.Tenpay.GetReturn">
+            <summary>
+            获得财付通的同步页面跳转通知信息[暂未实现该功能]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Tencent.Tenpay.Create">
+            <summary>
+            创建支付对象
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.TenpayUtil">
+            <summary>
+            TenpayUtil 的摘要说明。
+            </summary>
+        </member>
+        <member name="M:PayAPI.Tencent.Core.TenpayUtil.UrlEncode(System.String,System.String)">
+            对字符串进行URL编码 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.TenpayUtil.UrlDecode(System.String,System.String)">
+            对字符串进行URL解码 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.TenpayUtil.UnixStamp">
+            取时间戳生成随即数,替换交易单号中的后10位流水号 
+        </member>
+        <member name="M:PayAPI.Tencent.Core.TenpayUtil.BuildRandomStr(System.Int32)">
+            取随机数 
+        </member>
+        <member name="T:PayAPI.Tencent.Core.PayRequestHandler">
+            <summary>
+            即时到帐请求类
+            </summary>
+             即时到帐请求类
+             ============================================================================
+             api说明：
+             init(),初始化函数，默认给一些参数赋值，如cmdno,date等。
+             getGateURL()/setGateURL(),获取/设置入口地址,不包含参数值
+             getKey()/setKey(),获取/设置密钥
+             getParameter()/setParameter(),获取/设置参数值
+             getAllParameters(),获取所有参数
+             getRequestURL(),获取带参数的请求URL
+             doSend(),重定向到财付通支付
+             getDebugInfo(),获取debug信息
+             
+             ============================================================================
+            
+        </member>
+        <member name="M:PayAPI.Tencent.Core.PayRequestHandler.init">
+            @Override
+            初始化函数，默认给一些参数赋值，如cmdno,date等。
+        </member>
+        <member name="M:PayAPI.Tencent.Core.PayRequestHandler.createSign">
+            @Override
+            创建签名
+        </member>
+        <member name="T:PayAPI.Model.Attach">
+            <summary>
+            商家数据包参数实体
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.Attach.#ctor(System.String,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="key">key键，请勿使用特殊字符以及中文(不区分大小写，名称命名竟然简短，否则将过多占用数据包长度)</param>
+            <param name="value">数据值，请勿使用特殊字符以及中文</param>
+        </member>
+        <member name="M:PayAPI.Model.Attach.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Attach.Key">
+            <summary>
+            key键，请勿使用特殊字符以及中文(不区分大小写，名称命名竟然简短，否则将过多占用数据包长度)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Attach.Value">
+            <summary>
+            数据值，请勿使用特殊字符以及中文
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.AttachCollection">
+            <summary>
+            商家数据包参数集合
+            </summary>
+        </member>
+        <member name="M:PayAPI.Model.AttachCollection.Add(PayAPI.Model.Attach)">
+            <summary>
+            添加键值对数据
+            </summary>
+            <param name="model">数据包键值对</param>
+        </member>
+        <member name="M:PayAPI.Model.AttachCollection.ToString">
+            <summary>
+            输出按一定格式拼接后的商家数据包
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PayAPI.Model.AttachCollection.ToCollection(System.String)">
+            <summary>
+            设置指定格式的字符串数据包到当前实体集合中
+            </summary>
+            <param name="formatStr">指定格式的字符串(key1^value1|key2^value2)</param>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Model.AttachCollection.Count">
+            <summary>
+            获得集合个数
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.AttachCollection.Item(System.String)">
+            <summary>
+            根据KEY值获取数据包实体(若不存在该key则返回null)
+            </summary>
+            <param name="key">key(不区分大小写)</param>
+            <returns></returns>
+        </member>
+        <member name="P:PayAPI.Model.AttachCollection.Item(System.Int32)">
+            <summary>
+            根据索引值获取数据包实体(若不存在该key则返回null)
+            </summary>
+            <param name="index">索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.QianYue">
+            <summary>
+            加入支付圈电子协议签约
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.QianYue.Create_url">
+            <summary>
+            构造请求URL（GET方式请求）
+            </summary>
+            <returns>请求url</returns>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.PayResponseHandler">
+            <summary>
+            PayResponseHandler 的摘要说明。
+            </summary>
+             即时到帐应答类
+             ============================================================================
+             api说明：
+             getKey()/setKey(),获取/设置密钥
+             getParameter()/setParameter(),获取/设置参数值
+             getAllParameters(),获取所有参数
+             isTenpaySign(),是否财付通签名,true:是 false:否
+             doShow(),显示处理结果
+             getDebugInfo(),获取debug信息
+             
+             ============================================================================
+            
+        </member>
+        <member name="M:PayAPI.Tencent.Core.PayResponseHandler.isTenpaySign">
+            是否财付通签名
+            @Override
+            @return boolean
+        </member>
+        <member name="T:PayAPI.Model.Order">
+            <summary>
+            订单商品信息
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Order.OrderID">
+            <summary>
+            订单ID列表(只适用于一次支付少于10个订单ID左右)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Order.Subject">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:PayAPI.Model.Order.Body">
+            <summary>
+            商品描述
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.AlipayService">
+            <summary>
+            类名：alipay_service
+            功能：支付宝外部服务接口控制
+            详细：该页面是请求参数核心处理文件，不需要修改
+            版本：3.0
+            修改日期：2010-06-13
+            说明：
+            以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+            该代码仅供学习和研究支付宝接口使用，只是提供一个参考
+            </summary>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayService.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            从配置文件及入口文件中初始化变量
+            </summary>
+            <param name="partner">合作身份者ID</param>
+            <param name="seller_email">签约支付宝账号或卖家支付宝帐户</param>
+            <param name="return_url">付完款后跳转的页面 要用 以http开头格式的完整路径，不允许加?id=123这类自定义参数</param>
+            <param name="notify_url">交易过程中服务器通知的页面 要用 以http开格式的完整路径，不允许加?id=123这类自定义参数</param>
+            <param name="show_url">网站商品的展示地址，不允许加?id=123这类自定义参数</param>
+            <param name="out_trade_no">请与贵网站订单系统中的唯一订单号匹配</param>
+            <param name="subject">订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。</param>
+            <param name="body">订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里</param>
+            <param name="total_fee">订单总金额，显示在支付宝收银台里的“应付总额”里</param>
+            <param name="paymethod">默认支付方式，四个值可选：bankPay(网银); cartoon(卡通); directPay(余额); CASH(网点支付)</param>
+            <param name="defaultbank">默认网银代号，代号列表见club.alipay.com/read.php?tid=8681379</param>
+            <param name="encrypt_key">防钓鱼时间戳</param>
+            <param name="exter_invoke_ip">买家本地电脑的IP地址</param>
+            <param name="extra_common_param">自定义参数，可存放任何内容（除等特殊字符外），不会显示在页面上</param>
+            <param name="buyer_email">默认买家支付宝账号</param>
+            <param name="royalty_type">提成类型，该值为固定值：10，不需要修改</param>
+            <param name="royalty_parameters">提成信息集，与需要结合商户网站自身情况动态获取每笔交易的各分润收款账号、各分润金额、各分润说明。最多只能设置10条</param>
+            <param name="it_b_pay">超时时间，不填默认是15天。八个值可选：1h(1小时),2h(2小时),3h(3小时),1d(1天),3d(3天),7d(7天),15d(15天),1c(当天)</param>
+            <param name="key">安全检验码</param>
+            <param name="input_charset">字符编码格式 目前支持 gb2312 或 utf-8</param>
+            <param name="sign_type">加密方式 不需修改</param>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayService.Create_url">
+            <summary>
+            构造请求URL（GET方式请求）
+            </summary>
+            <returns>请求url</returns>
+        </member>
+        <member name="M:PayAPI.Ali.Core.AlipayService.Build_postform">
+            <summary>
+            构造Post表单提交HTML（POST方式请求）
+            </summary>
+            <returns>输出 表单提交HTML文本</returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Query_Customer_Result">
+            <summary>
+             查询电子协议接口 ，返回参数
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.AliPaySystem">
+            <summary>
+            支付宝系统信息
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Service">
+            <summary>
+            服务名，默认为create_direct_pay_by_user
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.SignType">
+            <summary>
+            签名方式如DSA、RSA、MD5。默认为MD5.
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Inputcharset">
+            <summary>
+            参数编码字符集(GBK,utf-8)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Paymethod">
+            <summary>
+            默认的支付方式，目前仅支持默认显示到按directPay余额支付
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.NotifyUrl">
+            <summary>
+            支付完成后异步调用通知的URL、http://开头的完整地址
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.ReturnUrl">
+            <summary>
+            支付完成后，同步重定向，自动跳转回该指定网址(若为空，支付完成后页面不进行跳转)，http://开头的完整地址
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Partner">
+            <summary>
+            合作伙伴在支付宝的用户ID
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Key">
+            <summary>
+            支付宝合作32位验证码
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.Account">
+            <summary>
+            合作伙伴的支付宝帐号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.ServiceFeePercent">
+            <summary>
+            每笔交易合作伙伴所收的服务费比例(如：0.1，则手续费=交易总金额*0.1 )
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.AliPaySystem.ServiceFeeType">
+            <summary>
+            服务费收费方式(目前仅支持按比例收费)
+            </summary>
+        </member>
+        <member name="T:PayAPI.Ali.Core.AliPaySystem.ServiceFeesType">
+            <summary>
+            服务收费方式
+            </summary>
+        </member>
+        <member name="F:PayAPI.Ali.Core.AliPaySystem.ServiceFeesType.按固定金额收费">
+            <summary>
+            按固定金额收费 = 1
+            </summary>
+        </member>
+        <member name="F:PayAPI.Ali.Core.AliPaySystem.ServiceFeesType.按比例收费">
+            <summary>
+            按比例收费 = 2
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.TenPaySystem">
+            <summary>
+            财付通系统信息
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.BargainorId">
+            <summary>
+            平台商户ID，商户号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.Key">
+            <summary>
+            安全检验码
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.Account">
+            <summary>
+            合作伙伴的财付通帐号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.Inputcharset">
+            <summary>
+            参数编码字符集(gb2312,utf-8)
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.SignType">
+            <summary>
+            签名方式如DSA、RSA、MD5。默认为MD5.
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.PfxPath">
+            <summary>
+            证书地址
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.PfxPwd">
+            <summary>
+            证书密码
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.Paymethod">
+            <summary>
+            默认的支付方式，目前仅支持默认显示到按财付通余额支付
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.NotifyUrl">
+            <summary>
+            支付完成后异步调用通知的URL、http://开头的完整地址
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.ReturnUrl">
+            <summary>
+            支付完成后，同步重定向，自动跳转回该指定网址(若为空，支付完成后页面不进行跳转)，http://开头的完整地址
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.ServiceFeePercent">
+            <summary>
+            每笔交易合作伙伴所收的服务费比例(如：0.1，则手续费=交易总金额*0.1 )
+            </summary>
+        </member>
+        <member name="P:PayAPI.Tencent.Core.TenPaySystem.ServiceFeeType">
+            <summary>
+            服务费收费方式(目前仅支持按比例收费)
+            </summary>
+        </member>
+        <member name="T:PayAPI.Tencent.Core.TenPaySystem.ServiceFeesType">
+            <summary>
+            服务收费方式
+            </summary>
+        </member>
+        <member name="F:PayAPI.Tencent.Core.TenPaySystem.ServiceFeesType.按固定金额收费">
+            <summary>
+            按固定金额收费 = 1
+            </summary>
+        </member>
+        <member name="F:PayAPI.Tencent.Core.TenPaySystem.ServiceFeesType.按比例收费">
+            <summary>
+            按比例收费 = 2
+            </summary>
+        </member>
+        <member name="T:PayAPI.Model.Error">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Common.Config.ConfigModel">
+            <summary>
+            Web.config 操作类
+             Copyright (C) 2006-2008 ChenZhiRen(Adpost) All Right Reserved.
+            定义为不可继承性
+            typeof(System.Configuration.NameValueFileSectionHandler).Assembly.FullName.ToString()
+            </summary>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetConfigString(System.String,System.String)">
+            <summary>
+            取得配置文件中的字符串KEY
+            </summary>
+            <param name="SectionName">节点名称</param>
+            <param name="key">KEY名</param>
+            <returns>返回KEY值</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetConfigDecimal(System.String,System.String)">
+            <summary>
+            得到配置文件中的配置decimal信息
+            </summary>
+            <param name="SectionName">节点名称</param>
+            <param name="key">KEY名称</param>
+            <returns>返回浮点数</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetConfigInt(System.String,System.String)">
+            <summary>
+            得到配置文件中的配置int信息
+            </summary>
+            <param name="SectionName">节点名称</param>
+            <param name="key">KEY名</param>
+            <returns>返回整数</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetConfigBoolean(System.String,System.String)">
+            <summary>
+            得到配置文件中的配置int信息
+            </summary>
+            <param name="SectionName">节点名称</param>
+            <param name="key">KEY名</param>
+            <returns>返回布尔值</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetAppSettingString(System.String)">
+            <summary>
+            取得默认节点的配置
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetAppSettingInt(System.String)">
+            <summary>
+            得到配置文件中的默认节点配置int信息
+            </summary>
+            <param name="key">KEY名</param>
+            <returns>返回整数</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetAppSettingDecimal(System.String)">
+            <summary>
+            取得配置文件中 默认节点的 浮点数型
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetAppSettingBoolean(System.String)">
+            <summary>
+            得到配置文件中的配置int信息
+            </summary>
+            <param name="key">KEY名</param>
+            <returns>返回布尔值</returns>
+        </member>
+        <member name="M:Common.Config.ConfigModel.GetConnectionString(System.String)">
+            <summary>
+            取得ConnectionStrings节点的配置
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PayAPI.Ali.Core.Refund_Distribute_Result">
+            <summary>
+            退款接口中使用到的，分润方退款结果数据格式
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Result.Trade_No">
+            <summary>
+            原付款支付宝交易号
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Result.Distribute_Account">
+            <summary>
+            转出人Email（原分润帐户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Result.PlatformIntermediate_Account">
+            <summary>
+            转入人Email（平台中间帐户）
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Result.RefundPrice">
+            <summary>
+            退款金额
+            </summary>
+        </member>
+        <member name="P:PayAPI.Ali.Core.Refund_Distribute_Result.IsSuccess">
+            <summary>
+            处理结果是否成功
+            </summary>
+        </member>
+    </members>
+</doc>

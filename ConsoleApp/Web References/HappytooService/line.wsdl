@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ws.happytoo.cn/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.ws.happytoo.cn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ws.happytoo.cn/">
+      <s:element name="GetDataLineColumn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ColumnCat" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataLineColumnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataLineColumnResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Z_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="State" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataSetLineResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLineRote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="L_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLineRoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataSetLineRoteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLineView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="L_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataSetLineViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataSetLineViewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderPost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="L_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CrCount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="XhCount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YCount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Or_GuestInfo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderPostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderPostResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDataLineColumnSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataLineColumn" />
+  </wsdl:message>
+  <wsdl:message name="GetDataLineColumnSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataLineColumnResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataSetLine" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataSetLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataSetLineRote" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataSetLineRoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataSetLineView" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataSetLineViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderPost" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataLineColumnHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="ColumnCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataLineColumnHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="Z_Id" type="s:string" />
+    <wsdl:part name="City" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+    <wsdl:part name="Page" type="s:string" />
+    <wsdl:part name="PageSize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteHttpGetIn">
+    <wsdl:part name="L_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="L_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostHttpGetIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="L_Id" type="s:string" />
+    <wsdl:part name="CrCount" type="s:string" />
+    <wsdl:part name="XhCount" type="s:string" />
+    <wsdl:part name="YCount" type="s:string" />
+    <wsdl:part name="Or_GuestInfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataLineColumnHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="ColumnCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataLineColumnHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="Z_Id" type="s:string" />
+    <wsdl:part name="City" type="s:string" />
+    <wsdl:part name="State" type="s:string" />
+    <wsdl:part name="Page" type="s:string" />
+    <wsdl:part name="PageSize" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteHttpPostIn">
+    <wsdl:part name="L_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineRoteHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="L_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSetLineViewHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostHttpPostIn">
+    <wsdl:part name="Key" type="s:string" />
+    <wsdl:part name="L_Id" type="s:string" />
+    <wsdl:part name="CrCount" type="s:string" />
+    <wsdl:part name="XhCount" type="s:string" />
+    <wsdl:part name="YCount" type="s:string" />
+    <wsdl:part name="Or_GuestInfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderPostHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="LineSoap">
+    <wsdl:operation name="GetDataLineColumn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取专线&lt;/h3&gt;&lt;p&gt; 输入参数：Key， ColumnCat  0=周边短线,1=国内长线,2=国际线路&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataLineColumnSoapIn" />
+      <wsdl:output message="tns:GetDataLineColumnSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， Z_Id=如果想全部专线获取则为空，如果想指定某条专线请多上一页中GetDataLineColumn方法里把专线列出后把专线里的z_Id值传到此项参数里 City=出发城市， State=-1=全部,0=正常,1=停止,2=客满,3=过期， Page=翻页页数， PageSize=当页显示条数&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineSoapIn" />
+      <wsdl:output message="tns:GetDataSetLineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路行程&lt;/h3&gt;&lt;p&gt; L_Id (数据类型：String)&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineRoteSoapIn" />
+      <wsdl:output message="tns:GetDataSetLineRoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID(注意如果有多个ID同时传递)，如果想查看某条线路的详细请返回上一页中GetDataSetLine方法里把线路列出后把线路里的L_Id值传到此项参数里&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineViewSoapIn" />
+      <wsdl:output message="tns:GetDataSetLineViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID，CrCount=成人数，XhCount=儿童数，YCount=婴儿数，Or_GuestInfo=格式” AAA,1,1,111|BBB,2,2,222” 从左至右依次为”姓名,性别,成人/儿童,证件号码”性别----0无,1男,2女,成人/儿童-------0成人,1儿童,2婴儿 返回数据：XML(状态：&gt;=1000=成功,1=线路停止,2=客满,3=线路截止,4=客满,500=系统出错)</wsdl:documentation>
+      <wsdl:input message="tns:OrderPostSoapIn" />
+      <wsdl:output message="tns:OrderPostSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LineHttpGet">
+    <wsdl:operation name="GetDataLineColumn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取专线&lt;/h3&gt;&lt;p&gt; 输入参数：Key， ColumnCat  0=周边短线,1=国内长线,2=国际线路&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataLineColumnHttpGetIn" />
+      <wsdl:output message="tns:GetDataLineColumnHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， Z_Id=如果想全部专线获取则为空，如果想指定某条专线请多上一页中GetDataLineColumn方法里把专线列出后把专线里的z_Id值传到此项参数里 City=出发城市， State=-1=全部,0=正常,1=停止,2=客满,3=过期， Page=翻页页数， PageSize=当页显示条数&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineHttpGetIn" />
+      <wsdl:output message="tns:GetDataSetLineHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路行程&lt;/h3&gt;&lt;p&gt; L_Id (数据类型：String)&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineRoteHttpGetIn" />
+      <wsdl:output message="tns:GetDataSetLineRoteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID(注意如果有多个ID同时传递)，如果想查看某条线路的详细请返回上一页中GetDataSetLine方法里把线路列出后把线路里的L_Id值传到此项参数里&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineViewHttpGetIn" />
+      <wsdl:output message="tns:GetDataSetLineViewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID，CrCount=成人数，XhCount=儿童数，YCount=婴儿数，Or_GuestInfo=格式” AAA,1,1,111|BBB,2,2,222” 从左至右依次为”姓名,性别,成人/儿童,证件号码”性别----0无,1男,2女,成人/儿童-------0成人,1儿童,2婴儿 返回数据：XML(状态：&gt;=1000=成功,1=线路停止,2=客满,3=线路截止,4=客满,500=系统出错)</wsdl:documentation>
+      <wsdl:input message="tns:OrderPostHttpGetIn" />
+      <wsdl:output message="tns:OrderPostHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LineHttpPost">
+    <wsdl:operation name="GetDataLineColumn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取专线&lt;/h3&gt;&lt;p&gt; 输入参数：Key， ColumnCat  0=周边短线,1=国内长线,2=国际线路&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataLineColumnHttpPostIn" />
+      <wsdl:output message="tns:GetDataLineColumnHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， Z_Id=如果想全部专线获取则为空，如果想指定某条专线请多上一页中GetDataLineColumn方法里把专线列出后把专线里的z_Id值传到此项参数里 City=出发城市， State=-1=全部,0=正常,1=停止,2=客满,3=过期， Page=翻页页数， PageSize=当页显示条数&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineHttpPostIn" />
+      <wsdl:output message="tns:GetDataSetLineHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路行程&lt;/h3&gt;&lt;p&gt; L_Id (数据类型：String)&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineRoteHttpPostIn" />
+      <wsdl:output message="tns:GetDataSetLineRoteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID(注意如果有多个ID同时传递)，如果想查看某条线路的详细请返回上一页中GetDataSetLine方法里把线路列出后把线路里的L_Id值传到此项参数里&lt;br/&gt;&lt;br/&gt; 返回数据：DataSet</wsdl:documentation>
+      <wsdl:input message="tns:GetDataSetLineViewHttpPostIn" />
+      <wsdl:output message="tns:GetDataSetLineViewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;br /&gt;&lt;h3&gt;获取线路&lt;/h3&gt;&lt;p&gt; 输入参数：Key， L_Id=线路ID，CrCount=成人数，XhCount=儿童数，YCount=婴儿数，Or_GuestInfo=格式” AAA,1,1,111|BBB,2,2,222” 从左至右依次为”姓名,性别,成人/儿童,证件号码”性别----0无,1男,2女,成人/儿童-------0成人,1儿童,2婴儿 返回数据：XML(状态：&gt;=1000=成功,1=线路停止,2=客满,3=线路截止,4=客满,500=系统出错)</wsdl:documentation>
+      <wsdl:input message="tns:OrderPostHttpPostIn" />
+      <wsdl:output message="tns:OrderPostHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LineSoap" type="tns:LineSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDataLineColumn">
+      <soap:operation soapAction="http://www.ws.happytoo.cn/GetDataLineColumn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <soap:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <soap:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLineRote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <soap:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLineView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <soap:operation soapAction="http://www.ws.happytoo.cn/OrderPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LineSoap12" type="tns:LineSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDataLineColumn">
+      <soap12:operation soapAction="http://www.ws.happytoo.cn/GetDataLineColumn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <soap12:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <soap12:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLineRote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <soap12:operation soapAction="http://www.ws.happytoo.cn/GetDataSetLineView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <soap12:operation soapAction="http://www.ws.happytoo.cn/OrderPost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LineHttpGet" type="tns:LineHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetDataLineColumn">
+      <http:operation location="/GetDataLineColumn" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <http:operation location="/GetDataSetLine" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <http:operation location="/GetDataSetLineRote" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <http:operation location="/GetDataSetLineView" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <http:operation location="/OrderPost" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LineHttpPost" type="tns:LineHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetDataLineColumn">
+      <http:operation location="/GetDataLineColumn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLine">
+      <http:operation location="/GetDataSetLine" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineRote">
+      <http:operation location="/GetDataSetLineRote" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetLineView">
+      <http:operation location="/GetDataSetLineView" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPost">
+      <http:operation location="/OrderPost" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Line">
+    <wsdl:port name="LineSoap" binding="tns:LineSoap">
+      <soap:address location="http://www.ws.happytoo.cn:8016/line.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LineSoap12" binding="tns:LineSoap12">
+      <soap12:address location="http://www.ws.happytoo.cn:8016/line.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LineHttpGet" binding="tns:LineHttpGet">
+      <http:address location="http://www.ws.happytoo.cn:8016/line.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LineHttpPost" binding="tns:LineHttpPost">
+      <http:address location="http://www.ws.happytoo.cn:8016/line.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

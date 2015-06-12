@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95CC8E92-4FF8-4641-BD37-4B560BB3976A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyouSoft.DAL</RootNamespace>
+    <AssemblyName>EyouSoft.DAL</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountStructure\DProvider.cs" />
+    <Compile Include="AccountStructure\DSellers.cs" />
+    <Compile Include="HotelStructure\DHotel.cs" />
+    <Compile Include="HotelStructure\DHotelCity.cs" />
+    <Compile Include="HotelStructure\DHotelCityAreas.cs" />
+    <Compile Include="HotelStructure\DHotelLandMarks.cs" />
+    <Compile Include="HotelStructure\DHotelOrder.cs" />
+    <Compile Include="HotelStructure\DHotelRoomType.cs" />
+    <Compile Include="HotelStructure\DHotelTourCustoms.cs" />
+    <Compile Include="JiPiaoStructure\DJiPiaoDingDan.cs" />
+    <Compile Include="JiPiaoStructure\DJiPiaoHangKongGongSi.cs" />
+    <Compile Include="JiPiaoStructure\DJiPiaoSanZiMa.cs" />
+    <Compile Include="OtherStructure\DArticleClass.cs" />
+    <Compile Include="OtherStructure\DDiBiao.cs" />
+    <Compile Include="OtherStructure\DFeedback.cs" />
+    <Compile Include="OtherStructure\DKV.cs" />
+    <Compile Include="OtherStructure\DLink.cs" />
+    <Compile Include="OtherStructure\DMember.cs" />
+    <Compile Include="OtherStructure\DRouteTheme.cs" />
+    <Compile Include="OtherStructure\DSms.cs" />
+    <Compile Include="OtherStructure\DSysAdv.cs" />
+    <Compile Include="OtherStructure\DSysAreaInfo.cs" />
+    <Compile Include="OtherStructure\DSysLogHandle.cs" />
+    <Compile Include="OtherStructure\DSysLogLogin.cs" />
+    <Compile Include="OtherStructure\DSystemLandMark.cs" />
+    <Compile Include="OtherStructure\DTatolProduct.cs" />
+    <Compile Include="OtherStructure\DTravelArticle.cs" />
+    <Compile Include="OtherStructure\DTravelStrategy.cs" />
+    <Compile Include="OtherStructure\DTravelStrategyTheme.cs" />
+    <Compile Include="OtherStructure\DWebmaster.cs" />
+    <Compile Include="OtherStructure\DOnLinePay.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QianZhengStructure\DQianZheng.cs" />
+    <Compile Include="QianZhengStructure\DQianZhengDingDan.cs" />
+    <Compile Include="QianZhengStructure\DQianZhengGuoJia.cs" />
+    <Compile Include="QianZhengStructure\DQianZhengGys.cs" />
+    <Compile Include="ScenicStructure\DScenicArea.cs" />
+    <Compile Include="ScenicStructure\DScenicTickets.cs" />
+    <Compile Include="XianLuStructure\DOrder.cs" />
+    <Compile Include="XianLuStructure\DXianLu.cs" />
+    <Compile Include="MoneyStructure\DChongZhi.cs" />
+    <Compile Include="MoneyStructure\DTiXian.cs" />
+    <Compile Include="MoneyStructure\DFanLi.cs" />
+    <Compile Include="ZuCheStructure\DZuChe.cs" />
+    <Compile Include="ZuCheStructure\DZuCheOrder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyouSoft.IDAL\EyouSoft.IDAL.csproj">
+      <Project>{1188435F-671E-4DCE-97AA-441CC05046C1}</Project>
+      <Name>EyouSoft.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Model\EyouSoft.Model.csproj">
+      <Project>{2CC3A201-7D24-4761-9C60-F107F21FD407}</Project>
+      <Name>EyouSoft.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyouSoft.Toolkit\EyouSoft.Toolkit.csproj">
+      <Project>{F643FD26-4C9B-40C7-8849-0FED59701419}</Project>
+      <Name>EyouSoft.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{14E7FAEF-BCFA-4058-BA10-37090712CDF2}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HotelStructure\DHotel2.cs" />
+    <Compile Include="HotelStructure\DHotelImg.cs" />
+    <Compile Include="HotelStructure\DHotelRoomType2.cs" />
+    <Compile Include="CityStructure\Interface\DHotel_City.cs" />
+    <Compile Include="HotelStructure\DHotelCity2.cs" />
+    <Compile Include="HotelStructure\DHotelRoomRate.cs" />
+    <Compile Include="HotelStructure\DHotelOrder2.cs" />
+    <Compile Include="HotelStructure\DHotelOrderContact.cs" />
+    <Compile Include="HotelStructure\DHotelOrderRoomRateId.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_HotelInfo.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_HotelAmenity.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_HotelTraffic.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_Landmark.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_RoomType.cs" />
+    <Compile Include="HotelStructure\Interface\DHotel_RoomRate.cs" />
+    <Compile Include="JPStructure\DDingDan.cs" />
+    <Compile Include="JPStructure\DJiPiao.cs" />
+    <Compile Include="MallStructure\DDiZhi.cs" />
+    <Compile Include="MallStructure\DLianMeng.cs" />
+    <Compile Include="MallStructure\DShangChengDingDan.cs" />
+    <Compile Include="MallStructure\DShangChengXiLie.cs" />
+    <Compile Include="MallStructure\DShangChengShangPin.cs" />
+    <Compile Include="MemberStructure\DChongZhi.cs" />
+    <Compile Include="MemberStructure\DMember.cs" />
+    <Compile Include="MemberStructure\DMember2.cs" />
+    <Compile Include="MoneyStructure\DAccount.cs" />
+    <Compile Include="MoneyStructure\DApplyTiXian.cs" />
+    <Compile Include="OtherStructure\DApply.cs" />
+    <Compile Include="OtherStructure\DChongZhi.cs" />
+    <Compile Include="OtherStructure\DDingDan.cs" />
+    <Compile Include="OtherStructure\DDingDanFanLi.cs" />
+    <Compile Include="OtherStructure\DJiaoYiMingXi.cs" />
+    <Compile Include="OtherStructure\DJiFen.cs" />
+    <Compile Include="OtherStructure\DPayMents.cs" />
+    <Compile Include="OtherStructure\DTuanGou.cs" />
+    <Compile Include="OtherStructure\DTuanGouDingDan.cs" />
+    <Compile Include="OtherStructure\DTuiGuang.cs" />
+    <Compile Include="OtherStructure\DXiaJiFenXiaoTiCheng.cs" />
+    <Compile Include="OtherStructure\DYanZhengMa.cs" />
+    <Compile Include="OtherStructure\DYuMing.cs" />
+    <Compile Include="OtherStructure\DZuTuan.cs" />
+    <Compile Include="ScenicStructure\DALBase.cs" />
+    <Compile Include="ScenicStructure\DScenicAreaImg.cs" />
+    <Compile Include="ScenicStructure\DScenicAreaOrder.cs" />
+    <Compile Include="ScenicStructure\DScenicTickets2.cs" />
+    <Compile Include="ScenicStructure\DScenicArea2.cs" />
+    <Compile Include="SystemStructure\DFeeSettings.cs" />
+    <Compile Include="SystemStructure\DSupplier.cs" />
+    <Compile Include="SystemStructure\DSysCity.cs" />
+    <Compile Include="SystemStructure\DSysProvince.cs" />
+    <Compile Include="WeiXin\DWeiXin.cs" />
+    <Compile Include="XianLuStructure\DZiZuTuan.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

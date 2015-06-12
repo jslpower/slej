@@ -1,0 +1,21 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body xml:lang="ace">
+    <textarea id=d1 onclick="alert(this.value+','+this.innerHTML)" value="1223"></textarea>
+
+    <select>
+    <option ><a href="1.htm">dd</a></option>
+    </select>
+	</body>
+    
+</html>
+<script>
+    onload = function () {
+        document.getElementById('d1').innerHTML = '<span>ddd';
+        alert(document.getElementById('d1').value);
+
+    };
+</script>

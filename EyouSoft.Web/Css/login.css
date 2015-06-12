@@ -1,0 +1,22 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+body{background:#2375d9 url(../images/loginbg1.gif) repeat-x top left;font-family:Arial, simsun, sans-serif,"宋体"; font-size:12px; line-height:1.5;}
+ul,li{ list-style:none;}
+input,select{vertical-align:middle;font-size:100%;}
+a{ text-decoration:none;}
+
+.login_box{ background:url(../images/login_bg.jpg) no-repeat center;width:565px; height:422px; padding-top:88px; padding-left:280px; margin:66px auto 0 auto; }
+.login_logo{ padding-left:27px; height:50px;}
+.login_form{ padding-top:55px;}
+.login_form li{ position:relative;width:229px; height:35px; padding:2px 4px 2px 56px; margin-bottom:13px; background:url(../images/u-libg.gif) no-repeat;}
+.login_form li em{ position:absolute; left:0; top:0; width:43px; height:39px; font-style:normal;}
+.login_form li em.name{background:url(../images/u-name.gif) no-repeat;}
+.login_form li em.mima{background:url(../images/u-mima.gif) no-repeat;}
+.login_form li input{width:229px; border:none 0;height:35px; line-height:35px; color:#979797;}
+.login_btn{ padding-left:52px; padding-top:14px; height:32px;}
+.login_btn a{ display:inline-block;width:86px; height:32px; line-height:32px; background:url(../images/u-btn.gif) no-repeat;font-size:14px; font-weight:bold; text-align:center; margin-right:12px;}
+.login_btn a.btn01{ background-position:0 0; color:#fff;}
+.login_btn a.btn02{ background-position:-98px 0; color:#666;}
+
+.login_bot{width:555px; margin:50px auto 20px auto; color:#ededed; text-align:center;}

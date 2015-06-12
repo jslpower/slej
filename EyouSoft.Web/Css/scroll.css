@@ -1,0 +1,8 @@
+﻿html,body,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,table,th,td,fieldset,form,input,select,textarea,hr,blockquote,pre{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:bold;line-height:2;}
+ul,ol,dl{list-style:none;}
+/* 横向滚动
+------------------------------ */
+.R_side01L .b_imglist{overflow:hidden;width:9999px;}
+
+

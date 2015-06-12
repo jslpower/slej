@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="startQuartz" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="initcron" /> -->
+				<ref bean="updatecron" />
+				<!-- <ref bean="clearcron" /> -->
+				<!-- <ref bean="updateroomtypecron" /> -->
+				<!-- <ref bean="updateroomratecron" /> -->
+			</list>
+		</property>
+	</bean>
+	<!--======================init枚举类型================================================== -->
+	<bean id="inittype_citylandmark"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_CITYLANDMARK">
+		</property>
+	</bean>
+	<bean id="inittype_hotelinfo"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_HOTELINFO">
+		</property>
+	</bean>
+	<bean id="inittype_hotelinfo_planrate"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_HOTELINFO_PLANRATE">
+		</property>
+	</bean>
+	<bean id="inittype_citylandmark_hotelinfo"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_CITYLANDMARK_HOTELINFO">
+		</property>
+	</bean>
+	<bean id="inittype_citylandmark_hotelinfo_planrate"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_CITYLANDMARK_HOTELINFO_PLANRATE">
+		</property>
+	</bean>
+	<bean id="inittype_planrate"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITTYPE.INITTYPE_PLANRATE">
+		</property>
+	</bean>
+	<bean id="initmode_include"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITMODE.INITMODE_INCLUDE">
+		</property>
+	</bean>
+	<bean id="initmode_exclude"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.travelsky.hotelbesdk.cache.job.InitCacheJob$ENUM_INITMODE.INITMODE_EXCLUDE">
+		</property>
+	</bean>
+</beans> 

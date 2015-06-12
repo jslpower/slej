@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--=========================== 一个时钟任务 ============================= -->
+	<bean id="updateCacheJob" class="com.travelsky.hotelbeloader.tools.UpdateCacheTool">
+		<property name="span">
+			<value>1440</value><!-- 以小时为单位 -->
+		</property>
+	</bean>
+	<bean id="updateCacheTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="updateCacheJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<bean id="updatecron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="updateCacheTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 23 * * ?</value>
+		</property>
+	</bean>
+</beans> 

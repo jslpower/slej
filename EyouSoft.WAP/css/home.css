@@ -1,0 +1,80 @@
+/****首页******/
+.index_head{ height:65px; padding:0 10px 10px 70px; background:#f5f5f5; position:relative;}
+.logo{ position:absolute; left:5px; top:19px; width:60px; height:37px;}
+.logo img{width:60px; height:37px;}
+.head_m{ position:relative;width:100%;top:5px;}
+.i_tel{width:27px; height:32px; cursor:pointer;position:absolute; right:0; top:0;}
+.i_tel:before{ background-position:-94px -76px; width:22px; height:22px; position:absolute; right:0; top:5px; content:"";}
+.head_m .search{ height:31px;}
+.head_m .search_form{height:25px; line-height:25px;}
+.head_m .input_txt{ height:23px;}
+.head_m .icon_search_i{ background-position:0 -76px; height:23px;}
+.head_title{ line-height:32px; text-align:center;}
+@media screen and (max-width:360px){
+.contact li,.contact_more li,.nav_list li p,.cuxiao .car_banner_txt,.foot_box{ font-size:12px;}
+	}
+.foot_box .font_gray{ font-size:11px; color:#E7E1E1;}
+
+.msg_box{ overflow:hidden;width:100%;}
+.contact li{width:50%;float:left; text-align:left; position:relative; height:40px; padding-left:36px;}
+.contact li span{width:31px; height:31px; border:#fff solid 1px; overflow:hidden; position:absolute; left:0; top:3px;}
+.contact li span img{width:31px; height:31px; }
+.msg_box li em{ color:#f77408;}
+.contact{ padding-left:10px;line-height:40px; overflow:hidden;position:relative;background:#ebebeb; border-top:#d8d8d8 solid 1px; border-bottom:#d8d8d8 solid 1px;}
+.contact_more{ overflow:hidden;padding-left:10px;line-height:30px; background:#fff; line-height:30px;border-bottom:#d8d8d8 solid 1px;}
+.contact_more ul{width:50%; float:left;}
+
+.nav_list{padding-right:10px;background:#e4e4e4;}
+.nav_list:after{clear: both; content: " ";display: block;height: 0;overflow: hidden;}
+.nav_list li{ height:100px; float:left; text-align:center; position:relative;padding-left:10px;box-sizing:border-box; color:#fff; margin-bottom:10px;}
+.nav_list li div:before{background-image:url(../images/nav_ico.png); background-repeat:no-repeat;width:40px; height:40px; content:""; position:absolute;}
+.nav_list li.wid3{ width:30%;}
+.nav_list li.wid4{width:40%;}
+.nav_list li.wid5{width:50%;}
+.nav_list li.wid6{ width:60%;}
+.nav_list li.wid7{ width:70%;}
+.nav_list li.wid{width:100%;}
+.nav_gn,.nav_cj,.nav_jp,.nav_car,.nav_zb,.nav_jq,.nav_e,.nav_hotel,.nav_zt,.nav_mall{height:55px;padding-top:45px;border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;}
+.nav_gn:before,.nav_zb:before,.nav_jq:before,.nav_cj:before,.nav_e:before,.nav_hotel:before,.nav_jp:before,.nav_car:before,.nav_zt:before,.nav_mall:before{left:50%; margin-left:-15px;top:5px;}
+.nav_gn{ background:#22ac38;}
+.nav_gn:before{ background-position:-5px 0;}
+.nav_zb{ background:#62c500;}
+.nav_zb:before{ background-position:-176px 0;}
+.nav_jq{ background:#3d84ff;}
+.nav_jq:before{ background-position:-304px -2px;}
+.nav_cj{ background:#5ebe00;}
+.nav_cj:before{ background-position:-5px -109px;}
+.nav_e{ background:#d46868;}
+.nav_e:before{ background:-176px -111px;}
+.nav_hotel{ background:#ff6073;}
+.nav_hotel:before{ background:-307px -109px;}
+.nav_jp{ background:#3d98ff;}
+.nav_jp:before{ background:-6px -220px;}
+.nav_zt{ background:#3ad4ca;}
+.nav_zt:before{ background:-178px -244px;}
+.nav_car{ background:#82a8ff;}
+.nav_car:before{ background:-5px -328px;}
+.nav_mall{ background:#ff7081;}
+.nav_mall:before{ background:-176px -353px;}
+
+
+.cuxiao{ overflow:hidden;}
+.cuxiao_t{ height:50px; line-height:50px; background:#fff; position:relative; margin:0 10px;}
+.cuxiao_t img{ padding-left:10px; padding-top:5px;}
+.font_time{ color:#fff000;}
+.cuxiao .R_jiantou:after{ margin-top:-4px;}
+.cuxiao .car_banner_txt{ text-align:center;}
+.cuxiao .car_banner_txt{ padding:0;}
+
+.home_tab{clear:both;}
+.home_TabTitle{ width:100%;height:38px; box-sizing:border-box; padding:0 10px;}
+.home_TabTitle ul{ background:#fff; border-bottom:#f77408 solid 2px; height:36px;}
+.home_TabTitle li{ float:left;height:36px;width:auto;}
+.home_TabTitle li a{ display:block;color:#252525; background:#fff;padding:0 8px;height:36px;line-height:36px;}
+.home_TabTitle li.active a{background:#f77408; color:#fff;}
+.home_TabContent{width:100%;}
+
+.city_bg{ background:#018bd3; color:#fff; vertical-align:middle; height:18px; line-height:18px; display:inline-block; margin-left:10px; padding:0 10px;}
+.foot_box{ background:#fff; padding:10px 0 10px 10px; overflow:hidden;}
+.foot_menu li{ height:31px; width:20%; box-sizing:border-box;line-height:31px; text-align:center; background:#f77408; float:left; border-right:#fff solid 10px;display:inline; color:#fff;}
+.foot_menu li a{ color:#fff;}

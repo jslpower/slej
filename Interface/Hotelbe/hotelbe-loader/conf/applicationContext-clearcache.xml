@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--=========================== 一个时钟任务 ============================= -->
+	<bean id="clearCacheJob" class="com.travelsky.hotelbeloader.tools.ClearCacheTool">
+		<property name="span"><!-- 以天数为单位 -->
+			<value>2</value>
+		</property>
+	</bean>
+	<bean id="clearCacheTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="clearCacheJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<bean id="clearcron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="clearCacheTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 23 * * ?</value>
+		</property>
+	</bean>
+</beans> 

@@ -1,0 +1,337 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.Web", "EyouSoft.Web\EyouSoft.Web.csproj", "{FA08694F-9F02-4DE4-9A4F-BFC36455D115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.Model", "EyouSoft.Model\EyouSoft.Model.csproj", "{2CC3A201-7D24-4761-9C60-F107F21FD407}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.IDAL", "EyouSoft.IDAL\EyouSoft.IDAL.csproj", "{1188435F-671E-4DCE-97AA-441CC05046C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.DAL", "EyouSoft.DAL\EyouSoft.DAL.csproj", "{95CC8E92-4FF8-4641-BD37-4B560BB3976A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.BLL", "EyouSoft.BLL\EyouSoft.BLL.csproj", "{93ED3B18-E870-4358-AE68-F4B6A43DC940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.Document", "EyouSoft.Document\EyouSoft.Document.csproj", "{953A0AC3-2115-481C-A58E-B3949F3A52E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.Toolkit", "EyouSoft.Toolkit\EyouSoft.Toolkit.csproj", "{F643FD26-4C9B-40C7-8849-0FED59701419}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0953418F-4565-4DFC-A788-C886E7001696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlLibrary", "ControlLibrary\ControlLibrary.csproj", "{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.Security.Membership", "EyouSoft.Security.Membership\EyouSoft.Security.Membership.csproj", "{AFA01A24-E10D-4B4C-BC41-C88537B7B314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.BackgroundServices", "EyouSoft.BackgroundServices\EyouSoft.BackgroundServices.csproj", "{1B911605-491C-43E0-BD08-841DF5128840}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{53238C6F-C1DB-4DB9-BDEE-381D533EE181}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hotelbe", "Hotelbe", "{972CE16E-1504-4B68-A699-183E7BC67C91}"
+	ProjectSection(SolutionItems) = preProject
+		Interface\Hotelbe\Antlr3.Runtime.dll = Interface\Hotelbe\Antlr3.Runtime.dll
+		Interface\Hotelbe\hotelbe-sdk-pure.dll = Interface\Hotelbe\hotelbe-sdk-pure.dll
+		Interface\Hotelbe\hotelbe-sdk.dll = Interface\Hotelbe\hotelbe-sdk.dll
+		Interface\Hotelbe\hotelbe-sdk3.dll = Interface\Hotelbe\hotelbe-sdk3.dll
+		Interface\Hotelbe\Iesi.Collections.dll = Interface\Hotelbe\Iesi.Collections.dll
+		Interface\Hotelbe\LinFu.DynamicProxy.dll = Interface\Hotelbe\LinFu.DynamicProxy.dll
+		Interface\Hotelbe\log4net.dll = Interface\Hotelbe\log4net.dll
+		Interface\Hotelbe\NHibernate.ByteCode.LinFu.dll = Interface\Hotelbe\NHibernate.ByteCode.LinFu.dll
+		Interface\Hotelbe\NHibernate.dll = Interface\Hotelbe\NHibernate.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A9EC20A1-5B4B-4D48-AB10-F37AF3BB6811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.InterfaceLib", "EyouSoft.InterfaceLib\EyouSoft.InterfaceLib.csproj", "{399831EC-930B-4867-AFF1-473E8D858D4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hotelbe-loader", "hotelbe-loader", "{A77BA4D4-F0EB-404A-8D2E-1E5B4E8372ED}"
+	ProjectSection(SolutionItems) = preProject
+		Interface\Hotelbe\hotelbe-loader\auto-run.bat = Interface\Hotelbe\hotelbe-loader\auto-run.bat
+		Interface\Hotelbe\hotelbe-loader\auto-run.sh = Interface\Hotelbe\hotelbe-loader\auto-run.sh
+		Interface\Hotelbe\hotelbe-loader\manual-run.bat = Interface\Hotelbe\hotelbe-loader\manual-run.bat
+		Interface\Hotelbe\hotelbe-loader\manual-run.sh = Interface\Hotelbe\hotelbe-loader\manual-run.sh
+		Interface\Hotelbe\hotelbe-loader\命令.txt = Interface\Hotelbe\hotelbe-loader\命令.txt
+		Interface\Hotelbe\hotelbe-loader\缓存表.sql = Interface\Hotelbe\hotelbe-loader\缓存表.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{663AF5EC-D4FB-475A-9E79-ECAAC030DDC5}"
+	ProjectSection(SolutionItems) = preProject
+		Interface\Hotelbe\hotelbe-loader\lib\ant-1.6.2.jar = Interface\Hotelbe\hotelbe-loader\lib\ant-1.6.2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\antlr-2.7.6.jar = Interface\Hotelbe\hotelbe-loader\lib\antlr-2.7.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\aopalliance-1.0.jar = Interface\Hotelbe\hotelbe-loader\lib\aopalliance-1.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\bsh-2.0b4.jar = Interface\Hotelbe\hotelbe-loader\lib\bsh-2.0b4.jar
+		Interface\Hotelbe\hotelbe-loader\lib\cglib-nodep-2.2.jar = Interface\Hotelbe\hotelbe-loader\lib\cglib-nodep-2.2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\classworlds-1.1-alpha-2.jar = Interface\Hotelbe\hotelbe-loader\lib\classworlds-1.1-alpha-2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\client-4.2.3.jar = Interface\Hotelbe\hotelbe-loader\lib\client-4.2.3.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-beanutils-1.7.0.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-beanutils-1.7.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-cli-20040117.000000.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-cli-20040117.000000.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-codec-1.6.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-codec-1.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-collections-3.1.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-collections-3.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-lang-2.5.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-lang-2.5.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-logging-1.1.1.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-logging-1.1.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\commons-logging-api-1.1.jar = Interface\Hotelbe\hotelbe-loader\lib\commons-logging-api-1.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\date4j-1.0.0.jar = Interface\Hotelbe\hotelbe-loader\lib\date4j-1.0.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\dom4j-1.6.1.jar = Interface\Hotelbe\hotelbe-loader\lib\dom4j-1.6.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\ezmorph-1.0.3.jar = Interface\Hotelbe\hotelbe-loader\lib\ezmorph-1.0.3.jar
+		Interface\Hotelbe\hotelbe-loader\lib\freemarker-2.3.8.jar = Interface\Hotelbe\hotelbe-loader\lib\freemarker-2.3.8.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hibernate-commons-annotations-3.2.0.Final.jar = Interface\Hotelbe\hotelbe-loader\lib\hibernate-commons-annotations-3.2.0.Final.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hibernate-core-3.6.4.Final.jar = Interface\Hotelbe\hotelbe-loader\lib\hibernate-core-3.6.4.Final.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hibernate-jpa-2.0-api-1.0.0.Final.jar = Interface\Hotelbe\hotelbe-loader\lib\hibernate-jpa-2.0-api-1.0.0.Final.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hibernate-tools-3.2.4.GA.jar = Interface\Hotelbe\hotelbe-loader\lib\hibernate-tools-3.2.4.GA.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hotelbe-cache-sdk-6.0.4.jar = Interface\Hotelbe\hotelbe-loader\lib\hotelbe-cache-sdk-6.0.4.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hotelbe-loader-1.0.0.jar = Interface\Hotelbe\hotelbe-loader\lib\hotelbe-loader-1.0.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hotelbe-map-0.0.1.jar = Interface\Hotelbe\hotelbe-loader\lib\hotelbe-map-0.0.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\hotelbe-pure-sdk-6.0.4.jar = Interface\Hotelbe\hotelbe-loader\lib\hotelbe-pure-sdk-6.0.4.jar
+		Interface\Hotelbe\hotelbe-loader\lib\httpcore-4.2.2.jar = Interface\Hotelbe\hotelbe-loader\lib\httpcore-4.2.2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\httpmime-4.2.3.jar = Interface\Hotelbe\hotelbe-loader\lib\httpmime-4.2.3.jar
+		Interface\Hotelbe\hotelbe-loader\lib\javassist-3.11.0.GA.jar = Interface\Hotelbe\hotelbe-loader\lib\javassist-3.11.0.GA.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jdbcdriver-1.0.0.jar = Interface\Hotelbe\hotelbe-loader\lib\jdbcdriver-1.0.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jdom-1.1.jar = Interface\Hotelbe\hotelbe-loader\lib\jdom-1.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jettison-1.2.jar = Interface\Hotelbe\hotelbe-loader\lib\jettison-1.2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\joda-time-1.6.jar = Interface\Hotelbe\hotelbe-loader\lib\joda-time-1.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\json-20080701.jar = Interface\Hotelbe\hotelbe-loader\lib\json-20080701.jar
+		Interface\Hotelbe\hotelbe-loader\lib\json-lib-2.1-jdk15.jar = Interface\Hotelbe\hotelbe-loader\lib\json-lib-2.1-jdk15.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jta-1.1.jar = Interface\Hotelbe\hotelbe-loader\lib\jta-1.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jtidy-4aug2000r7-dev.jar = Interface\Hotelbe\hotelbe-loader\lib\jtidy-4aug2000r7-dev.jar
+		Interface\Hotelbe\hotelbe-loader\lib\jtidy-r8-20060801.jar = Interface\Hotelbe\hotelbe-loader\lib\jtidy-r8-20060801.jar
+		Interface\Hotelbe\hotelbe-loader\lib\junit-3.8.1.jar = Interface\Hotelbe\hotelbe-loader\lib\junit-3.8.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\kxml2-min-2.3.0.jar = Interface\Hotelbe\hotelbe-loader\lib\kxml2-min-2.3.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\log4j-1.2.17.jar = Interface\Hotelbe\hotelbe-loader\lib\log4j-1.2.17.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-ant-tasks-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-ant-tasks-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-artifact-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-artifact-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-artifact-manager-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-artifact-manager-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-error-diagnostics-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-error-diagnostics-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-model-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-model-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-plugin-registry-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-plugin-registry-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-profile-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-profile-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-project-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-project-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-repository-metadata-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-repository-metadata-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\maven-settings-2.0.9.jar = Interface\Hotelbe\hotelbe-loader\lib\maven-settings-2.0.9.jar
+		Interface\Hotelbe\hotelbe-loader\lib\mysql-connector-java-5.1.21.jar = Interface\Hotelbe\hotelbe-loader\lib\mysql-connector-java-5.1.21.jar
+		Interface\Hotelbe\hotelbe-loader\lib\plexus-container-default-1.0-alpha-9-stable-1.jar = Interface\Hotelbe\hotelbe-loader\lib\plexus-container-default-1.0-alpha-9-stable-1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\plexus-utils-1.5.1.jar = Interface\Hotelbe\hotelbe-loader\lib\plexus-utils-1.5.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\quartz-1.8.4.jar = Interface\Hotelbe\hotelbe-loader\lib\quartz-1.8.4.jar
+		Interface\Hotelbe\hotelbe-loader\lib\slf4j-api-1.6.2.jar = Interface\Hotelbe\hotelbe-loader\lib\slf4j-api-1.6.2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\slf4j-log4j12-1.6.6.jar = Interface\Hotelbe\hotelbe-loader\lib\slf4j-log4j12-1.6.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\spring-2.5.6.jar = Interface\Hotelbe\hotelbe-loader\lib\spring-2.5.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\spring-beans-2.5.6.jar = Interface\Hotelbe\hotelbe-loader\lib\spring-beans-2.5.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\spring-context-2.5.6.jar = Interface\Hotelbe\hotelbe-loader\lib\spring-context-2.5.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\spring-context-support-2.5.6.jar = Interface\Hotelbe\hotelbe-loader\lib\spring-context-support-2.5.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\spring-core-2.5.6.jar = Interface\Hotelbe\hotelbe-loader\lib\spring-core-2.5.6.jar
+		Interface\Hotelbe\hotelbe-loader\lib\sqljdbc4-1.0.0.jar = Interface\Hotelbe\hotelbe-loader\lib\sqljdbc4-1.0.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\stax-1.2.0.jar = Interface\Hotelbe\hotelbe-loader\lib\stax-1.2.0.jar
+		Interface\Hotelbe\hotelbe-loader\lib\stax-api-1.0.1.jar = Interface\Hotelbe\hotelbe-loader\lib\stax-api-1.0.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\wagon-file-1.0-beta-2.jar = Interface\Hotelbe\hotelbe-loader\lib\wagon-file-1.0-beta-2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\wagon-http-lightweight-1.0-beta-2.jar = Interface\Hotelbe\hotelbe-loader\lib\wagon-http-lightweight-1.0-beta-2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\wagon-http-shared-1.0-beta-2.jar = Interface\Hotelbe\hotelbe-loader\lib\wagon-http-shared-1.0-beta-2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\wagon-provider-api-1.0-beta-2.jar = Interface\Hotelbe\hotelbe-loader\lib\wagon-provider-api-1.0-beta-2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\wstx-asl-3.2.7.jar = Interface\Hotelbe\hotelbe-loader\lib\wstx-asl-3.2.7.jar
+		Interface\Hotelbe\hotelbe-loader\lib\xml-apis-1.0.b2.jar = Interface\Hotelbe\hotelbe-loader\lib\xml-apis-1.0.b2.jar
+		Interface\Hotelbe\hotelbe-loader\lib\xmlpull-1.1.3.1.jar = Interface\Hotelbe\hotelbe-loader\lib\xmlpull-1.1.3.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\xom-1.1.jar = Interface\Hotelbe\hotelbe-loader\lib\xom-1.1.jar
+		Interface\Hotelbe\hotelbe-loader\lib\xpp3_min-1.1.4c.jar = Interface\Hotelbe\hotelbe-loader\lib\xpp3_min-1.1.4c.jar
+		Interface\Hotelbe\hotelbe-loader\lib\xstream-1.0.10.jar = Interface\Hotelbe\hotelbe-loader\lib\xstream-1.0.10.jar
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "conf", "conf", "{E5EC4D84-4F59-4BAF-A132-A0CF389BBFA2}"
+	ProjectSection(SolutionItems) = preProject
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-clearcache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-clearcache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-initcache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-initcache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updatecache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updatecache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updatehotelscache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updatehotelscache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updateroomratecache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updateroomratecache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updateroomtypecache.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext-updateroomtypecache.xml
+		Interface\Hotelbe\hotelbe-loader\conf\applicationContext.xml = Interface\Hotelbe\hotelbe-loader\conf\applicationContext.xml
+		Interface\Hotelbe\hotelbe-loader\conf\hibernate.cfg.xml = Interface\Hotelbe\hotelbe-loader\conf\hibernate.cfg.xml
+		Interface\Hotelbe\hotelbe-loader\conf\hotelbe.properties = Interface\Hotelbe\hotelbe-loader\conf\hotelbe.properties
+		Interface\Hotelbe\hotelbe-loader\conf\log4j.properties = Interface\Hotelbe\hotelbe-loader\conf\log4j.properties
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_XiaLu", "ConsoleApp\ConsoleApp_XiaLu.csproj", "{3DE2BFCF-1F13-468D-8C18-BD72BBBE20ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_HotelDataImporter", "ConsoleApp_HotelDataImporter\ConsoleApp_HotelDataImporter.csproj", "{CF6FCC92-D5AE-4F4C-90C0-2332B071944B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linq", "Linq\Linq.csproj", "{14E7FAEF-BCFA-4058-BA10-37090712CDF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hotelbe-sdk-pure", "Interface\Hotelbe\hotelbe-sdk-pure\hotelbe-sdk-pure.csproj", "{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyouSoft.WAP", "EyouSoft.WAP\EyouSoft.WAP.csproj", "{427471DA-ED4F-4D57-B512-3E2E9CBC3502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeixinMpSdk", "ClassLibrary1\WeixinMpSdk.csproj", "{C3B1B2D5-8134-44DC-BCD8-F72D5FF34AAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlipayLibrary", "AlipayLibrary\AlipayLibrary.csproj", "{8FC870CE-B92E-4719-8722-C36FB4E5ECC0}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 20
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = Common\\Common.csproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection1 = Common\\
+		SccProjectUniqueName2 = ControlLibrary\\ControlLibrary.csproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection2 = ControlLibrary\\
+		SccProjectUniqueName3 = EyouSoft.BackgroundServices\\EyouSoft.BackgroundServices.csproj
+		SccLocalPath3 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection3 = EyouSoft.BackgroundServices\\
+		SccProjectUniqueName4 = EyouSoft.BLL\\EyouSoft.BLL.csproj
+		SccLocalPath4 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection4 = EyouSoft.BLL\\
+		SccProjectUniqueName5 = EyouSoft.DAL\\EyouSoft.DAL.csproj
+		SccLocalPath5 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection5 = EyouSoft.DAL\\
+		SccProjectUniqueName6 = EyouSoft.Document\\EyouSoft.Document.csproj
+		SccLocalPath6 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection6 = EyouSoft.Document\\
+		SccProjectUniqueName7 = EyouSoft.IDAL\\EyouSoft.IDAL.csproj
+		SccLocalPath7 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection7 = EyouSoft.IDAL\\
+		SccProjectUniqueName8 = EyouSoft.Security.Membership\\EyouSoft.Security.Membership.csproj
+		SccLocalPath8 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection8 = EyouSoft.Security.Membership\\
+		SccProjectUniqueName9 = EyouSoft.Toolkit\\EyouSoft.Toolkit.csproj
+		SccLocalPath9 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection9 = EyouSoft.Toolkit\\
+		SccProjectUniqueName10 = EyouSoft.Web\\EyouSoft.Web.csproj
+		SccLocalPath10 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection10 = EyouSoft.Web\\
+		SccProjectUniqueName11 = EyouSoft.Model\\EyouSoft.Model.csproj
+		SccProjectName11 = \u0022$/杭州金奥.root/杭州金奥/EyouSoft.Model\u0022,\u0020PKAAAAAA
+		SccLocalPath11 = EyouSoft.Model
+		CanCheckoutShared = false
+		SccProjectUniqueName12 = EyouSoft.InterfaceLib\\EyouSoft.InterfaceLib.csproj
+		SccLocalPath12 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection12 = EyouSoft.InterfaceLib\\
+		SccProjectUniqueName13 = ConsoleApp\\ConsoleApp_XiaLu.csproj
+		SccLocalPath13 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection13 = ConsoleApp\\
+		SccProjectUniqueName14 = ConsoleApp_HotelDataImporter\\ConsoleApp_HotelDataImporter.csproj
+		SccLocalPath14 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection14 = ConsoleApp_HotelDataImporter\\
+		SccProjectUniqueName15 = Linq\\Linq.csproj
+		SccLocalPath15 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection15 = Linq\\
+		SccProjectUniqueName16 = Interface\\Hotelbe\\hotelbe-sdk-pure\\hotelbe-sdk-pure.csproj
+		SccProjectTopLevelParentUniqueName16 = 杭州金奥.sln
+		SccProjectName16 = \u0022$/杭州金奥.root/杭州金奥/Interface/Hotelbe/hotelbe-sdk-pure\u0022,\u0020NGFAAAAA
+		SccLocalPath16 = Interface\\Hotelbe\\hotelbe-sdk-pure
+		CanCheckoutShared = false
+		SccProjectUniqueName17 = EyouSoft.WAP\\EyouSoft.WAP.csproj
+		SccLocalPath17 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection17 = EyouSoft.WAP\\
+		SccProjectUniqueName18 = ClassLibrary1\\WeixinMpSdk.csproj
+		SccLocalPath18 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection18 = ClassLibrary1\\
+		SccProjectUniqueName19 = AlipayLibrary\\AlipayLibrary.csproj
+		SccLocalPath19 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection19 = AlipayLibrary\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA08694F-9F02-4DE4-9A4F-BFC36455D115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA08694F-9F02-4DE4-9A4F-BFC36455D115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA08694F-9F02-4DE4-9A4F-BFC36455D115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA08694F-9F02-4DE4-9A4F-BFC36455D115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC3A201-7D24-4761-9C60-F107F21FD407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC3A201-7D24-4761-9C60-F107F21FD407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC3A201-7D24-4761-9C60-F107F21FD407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC3A201-7D24-4761-9C60-F107F21FD407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1188435F-671E-4DCE-97AA-441CC05046C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1188435F-671E-4DCE-97AA-441CC05046C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1188435F-671E-4DCE-97AA-441CC05046C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1188435F-671E-4DCE-97AA-441CC05046C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95CC8E92-4FF8-4641-BD37-4B560BB3976A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95CC8E92-4FF8-4641-BD37-4B560BB3976A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95CC8E92-4FF8-4641-BD37-4B560BB3976A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95CC8E92-4FF8-4641-BD37-4B560BB3976A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93ED3B18-E870-4358-AE68-F4B6A43DC940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93ED3B18-E870-4358-AE68-F4B6A43DC940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93ED3B18-E870-4358-AE68-F4B6A43DC940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93ED3B18-E870-4358-AE68-F4B6A43DC940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{953A0AC3-2115-481C-A58E-B3949F3A52E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953A0AC3-2115-481C-A58E-B3949F3A52E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953A0AC3-2115-481C-A58E-B3949F3A52E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953A0AC3-2115-481C-A58E-B3949F3A52E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F643FD26-4C9B-40C7-8849-0FED59701419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F643FD26-4C9B-40C7-8849-0FED59701419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F643FD26-4C9B-40C7-8849-0FED59701419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F643FD26-4C9B-40C7-8849-0FED59701419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0953418F-4565-4DFC-A788-C886E7001696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0953418F-4565-4DFC-A788-C886E7001696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0953418F-4565-4DFC-A788-C886E7001696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0953418F-4565-4DFC-A788-C886E7001696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E83046-79D0-46DD-8EAA-AA4C7679EFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA01A24-E10D-4B4C-BC41-C88537B7B314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA01A24-E10D-4B4C-BC41-C88537B7B314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA01A24-E10D-4B4C-BC41-C88537B7B314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA01A24-E10D-4B4C-BC41-C88537B7B314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B911605-491C-43E0-BD08-841DF5128840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B911605-491C-43E0-BD08-841DF5128840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B911605-491C-43E0-BD08-841DF5128840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B911605-491C-43E0-BD08-841DF5128840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{399831EC-930B-4867-AFF1-473E8D858D4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{399831EC-930B-4867-AFF1-473E8D858D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{399831EC-930B-4867-AFF1-473E8D858D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{399831EC-930B-4867-AFF1-473E8D858D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE2BFCF-1F13-468D-8C18-BD72BBBE20ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE2BFCF-1F13-468D-8C18-BD72BBBE20ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE2BFCF-1F13-468D-8C18-BD72BBBE20ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE2BFCF-1F13-468D-8C18-BD72BBBE20ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6FCC92-D5AE-4F4C-90C0-2332B071944B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6FCC92-D5AE-4F4C-90C0-2332B071944B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6FCC92-D5AE-4F4C-90C0-2332B071944B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6FCC92-D5AE-4F4C-90C0-2332B071944B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E7FAEF-BCFA-4058-BA10-37090712CDF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E7FAEF-BCFA-4058-BA10-37090712CDF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E7FAEF-BCFA-4058-BA10-37090712CDF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E7FAEF-BCFA-4058-BA10-37090712CDF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{427471DA-ED4F-4D57-B512-3E2E9CBC3502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{427471DA-ED4F-4D57-B512-3E2E9CBC3502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{427471DA-ED4F-4D57-B512-3E2E9CBC3502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{427471DA-ED4F-4D57-B512-3E2E9CBC3502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B1B2D5-8134-44DC-BCD8-F72D5FF34AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B1B2D5-8134-44DC-BCD8-F72D5FF34AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B1B2D5-8134-44DC-BCD8-F72D5FF34AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B1B2D5-8134-44DC-BCD8-F72D5FF34AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC870CE-B92E-4719-8722-C36FB4E5ECC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC870CE-B92E-4719-8722-C36FB4E5ECC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC870CE-B92E-4719-8722-C36FB4E5ECC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC870CE-B92E-4719-8722-C36FB4E5ECC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{972CE16E-1504-4B68-A699-183E7BC67C91} = {53238C6F-C1DB-4DB9-BDEE-381D533EE181}
+		{7DF35CF8-1AEE-4A06-BC37-6EDA8A6D283B} = {53238C6F-C1DB-4DB9-BDEE-381D533EE181}
+		{A77BA4D4-F0EB-404A-8D2E-1E5B4E8372ED} = {972CE16E-1504-4B68-A699-183E7BC67C91}
+		{663AF5EC-D4FB-475A-9E79-ECAAC030DDC5} = {A77BA4D4-F0EB-404A-8D2E-1E5B4E8372ED}
+		{E5EC4D84-4F59-4BAF-A132-A0CF389BBFA2} = {A77BA4D4-F0EB-404A-8D2E-1E5B4E8372ED}
+	EndGlobalSection
+EndGlobal

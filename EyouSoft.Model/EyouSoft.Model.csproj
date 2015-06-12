@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2CC3A201-7D24-4761-9C60-F107F21FD407}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EyouSoft.Model</RootNamespace>
+    <AssemblyName>EyouSoft.Model</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountStructure\MProviders.cs" />
+    <Compile Include="AccountStructure\MProvidersSearchModel.cs">
+      <DependentUpon>MProviders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountStructure\MSellers.cs" />
+    <Compile Include="AccountStructure\MSellerSearchModel.cs">
+      <DependentUpon>MSellers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyStructure\CompanyUser.cs" />
+    <Compile Include="ConvertToMModel.cs" />
+    <Compile Include="Enum\OrderSite.cs" />
+    <Compile Include="Enum\Supplier.cs" />
+    <Compile Include="Enum\TransactionCate.cs" />
+    <Compile Include="Enum\TStatus.cs" />
+    <Compile Include="Enum\TuanGou.cs" />
+    <Compile Include="HotelStructure\MHotelOrderRoomRateId.cs" />
+    <Compile Include="HotelStructure\MHotelOrderContact.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_RoomRate.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_Landmark.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_HotelAmenity.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_HotelInfo.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_City.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_HotelInfo2.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_HotelTraffic.cs" />
+    <Compile Include="HotelStructure\Interface\Hotel_RoomType.cs" />
+    <Compile Include="HotelStructure\MHotel2.cs" />
+    <Compile Include="HotelStructure\MHotelRoomRate.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelRoomRateBindModel.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelOrderSearchModel.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelOrderXiangQing.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelRoomTypeWithImage.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelSearchModel1.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelXiangQingModel.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelRoomTypeModel.cs" />
+    <Compile Include="HotelStructure\WebModel\MHotelSearchModel2.cs" />
+    <Compile Include="JPStructure\MDingDanInfo.cs" />
+    <Compile Include="JPStructure\MeiJu.cs" />
+    <Compile Include="JPStructure\MHangBanInfo.cs" />
+    <Compile Include="JPStructure\MJiPiaoInfo.cs" />
+    <Compile Include="JPStructure\MZhengCeInfo.cs" />
+    <Compile Include="MallStructure\MLianMeng.cs" />
+    <Compile Include="MallStructure\MChanPinTuPian.cs" />
+    <Compile Include="MallStructure\MShangChengDingDan.cs" />
+    <Compile Include="MallStructure\MShangChengLeiBie.cs" />
+    <Compile Include="MallStructure\MShangChengShangPin.cs" />
+    <Compile Include="MemberStructure\MDiZhi.cs" />
+    <Compile Include="MemberStructure\WebModel\MMember2SearchModel.cs" />
+    <Compile Include="MemberStructure\WebModel\MMember2SubmitModel.cs" />
+    <Compile Include="HotelStructure\MHotelLandMark.cs" />
+    <Compile Include="Enum\ChanPinSources.cs" />
+    <Compile Include="Enum\ChongZhiState.cs" />
+    <Compile Include="Enum\ChongZhiWay.cs" />
+    <Compile Include="Enum\FeeTypes.cs" />
+    <Compile Include="Enum\HotelEnum.cs" />
+    <Compile Include="Enum\Is.cs" />
+    <Compile Include="Enum\JiPiaoStructure.cs" />
+    <Compile Include="Enum\MallOrderState.cs" />
+    <Compile Include="Enum\MemberTypes.cs" />
+    <Compile Include="Enum\OtherStructure.cs" />
+    <Compile Include="Enum\Permissions.cs" />
+    <Compile Include="Enum\ProviderType.cs" />
+    <Compile Include="Enum\QianZhengStructure.cs" />
+    <Compile Include="Enum\TiXianState.cs" />
+    <Compile Include="Enum\TiXianWays.cs" />
+    <Compile Include="Enum\UserStructure.cs" />
+    <Compile Include="Enum\WebmasterUserType.cs" />
+    <Compile Include="Enum\XianLuStructure.cs" />
+    <Compile Include="Enum\ZuCheStructure.cs" />
+    <Compile Include="HotelStructure\MHotel.cs" />
+    <Compile Include="HotelStructure\MHotelCity.cs" />
+    <Compile Include="HotelStructure\MHotelCityAreas.cs" />
+    <Compile Include="HotelStructure\MHotelLandMarks.cs" />
+    <Compile Include="HotelStructure\MHotelOrder.cs" />
+    <Compile Include="HotelStructure\MHotelRoomType.cs" />
+    <Compile Include="HotelStructure\MHotelTourCustoms.cs" />
+    <Compile Include="HotelStructure\MJiuDianDianPingInfo.cs" />
+    <Compile Include="JiPiaoStructure\MJiPiaoDingDanInfo.cs" />
+    <Compile Include="JiPiaoStructure\MJiPiaoHangKongGongSiInfo.cs" />
+    <Compile Include="JiPiaoStructure\MJiPiaoInfo.cs" />
+    <Compile Include="JiPiaoStructure\MJiPiaoSanZiMaInfo.cs" />
+    <Compile Include="MemberStructure\MMember2.cs" />
+    <Compile Include="MemberStructure\WebModel\MMemberAndSeller.cs" />
+    <Compile Include="MemberStructure\MChongZhi.cs" />
+    <Compile Include="MoneyStructure\MAccount.cs" />
+    <Compile Include="MoneyStructure\MApplyTiXian.cs" />
+    <Compile Include="MoneyStructure\WebModel\MAccountSearchModel.cs" />
+    <Compile Include="MoneyStructure\WebModel\MFanLiSearchModel.cs" />
+    <Compile Include="MoneyStructure\WebModel\MChongZhiSearchModel.cs" />
+    <Compile Include="MoneyStructure\WebModel\MTiXianSearchModel.cs" />
+    <Compile Include="OtherStructure\MApply.cs" />
+    <Compile Include="OtherStructure\MChongZhi.cs" />
+    <Compile Include="OtherStructure\MDiBiaoInfo.cs" />
+    <Compile Include="OtherStructure\MDingDan.cs" />
+    <Compile Include="OtherStructure\MDingDanFanLiInfo.cs" />
+    <Compile Include="OtherStructure\MDuanXinInfo.cs" />
+    <Compile Include="OtherStructure\MFeedback.cs" />
+    <Compile Include="OtherStructure\MJiFen.cs" />
+    <Compile Include="OtherStructure\MKV.cs" />
+    <Compile Include="OtherStructure\MLandMark.cs" />
+    <Compile Include="OtherStructure\MLink.cs" />
+    <Compile Include="OtherStructure\MMember.cs" />
+    <Compile Include="OtherStructure\MPayMentsInfo.cs" />
+    <Compile Include="OtherStructure\MRouteTheme.cs" />
+    <Compile Include="OtherStructure\MSmsInfo.cs" />
+    <Compile Include="OtherStructure\MSysAreaInfo.cs" />
+    <Compile Include="OtherStructure\MSysLogHandle.cs" />
+    <Compile Include="OtherStructure\MSysLogLogin.cs" />
+    <Compile Include="OtherStructure\MSystemLandMark.cs" />
+    <Compile Include="OtherStructure\MTatolProduct.cs" />
+    <Compile Include="OtherStructure\MTimerInfo.cs" />
+    <Compile Include="OtherStructure\MTravelStrategy.cs" />
+    <Compile Include="OtherStructure\MTuiGuangInfo.cs" />
+    <Compile Include="OtherStructure\MWebmaster.cs" />
+    <Compile Include="OtherStructure\MOnLinePay.cs" />
+    <Compile Include="OtherStructure\MTuanGouChanPin.cs" />
+    <Compile Include="OtherStructure\MTuanGouDingDan.cs" />
+    <Compile Include="OtherStructure\MXiaJiFenXiaoTiChengInfo.cs" />
+    <Compile Include="OtherStructure\MYanZhengMaInfo.cs" />
+    <Compile Include="OtherStructure\MYuMing.cs" />
+    <Compile Include="OtherStructure\MJioaYiMingXiInfo.cs" />
+    <Compile Include="OtherStructure\MZuTuan.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QianZhengStructure\MQianZhengDingDanInfo.cs" />
+    <Compile Include="QianZhengStructure\MQianZhengGuoJiaInfo.cs" />
+    <Compile Include="QianZhengStructure\MQianZhengInfo.cs" />
+    <Compile Include="QianZhengStructure\MQianZhengGysInfo.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicAndOrder.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicAreaTicketsOrderWebBindModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\RegModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\ScenicTicketXiangQingSearchModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicAreaWebSearchModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicTicketsSearchModel.cs" />
+    <Compile Include="ScenicStructure\MScenicAreaImg.cs" />
+    <Compile Include="ScenicStructure\MScenicAreaOrder.cs" />
+    <Compile Include="ScenicStructure\MJingDianDianPingInfo.cs" />
+    <Compile Include="ScenicStructure\MScenicArea.cs" />
+    <Compile Include="ScenicStructure\MScenicRelationLandMark.cs" />
+    <Compile Include="ScenicStructure\MScenicTickets.cs" />
+    <Compile Include="Enum\ScenicEnum.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicAreaSearchModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicAreaOrderSearchModel.cs" />
+    <Compile Include="ScenicStructure\WebModel\MScenicTicketsWebBindModel.cs" />
+    <Compile Include="SSOStructure\MUserInfo.cs" />
+    <Compile Include="SSOStructure\MWebmasterInfo.cs" />
+    <Compile Include="OtherStructure\MSysAdv.cs" />
+    <Compile Include="OtherStructure\MTravelArticle.cs" />
+    <Compile Include="SystemStructure\MFeeSettings.cs" />
+    <Compile Include="SystemStructure\MSupplier.cs" />
+    <Compile Include="SystemStructure\WebModel\MFeeSettingsSearchModel.cs" />
+    <Compile Include="WeiXin\MWinXin.cs" />
+    <Compile Include="XianLuStructure\MOrderInfo.cs" />
+    <Compile Include="XianLuStructure\MXianLuInfo.cs" />
+    <Compile Include="MoneyStructure\MChongZhi.cs" />
+    <Compile Include="MoneyStructure\MFanLi.cs" />
+    <Compile Include="MoneyStructure\MTiXian.cs" />
+    <Compile Include="XianLuStructure\MZiZuTuan.cs" />
+    <Compile Include="ZuCheStructure\MZuCheInfo.cs" />
+    <Compile Include="ZuCheStructure\MZuCheOrder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyouSoft.Toolkit\EyouSoft.Toolkit.csproj">
+      <Project>{F643FD26-4C9B-40C7-8849-0FED59701419}</Project>
+      <Name>EyouSoft.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linq\Linq.csproj">
+      <Project>{14E7FAEF-BCFA-4058-BA10-37090712CDF2}</Project>
+      <Name>Linq</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

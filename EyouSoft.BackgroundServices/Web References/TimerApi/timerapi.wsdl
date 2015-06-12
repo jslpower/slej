@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HandlerDingDans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="items" type="tns:ArrayOfMTimerDingDanInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMTimerDingDanInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MTimerDingDanInfo" nillable="true" type="tns:MTimerDingDanInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MTimerDingDanInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DingDanLeiXing" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DingDanId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HandlerDingDansResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ApiSoapHeader" type="tns:ApiSoapHeader" />
+      <s:complexType name="ApiSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SecretKey" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HandlerDingDansSoapIn">
+    <wsdl:part name="parameters" element="tns:HandlerDingDans" />
+  </wsdl:message>
+  <wsdl:message name="HandlerDingDansSoapOut">
+    <wsdl:part name="parameters" element="tns:HandlerDingDansResponse" />
+  </wsdl:message>
+  <wsdl:message name="HandlerDingDansApiSoapHeader">
+    <wsdl:part name="ApiSoapHeader" element="tns:ApiSoapHeader" />
+  </wsdl:message>
+  <wsdl:portType name="TimerApiSoap">
+    <wsdl:operation name="HandlerDingDans">
+      <wsdl:input message="tns:HandlerDingDansSoapIn" />
+      <wsdl:output message="tns:HandlerDingDansSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TimerApiSoap" type="tns:TimerApiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HandlerDingDans">
+      <soap:operation soapAction="http://tempuri.org/HandlerDingDans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HandlerDingDansApiSoapHeader" part="ApiSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimerApiSoap12" type="tns:TimerApiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HandlerDingDans">
+      <soap12:operation soapAction="http://tempuri.org/HandlerDingDans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HandlerDingDansApiSoapHeader" part="ApiSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TimerApi">
+    <wsdl:port name="TimerApiSoap" binding="tns:TimerApiSoap">
+      <soap:address location="http://localhost:2769/soap/timerapi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TimerApiSoap12" binding="tns:TimerApiSoap12">
+      <soap12:address location="http://localhost:2769/soap/timerapi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

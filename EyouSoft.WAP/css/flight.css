@@ -1,0 +1,9 @@
+.zd_btn{width:141px; height:38px; line-height:38px; text-align:center; color:#fff; display:inline-block; background:url(/images/zd-btn.png) no-repeat;}
+.zhidao_t{width:100%; height:56px;}
+
+.flight_sm{ border-top:#e9e9e9 solid 1px; padding:10px; background:#fff; color:#3a3a3a;}
+.flight_sm h3{ text-align:center; height:21px;}
+.flight_sm h3 span{ display:inline-block; position:relative; padding-right:30px; font-size:16px;}
+.flight_sm .down_jiantou:after{margin-top:-6px;}
+.flight_sm .up_jiantou:after{margin-top:-2px;}
+.flight_sm li{ padding-top:10px;}

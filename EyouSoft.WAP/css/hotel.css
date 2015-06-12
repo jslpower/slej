@@ -1,0 +1,26 @@
+.hotel_xz li{width:33%;}
+.hotel_xz li:nth-child(3){width:34%;}
+
+.hotel-mask-cnt{width:100%; margin-top:135px; background:#fff; overflow:hidden; height:100%;}
+
+.place_box{overflow:hidden; padding-bottom:50px;}
+.place_list{float:left;width:30%;background:#fff;padding-right:10px;}
+.place_list li{width:100%;height:30px; line-height:30px; text-indent:5px; overflow:hidden;}
+.place_list li.on{ background:#f7f7f7;}
+.place_box .star_box{ background:#fff; padding-left:10px; float:left;border-left:#ddd solid 1px;}
+
+.place_list2{ float:left;width:30%; padding-left:10px; padding-right:10px;border-left:#ddd solid 1px;}
+.place_list2 li{width:100%;height:26px; line-height:26px;overflow:hidden;}
+.place_list2 li.on{ color:#fe6700;}
+
+.h-search{ z-index:102; padding-right:70px;}
+.h-search .my_address{ position:absolute; right:10px; top:10px;width:60px; background:url(../images/my_address.png) no-repeat top center; height:18px; color:#808080; font-size:12px;text-align:center;padding-top:18px;}
+
+@media screen and (max-width:480px){
+.place_box,.place_box .star_box li{ font-size:12px;}
+.place_list2,.place_box .star_box{padding-left:5px;}
+.place_list,.place_list2{ padding-right:5px;}
+	}
+
+.hotel-mask-bot{width:100%; height:40px;}
+.hotel-mask-btn{position:fixed; bottom:0;width:100%; height:40px; z-index:99;}

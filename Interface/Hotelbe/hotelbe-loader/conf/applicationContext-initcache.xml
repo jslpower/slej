@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--=========================== 一个时钟任务 ============================= -->
+	<bean id="initCacheJob" class="com.travelsky.hotelbeloader.tools.InitCacheTool">
+		<property name="cities">
+			<value>SHA,PEK</value>
+		</property>
+		<property name="type" ref="inittype_hotelinfo" />
+		<property name="mode" ref="initmode_include" />
+	</bean>
+	<bean id="initCacheTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="initCacheJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<bean id="initcron" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="initCacheTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 12 13 * * ?</value>
+		</property>
+	</bean>
+</beans> 

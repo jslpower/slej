@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{14E7FAEF-BCFA-4058-BA10-37090712CDF2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Linq</RootNamespace>
+    <AssemblyName>Linq</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/Linq/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bussiness\EditMode.cs" />
+    <Compile Include="Bussiness\PageInfo.cs" />
+    <Compile Include="Bussiness\SearchModel.cs" />
+    <Compile Include="Common\MaxUtils.cs" />
+    <Compile Include="Common\timerRecorder.cs" />
+    <Compile Include="Expressions\Enums\CTType.cs" />
+    <Compile Include="Expressions\ExpressionBuilder.cs" />
+    <Compile Include="Expressions\ExpressionModels\CountExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\ExistsExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\IJH.cs" />
+    <Compile Include="Expressions\ExpressionModels\Join\JoinExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\SelectChildQuery.cs" />
+    <Compile Include="Expressions\ExpressionModels\SumExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\TopExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\WhereExpressionModel.cs" />
+    <Compile Include="Expressions\Enums\YieldMoel.cs" />
+    <Compile Include="Expressions\ExpressionModels\MaxExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\MinExpressionModel.cs" />
+    <Compile Include="Expressions\ExpressionModels\DistinctExpressionModel.cs" />
+    <Compile Include="Expressions\Interface\ISelectExpressionBuilder.cs" />
+    <Compile Include="Expressions\ExpressionModels\TableQueryColumnInfoCollection.cs" />
+    <Compile Include="Expressions\Enums\JTypes.cs" />
+    <Compile Include="Expressions\ExpressionModels\OrderByExpressionModel.cs" />
+    <Compile Include="Expressions\Interface\IExpressionBuilder.cs" />
+    <Compile Include="ModelHandler\IgnoreAttribute.cs" />
+    <Compile Include="ORM\Attribute\ColumnIgnoreAttribute.cs" />
+    <Compile Include="ORM\Attribute\IdentityAttribute.cs" />
+    <Compile Include="ORM\Attribute\UniqueAttribute.cs" />
+    <Compile Include="ORM\Column.cs" />
+    <Compile Include="Common\IConvertToMModel.cs" />
+    <Compile Include="ORM\Extensions.cs" />
+    <Compile Include="ORM\KeyValue.cs" />
+    <Compile Include="ORM\tas.cs" />
+    <Compile Include="ORM\Attribute\ColumnAttribute.cs" />
+    <Compile Include="ORM\Attribute\DbTypeAttribute.cs" />
+    <Compile Include="Expressions\Extensions\ExpressionBuilderExtension.cs" />
+    <Compile Include="Expressions\ExpressionModels\TableQueryColumnInfo.cs" />
+    <Compile Include="Expressions\QueryExpressionBuilder.cs" />
+    <Compile Include="Expressions\QueryExpressionBuilder2.cs" />
+    <Compile Include="Expressions\ExpressionModels\SelectExpressionModel.cs" />
+    <Compile Include="Respository\IRepository.cs" />
+    <Compile Include="Respository\IWithTransaction.cs" />
+    <Compile Include="ORM\IdentityType.cs" />
+    <Compile Include="Bussiness\ISearchable.cs" />
+    <Compile Include="MetaDataProviders\MetaDataProvider.cs" />
+    <Compile Include="MetaDataProviders\MetaDataProviders.cs" />
+    <Compile Include="ModelHandler\ModelBinderAttribute.cs" />
+    <Compile Include="ModelHandler\DefaultModelBinder.cs" />
+    <Compile Include="ModelHandler\IModelBinder.cs" />
+    <Compile Include="ModelHandler\IModelBinderProvider.cs" />
+    <Compile Include="ModelHandler\ModelBinders.cs" />
+    <Compile Include="ModelState\ModelStateDictionary.cs" />
+    <Compile Include="Respository\RespositoryBase.cs" />
+    <Compile Include="SQL\SQLManager.cs" />
+    <Compile Include="ValueProvider\IMvcValueProvider.cs" />
+    <Compile Include="ModelHandler\ModelBinderProviders.cs" />
+    <Compile Include="ModelHandler\ModelBindingContext.cs" />
+    <Compile Include="MetaDataProviders\MvcModelMetaData.cs" />
+    <Compile Include="ValueProvider\ValueProviderCollection.cs" />
+    <Compile Include="ValueProvider\Factory\NameValueCollectionFactory.cs" />
+    <Compile Include="ValueProvider\IValueProvider\NameValueCollectionValueProvider.cs" />
+    <Compile Include="ValueProvider\ValueProviderResult.cs" />
+    <Compile Include="ValueProvider\ValueProviderUtil.cs" />
+    <Compile Include="ORM\Attribute\PrimaryKeyAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ORM\Attribute\TableNameAttribute.cs" />
+    <Compile Include="TypeHelper\TypeHelper.cs" />
+    <Compile Include="ValueProvider\ValueProviderFactories.cs" />
+    <Compile Include="Web\ASPNET\DataBindExtension.cs" />
+    <Compile Include="Web\ASPNET\WebExtensions.cs" />
+    <Compile Include="Web\Html\Attrib\HtmlAttributeAttribute.cs" />
+    <Compile Include="Web\Html\Attrib\HtmlElementChildrenAttribute.cs" />
+    <Compile Include="Web\Html\Enums\HtmlNodeType.cs" />
+    <Compile Include="Web\Html\Enums\ScriptType.cs" />
+    <Compile Include="Web\Html\Collections\HtmlOptionCollection.cs" />
+    <Compile Include="Web\Html\Collections\HtmlNodeCollection.cs" />
+    <Compile Include="Web\Html\Enums\ContentResolveWay.cs" />
+    <Compile Include="Web\Html\HtmlAttributeValueProvider.cs" />
+    <Compile Include="Web\Html\IHtmlNodeContainer.cs" />
+    <Compile Include="Web\Html\HtmlNode.cs" />
+    <Compile Include="Web\Html\HtmlTextNode.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlInputPassword.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlTextArea.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlInputText.cs" />
+    <Compile Include="Web\Html\CommonTag\HtmlBody.cs" />
+    <Compile Include="Web\Html\HtmlElement.cs" />
+    <Compile Include="Web\Html\CommonTag\HtmlHead.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlOption.cs" />
+    <Compile Include="Web\Html\CommonTag\HtmlScript.cs" />
+    <Compile Include="Web\Html\Enums\HtmlTagType.cs" />
+    <Compile Include="Web\Html\Interface\CustomValueFormatter.cs" />
+    <Compile Include="Web\Html\Interface\DefaultDateTimeFormat.cs" />
+    <Compile Include="Web\Html\Interface\DefaultValueFormatter.cs" />
+    <Compile Include="Web\Html\Interface\EnumRawStringValueFormatter.cs" />
+    <Compile Include="Web\Html\Interface\INameValue.cs" />
+    <Compile Include="Web\Html\Interface\IsSelectedAttributeValueTransfer.cs" />
+    <Compile Include="Web\Html\Interface\IValueFormatter.cs" />
+    <Compile Include="Web\Html\Interface\IDisabled.cs" />
+    <Compile Include="Web\Html\Interface\IName.cs" />
+    <Compile Include="Web\Html\Interface\IReadonly.cs" />
+    <Compile Include="Web\Html\Interface\IUnique.cs" />
+    <Compile Include="Web\Html\Interface\IValue.cs" />
+    <Compile Include="Web\Html\Enums\TagCloseType.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlInput.cs" />
+    <Compile Include="Web\Html\Enums\HtmlInputType.cs" />
+    <Compile Include="Web\Html\Html.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlInputHidden.cs" />
+    <Compile Include="Web\Html\Interface\ValueFormatterAttribute.cs" />
+    <Compile Include="Web\Html\ValidateUtility\HtmlEncodeUtility.cs" />
+    <Compile Include="Web\Html\ValidateUtility\CrossSiteScriptingValidation.cs" />
+    <Compile Include="Web\ModelViewPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Html\HtmlHelper.cs" />
+    <Compile Include="Web\IValidator.cs" />
+    <Compile Include="Web\NoCacheAttribute.cs" />
+    <Compile Include="Web\SelectListItem.cs" />
+    <Compile Include="Web\Html\Inputs\HtmlSelect.cs" />
+    <Compile Include="Web\UrlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\1.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConsoleApp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConsoleApp_HappytooService_Line" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ws.happytoo.cn:8016/line.asmx</Value>
+    </Setting>
+    <Setting Name="ConsoleApp_HappytooService1_Line" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.ws.happytoo.cn:8016/line.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
