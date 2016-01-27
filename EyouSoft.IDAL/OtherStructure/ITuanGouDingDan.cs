@@ -57,6 +57,10 @@ namespace EyouSoft.IDAL.OtherStructure
         /// <param name="Status">订单状态</param>
         /// <returns></returns>
         int GetOrderNum(EyouSoft.Model.Enum.XianLuStructure.OrderStatus Status);
+        /// <summary>
+        /// 订单分润
+        /// </summary>
+        int FenRun(string orderid, EyouSoft.Model.Enum.DingDanLeiBie OrderLeiBie);
 
     }
 }

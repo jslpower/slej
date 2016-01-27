@@ -52,6 +52,12 @@ namespace EyouSoft.IDAL.OtherStructure
        /// </summary>
        /// <returns></returns>
        EyouSoft.Model.MXiaJiFenXiaoJiangLiPeiZhiInfo GetXiaJiFenXiaoJiangLiPeiZhi();
+       /// <summary>
+       /// 设置交易费率
+       /// </summary>
+       /// <param name="FeiLv"></param>
+       /// <returns></returns>
+       int SheZhiJiaoYiFeiLv(decimal FeiLv);
        
       #endregion
    }

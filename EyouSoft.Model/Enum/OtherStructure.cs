@@ -560,7 +560,19 @@ namespace EyouSoft.Model.Enum
         /// <summary>
         /// E额宝增值（用户E额宝余额增加，系统余额减少）
         /// </summary>
-        E额宝增值 = 6
+        E额宝增值 = 6,
+        /// <summary>
+        /// 产品销售款(交易成功后给予供应商销售款)
+        /// </summary>
+        产品销售款 = 7,
+        /// <summary>
+        /// 平台交易费(交易成功后平台收取供应商的平台费)
+        /// </summary>
+        平台交易费 = 8,
+        /// <summary>
+        /// 分销利润(交易成功后给予分销商的分销费)
+        /// </summary>
+        分销利润 = 9,
     }
     #endregion
 
@@ -626,7 +638,11 @@ namespace EyouSoft.Model.Enum
         /// <summary>
         /// 支付宝
         /// </summary>
-        支付宝 = 3
+        支付宝 = 3,
+        /// <summary>
+        /// 微信
+        /// </summary>
+        微信 = 4
     }
     #endregion
 

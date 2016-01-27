@@ -7,10 +7,11 @@ using System.Web.UI.WebControls;
 using EyouSoft.Common;
 using Common.page;
 using System.Text;
+using EyouSoft.Common.Page;
 
 namespace EyouSoft.WAP
 {
-    public partial class Line_LXRXX : HuiYuanWapPageBase
+    public partial class Line_LXRXX : WebPageBase
     {
         protected decimal crj, etj, userTp;
         protected decimal jsjcr, jsjet;
@@ -97,20 +98,25 @@ namespace EyouSoft.WAP
                 #region  计算代理价格
                 var crjsj = tourinfo.JSJCR;
                 var etjsj = tourinfo.JSJET;
-                decimal crj = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, EyouSoft.Model.Enum.MemberTypes.代理);
-                decimal etj = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, EyouSoft.Model.Enum.MemberTypes.代理);
-                decimal dingdanjine = ((crj * info.ChengRenShu) + (etj * info.ErTongShu));
-                info.AgencyJinE = dingdanjine;
-                if (info.JinE < dingdanjine)
-                {
-                    decimal crj1 = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, EyouSoft.Model.Enum.MemberTypes.员工);
-                    decimal etj1 = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, EyouSoft.Model.Enum.MemberTypes.员工);
-                    decimal dingdanjine1 = ((crj1 * info.ChengRenShu) + (etj1 * info.ErTongShu));
-                    info.AgencyJinE = UtilsCommons.GetGYStijia(fee, dingdanjine1, EyouSoft.Model.Enum.MemberTypes.员工);
-                }
+
+                decimal crj1 = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, yuming.UserType);
+                decimal etj1 = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, yuming.UserType);
+                decimal dingdanjine1 = ((crj1 * info.ChengRenShu) + (etj1 * info.ErTongShu));
+                info.AgencyJinE = dingdanjine1;
+
+                info.JiaoYiCR = UtilsCommons.GetGYStijia(fee, tourinfo.JSJCR, tourinfo.CRSCJ);
+                info.JiaoYiET = UtilsCommons.GetGYStijia(fee, tourinfo.JSJET, tourinfo.ETSCJ);
+                info.WebSiteCR = crj1;
+                info.WebSiteET = etj1;
+
 
                 #endregion
             }
+
+            //info.SCJCR = info.SCJCR;
+            //info.SCJET = info.SCJET;
+
+
 
             if (xianlu.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.系统 || xianlu.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
             {
@@ -156,26 +162,15 @@ namespace EyouSoft.WAP
             info.TourId = Utils.GetQueryStringValue("tourid");
             info.XiaDanBeiZhu = "";// Utils.GetFormValue("txtarea");
             info.XianLuId = Utils.GetQueryStringValue("xianluid");
-            info.JSJCR = Utils.GetDecimal(Utils.GetFormValue("jsc"));
-            info.JSJER = Utils.GetDecimal(Utils.GetFormValue("jse"));
             info.JinE = Utils.GetDecimal(Utils.GetFormValue("zj"));
             info.LxrName = Utils.GetFormValue("yklxr");
             info.LxrTelephone = Utils.GetFormValue("yksj");
             info.LDate = Utils.GetDateTime(Utils.GetFormValue("hidLDate"));
-            bool isHasPriv = new EyouSoft.IDAL.AccountStructure.BSellers().JudgeAuthor(Request.Url.Host.ToLower(), (EyouSoft.Model.Enum.FeeTypes)Utils.GetInt(Utils.GetQueryStringValue("type")));
-            if (isLogin)
-            {
-                info.OperatorId = m.UserId;
-            }
-            else
-            {
-                info.OperatorId = "-1";
-            }
+            info.OperatorId = m.UserId;
 
             info.YouKes = new List<EyouSoft.Model.XianLuStructure.MOrderYouKeInfo>();
 
             string[] txtYouKeName = Utils.GetFormValues("txtYouKeName");
-            //string[] txtYouKeGender = Utils.GetFormValues("txtYouKeGender");
             string[] txtYouKeLeiXing = Utils.GetFormValues("txtYouKeLeiXing");
             string[] txtYouKeZhengJianLeiXing = Utils.GetFormValues("txtYouKeZhengJianLeiXing");
             string[] txtYouKeZhengJianHao = Utils.GetFormValues("txtYouKeZhengJianHao");
@@ -204,6 +199,9 @@ namespace EyouSoft.WAP
 
                 info.YouKes.Add(item);
             }
+
+
+
 
             return info;
         }

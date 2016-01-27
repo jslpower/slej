@@ -18,6 +18,7 @@ namespace EyouSoft.Web
         protected int routeType = 0;
         protected int isfenxiao = 0;//是否是分销商网站
         protected string thisurl = "";
+        protected EyouSoft.Model.XianLuStructure.LineSource lineSource;
         protected void Page_Load(object sender, EventArgs e)
         {
             string hosturl = Request.Url.Host.ToLower();
@@ -64,6 +65,7 @@ namespace EyouSoft.Web
             string boxString = "dataBox={}";
             if (model != null)
             {
+                lineSource = model.Line_Source;
                 //if (model.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.光大)
                 //{
                 //    lit_Line.Text = "出团编号：";
@@ -224,7 +226,7 @@ namespace EyouSoft.Web
                     , item.CRSCJ.ToString("F0")
                     , item.ETSCJ.ToString("F0"));
 
-                            strJGlevel.AppendFormat("<li><strong>会员价：</strong>成人价：<b class=\"fontblue font14\">¥<span id=\"s_hycrj\">{0}</span></b>元/人 儿童价：<b class=\"fontred font14\">¥<span id=\"s_hyet\">{1}</span></b>元/人</li>"
+                            strJGlevel.AppendFormat("<li><strong>优惠价：</strong>成人价：<b class=\"fontblue font14\">¥<span id=\"s_hycrj\">{0}</span></b>元/人 儿童价：<b class=\"fontred font14\">¥<span id=\"s_hyet\">{1}</span></b>元/人</li>"
                                 , UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                                 , UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0"));
                             if (userInfo != null)
@@ -250,7 +252,7 @@ namespace EyouSoft.Web
                             etMsj = item.ETSCJ;
 
 
-                            litHuiYuan.Text = string.Format("<li id=\"hy_li\" class=\"mar5\"><div class=\"tixing\"><b>会员价总金额：</b><br><font class=\"fontyellow\">成人<b class=\"font14\"><span id=\"hycrj\">{0}</span></b>元/人 x <b class=\"font14\"><span id=\"hycrs\">1</span></b>人+ 儿童<b class=\"font14\"><span id=\"hyetj\">{1}</span></b>元/人 x <b class=\"font14\"><span id=\"hyets\">0</span></b>人 = </font><font class=\"fontblue\"><b class=\"font14\"><span id=\"hyzj\">{0}</span></b>元</font></div></li>"
+                            litHuiYuan.Text = string.Format("<li id=\"hy_li\" class=\"mar5\"><div class=\"tixing\"><b>优惠价总金额：</b><br><font class=\"fontyellow\">成人<b class=\"font14\"><span id=\"hycrj\">{0}</span></b>元/人 x <b class=\"font14\"><span id=\"hycrs\">1</span></b>人+ 儿童<b class=\"font14\"><span id=\"hyetj\">{1}</span></b>元/人 x <b class=\"font14\"><span id=\"hyets\">0</span></b>人 = </font><font class=\"fontblue\"><b class=\"font14\"><span id=\"hyzj\">{0}</span></b>元</font></div></li>"
                                  , UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                                  , UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                               );
@@ -309,7 +311,7 @@ namespace EyouSoft.Web
                 , selectTraffice[0].CRSCJ.ToString("F0")
                 , selectTraffice[0].ETSCJ.ToString("F0"));
 
-                        strJGlevel.AppendFormat("<li><strong>会员价：</strong>成人价：<b class=\"fontblue font14\">¥<span id=\"s_hycrj\">{0}</span></b>元/人 儿童价：<b class=\"fontred font14\">¥<span id=\"s_hyetj\">{1}</span></b>元/人</li>"
+                        strJGlevel.AppendFormat("<li><strong>优惠价：</strong>成人价：<b class=\"fontblue font14\">¥<span id=\"s_hycrj\">{0}</span></b>元/人 儿童价：<b class=\"fontred font14\">¥<span id=\"s_hyetj\">{1}</span></b>元/人</li>"
                             , UtilsCommons.GetGYStijia(FeeType, selectTraffice[0].JSJCR, selectTraffice[0].CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                             , UtilsCommons.GetGYStijia(FeeType, selectTraffice[0].JSJET, selectTraffice[0].ETSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0"));
                         if (userInfo != null)
@@ -335,7 +337,7 @@ namespace EyouSoft.Web
                         etMsj = selectTraffice[0].ETSCJ;
 
 
-                        litHuiYuan.Text = string.Format("<li id=\"hy_li\" class=\"mar5\"><div class=\"tixing\"><b>会员价总金额：</b><br><font class=\"fontyellow\">成人<b class=\"font14\"><span id=\"hycrj\">{0}</span></b>元/人 x <b class=\"font14\"><span id=\"hycrs\">1</span></b>人+ 儿童<b class=\"font14\"><span id=\"hyetj\">{1}</span></b>元/人 x <b class=\"font14\"><span id=\"hyets\">0</span></b>人 = </font><font class=\"fontblue\"><b class=\"font14\"><span id=\"hyzj\">{0}</span></b>元</font></div></li>"
+                        litHuiYuan.Text = string.Format("<li id=\"hy_li\" class=\"mar5\"><div class=\"tixing\"><b>优惠价总金额：</b><br><font class=\"fontyellow\">成人<b class=\"font14\"><span id=\"hycrj\">{0}</span></b>元/人 x <b class=\"font14\"><span id=\"hycrs\">1</span></b>人+ 儿童<b class=\"font14\"><span id=\"hyetj\">{1}</span></b>元/人 x <b class=\"font14\"><span id=\"hyets\">0</span></b>人 = </font><font class=\"fontblue\"><b class=\"font14\"><span id=\"hyzj\">{0}</span></b>元</font></div></li>"
                              , UtilsCommons.GetGYStijia(FeeType, selectTraffice[0].JSJCR, selectTraffice[0].CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                              , UtilsCommons.GetGYStijia(FeeType, selectTraffice[0].JSJET, selectTraffice[0].ETSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0")
                           );
@@ -423,6 +425,20 @@ namespace EyouSoft.Web
             Response.End();
         }
         #endregion
+
+        protected string getXcStr(object xianluSource, object xingChengStr)
+        {
+            EyouSoft.Model.XianLuStructure.LineSource source = (EyouSoft.Model.XianLuStructure.LineSource)xianluSource;
+            if (source == EyouSoft.Model.XianLuStructure.LineSource.光大 || source == EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
+            {
+                return Utils.ConverToHtml(xingChengStr.ToString());
+            }
+            else
+            {
+                return Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(xingChengStr.ToString()));
+            }
+
+        }
     }
 
     /// <summary>
@@ -451,7 +467,7 @@ namespace EyouSoft.Web
         /// </summary>
         public string msj { get; set; }
         /// <summary>
-        /// 会员价
+        /// 优惠价
         /// </summary>
         public string hyj { get; set; }
         /// <summary>

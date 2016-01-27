@@ -209,7 +209,38 @@ namespace EyouSoft.Model.AccountStructure
           set { _navnum = value; }
           get { return _navnum; }
       }
-
+      /// <summary>
+      /// 供应商类型
+      /// </summary>
+      public SupplierType SupplierType { get; set; }
+      /// <summary>
+      /// 个人身份证/单位营业执照
+      /// </summary>
+      public string CardPath { get; set; }
+      /// <summary>
+      /// 户口本/经营许可证
+      /// </summary>
+      public string AccountPaht { get; set; }
+      /// <summary>
+      /// 工作名片/税务登记证
+      /// </summary>
+      public string VisitPath { get; set; }
+      /// <summary>
+      /// 其他个人证件/代码证
+      /// </summary>
+      public string OtherPath { get; set; }
+      /// <summary>
+      /// 表格资料
+      /// </summary>
+      public string FormPath { get; set; }
+      /// <summary>
+      /// 资质
+      /// </summary>
+      public string Qualifications { get; set; }
+      /// <summary>
+      /// 是否开启总代理配置
+      /// </summary>
+      public IsZDaiLi IsZDaiLi { get; set; }
       #endregion Model
 
    }

@@ -66,7 +66,7 @@ namespace EyouSoft.WAP.Flight
 
             FenXiangBiaoTi = "机票预订";
             FenXiangMiaoShu = "机票预订";
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
         }
     }

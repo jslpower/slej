@@ -34,6 +34,11 @@
                         <label>
                             产品名称：</label>
                         <input type="text" class="inputtext" name="CpName" value="<%= EyouSoft.Common.Utils.GetQueryStringValue("CpName") %>" />
+                        下单渠道：<select name="qudaolist" id="qudaolist" class="inputselect" style="width:140px;">
+                        <option value="-2">请选择</option>
+                            <%=GetSellersHtml(EyouSoft.Common.Utils.GetQueryStringValue("qudaolist"))%>
+                        </select>
+                        <input name="type" value="<%= EyouSoft.Common.Utils.GetQueryStringValue("type") %>" type="hidden" />
                         <input type="submit" class="search-btn" value="" />
                     </div>
                     </form>
@@ -69,6 +74,15 @@
                     <th width="130" align="center">
                         订单金额
                     </th>
+                    <th width="60" align="center">
+                        平台交易费
+                    </th>
+                    <%if (UserInfo.LeiXing == WebmasterUserType.后台用户)
+                      { %>
+                      <th width="60" align="center">
+                      应付供应商款
+                      </th>
+                    <%} %>
                     <th width="100" align="center">
                         客人信息
                     </th>
@@ -102,13 +116,27 @@
                                 <%#Eval("ProductName")%>
                             </td>
                             <td align="center">
+                            代理商：<a href="/webmaster/Supplier/SupplierD.aspx?dlsid=<%# Eval("SupplierID")%>">
                                 <%# GetWangDianByID(Eval("SupplierID"))%>
+                                </a>
+                                
+                                <br />
+                            <%# GetGongYingByID(Eval("ProductID"))%>
                             </td>
                             <td align="left">
                                 产品数：<%# Eval("ProductNum")%> 份<br />
                      单价：<%#  (Convert.ToDouble(Eval("OrderPrice")) / Convert.ToDouble(Eval("ProductNum"))).ToString("f2")%> 元/份<br />
                      金额：<%#  Convert.ToDouble(Eval("OrderPrice")).ToString("f2")%>
                             </td>
+                            <td align="center">
+                              <%#  Convert.ToDecimal(Convert.ToDecimal(Eval("OrderPrice")) * Convert.ToDecimal(Eval("JiaoYiLv")) / 100).ToString("f4")%>元  
+                            </td>
+                            <%if (UserInfo.LeiXing == WebmasterUserType.后台用户)
+                      { %>
+                      <td align="center">
+                      <%#  Convert.ToDecimal(Convert.ToDecimal(Eval("OrderPrice")) - Convert.ToDecimal(Eval("OrderPrice")) * Convert.ToDecimal(Eval("JiaoYiLv")) / 100).ToString("f4")%>元  
+                      </td>
+                    <%} %>
                             <td align="left">
                                 <%# Eval("PeopleName")%><br />
                      <%# Eval("PeopleMobile")%>
@@ -127,7 +155,7 @@
                             </td>
                             <td height="30" align="center" nowrap="nowrap"><%# GetFuKuangCate(Eval("OrderId"), Eval("OrderState"))%></td>
                             <td align="center">
-                                <%# setOptClick(Eval("OrderId").ToString(), Eval("OrderState"))%><br />
+                                <%# setOptClick(Eval("OrderId").ToString(), Eval("OrderState"), Eval("SupplierID"))%><br />
                                 <%# DeleteUserOrder(Eval("OrderId").ToString(), Eval("OrderState"))%>
                             </td>
                         </tr>
@@ -139,6 +167,7 @@
             <tr class="<%= recordCount % 2 == 0 ?  "even" : "odd"%>">
                 <td colspan="3" align="right">合计金额：</td>
                 <td align="center">￥<%=SumMoney.ToString("f2") %></td>
+                <td align="center">￥<%=Convert.ToDecimal(SumMoney * JiaoYiLv / 100).ToString("f4")%></td>
                 <td colspan="7"></td>
             </tr>
             <tr>
@@ -154,6 +183,15 @@
                     <th width="130" align="center">
                         订单金额
                     </th>
+                    <th width="60" align="center">
+                        平台交易费
+                    </th>
+                    <%if (UserInfo.LeiXing == WebmasterUserType.后台用户)
+                      { %>
+                      <th width="60" align="center">
+                      应付供应商款
+                      </th>
+                    <%} %>
                     <th width="100" align="center">
                         客人信息
                     </th>
@@ -193,6 +231,25 @@
                 if (window.confirm("请确认操作")) {
                     $.ajax({
                         url: "/WebMaster/TuanGou/TuanGouDingDans.aspx?setState=1&id=" + oid + "&state=" + state,
+                        dataType: "json",
+                        success: function(ret) {
+                            if (ret.result == "1") {
+                                tableToolbar._showMsg(ret.msg, function() { location.href = location.href; });
+                            }
+                            else {
+                                tableToolbar._showMsg(ret.msg);
+                            }
+                        },
+                        error: function() {
+                            tableToolbar._showMsg(tableToolbar.errorMsg);
+                        }
+                    })
+                }
+            },
+            FanQian:function(oid,state){
+               if (window.confirm("请确认操作")) {
+                    $.ajax({
+                        url: "/WebMaster/TuanGou/TuanGouDingDans.aspx?setState=2&id=" + oid + "&state=" + state,
                         dataType: "json",
                         success: function(ret) {
                             if (ret.result == "1") {

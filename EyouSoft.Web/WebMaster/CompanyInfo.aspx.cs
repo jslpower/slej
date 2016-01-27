@@ -47,6 +47,16 @@ namespace EyouSoft.Web.WebMaster
             txtSLEJ.Text = model.SLEJText;
             MoblieEBao.Text = model.MoblieEBao;
             MoblieSLEJ.Text = model.MoblieSLEJText;
+            DaiLiTiaoKuan.Text = model.DaiLiTiaoKuan;
+            WapSet.Text = model.WapSet;
+
+            txtWapFenXiao.Text = model.WapMakeFenXiao;
+            txtWapGongYing.Text = model.WapMakeGongYing;
+            txtWapGuiBin.Text = model.WapMakeGuiBin;
+            txtWapPuTong.Text = model.WapMakePuTong;
+            txtWapYingPin.Text = model.WapMakeYingPing;
+
+
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -77,6 +87,14 @@ namespace EyouSoft.Web.WebMaster
             model.SLEJText = Utils.EditInputText(txtSLEJ.Text);
             model.MoblieEBao = Utils.EditInputText(MoblieEBao.Text);
             model.MoblieSLEJText = Utils.EditInputText(MoblieSLEJ.Text);
+            model.DaiLiTiaoKuan = Utils.EditInputText(DaiLiTiaoKuan.Text);
+            model.WapSet = Utils.EditInputText(WapSet.Text);
+
+            model.WapMakeFenXiao = Utils.EditInputText(txtWapFenXiao.Text);
+            model.WapMakeGongYing = Utils.EditInputText(txtWapGongYing.Text);
+            model.WapMakeGuiBin = Utils.EditInputText(txtWapGuiBin.Text);
+            model.WapMakePuTong = Utils.EditInputText(txtWapPuTong.Text);
+            model.WapMakeYingPing = Utils.EditInputText(txtWapYingPin.Text);
             return model;
         }
     }

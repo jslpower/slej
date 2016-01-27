@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
  
-<title>单独组团</title>
+<title><%=FenXiangBiaoTi %></title>
 
 <link rel="stylesheet" href="/css/zt.css" type="text/css" media="screen">
 <script src="/js/jq.mobi.min.js" type="text/javascript"></script>

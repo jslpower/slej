@@ -27,6 +27,22 @@ namespace EyouSoft.Model
       /// 线路区域类别
       /// </summary>
       public AreaType RouteType { get; set; }
+
+      /// <summary>
+      /// 图片
+      /// </summary>
+      public string ImgPath { get; set; }
+
+      /// <summary>
+      /// 广告标题
+      /// </summary>
+      public string AdvTitle { get; set; }
+
+
+      /// <summary>
+      /// 广告链接地址
+      /// </summary>
+      public string AdvLink { get; set; }
    }
    #endregion 区域
 

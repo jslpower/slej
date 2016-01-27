@@ -79,8 +79,11 @@ namespace EyouSoft.DAL.AccountStructure
             {
                 int siteId = int.Parse(ConfigurationManager.AppSettings["siteId"]);
                 int WapsiteId = int.Parse(ConfigurationManager.AppSettings["WapsiteId"]);
+                int appSiteId = int.Parse(ConfigurationManager.AppSettings["appSiteId"]);
+              
                 AddWebDomain(newsite,siteId);
                 AddWebDomain("m." + newsite, WapsiteId);
+                AddWebDomain("p." + newsite, appSiteId);
             }
             else
             {
@@ -88,10 +91,13 @@ namespace EyouSoft.DAL.AccountStructure
                 {
                     int siteId = int.Parse(ConfigurationManager.AppSettings["siteId"]);
                     int WapsiteId = int.Parse(ConfigurationManager.AppSettings["WapsiteId"]);
+                    int appSiteId = int.Parse(ConfigurationManager.AppSettings["appSiteId"]);
                     RemoveWebDomain(oldsite, siteId);
                     AddWebDomain(newsite, siteId);
                     RemoveWebDomain("m." + oldsite, WapsiteId);
                     AddWebDomain("m." + newsite, WapsiteId);
+                    RemoveWebDomain("p." + oldsite, appSiteId);
+                    AddWebDomain("p." + newsite, appSiteId);
                 }
             }
          }
@@ -101,8 +107,10 @@ namespace EyouSoft.DAL.AccountStructure
             {
                 int siteId = int.Parse(ConfigurationManager.AppSettings["siteId"]);
                 int WapsiteId = int.Parse(ConfigurationManager.AppSettings["WapsiteId"]);
+                int appSiteId = int.Parse(ConfigurationManager.AppSettings["appSiteId"]);
                RemoveWebDomain(oldsite,siteId);
                RemoveWebDomain(oldsite, WapsiteId);
+               RemoveWebDomain(oldsite, appSiteId);
             }
          }
       }

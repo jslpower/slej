@@ -47,7 +47,7 @@
                     <li id="n4Tab_Title0" onclick="nTabs('n4Tab',this);" class="active"><a href="javascript:void(0);">
                         E额宝支付</a></li>
                     <li id="n4Tab_Title1" onclick="nTabs('n4Tab',this);" class="normal"><a href="javascript:void(0);">
-                        支付宝支付</a></li>
+                        其他支付</a></li>
                     <li id="n4Tab_Title2" onclick="nTabs('n4Tab',this);" class="normal" style="width: 34%;">
                         <a href="javascript:void(0);">转账汇款</a></li>
                 </ul>
@@ -56,10 +56,13 @@
                 <div id="n4Tab_Content0">
                     <div class="user_form">
                         <ul>
-                            <li><span class="label_name">E额宝余额</span> <span class="font18 font_yellow" style="width:103px; display:inline-block;"><asp:Literal ID="MyMoney" runat="server"></asp:Literal></span><a href="/Member/ChongZhi.aspx" class="yzm">立即充值</a></li>
+                            <li><span class="label_name">E额宝余额</span> <span class="font18 font_yellow" style="width: 103px;
+                                display: inline-block;">
+                                <asp:Literal ID="MyMoney" runat="server"></asp:Literal></span><a href="/Member/ChongZhi.aspx"
+                                    class="yzm">立即充值</a> </li>
                             <li><span class="label_name">E额宝密码</span>
-                                <input name="zhifuPwd" type="password" class="u-input" id="zhifuPwd" style="width:103px;" /><a href="/Member/ZhiFuMiMa.aspx" class="yzm">修改密码</a>
-                            </li>
+                                <input name="zhifuPwd" type="password" class="u-input" id="zhifuPwd" style="width: 103px;" /><a
+                                    href="/Member/ZhiFuMiMa.aspx" class="yzm">修改密码</a> </li>
                             <li><span class="label_name">动态验证码 </span>
                                 <input name="viacode" type="text" class="u-input" id="viacode" style="width: 103px;" /><a
                                     class="yzm" href="javascript:void(0)" id="i_a_huoquyuezhifuyanzhengma">获取验证码</a>
@@ -69,14 +72,42 @@
                     <div class="padd cent">
                         <input name="" type="button" class="y_btn" value="付款" id="epay" /></div>
                     <div class="paddL font16">
-                        <a href="/EBao.aspx">什么是E额宝？</a></div>
-                    <div class="paddL paddR20 paddT">
+                        <a href="/EBao.aspx">
+                            <div class="paddL font16">
+                                <span class="g_btn" style="width: 120px;">什么是E额宝>></span></div>
+                        </a>
+                    </div>
+                    <div class="paddL paddR20 paddT indent">
                         E 额宝是商旅E家为用户开发的可以在本系统中用于充值、支付、收佣、提现、统计和累计的财务工具。E 额宝余额每天按照一定比例进行积分增值，凭积分情况换取积分卡后可兑换旅游现金券。</div>
                 </div>
                 <div id="n4Tab_Content1" class="none">
-                    <div class="zfb_box">
-                        <a href="javascript:;" id="alipay">
-                            <img src="/images/zfb.png">支付宝安全支付</a>
+                    <div class="zhifu_type">
+                        <ul>
+                            <asp:PlaceHolder ID="plaIsWxBow" runat="server" Visible="false">
+                                <li id="getBrandWCPayRequest"><s class="weixin"></s>
+                                    <h3>
+                                        微信支付</h3>
+                                    <p>
+                                        使用微信支付，安全便捷</p>
+                                </li>
+                            </asp:PlaceHolder>
+                            <li id="alipay"><s class="zfb"></s>
+                                <h3>
+                                    支付宝</h3>
+                                <p>
+                                    支持有支付宝，网银的用户使用</p>
+                            </li>
+                            <li id="99bill"><s class="kq"></s>
+                                <h3>
+                                    快钱支付<span class="font14" style="color: #4d4d4d;">(储蓄卡/信用卡)</span></h3>
+                                <p>
+                                    支持快钱钱包用户，快捷支付</p>
+                            </li>
+                            <li id="fenqi">
+                                <s style=" background:none; text-decoration:none;" class="icon-fenqifukuan"></s>
+                                <h3>分期付款</h3>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div id="n4Tab_Content2" class="none">
@@ -163,7 +194,16 @@
             </div>
         </div>
     </div>
+     <!---分期付款点击显示层--->
+<div id="fenqifukuanbox" class="user-mask" style="display:none;">
+   
+       <div class="fenqifukuan_box" >
+                <img src="/images/fenqifukuan.jpg">
+       </div>
+   
+</div>
     </form>
+
     <script type="text/javascript">
         $(".purl").click(function() {
             var otype = "<%= DDLX%>";
@@ -191,14 +231,15 @@
             }
         });
     </script>
-    
+
     <script type="text/javascript">
         var PageInfo = {
             urlLocation: '<%= EyouSoft.Common.Utils.GetQueryStringValue("Classid")%>',
             yeparam: { Pay: '<%= EyouSoft.Common.Utils.GetQueryStringValue("Pay")%>', Classid: '<%= EyouSoft.Common.Utils.GetQueryStringValue("Classid")%>', id: '<%= EyouSoft.Common.Utils.GetQueryStringValue("id")%>', token: '<%= EyouSoft.Common.Utils.GetQueryStringValue("token")%>' },
             wypara: { orderid: '<%= EyouSoft.Common.Utils.GetQueryStringValue("id")%>', type: '<%= DDLX%>', token: '<%= EyouSoft.Common.Utils.GetQueryStringValue("token")%>' },
             Sava: function() {
-
+                if ($("#zhifuPwd").val() == '' || $("#zhifuPwd").val() == 'undefined') { alert("E额宝密码不可为空"); return false; }
+                if ($("#viacode").val() == '' || $("#viacode").val() == 'undefined') { alert("动态验证码不可为空"); return false; }
 
                 var sy = parseFloat('<%=ShengYuJinE %>');
                 var dd = parseFloat('<%=ZhiFuJinE %>');
@@ -253,7 +294,7 @@
                             //else if (PageInfo.urlLocation == "7") { location.href = "/Member/VisaOrderList.aspx"; return false; }
                             else if (PageInfo.urlLocation == "8") { location.href = "/Member/XianLuOrderList.aspx?type=2"; return false; }
                             else if (PageInfo.urlLocation == "9") { location.href = "/Member/XianLuOrderList.aspx?type=3"; return false; }
-                            else if (PageInfo.urlLocation == "10") { location.href = "/Member/JpOrderList.aspx"; return false; }
+                            else if (PageInfo.urlLocation == "11") { location.href = "/Member/JpOrderList.aspx"; return false; }
                             else { location.href = "/Member/ChangXianOrder.aspx"; return false; }
                         }
 
@@ -262,43 +303,73 @@
                         alert("数据丢失")
                     }
                 });
-            },
-            GoAliPay: function(type, orderid, token) {
-
             }
 
 
 
         };
         $(function() {
-            $("#epay").click(function() {
-                var sy = parseFloat('<%=ShengYuJinE %>');
-                var dd = parseFloat('<%=ZhiFuJinE %>');
-                if (dd <= sy) {
-                    var url = '/Member/ZhiFu.aspx?zhifu=1&' + $.param(PageInfo.yeparam);
-                    PageInfo.GoAjax(url);
-                }
-                else {
-                    $("#noMeney").html("余额不足，你可以选择使用网银支付！");
+            //            $("#epay").click(function() {
+            //                var sy = parseFloat('<%=ShengYuJinE %>');
+            //                var dd = parseFloat('<%=ZhiFuJinE %>');
+            //                if ($("#zhifuPwd").val() == '' || $("#zhifuPwd").val() == 'undefined') { alert("E额宝密码不可为空"); return false; }
+            //                if ($("#viacode").val() == '' || $("#viacode").val() == 'undefined') { alert("动态验证码不可为空"); return false; }
+            //                if (dd <= sy) {
+            //                    alert(1);
+            //                    var url = '/Member/ZhiFu.aspx?zhifu=1&' + $.param(PageInfo.yeparam);
+            //                    PageInfo.GoAjax(url);
+            //                }
+            //                else {
+            //                    $("#noMeney").html("余额不足，你可以选择使用网银支付！");
 
-                }
-                if (confirm("确认支付")) {
+            //                }
 
-                } else {
 
-                }
-            })
+            //            })
             $("#alipay").click(function() {
                 if (window.confirm("确认使用支付宝")) {
                     location.href = "/alipay/default.aspx?" + $.param(PageInfo.wypara);
                 }
             })
 
+            $("#99bill").click(function() {
+                if (window.confirm("确认使用快钱")) {
+                    location.href = "/99bill/send.aspx?" + $.param(PageInfo.wypara);
+                }
+            })
+
             $("#ChongZhi").click(function() { location.href = "/Member/MyChongzhi.aspx?tp=1"; });
             $("#Chongzhi1").click(function() { location.href = "/Member/MyChongzhi.aspx?tp=1"; });
             $("#i_a_huoquyuezhifuyanzhengma").click(function() { PageInfo.getYuEZhiFuYanZhengMa(this) });
-            //$("#epay").bind("click", function() { PageInfo.Sava(); });
+            $("#epay").bind("click", function() { PageInfo.Sava(); });
+            $("#fenqi").click(function() {  $("#fenqifukuanbox").show() });
+            $("#fenqifukuanbox").click(function() { $("#fenqifukuanbox").hide() });
         });
+    </script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script type="text/javascript">
+     var wx_jsapi_config=<%=weixin_jsapi_config %>;
+    wx.config(wx_jsapi_config);
+    </script>
+
+    <script language="javascript" type="text/javascript">
+
+        $(function() {
+            $('#getBrandWCPayRequest').click(function() {
+                wx.chooseWXPay({
+                    timestamp: '<%= _TenPayTradeModel.TimeStamp %>', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: '<%= _TenPayTradeModel.NonceStr %>', // 支付签名随机串，不长于 32 位
+                    package: 'prepay_id=<%= _TenPayTradeModel.PrepayId %>', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    paySign: '<%= _TenPayTradeModel.Sign %>', // 支付签名
+                    success: function(res) {
+                        // 支付成功后的回调函数
+                    }
+                });
+            })
+        })
     </script>
 
 </body>

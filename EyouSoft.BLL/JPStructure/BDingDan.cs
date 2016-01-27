@@ -110,6 +110,7 @@ namespace EyouSoft.BLL.JPStructure
             requestInfo.ShiFuDaYinXingChengDan = shiFouDaYinXingChengDan;
             requestInfo.ZhengCeId = info.ZhengCeId;
             requestInfo.ZhengCeLeiXing = ((int)info.ZhengCeLeiXing).ToString();
+            requestInfo.AirChangedContact = info.AirChangedContact;
             #endregion
 
             #region 创建请求XML
@@ -137,6 +138,8 @@ namespace EyouSoft.BLL.JPStructure
             apiChaXunXml.AppendFormat(" AutoPay=\"{0}\" ", requestInfo.ShiFouZiDongDaiKou);
             apiChaXunXml.AppendFormat(" PassengerType=\"{0}\" ", requestInfo.ChengKeLeiXing);
             apiChaXunXml.AppendFormat("  SystemId=\"\" ");
+            apiChaXunXml.AppendFormat("  AirChangedContact=\"{0}\" ", requestInfo.AirChangedContact);
+
             apiChaXunXml.AppendFormat("/>");
             apiChaXunXml.Append("</JIT-CreateOrder>");
             #endregion

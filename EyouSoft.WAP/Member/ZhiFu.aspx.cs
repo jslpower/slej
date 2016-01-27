@@ -13,6 +13,8 @@ using EyouSoft.BLL.ZuCheStructure;
 using EyouSoft.BLL.MallStructure;
 using EyouSoft.BLL.OtherStructure;
 using EyouSoft.BLL.QianZhengStructure;
+using PayAPI.Model.Tencent;
+using PayAPI.Tencent;
 
 namespace EyouSoft.WAP.Member
 {
@@ -23,25 +25,221 @@ namespace EyouSoft.WAP.Member
         BZuCheOrder zuchebll = new BZuCheOrder();
         protected int DDLX = 0;
         protected string pid = "";
+        protected TenPayTrade TenPayTradeModel = new TenPayTrade();
+        protected PrePay _TenPayTradeModel = new PrePay();
+        protected string weixin_jsapi_config = "";
+        protected EyouSoft.Common.Utils.weixin_oauth2_access_token_info wxModel = new Utils.weixin_oauth2_access_token_info();
+        protected string OpenID = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            #region
+            if (Request.UserAgent.ToLower().Contains("micromessenger"))
+            {
+                plaIsWxBow.Visible = true;
+                var weixin_jsApiList = new List<string>();
+                weixin_jsApiList.Add("chooseWXPay");
+                var weixing_config_info = Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
+
+                weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
+                OpenID = Utils.getOpenidCookie();
+                wxModel.openid = OpenID;  
+                if (wxModel == null)
+                {
+                    plaIsWxBow.Visible = false;
+                }
+            }
+            #endregion
+
             EyouSoft.Model.SSOStructure.MUserInfo m = null;
             bool isLogin = EyouSoft.Security.Membership.UserProvider.IsLogin(out m);
             EyouSoft.BLL.OtherStructure.BKV BLL = new EyouSoft.BLL.OtherStructure.BKV();
             EyouSoft.Model.MCompanySetting model = BLL.GetCompanySetting();
 
             if (!isLogin) Response.Redirect("/default.aspx");
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "1") { GetXuLuModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.长线订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "8") { GetXuLuModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.出境订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "9") { GetXuLuModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.短线订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "2") { GetHotelModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.酒店订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "3") { GetJingquModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.门票订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "4") { GetZucheModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.租车订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "5") { GetShangChengModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.商城订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "6") { GetTuanGouModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.团购订单; }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "1")
+            {
+                var order = GetXuLuModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.JinE;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.JinE.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    if(!_TenPayTradeModel.IsSuccess)
+                        plaIsWxBow.Visible = false;
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.长线订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "8")
+            {
+                var order = GetXuLuModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.JinE;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.JinE.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.出境订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "9")
+            {
+                var order = GetXuLuModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.JinE;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.JinE.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.短线订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "2")
+            {
+                var order = GetHotelModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.TotalAmount;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.TotalAmount.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.酒店订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "3")
+            {
+                var order = GetJingquModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.Price;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.Price.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.门票订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "4")
+            {
+                var order = GetZucheModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.ZuJin.Value;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.ZuJin.Value.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.租车订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "5")
+            {
+                var order = GetShangChengModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.OrderPrice;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.OrderPrice.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.商城订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "6")
+            {
+                var order = GetTuanGouModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.OrderPrice;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.OrderPrice.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.团购订单;
+            }
             //if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "7") { GetQianZhengModel();DDLX= EyouSoft.Model.OtherStructure.DingDanType.签证订单 }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "10") { GetZuTuanModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.单团订单; }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "11") { GeJiPiaoModel(); DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.机票订单; }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "10")
+            {
+                var order = GetZuTuanModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.ZongJinE.Value;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.OrderCode;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.ZongJinE.Value.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.单团订单;
+            }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "11")
+            {
+                var order = GeJiPiaoModel();
+                if (Request.UserAgent.ToLower().Contains("micromessenger"))
+                {
+                    #region 初始化支付信息
+                    Tenpay pay = new Tenpay();
+                    TenPayTradeModel.OPENID = wxModel.openid;
+                    TenPayTradeModel.Totalfee = order.JinE;
+                    TenPayTradeModel.UserIP = Utils.GetRemoteIP();
+                    TenPayTradeModel.OutTradeNo = order.DingDanId;
+                    TenPayTradeModel.OrderInfo.Body = "支付金额:" + order.JinE.ToString("F2") + "元";
+
+                    _TenPayTradeModel = pay.Create_url(TenPayTradeModel);
+                    #endregion
+                }
+                DDLX = (int)EyouSoft.Model.OtherStructure.DingDanType.机票订单;
+            }
             if (Utils.GetQueryStringValue("zhifu") == "1") PayOrder();
         }
         public EyouSoft.Model.XianLuStructure.MOrderInfo GetXuLuModel()

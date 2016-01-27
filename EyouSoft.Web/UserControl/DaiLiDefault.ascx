@@ -82,17 +82,18 @@
         </ul>
     </div>
 </div>
+<%if(cxnum>0 || msnum>0){ %>
 <!------R_side01-------->
 <div class="R_side01 fixed margin_T10">
     <!------促销-------->
     <div id="CuXiaoSrcoll"  class="R_side01L mar6">
         <h3>
-            <img src="images/cuxiao.png"><a class="more" href="/TuanGou.aspx?type=3">更多&gt;&gt;</a></h3>
+            <img src="images/cuxiao.png"><a class="more" href="/TuanGou.aspx?type=3&t=1">更多&gt;&gt;</a></h3>
             <div class="box">
         <ul class="b_imglist">
             <asp:Repeater ID="CuXiao" runat="server">
                 <ItemTemplate>
-                    <li><a class="cx_img" href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
+                    <li><div class="list"><a class="cx_img" href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
                         <img src="<%# Eval("ProductImg")%>" /><div class="tuijian">
                         </div>
                     </a>
@@ -102,7 +103,7 @@
                         <p>
                             <span class="sales"><em>¥<%# Convert.ToInt32(Eval("GroupPrice"))%></em>起</span><span
                                 class="rate-info">原价：<s>¥<%# Convert.ToInt32(Eval("MarketPrice"))%></s></span></p>
-                    </li>
+                    </div></li>
                 </ItemTemplate>
             </asp:Repeater>
         </ul>
@@ -113,12 +114,12 @@
     <!------秒杀-------->
     <div id="MiaoShaSrcoll" class="R_side01L R_side01R" style="margin:0; float:right;">
         <h3>
-            <img src="/images/miaosha.png"><a class="more" href="/TuanGou.aspx?type=1">更多&gt;&gt;</a></h3>
+            <img src="/images/miaosha.png"><a class="more" href="/TuanGou.aspx?type=1&t=1">更多&gt;&gt;</a></h3>
             <div class="box">
         <ul class="b_imglist">
             <asp:Repeater ID="MiaoSha" runat="server">
                 <ItemTemplate>
-                    <li><a class="cx_img" href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
+                    <li><div class="list"><a class="cx_img" href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
                         <img src="<%# Eval("ProductImg")%>" /><p class="cx_title">
                             <%# Eval("ProductName")%></p>
                     </a>
@@ -132,7 +133,7 @@
                             时 <font class="fontblue font14" id="minute_show<%# Container.ItemIndex+1 %>">20</font>
                             分 <font class="fontblue font14" id="second_show<%# Container.ItemIndex+1 %>">1</font>
                             秒</p>
-                    </li>
+                   </div> </li>
                 </ItemTemplate>
             </asp:Repeater>
         </ul>
@@ -141,6 +142,7 @@
         </div>
     </div>
 </div>
+<%} %>
 <!------会员商城-------->
 <div class="R-side02 margin_T10">
     <div class="R_side02_T">
@@ -155,7 +157,7 @@
                 <ItemTemplate>
                     <li><a href="/ShangChengXiangQing.aspx?ID=<%#  Eval("ProductID") %>" class="cx_img">
                         <img src="<%# getImgs(Eval("ProductImgs")) %>" /><div class="tuijian">
-                            会员价</div>
+                            优惠价</div>
                     </a>
                         <p class="cx_title">
                             <a href="/ShangChengXiangQing.aspx?ID=<%#  Eval("ProductID") %>">
@@ -380,7 +382,7 @@
                 $('#ShangChengPageChanPinIndex').val(data.pageIndex);
                 $(data.list).each(function() {
                     var productInfo = data.list[i];
-                    str += '<li class="mar6"><a class="cx_img" href="#"><img src="' + productInfo.Images[0].ImgUrl + '"><div class="tuijian">会员价</div></a><p class="cx_title"><a href="#">' + productInfo.ProductName + '</a></p><p><span class="sales"><em>' + (productInfo.Price * (1 + productInfo.FeeSetting.PuTongHuiYuanJia / 100)).toFixed(0) + '</em>起</span><span class="rate-info">原价：<s>' + productInfo.Price.toFixed(0) + '</s></span></p></li>';
+                    str += '<li class="mar6"><a class="cx_img" href="#"><img src="' + productInfo.Images[0].ImgUrl + '"><div class="tuijian">优惠价</div></a><p class="cx_title"><a href="#">' + productInfo.ProductName + '</a></p><p><span class="sales"><em>' + (productInfo.Price * (1 + productInfo.FeeSetting.PuTongHuiYuanJia / 100)).toFixed(0) + '</em>起</span><span class="rate-info">原价：<s>' + productInfo.Price.toFixed(0) + '</s></span></p></li>';
                 });
                 animateCallback(str);
                 $('#shangchengimglist').css({ position: '', overflow: '' });

@@ -57,7 +57,13 @@ namespace EyouSoft.Web
 
             EyouSoft.BLL.OtherStructure.BSysAdv bll = new EyouSoft.BLL.OtherStructure.BSysAdv();
             //首页轮播图
-            var top = bll.GetList(5, EyouSoft.Model.Enum.AdvArea.国内长线首页轮换广告);
+            int count = 0;
+            var top = bll.GetList(5, 1, ref count, new EyouSoft.Model.MSearchSysAdv()
+            {
+                AreaIds = new AdvArea[] { EyouSoft.Model.Enum.AdvArea.国内长线首页轮换广告,
+                                          EyouSoft.Model.Enum.AdvArea.国际线路首页轮换广告, 
+                                          EyouSoft.Model.Enum.AdvArea.周边短线首页轮换广告 }
+            });
             if (top != null && top.Count > 0)
             {
                 for (int i = 0; i < top.Count; i++)

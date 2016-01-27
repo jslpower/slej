@@ -30,22 +30,6 @@
         <table width="100%" border="0">
             <tr class="odd">
                 <th width="110" height="30" align="center">
-                    <span class="fred">*</span>用户名:
-                </th>
-                <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtSuppName" MaxLength="40" name="txtSuppName" runat="server" class="inputtext formsize180"
-                        valid="required" errmsg="请输入用户名!" value></asp:TextBox>
-                </td>
-                <th width="90" height="30" align="center">
-                    密码:
-                </th>
-                <td bgcolor="#E3F1FC">               
-                    <asp:TextBox ID="txtSuppPwd" name="txtSuppPwd" TextMode="Password" runat="server"
-                        class="inputtext formsize180"></asp:TextBox><br />（默认123456，代理商自行修改）
-                </td>
-            </tr>
-            <tr class="odd">
-                <th width="110" height="30" align="center">
                     <span class="fred">*</span>单位名称
                 </th>
                 <td bgcolor="#E3F1FC">
@@ -53,10 +37,10 @@
                         class="inputtext formsize180" valid="required" errmsg="请输入单位名称!"></asp:TextBox>
                 </td>
                 <th width="90" height="30" align="center">
-                    资质:
+                    单位简称:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtZiZhi" name="txtZiZhi" runat="server" class="inputtext formsize180"></asp:TextBox>
+                    <asp:TextBox ID="txtJC" name="txtJC" runat="server" class="inputtext formsize180"></asp:TextBox>
                 </td>
             </tr>
             <tr class="odd">
@@ -90,25 +74,26 @@
             </tr>
             <tr class="odd">
                 <th width="90" height="30" align="center">
+                    资质:
+                </th>
+                <td bgcolor="#E3F1FC">
+                    <asp:TextBox ID="txtZiZhi" name="txtZiZhi" runat="server" class="inputtext formsize180"></asp:TextBox>
+                </td>
+                <th width="90" height="30" align="center">
                     邮箱:
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtYouXiang" name="txtYouXiang" runat="server" class="inputtext formsize180"
                         valid="isEmail" errmsg="邮箱格式错误!"></asp:TextBox>
                 </td>
-                <th width="90" height="30" align="center">
-                    网址:
-                </th>
-                <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtWangZhi" name="txtWangZhi" runat="server" class="inputtext formsize180"></asp:TextBox>
-                </td>
+                
             </tr>
             <tr class="odd">
                 <th width="90" height="30" align="center">
                     地址:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtDiZhi" name="txtDiZhi" runat="server" class="inputtext formsize180"></asp:TextBox>
+                    <asp:TextBox ID="txtDiZhi" name="txtDiZhi" runat="server" class="inputtext formsize260"></asp:TextBox>
                 </td>
                 <th width="90" height="30" align="center">
                     地图位置:
@@ -201,7 +186,6 @@
 
     <script type="text/javascript">
         var pageData = {
-            parm: { dotype: '<%= EyouSoft.Common.Utils.GetQueryStringValue("dotype") %>', id: '<%=EyouSoft.Common.Utils.GetQueryStringValue("id") %>', domark: '<%= EyouSoft.Common.Utils.GetQueryStringValue("type") %>' },
             CheckForm: function() {
                 return ValiDatorForm.validator($("#btn").closest("form").get(0), "alert");
             },
@@ -211,18 +195,17 @@
             pageSave: function() {
                 $.newAjax({
                     type: "post",
-                    url: "SupplierEdit.aspx?save=save&" + $.param(pageData.parm),
+                    url: "SupplierEdit.aspx?save=save",
                     dataType: "json",
                     data: $("#btn").closest("form").serialize(),
                     success: function(ret) {
-                        tableToolbar._showMsg(ret.msg, function() {
-                            if (pageData.parm.domark == "left") {
-                                location.href = location.href;
-                            }
-                            else {
-                                location.href = '/WebMaster/Supplier/SupplierList.aspx';
-                             }
-                        });
+                    if (ret.result == "1") {
+                    
+                        tableToolbar._showMsg(ret.msg, function() { location.href = '/WebMaster/Supplier/SupplierEdit.aspx'; });
+                    }
+                    else {
+                        tableToolbar._showMsg(ret.msg);
+                    }
                     },
                     error: function() {
                         tableToolbar._showMsg(tableToolbar.errorMsg);
@@ -245,10 +228,6 @@
         $(function() {
             $("#btn").click(function() { if (pageData.CheckForm()) { pageData.pageSave() } })
             pageData.SetMapInfo();
-            if (pageData.parm.dotype != "update" && '<%= EyouSoft.Common.Utils.GetQueryStringValue("type") %>' != 'left') {
-                $("#<%=txtSuppPwd.ClientID %>").val("123456");
-                $("#<%=txtSuppPwd.ClientID %>").attr("errmsg", "请输入密码").attr("valid", "required");
-            }
         })
     </script>
 

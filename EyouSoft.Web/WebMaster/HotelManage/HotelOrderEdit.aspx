@@ -130,7 +130,24 @@
                                 <asp:Literal ID="txt_hotelback" runat="server"></asp:Literal>
                             </td>
                         </tr>
-                           
+                         
+                    </table>
+                    <table border="0" class="tchuang" style="width: 100%">
+                    <tr>
+                    <td colspan="3" style=" font-size:16px; font-weight:bold; text-align:center"> 酒店价格列表 </td>
+                    </tr>
+                        <tr sizcache="24" sizset="77">
+                            <th width="146" height="28" align="right" style=" font-size:13px; font-weight:bold; text-align:center">
+                                日期
+                            </th>
+                            <td height="28" width="300"  bgcolor="#E3F1FC" style=" font-size:13px; font-weight:bold; text-align:center">
+                                金额
+                            </td>
+                            <td height="28" width="300"   bgcolor="#E3F1FC" style=" font-size:13px; font-weight:bold; text-align:center">
+                                分销金额
+                            </td>
+                        </tr>
+                        <asp:Literal ID="XC" runat="server"></asp:Literal>
                     </table>
                     <div style="float:right; padding-top:30px; padding-right:60px;"><a href="javascript:history.go(-1);" style="color:Blue">返回订单列表</a></div>
     </div>

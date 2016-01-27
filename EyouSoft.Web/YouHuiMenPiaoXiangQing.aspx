@@ -71,7 +71,7 @@
                         <li>
                             <label>
                                 挂牌价：</label><font class="font13 font_yellow"><strike><%=Model.RetailPrice == 0 ? "空" : "¥" + Model.RetailPrice.ToString("0")+"元起"%></strike></font><font>&nbsp;&nbsp;&nbsp;&nbsp;网络零售价：</font><font
-                                    class="font13 font_yellow"><strike><%=Model.WebsitePrices == 0 ? "空" : "¥"+Model.WebsitePrices.ToString("0") + "元起"%></strike></font><font>&nbsp;&nbsp;&nbsp;&nbsp;会员价：</font><font
+                                    class="font13 font_yellow"><strike><%=Model.WebsitePrices == 0 ? "空" : "¥"+Model.WebsitePrices.ToString("0") + "元起"%></strike></font><font>&nbsp;&nbsp;&nbsp;&nbsp;优惠价：</font><font
                                         class="font13 font_yellow"><%=EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(Model.DistributionPrice, Model.WebsitePrices, MemberTypes.普通会员, Model.FeeSettings, FeeTypes.门票) == 0 ? "空" : "¥" + EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(Model.DistributionPrice, Model.WebsitePrices, MemberTypes.普通会员, Model.FeeSettings, FeeTypes.门票).ToString("0") + "元起"%></font><font></font></li>
                         <li>
                             <label>
@@ -136,7 +136,7 @@
                             <%if (IsShowHuiYuan())
                               {%>
                             <th>
-                                会员价
+                                优惠价
                             </th>
                             <%} %>
                             <%if (IsShowErJiDaiLi())
@@ -378,7 +378,7 @@
                             <%if (IsShowHuiYuan())
                               {%>
                             <th>
-                                会员价
+                                优惠价
                             </th>
                             <%} %>
                             <%if (IsShowErJiDaiLi())

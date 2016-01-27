@@ -30,6 +30,9 @@
                         <label>
                             产品名称：</label>
                         <input type="text" class="inputtext" name="CpName" value="<%= EyouSoft.Common.Utils.GetQueryStringValue("CpName") %>" />
+                        <label>
+                            供应商名称：</label>
+                        <input type="text" class="inputtext" name="CompanyName" value="<%= EyouSoft.Common.Utils.GetQueryStringValue("CompanyName") %>" />
                         促销形式：
                         <select class="inputselect" name="CxType">
                             <%=EyouSoft.Common.Utils.GetEnumDDL(EyouSoft.Common.EnumObj.GetList(typeof(EyouSoft.Model.Enum.CuXiaoLeiXing)), EyouSoft.Common.Utils.GetQueryStringValue("CxType"), true, "-1", "请选择")%>
@@ -38,6 +41,7 @@
                         <select class="inputselect" name="CpType">
                             <%=EyouSoft.Common.Utils.GetEnumDDL(EyouSoft.Common.EnumObj.GetList(typeof(EyouSoft.Model.Enum.ChanPinLeiXing)), EyouSoft.Common.Utils.GetQueryStringValue("CpType"), true, "-1", "请选择")%>
                         </select>
+                        <input name="type" value="<%= EyouSoft.Common.Utils.GetQueryStringValue("type") %>" type="hidden" />
                         <input type="submit" class="search-btn" value="" />
                     </div>
                     </form>
@@ -48,6 +52,8 @@
             </tr>
         </tbody>
     </table>
+    <% if (EyouSoft.Common.Utils.GetQueryStringValue("type") == "g")
+       {%>
     <div class="btnbox btnboxme">
         <table border="0" align="left" cellpadding="0" cellspacing="0">
             <tr>
@@ -57,6 +63,7 @@
             </tr>
         </table>
     </div>
+    <%} %>
     <div class="tablelist">
         <table width="100%" cellspacing="1" cellpadding="0" border="0" id="liststyle">
             <tbody>
@@ -82,6 +89,12 @@
                     <th align="center">
                         有效期
                     </th>
+                    <% if (EyouSoft.Common.Utils.GetQueryStringValue("type") != "g")
+                       {%>
+                    <th>
+                    供应商
+                    </th>
+                    <%} %>
                     <th align="center">
                         操作
                     </th>
@@ -110,10 +123,23 @@
                             <td align="center">
                                 <%# Eval("ValiDate", "{0:yyyy-MM-dd}")%>
                             </td>
+                             <% if (EyouSoft.Common.Utils.GetQueryStringValue("type") != "g")
+                                {%>
                             <td align="center">
-                            <%#CheIsIndex(Eval("IsIndex"), Eval("ID"))%><br />
+                                <a href="/webmaster/Supplier/SupplierD.aspx?dlsid=<%# Eval("SupplierID")%>">
+                                    <%# GetCompanyName(Eval("SupplierID"))%>
+                                    </a>
+                            </td>
+                            <%} %>
+                            <td align="center">
+                            <% if (EyouSoft.Common.Utils.GetQueryStringValue("type") != "s")
+                               {%>
+                               <%#CheIsIndex(Eval("IsIndex"), Eval("ID"))%><br />
                                 <a class="table_update" href="javascript:;" data-id="<%#Eval("ID") %>">修改</a> <a
                                     class="table_del" href="javascript:;" data-id="<%#Eval("ID") %>">删除</a>
+                            <%}else{ %><%# GetDaiLiPro(Eval("IsIndex"), Eval("ValiDate"), Eval("ID"))%> 
+                            
+                                    <%} %>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -148,6 +174,13 @@
             var url = "/WebMaster/TuanGou/TuanGouList.aspx?dotype=isindex&id=" + id + "&state=" + state;
             pageData.GoAjax(url);
         },
+        SheZhiStatus: function(obj) {
+            var id = $(obj).attr("data-id");
+            var state = $(obj).attr("data-state");
+            var probool = $(obj).attr("data-bool");
+            var url = "/WebMaster/TuanGou/TuanGouList.aspx?dotype=isdaili&id=" + id + "&state=" + state + "&probool=" + probool;
+            pageData.GoAjax(url);
+        },
         GoAjax: function(url) {
             $.newAjax({
                 type: "post",
@@ -171,11 +204,11 @@
         };
         $(function() {
         $("a.table_add").click(function() {
-        window.location.href = "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=add";
+        window.location.href = "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=add&otype=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>";
         //             pageData.ShowBoxy({ iframeUrl: "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=add", title: "新增", width: "900px", height: "450px" }) 
 });
 $("a.table_update").click(function() {
-window.location.href = "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=update&id=" + $(this).attr("data-id");
+window.location.href = "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=update&otype=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>&id=" + $(this).attr("data-id");
 //            pageData.ShowBoxy({ iframeUrl: "/WebMaster/TuanGou/TuanGouEdit.aspx?dotype=update&id=" + $(this).attr("data-id"), title: "修改", width: "900px", height: "450px" }) 
 });
 

@@ -84,7 +84,14 @@ namespace EyouSoft.Model.MallStructure
         /// 订单来源
         /// </summary>
         public OrderSite OrderSite { get; set; }
-
+        /// <summary>
+        /// 平台交易率
+        /// </summary>
+        public decimal JiaoYiLv { get; set; }
+        /// <summary>
+        /// 成本价
+        /// </summary>
+        public decimal SalePrice { get; set; }
 
         #region  扩展属性
         /// <summary>
@@ -135,6 +142,10 @@ namespace EyouSoft.Model.MallStructure
         /// 分销商id
         /// </summary>
         public string SupplierID { get; set; }
+        /// <summary>
+        /// 是否是特约供应商(特约供应商的id)
+        /// </summary>
+        public string IsTeYue { get; set; }
 
     }
 }

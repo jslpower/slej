@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/Js/jquery-1.4.4.js"></script>
 
     <script src="/JS/table-toolbar.js" type="text/javascript"></script>
-    
+
     <script src="/JS/swfupload/swfupload.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="/Js/kindeditor-4.1/kindeditor.js"></script>
@@ -55,10 +55,26 @@
         </tr>
         <tr class="lr_hangbg">
             <td align="right">
+                我要做分销商手机版：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtWapFenXiao" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
                 我要做贵宾会员：
             </td>
             <td align="left" bgcolor="#FFFFFF">
                 <asp:TextBox runat="server" ID="txtGuiBin" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
+                我要做贵宾会员手机版：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtWapGuiBin" class="editText"></asp:TextBox>
             </td>
         </tr>
         <tr class="lr_hangbg">
@@ -71,6 +87,14 @@
         </tr>
         <tr class="lr_hangbg">
             <td align="right">
+                我要做普通会员手机版：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtWapPuTong" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
                 我要应聘专职：
             </td>
             <td align="left" bgcolor="#FFFFFF">
@@ -79,10 +103,26 @@
         </tr>
         <tr class="lr_hangbg">
             <td align="right">
+                我要应聘专职手机版：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtWapYingPin" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
                 我要做供应商：
             </td>
             <td align="left" bgcolor="#FFFFFF">
                 <asp:TextBox runat="server" ID="txtGongYing" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
+                我要做供应商手机版：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtWapGongYing" class="editText"></asp:TextBox>
             </td>
         </tr>
         <%--<tr class="lr_hangbg">
@@ -141,6 +181,22 @@
                 <asp:TextBox runat="server" ID="MoblieSLEJ" class="editText"></asp:TextBox>
             </td>
         </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
+                免费代理申请条款：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="DaiLiTiaoKuan" class="editText"></asp:TextBox>
+            </td>
+        </tr>
+        <tr class="lr_hangbg">
+            <td align="right">
+                系统操作手册：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="WapSet" class="editText"></asp:TextBox>
+            </td>
+        </tr>
         <!--<tr class="lr_hangbg">
             <td align="right">
                 统计代码：
@@ -162,7 +218,9 @@
                 </table>
             </td>
         </tr>
-    </table><br /><br />
+    </table>
+    <br />
+    <br />
     </form>
 
     <script type="text/javascript">

@@ -260,10 +260,11 @@ namespace EyouSoft.Web.Member
                 var item = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetModel(productid.ToString());
                 if (item != null)
                 {
-                    var list = new EyouSoft.BLL.SystemStructure.BSupplier().GetModel(item.GYSid);
+                    var list = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(item.GYSid);
                     if (list != null)
                     {
-                        gongying = "<span style=\"width:100px; height:18px; overflow:hidden\">"+list.SupplierName + "</span><br />" + list.ContactMobile;
+                        var memodel = new EyouSoft.IDAL.MemberStructure.BMember2().Get(list.MemberID);
+                        gongying = "<span style=\"width:100px; height:18px; overflow:hidden\">"+ memodel.MemberName + "</span><br />" + memodel.Mobile;
                     }
                 }
             }

@@ -31,7 +31,7 @@
               <tr>
                 <th>&nbsp;</th>
                 <th width="95" align="right">门市价</th>
-                <th width="95" align="right">会员价</th>
+                <th width="95" align="right">优惠价</th>
                 <th width="128">&nbsp;</th>
               </tr>
           </table>

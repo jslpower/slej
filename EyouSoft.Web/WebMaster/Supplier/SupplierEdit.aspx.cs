@@ -24,33 +24,23 @@ namespace EyouSoft.Web.WebMaster.Supplier
         /// </summary>
         void initPage()
         {
-            string gysType = "0";
-            string id = Utils.GetQueryStringValue("id");
-
-            if (Utils.GetQueryStringValue("type") == "left")
-            {
-                id = UserInfo.GysId;
-            }
-            var model = new EyouSoft.BLL.SystemStructure.BSupplier().GetModel(id);
+            int gysType = 0;
+            string id = UserInfo.GysId;
+            var model = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(id);
             if (model != null)
             {
-                txtSuppName.ReadOnly = true;
-                txtSuppName.Text = model.SuppName;
-                txtSuppPwd.Text = model.SuppPwd;
-                txtDanWeiMingCheng.Text = model.SupplierName;
-                if (Utils.GetQueryStringValue("type") == "left")
-                {
-                    txtDanWeiMingCheng.ReadOnly = true;
-                }
-                gysType = ((int)model.SupplierType).ToString();
+                var memberModel = new EyouSoft.IDAL.MemberStructure.BMember2().Get(model.MemberID);
+                txtDanWeiMingCheng.Text = model.CompanyName;
+                txtJC.Text = model.CompanyJC;
+                gysType = (int)model.SupplierType;
                 txtZiZhi.Text = model.Qualifications;
-                txtLianXiRen.Text = model.ContactName;
-                txtDianHua.Text = model.ContactPhone;
-                txtShouJi.Text = model.ContactMobile;
-                txtQQ.Text = model.ContactQQ;
-                txtYouXiang.Text = model.ContactMail;
-                txtWangZhi.Text = model.SuppULR;
-                txtDiZhi.Text = model.SuppAddress;
+                txtLianXiRen.Text = memberModel.MemberName;
+                txtDianHua.Text = memberModel.Contact;
+                txtShouJi.Text = memberModel.Mobile;
+                txtQQ.Text = memberModel.qq;
+                txtYouXiang.Text = memberModel.Email;
+                //txtWangZhi.Text = model.SuppULR;
+                txtDiZhi.Text = memberModel.Address;
                 X.InnerText = jingdu.Value = model.MapX;
                 Y.InnerText = weidu.Value = model.MapY;
 
@@ -60,26 +50,29 @@ namespace EyouSoft.Web.WebMaster.Supplier
                 if (!string.IsNullOrEmpty(model.OtherPath)) litQiTaZhengJian.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='upQiTaZhengJianhidFileName' value='1|{0}' /></span>", model.OtherPath);
                 if (!string.IsNullOrEmpty(model.FormPath)) litBiaoGe.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='upBiaoGehidFileName' value='1|{0}' /></span>", model.FormPath);
             }
-            strGYSType = Utils.GetEnumDDL(EnumObj.GetList(typeof(EyouSoft.Model.Enum.SupplierType)), gysType, false);
+            strGYSType = Utils.GetEnumDDL(EnumObj.GetList(typeof(EyouSoft.Model.Enum.SupplierType)), gysType.ToString(), false);
         }
         /// <summary>
         /// 保存数据
         /// </summary>
         void pageSave()
         {
-            var model = new EyouSoft.Model.SystemStructure.MSupplier();
-            model.SuppName = Utils.GetFormValue(txtSuppName.UniqueID);
-            model.SuppPwd = Utils.GetFormValue(txtSuppPwd.UniqueID);
-            model.SupplierName = Utils.GetFormValue(txtDanWeiMingCheng.UniqueID);
+            var Sellermodel = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(UserInfo.GysId);
+            var model = new EyouSoft.Model.AccountStructure.MSellers();
+            var memberModel = new MMember2();
+            model.ID = Sellermodel.ID;
+            memberModel.MemberID = Sellermodel.MemberID;
+            model.CompanyName = Utils.GetFormValue(txtDanWeiMingCheng.UniqueID);
+            model.CompanyJC = Utils.GetFormValue(txtJC.UniqueID);
             model.SupplierType = (EyouSoft.Model.Enum.SupplierType)Utils.GetInt(Utils.GetFormValue("ddlGYSType"));
             model.Qualifications = Utils.GetFormValue(txtZiZhi.UniqueID);
-            model.ContactName = Utils.GetFormValue(txtLianXiRen.UniqueID);
-            model.ContactPhone = Utils.GetFormValue(txtDianHua.UniqueID);
-            model.ContactMobile = Utils.GetFormValue(txtShouJi.UniqueID);
-            model.ContactQQ = Utils.GetFormValue(txtQQ.UniqueID);
-            model.ContactMail = Utils.GetFormValue(txtYouXiang.UniqueID);
-            model.SuppULR = Utils.GetFormValue(txtWangZhi.UniqueID);
-            model.SuppAddress = Utils.GetFormValue(txtDiZhi.UniqueID);
+            memberModel.MemberName = Utils.GetFormValue(txtLianXiRen.UniqueID);
+            memberModel.Contact = Utils.GetFormValue(txtDianHua.UniqueID);
+            memberModel.Mobile = Utils.GetFormValue(txtShouJi.UniqueID);
+            memberModel.qq = Utils.GetFormValue(txtQQ.UniqueID);
+            memberModel.Email = Utils.GetFormValue(txtYouXiang.UniqueID);
+            //model.SuppULR = Utils.GetFormValue(txtWangZhi.UniqueID);
+            memberModel.Address = Utils.GetFormValue(txtDiZhi.UniqueID);
             model.MapX = Utils.GetFormValue(jingdu.UniqueID);
             model.MapY = Utils.GetFormValue(weidu.UniqueID);
 
@@ -96,82 +89,17 @@ namespace EyouSoft.Web.WebMaster.Supplier
             if (others.Length > 1) model.OtherPath = others[1];
             if (forms.Length > 1) model.FormPath = forms[1];
 
-            model.OperatorID = UserInfo.UserId.ToString();
-            model.OperatorName = UserInfo.Username;
-
-            #region 写入后台用户
-            var webUser = new Model.MWebmaster
-            {
-                Fax = model.ContactQQ,//传真字段保存QQ信息。
-                Mobile = model.ContactMobile,
-                Telephone = model.ContactPhone,
-                Realname = model.ContactName,
-                Username = model.SuppName,
-                IsEnable = 1,
-                LeiXing = 1
-            };
-
-            if (!string.IsNullOrEmpty(model.SuppPwd))
-            {
-                webUser.Password = model.SuppPwd;
-                webUser.MD5Password = new EyouSoft.Toolkit.DataProtection.HashCrypto().MD5Encrypt(model.SuppPwd);
-            }
-
-
-            #endregion
-
-            int result = 0;
-            string dotype = Utils.GetQueryStringValue("dotype");
-            if (dotype == "add")
-            {
-                model.SuppName = "G" + model.SuppName;
-                webUser.Username = model.SuppName;
-                if (!new EyouSoft.BLL.SystemStructure.BSupplier().ExistsName(model.SuppName))
-                {
-
-                    model.ID = Guid.NewGuid().ToString();
-                    webUser.GysId = model.ID;
-                    webUser.CreateTime = DateTime.Now;
-                    webUser.IsAdmin = (int)EyouSoft.Model.Enum.Is.是;
-                    webUser.Permissions = string.Empty;
-                    if (!new BLL.OtherStructure.BWebmaster().ExistsUserName(model.SuppName, -1))
-                    {
-                        result = new EyouSoft.BLL.SystemStructure.BSupplier().Insert(model);
-                        new BLL.OtherStructure.BWebmaster().Add(webUser);
-                    }
-                    else
-                    {
-                        result = 3;
-                    }
-                }
-                else
-                {
-                    result = 3;
-                }
-            }
-            else
-            {
-                model.ID = Utils.GetQueryStringValue("id");
-                if (Utils.GetQueryStringValue("domark") == "left")
-                {
-                    model.ID = UserInfo.GysId;
-                }
-                result = new EyouSoft.BLL.SystemStructure.BSupplier().Update(model);
-            }
             Response.Clear();
-            if (result == 1 || result == 2)
+            if (new EyouSoft.BLL.MemberStructure.BMember().UpdateDaiLiMemberInfo(memberModel) == true && new EyouSoft.BLL.MemberStructure.BMember().UpdateDaiLiSellerInfo(model) == true)
             {
-                Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", dotype == "add" ? "添加成功" : "修改成功"));
-            }
-            else if (result == 3)
-            {
-                Response.Write(UtilsCommons.AjaxReturnJson("0", "用户名重复"));
+                Response.Write(UtilsCommons.AjaxReturnJson("1" , "修改成功！"));
             }
             else
             {
-                Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", dotype == "add" ? "添加失败" : "修改失败"));
+                Response.Write(UtilsCommons.AjaxReturnJson("0", "修改失败！"));
             }
             Response.End();
+
         }
     }
 }

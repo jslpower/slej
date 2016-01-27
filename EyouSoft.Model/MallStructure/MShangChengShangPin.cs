@@ -157,6 +157,10 @@ namespace EyouSoft.Model.MallStructure
         /// 是否有排序（0.没有，其他都有）
         /// </summary>
         public int Sort { get; set; }
+        /// <summary>
+        /// 供应商商铺名称
+        /// </summary>
+        public string CompanyName { get; set; }
     }
 
 

@@ -48,6 +48,55 @@ namespace EyouSoft.DAL.MemberStructure
             return count;
         }
         /// <summary>
+        /// 代理商，员工，免费代理修改信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateDaiLiMemberInfo(MMember2 model)
+        {
+            string sql = "update tbl_Member set MemberName=@MemberName,Address=@Address,Mobile=@Mobile,Email=@Email,Contact=@Contact,qq=@qq where MemberID=@MemberID";
+            DbCommand cmd = this._db.GetSqlStringCommand(sql);
+
+            this._db.AddInParameter(cmd, "MemberName", DbType.String, model.MemberName);
+            this._db.AddInParameter(cmd, "Email", DbType.String, model.Email);
+            this._db.AddInParameter(cmd, "Contact", DbType.String, model.Contact);
+            this._db.AddInParameter(cmd, "qq", DbType.String, model.qq);
+            this._db.AddInParameter(cmd, "Mobile", DbType.String, model.Mobile);
+            this._db.AddInParameter(cmd, "MemberID", DbType.String, model.MemberID);
+            this._db.AddInParameter(cmd, "Address", DbType.String, model.Address);
+
+            int count = DbHelper.ExecuteSql(cmd, this._db);
+            return count;
+        }
+        /// <summary>
+        /// 代理商，员工，免费代理修改代理信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int UpdateDaiLiSellerInfo(EyouSoft.Model.AccountStructure.MSellers model)
+        {
+            string sql = "update tbl_JA_Sellers set CompanyName=@CompanyName,CompanyJC=@CompanyJC,SupplierType=@SupplierType,Qualifications=@Qualifications,MapX=@MapX,MapY=@MapY,CardPath=@CardPath,AccountPaht=@AccountPaht,VisitPath=@VisitPath,OtherPath=@OtherPath,FormPath=@FormPath where ID=@ID";
+            DbCommand cmd = this._db.GetSqlStringCommand(sql);
+
+            this._db.AddInParameter(cmd, "CompanyName", DbType.String, model.CompanyName);
+            this._db.AddInParameter(cmd, "CompanyJC", DbType.String, model.CompanyJC);
+            this._db.AddInParameter(cmd, "SupplierType", DbType.Int16, (int)model.SupplierType);
+            this._db.AddInParameter(cmd, "Qualifications", DbType.String, model.Qualifications);
+            this._db.AddInParameter(cmd, "MapX", DbType.String, model.MapX);
+            this._db.AddInParameter(cmd, "MapY", DbType.String, model.MapY);
+            this._db.AddInParameter(cmd, "CardPath", DbType.String, model.CardPath);
+            this._db.AddInParameter(cmd, "AccountPaht", DbType.String, model.AccountPaht);
+            this._db.AddInParameter(cmd, "VisitPath", DbType.String, model.VisitPath);
+            this._db.AddInParameter(cmd, "OtherPath", DbType.String, model.OtherPath);
+            this._db.AddInParameter(cmd, "FormPath", DbType.String, model.FormPath);
+            this._db.AddInParameter(cmd, "ID", DbType.String, model.ID);
+
+            int count = DbHelper.ExecuteSql(cmd, this._db);
+            return count;
+        }
+
+
+        /// <summary>
         /// 更新会员支付密码
         /// </summary>
         /// <param name="model"></param>
@@ -220,6 +269,498 @@ namespace EyouSoft.DAL.MemberStructure
             }
 
             return ZhiFuWay;
+        }
+        /// <summary>
+        /// 获取代理商城商品的代理商列表
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyDaiLi(string GYSId,int PageIndex,int PageSize, MTeYueSer sermodel)
+        {
+            IList<MTeYue> list = new List<MTeYue>();
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if(!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            if (sermodel.IsMyDaiLi > 0)
+            {
+                if (sermodel.IsMyDaiLi == 1)
+                {
+                    sqlwhere.AppendFormat(" and a.ID in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=0 ) ", GYSId);
+                }
+                else
+                {
+                    sqlwhere.AppendFormat(" and a.ID NOT in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=0 ) ", GYSId);
+                }
+            }
+            string sql = "SELECT * from (select ROW_NUMBER() OVER(order by b.Mobile desc ) AS RowNumber,a.*,b.MemberName,b.Mobile from (select MemberID,ID,WebsiteName,CompanyName,WebSite from tbl_JA_Sellers where ID in(SELECT DISTINCT MemberId from tbl_Seller_ShangCheng where MemberId <> '" + GYSId + "' and ProductId in (select ProductID from tbl_ShangChengChanPin where GYSid='" + GYSId + "')))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString() + ") as c where  RowNumber BETWEEN " + (PageIndex - 1) * PageSize + " and " + PageIndex * PageSize;
+            DbCommand cmd = this._db.GetSqlStringCommand(sql.ToString());
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                while (dr.Read())
+                {
+                   MTeYue model = new MTeYue();
+                   model.ID = dr["ID"].ToString();
+                   model.MemberID = dr["MemberID"].ToString();
+                   model.WebsiteName = dr["WebsiteName"].ToString();
+                   model.MemberName = dr["MemberName"].ToString();
+                   model.CompanyName = dr["CompanyName"].ToString();
+                   model.Mobile = dr["Mobile"].ToString();
+                   model.WebSite = dr["WebSite"].ToString();
+                   list.Add(model);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
+        /// 获取选择我的商城商品的代理总数
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int GetMyDaiLiNum(string GYSId, MTeYueSer sermodel)
+        {
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            if (sermodel.IsMyDaiLi > 0)
+            {
+                if (sermodel.IsMyDaiLi == 1)
+                {
+                    sqlwhere.AppendFormat(" and a.ID in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=0 ) ", GYSId);
+                }
+                else
+                {
+                    sqlwhere.AppendFormat(" and a.ID NOT in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=0 ) ", GYSId);
+                }
+            }
+            string sql = "select Count(a.MemberID) from (select MemberID,ID,WebsiteName,CompanyName from tbl_JA_Sellers where ID in(SELECT DISTINCT MemberId from tbl_Seller_ShangCheng where MemberId <> '" + GYSId + "' and ProductId in (select ProductID from tbl_ShangChengChanPin where GYSid='" + GYSId + "')))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString();
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 判断该代理商是否为我的商城下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int JudgeDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "SELECT COUNT(ID) FROM tbl_GYS_Seller where GYSId='" + GYSId + "' and DaiLiId='" + DaiLiId + "'  and LeiXing=0 ";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 添加我的商城下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int AddDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "INSERT into tbl_GYS_Seller (GYSId,DaiLiId,LeiXing) VALUES('" + GYSId + "','" + DaiLiId + "',0)";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.ExecuteSql(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 删除我的商城下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int DelDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "DELETE from tbl_GYS_Seller where GYSId='" + GYSId + "' and DaiLiId='" + DaiLiId + "' and LeiXing=0 ";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.ExecuteSql(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+
+        /// <summary>
+        /// 获取代理团购商品的代理商列表
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTGDaiLi(string GYSId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            IList<MTeYue> list = new List<MTeYue>();
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            if (sermodel.IsMyDaiLi > 0)
+            {
+                if (sermodel.IsMyDaiLi == 1)
+                {
+                    sqlwhere.AppendFormat(" and a.ID in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=1 ) ", GYSId);
+                }
+                else
+                {
+                    sqlwhere.AppendFormat(" and a.ID NOT in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=1 ) ", GYSId);
+                }
+            }
+            string sql = "SELECT * from (select ROW_NUMBER() OVER(order by b.Mobile desc ) AS RowNumber,a.*,b.MemberName,b.Mobile from (select MemberID,ID,WebsiteName,CompanyName,WebSite from tbl_JA_Sellers where ID in(SELECT DISTINCT MemberId from tbl_Seller_TuanGou where  MemberId <> '" + GYSId + "' and ProductId in (select ProductID from tbl_TuanGouChanPin where SupplierID='" + GYSId + "')))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString() + ") as c where  RowNumber BETWEEN " + (PageIndex - 1) * PageSize + " and " + PageIndex * PageSize;
+            DbCommand cmd = this._db.GetSqlStringCommand(sql.ToString());
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                while (dr.Read())
+                {
+                    MTeYue model = new MTeYue();
+                    model.ID = dr["ID"].ToString();
+                    model.MemberID = dr["MemberID"].ToString();
+                    model.WebsiteName = dr["WebsiteName"].ToString();
+                    model.MemberName = dr["MemberName"].ToString();
+                    model.CompanyName = dr["CompanyName"].ToString();
+                    model.Mobile = dr["Mobile"].ToString();
+                    model.WebSite = dr["WebSite"].ToString();
+                    list.Add(model);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
+        /// 获取选择我的团购商品的代理总数
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int GetMyTGDaiLiNum(string GYSId, MTeYueSer sermodel)
+        {
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            if (sermodel.IsMyDaiLi > 0)
+            {
+                if (sermodel.IsMyDaiLi == 1)
+                {
+                    sqlwhere.AppendFormat(" and a.ID in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=1 ) ", GYSId);
+                }
+                else
+                {
+                    sqlwhere.AppendFormat(" and a.ID NOT in (SELECT  DailiId from tbl_GYS_Seller WHERE GYSid='{0}' and LeiXing=1 ) ", GYSId);
+                }
+            }
+            string sql = "select Count(a.MemberID) from (select MemberID,ID,WebsiteName,CompanyName from tbl_JA_Sellers where ID in(SELECT DISTINCT MemberId from tbl_Seller_TuanGou where MemberId <> '" + GYSId + "' and  ProductId in (select ProductID from tbl_TuanGouChanPin where SupplierID='" + GYSId + "')))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString();
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 判断该代理商是否为我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int JudgeTGDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "SELECT COUNT(ID) FROM tbl_GYS_Seller where GYSId='" + GYSId + "' and DaiLiId='" + DaiLiId + "'  and LeiXing=1 ";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 添加我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int AddTGDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "INSERT into tbl_GYS_Seller (GYSId,DaiLiId,LeiXing) VALUES('" + GYSId + "','" + DaiLiId + "',1)";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.ExecuteSql(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 删除我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int DelTGDaiLi(string GYSId, string DaiLiId)
+        {
+            string sql = "DELETE from tbl_GYS_Seller where GYSId='" + GYSId + "' and DaiLiId='" + DaiLiId + "' and LeiXing=1 ";
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.ExecuteSql(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+
+        /// <summary>
+        /// 获取代理商城商品的供应商列表
+        /// </summary>
+        /// <param name="DaiLiId">代理商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyGYS(string DaiLiId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            IList<MTeYue> list = new List<MTeYue>();
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            string sql = "SELECT * from (select ROW_NUMBER() OVER(order by b.Mobile desc ) AS RowNumber,a.*,b.MemberName,b.Mobile from (SELECT MemberID,ID,WebsiteName,CompanyName,WebSite from tbl_JA_Sellers where ID in(SELECT GYSid from tbl_ShangChengChanPin where GYSid <> '" + DaiLiId + "' and ProductID in (SELECT ProductId from tbl_Seller_ShangCheng where MemberId='" + DaiLiId + "' and ProductStatus=2)))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString() + ") as c where  RowNumber BETWEEN " + (PageIndex - 1) * PageSize + " and " + PageIndex * PageSize;
+            DbCommand cmd = this._db.GetSqlStringCommand(sql.ToString());
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                while (dr.Read())
+                {
+                    MTeYue model = new MTeYue();
+                    model.ID = dr["ID"].ToString();
+                    model.MemberID = dr["MemberID"].ToString();
+                    model.WebsiteName = dr["WebsiteName"].ToString();
+                    model.MemberName = dr["MemberName"].ToString();
+                    model.CompanyName = dr["CompanyName"].ToString();
+                    model.Mobile = dr["Mobile"].ToString();
+                    model.WebSite = dr["WebSite"].ToString();
+                    list.Add(model);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
+        ///  获取代理商城商品的供应商总数
+        /// </summary>
+        /// <param name="DaiLiId"></param>
+        /// <returns></returns>
+        public int GetMyGYSNum(string DaiLiId, MTeYueSer sermodel)
+        {
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            string sql = "select Count(a.MemberID) from (SELECT MemberID,ID,WebsiteName,CompanyName from tbl_JA_Sellers where ID in(SELECT GYSid from tbl_ShangChengChanPin where GYSid <> '" + DaiLiId + "' and ProductID in (SELECT ProductId from tbl_Seller_ShangCheng where MemberId='" + DaiLiId + "' and ProductStatus=2)))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString();
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+        /// <summary>
+        /// 获取代理团购商品的供应商列表
+        /// </summary>
+        /// <param name="DaiLiId">代理商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTGGYS(string DaiLiId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            IList<MTeYue> list = new List<MTeYue>();
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            string sql = "SELECT * from (select ROW_NUMBER() OVER(order by b.Mobile desc ) AS RowNumber,a.*,b.MemberName,b.Mobile from (SELECT MemberID,ID,WebsiteName,CompanyName,WebSite from tbl_JA_Sellers where ID in(SELECT SupplierID from tbl_TuanGouChanPin where SupplierID <> '" + DaiLiId + "' and ID in (SELECT ProductId from tbl_Seller_TuanGou where MemberId='" + DaiLiId + "' and ProductStatus=2)))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString() + ") as c where  RowNumber BETWEEN " + (PageIndex - 1) * PageSize + " and " + PageIndex * PageSize;
+            DbCommand cmd = this._db.GetSqlStringCommand(sql.ToString());
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                while (dr.Read())
+                {
+                    MTeYue model = new MTeYue();
+                    model.ID = dr["ID"].ToString();
+                    model.MemberID = dr["MemberID"].ToString();
+                    model.WebsiteName = dr["WebsiteName"].ToString();
+                    model.MemberName = dr["MemberName"].ToString();
+                    model.CompanyName = dr["CompanyName"].ToString();
+                    model.Mobile = dr["Mobile"].ToString();
+                    model.WebSite = dr["WebSite"].ToString();
+                    list.Add(model);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
+        ///  获取代理团购商品的供应商总数
+        /// </summary>
+        /// <param name="DaiLiId"></param>
+        /// <returns></returns>
+        public int GetMyTGGYSNum(string DaiLiId, MTeYueSer sermodel)
+        {
+            StringBuilder sqlwhere = new StringBuilder();
+            sqlwhere.Append(" where 1=1 ");
+            if (!string.IsNullOrEmpty(sermodel.CompanyName))
+            {
+                sqlwhere.AppendFormat(" and CompanyName like '%{0}%' ", sermodel.CompanyName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.MemberName))
+            {
+                sqlwhere.AppendFormat(" and MemberName like '%{0}%' ", sermodel.MemberName);
+            }
+            if (!string.IsNullOrEmpty(sermodel.Mobile))
+            {
+                sqlwhere.AppendFormat(" and Mobile like '%{0}%' ", sermodel.Mobile);
+            }
+            if (!string.IsNullOrEmpty(sermodel.WebsiteName))
+            {
+                sqlwhere.AppendFormat(" and WebsiteName like '%{0}%' ", sermodel.WebsiteName);
+            }
+            string sql = "select Count(a.MemberID) from (SELECT MemberID,ID,WebsiteName,CompanyName from tbl_JA_Sellers where ID in(SELECT SupplierID from tbl_TuanGouChanPin where SupplierID <> '" + DaiLiId + "' and ID in (SELECT ProductId from tbl_Seller_TuanGou where MemberId='" + DaiLiId + "' and ProductStatus=2)))as a left JOIN tbl_Member as b on a.MemberID=b.MemberID " + sqlwhere.ToString();
+            DbCommand cmd = _db.GetSqlStringCommand(sql.ToString());
+
+            object num = DbHelper.GetSingle(cmd, _db);
+            return Convert.ToInt32(num);
+        }
+
+        /// <summary>
+        /// 获取我的特约代理
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <param name="LeiBie">商城-0，团购-1</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTY(string GYSId,int LeiBie)
+        {
+            IList<MTeYue> list = new List<MTeYue>();
+            StringBuilder sqlwhere = new StringBuilder();
+
+            string sql = "SELECT ID,WebsiteName from tbl_JA_Sellers where ID in(SELECT DaiLiId from tbl_GYS_Seller where GYSId='" + GYSId + "' AND LeiXing="+LeiBie+")";
+            DbCommand cmd = this._db.GetSqlStringCommand(sql.ToString());
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                while (dr.Read())
+                {
+                    MTeYue model = new MTeYue();
+                    model.ID = dr["ID"].ToString();
+                    model.WebsiteName = dr["WebsiteName"].ToString();
+                    list.Add(model);
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// 获取域名（按邀请码）
+        /// </summary>
+        /// <param name="yaQingMa"></param>
+        /// <returns></returns>
+        public string GetYuMing_YaoQingMa(string yaQingMa)
+        {
+            var sql = "SELECT B.WebSite FROM tbl_Member AS A INNER JOIN tbl_JA_Sellers AS B ON A.MemberID=B.MemberID WHERE A.Account=@YongHuMing";
+
+            var cmd = _db.GetSqlStringCommand(sql);
+            _db.AddInParameter(cmd, "YongHuMing", DbType.String, yaQingMa);
+
+            using (var rdr = DbHelper.ExecuteReader(cmd, _db))
+            {
+                if (rdr.Read())
+                {
+                    return rdr[0].ToString();
+                }
+            }
+
+            return string.Empty;
         }
 
     }

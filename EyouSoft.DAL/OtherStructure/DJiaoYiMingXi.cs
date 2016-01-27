@@ -167,6 +167,7 @@ namespace EyouSoft.DAL.OtherStructure
 
             return info;
         }
+        
 
         /// <summary>
         /// 设置明细状态，返回1成功，其它失败

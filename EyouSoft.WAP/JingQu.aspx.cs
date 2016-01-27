@@ -51,7 +51,7 @@ namespace EyouSoft.WAP.JingQu
         {
 
             #region 图片处理
-            
+
             EyouSoft.BLL.OtherStructure.BSysAdv bll = new EyouSoft.BLL.OtherStructure.BSysAdv();
             //首页轮播图
             List<MSysAdv> imgList = new List<MSysAdv>(bll.GetList(5, AdvArea.优惠门票首页轮换广告));
@@ -60,9 +60,9 @@ namespace EyouSoft.WAP.JingQu
             FenXiangMiaoShu = "优惠门票";
             if (imgList != null && imgList.Count > 0)
             {
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imgList[0].ImgPath[0], 640, 200);
+                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imgList[0].ImgPath, 640, 200);
             }
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
             List<string> files = new List<string>();
             List<string> hrefs = new List<string>();
@@ -70,7 +70,7 @@ namespace EyouSoft.WAP.JingQu
             {
                 foreach (var item in imgList)
                 {
-                    files.Add(TuPian.F1(item.ImgPath,640,200));
+                    files.Add(TuPian.F1(item.ImgPath, 640, 200));
                     hrefs.Add(item.AdvLink);
                 }
 
@@ -82,7 +82,7 @@ namespace EyouSoft.WAP.JingQu
             #endregion
 
 
-           
+
             //if (imgList != null && imgList.Count > 0)
             //{
             //    for (int i = 0; i < imgList.Count; i++)

@@ -21,6 +21,7 @@ namespace EyouSoft.WAP.Member
         protected decimal mymoney = 0;
         public int isfenxiao = 0;
         protected int WeiChuLiNum = 0;
+        protected int HuiYuanType = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             WapHeader1.HeadText = "会员中心";
@@ -33,8 +34,7 @@ namespace EyouSoft.WAP.Member
             {
                 mymoney = (decimal)0;
             }
-
-
+            HuiYuanType = (int)HuiYuanInfo.UserType;
             if (HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理 || HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
             {
                 isfenxiao = 1;

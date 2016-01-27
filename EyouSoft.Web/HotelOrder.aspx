@@ -78,7 +78,7 @@
                                 <%if (IsShowHuiYuan())
                                   { %>
                                 <th class="Rline">
-                                    会员价
+                                    优惠价
                                 </th>
                                 <% } %>
                                  <%if (IsShowErJiDaiLi())

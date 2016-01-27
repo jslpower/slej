@@ -138,7 +138,7 @@ namespace EyouSoft.DAL.XianLuStructure
         /// </summary>
         /// <param name="orderId">订单编号</param>
         /// <returns></returns>
-        IList<MXianLuTourTraffice> GetTraffice(string TrafficeId,string XianluId)
+        IList<MXianLuTourTraffice> GetTraffice(string TrafficeId, string XianluId)
         {
             IList<MXianLuTourTraffice> items = new List<MXianLuTourTraffice>();
             DbCommand cmd = _db.GetSqlStringCommand(SQL_SELECT_GetTraffice);
@@ -211,8 +211,6 @@ namespace EyouSoft.DAL.XianLuStructure
             _db.AddInParameter(cmd, "@Status", DbType.Byte, info.Status);
             _db.AddInParameter(cmd, "@ChengRenShu", DbType.Int32, info.ChengRenShu);
             _db.AddInParameter(cmd, "@ErTongShu", DbType.Int32, info.ErTongShu);
-            _db.AddInParameter(cmd, "@JSJCR", DbType.Decimal, info.JSJCR);
-            _db.AddInParameter(cmd, "@JSJER", DbType.Decimal, info.JSJER);
             _db.AddInParameter(cmd, "@JinE", DbType.Decimal, info.JinE);
             _db.AddInParameter(cmd, "@FuKuanStatus", DbType.Byte, info.FuKuanStatus);
             _db.AddInParameter(cmd, "@LDate", DbType.DateTime, DateTime.Today);
@@ -227,6 +225,11 @@ namespace EyouSoft.DAL.XianLuStructure
             _db.AddInParameter(cmd, "@AgencyJinE", DbType.Decimal, info.AgencyJinE);
             _db.AddInParameter(cmd, "@Traffice", DbType.String, info.TrafficId);
             _db.AddInParameter(cmd, "@OrderSite", DbType.Int32, info.OrderSite);
+
+            _db.AddInParameter(cmd, "@JiaoYiCR", DbType.Decimal, info.JiaoYiCR);
+            _db.AddInParameter(cmd, "@JiaoYiET", DbType.Decimal, info.JiaoYiET);
+            _db.AddInParameter(cmd, "@WebSiteCR", DbType.Decimal, info.WebSiteCR);
+            _db.AddInParameter(cmd, "@WebSiteET", DbType.Decimal, info.WebSiteET);
 
             _db.AddOutParameter(cmd, "@RetCode", DbType.Int32, 4);
 
@@ -269,10 +272,6 @@ namespace EyouSoft.DAL.XianLuStructure
                     info.FuKuanStatus = (FuKuanStatus)rdr.GetByte(rdr.GetOrdinal("FuKuanStatus"));
                     info.IssueTime = rdr.GetDateTime(rdr.GetOrdinal("IssueTime"));
                     info.JinE = rdr.GetDecimal(rdr.GetOrdinal("JinE"));
-                    info.JSJCR = rdr.GetDecimal(rdr.GetOrdinal("JSJCR"));
-                    info.JSJER = rdr.GetDecimal(rdr.GetOrdinal("JSJET"));
-                    info.SCJCR = rdr.GetDecimal(rdr.GetOrdinal("SCJCR"));
-                    info.SCJET = rdr.GetDecimal(rdr.GetOrdinal("SCJET"));
                     info.LDate = rdr.GetDateTime(rdr.GetOrdinal("LDate"));
                     info.LxrGender = (EyouSoft.Model.Enum.Gender)rdr.GetByte(rdr.GetOrdinal("LxrGender"));
                     info.LxrName = rdr["LxrName"].ToString();
@@ -302,6 +301,11 @@ namespace EyouSoft.DAL.XianLuStructure
                     {
                         info.UserType = EyouSoft.Model.Enum.MemberTypes.未注册用户;
                     }
+
+                    info.JiaoYiCR = rdr.GetDecimal(rdr.GetOrdinal("JiaoYiCR"));
+                    info.JiaoYiET = rdr.GetDecimal(rdr.GetOrdinal("JiaoYiET"));
+                    info.WebSiteCR = rdr.GetDecimal(rdr.GetOrdinal("WebSiteCR"));
+                    info.WebSiteET = rdr.GetDecimal(rdr.GetOrdinal("WebSiteET"));
                 }
             }
 
@@ -331,8 +335,8 @@ namespace EyouSoft.DAL.XianLuStructure
             _db.AddInParameter(cmd, "@Status", DbType.Byte, info.Status);
             _db.AddInParameter(cmd, "@ChengRenShu", DbType.Int32, info.ChengRenShu);
             _db.AddInParameter(cmd, "@ErTongShu", DbType.Int32, info.ErTongShu);
-            _db.AddInParameter(cmd, "@JSJCR", DbType.Decimal, info.JSJCR);
-            _db.AddInParameter(cmd, "@JSJER", DbType.Decimal, info.JSJER);
+            //_db.AddInParameter(cmd, "@JSJCR", DbType.Decimal, info.JSJCR);
+            //_db.AddInParameter(cmd, "@JSJER", DbType.Decimal, info.JSJER);
             _db.AddInParameter(cmd, "@JinE", DbType.Decimal, info.JinE);
             _db.AddInParameter(cmd, "@FuKuanStatus", DbType.Byte, info.FuKuanStatus);
             _db.AddInParameter(cmd, "@LDate", DbType.DateTime, DateTime.Today);
@@ -502,8 +506,8 @@ namespace EyouSoft.DAL.XianLuStructure
                 {
                     query.AppendFormat(" AND RouteType={0} ", (int)chaXun.RouteType.Value);
                 }
-                
-                
+
+
 
                 if (chaXun.IsFeiHuiYuan)
                 {
@@ -527,10 +531,6 @@ namespace EyouSoft.DAL.XianLuStructure
                     item.FuKuanStatus = (FuKuanStatus)rdr.GetByte(rdr.GetOrdinal("FuKuanStatus"));
                     item.IssueTime = rdr.GetDateTime(rdr.GetOrdinal("IssueTime"));
                     item.JinE = rdr.GetDecimal(rdr.GetOrdinal("JinE"));
-                    item.JSJCR = rdr.GetDecimal(rdr.GetOrdinal("JSJCR"));
-                    item.JSJER = rdr.GetDecimal(rdr.GetOrdinal("JSJET"));
-                    item.SCJCR = rdr.GetDecimal(rdr.GetOrdinal("SCJCR"));
-                    item.SCJET = rdr.GetDecimal(rdr.GetOrdinal("SCJET"));
                     item.LDate = rdr.GetDateTime(rdr.GetOrdinal("LDate"));
                     item.LxrGender = (EyouSoft.Model.Enum.Gender)rdr.GetByte(rdr.GetOrdinal("LxrGender"));
                     item.LxrName = rdr["LxrName"].ToString();
@@ -560,6 +560,11 @@ namespace EyouSoft.DAL.XianLuStructure
                     }
                     item.MemberName = rdr["MemberName"].ToString();
                     item.Mobile = rdr["Mobile"].ToString();
+
+                    item.JiaoYiCR = rdr.GetDecimal(rdr.GetOrdinal("JiaoYiCR"));
+                    item.JiaoYiET = rdr.GetDecimal(rdr.GetOrdinal("JiaoYiET"));
+                    item.WebSiteCR = rdr.GetDecimal(rdr.GetOrdinal("WebSiteCR"));
+                    item.WebSiteET = rdr.GetDecimal(rdr.GetOrdinal("WebSiteET"));
 
                     items.Add(item);
                 }

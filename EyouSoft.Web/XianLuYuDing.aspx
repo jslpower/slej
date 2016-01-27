@@ -250,7 +250,7 @@
                                     <%# Eval("JiaoTong") %>
                                     住：<%# Eval("ZhuSu")%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;餐：<%# Eval("YongCan") %></dt>
                                 <dd>
-                                    <%#   EyouSoft.Common.Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(Eval("XingCheng").ToString()))%></dd>
+                                    <%# getXcStr(lineSource, Eval("XingCheng"))%></dd>
                             </dl>
                         </li>
                     </ItemTemplate>

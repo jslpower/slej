@@ -27,7 +27,10 @@ namespace EyouSoft.WAP
         protected string TelNum = "4006588180";
         protected string BanQuan = "杭州金奥国际旅行社有限公司";
         protected string MiaoShuJ = "";
+        protected string Xuke = "杭州金奥：L-ZJ-01409";
         protected string houtaiurl = "<a href=\"/HuiYuanCenter.aspx\">后台管理</a>";
+        protected string CityName = "全国";
+        protected int CityId = -1;
         #region 微信分享
         protected string weixin_jsapi_config = string.Empty
                                     , FenXiangBiaoTi = string.Empty
@@ -37,18 +40,19 @@ namespace EyouSoft.WAP
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            GetCityName();
             if (isLogin)
             {
                 houtaiurl = "<a href=\"/Member/UserCenter.aspx\">后台管理</a>";
             }
-            thisurl = "http://"+HttpContext.Current.Request.Url.Host.ToLower();
+            thisurl = "http://" + HttpContext.Current.Request.Url.Host.ToLower();
             if (isfenxiao)
             {
                 string website = HttpContext.Current.Request.Url.Host.ToLower().Replace("m.", "");
                 //string website = "m.1234.slej.cn".Replace("m.", "");
                 if (website.IndexOf("slej") > 1)
                 {
-                    PCUrl = "http://"+website + "?source=m";
+                    PCUrl = "http://" + website + "?source=m";
                 }
                 GetQX(website);
                 EyouSoft.Model.AccountStructure.MSellers seller = new BSellers().GetMSellersByWebSite(website);
@@ -74,9 +78,36 @@ namespace EyouSoft.WAP
             var weixing_config_info = Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
             weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
             FenXiangBiaoTi = BanQuan;
-            FenXiangMiaoShu = Utils.GetText2(MiaoShuJ, 30, true);
-            FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/logo.png";
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangMiaoShu = BanQuan;
+            FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/logo.jpg";
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+        }
+        protected void GetCityName()
+        {
+            var cityid =Utils.GetInt(Utils.GetQueryStringValue("CityId"),-1);
+            if (cityid>0)
+            {
+                var chufalist = new EyouSoft.BLL.XianLuStructure.BXianLu().getChuFaCityModel(cityid);
+                if (chufalist!=null)
+                {
+                    CityName = chufalist.Name;
+                    CityId = chufalist.Id;
+                    EyouSoft.Security.Membership.UserProvider.SetCityCookies(chufalist.Id, Server.UrlPathEncode(chufalist.Name));
+                }
+            }
+            else if (cityid == -1)
+            {
+                EyouSoft.Security.Membership.UserProvider.SetCityCookies(-1, string.Empty);
+            }
+            else
+            {
+               var citymodel= EyouSoft.Security.Membership.UserProvider.GetCityInfo();
+               if (citymodel!=null && citymodel.Id > 0)
+               {
+                   CityName = citymodel.Name;
+                   CityId = citymodel.Id;
+               }
+            }
         }
         /// <summary>
         /// 根据分销商的website获取分销商权限
@@ -91,7 +122,14 @@ namespace EyouSoft.WAP
             {
                 companyName = seller.CompanyName;
                 MiaoShuJ = seller.CompanyContent;
-                BanQuan = seller.CompanyName;
+                if (!string.IsNullOrEmpty(seller.CompanyName))
+                {
+                    BanQuan = seller.CompanyName;
+                }
+                if (!string.IsNullOrEmpty(seller.XuKeZhengHao))
+                {
+                    Xuke = seller.XuKeZhengHao;
+                }
                 MMember2 model = new EyouSoft.IDAL.MemberStructure.BMember2().Get(seller.MemberID);
                 if (model != null)
                 {
@@ -117,6 +155,7 @@ namespace EyouSoft.WAP
                     SLMoblie.Text = seller.JinAoMobile;
                     SLTel.Text = seller.JinAoTel;
                     slweixin = seller.JinAoWeiXin;
+
                     //Label1.Text = seller.JinAoWeiXin;
                 }
                 if (seller.QuanXian.IndexOf("9") > -1)

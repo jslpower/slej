@@ -52,6 +52,8 @@ namespace ConsoleApp
 
                                 foreach (SelectProductListResponse.item item2 in response2)
                                 {
+                                    if (item2.RequireDate <= DateTime.Now)
+                                        continue;
                                     //var request3 = new ProductDetailRequest();
                                     MScenicTickets model2 = new MScenicTickets();
                                     model2.Description = "<span class=title>产品说明：</span><p>" + item2.Description + "</p><br><span class=title>费用包含：</span><p>" + item2.Services + "</p><br><span class=title>游客提示：</span><p>" + item2.GuestPrompt + "</p><br><span class=title>使用说明：</span><p>" + item2.Help + "</p><br><span class=title>退票说明：</span><p>" + item2.RefundDescription + "</p>";

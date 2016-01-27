@@ -135,7 +135,18 @@ namespace EyouSoft.Web
 
             if (seller != null)
             {
-                fenxiao = feeSettings.FenXiaoJia;
+                if (seller.DengJi == EyouSoft.Model.Enum.MemberTypes.代理)
+                {
+                    fenxiao = feeSettings.FenXiaoJia;
+                }
+                else if (seller.DengJi == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                {
+                    fenxiao = feeSettings.FreeFenXiaoJia;
+                }
+                else if (seller.DengJi == EyouSoft.Model.Enum.MemberTypes.员工)
+                {
+                    fenxiao = feeSettings.YuanGongJia;
+                }
             }
 
             if (Ordermodel.ZuCheType == (int)EyouSoft.Model.Enum.ZhuCheType.同城往返带司机包租车)

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>景区</title>
+    <title><%=FenXiangBiaoTi %></title>
 
 
     <script src="/js/jquery_cm.js" type="text/javascript"></script>
@@ -70,7 +70,7 @@
                                             零售：¥<strike><%# ((decimal)Eval("TicketFirst.WebsitePrices")).ToString("0")%></strike>
                                             起</dd>
                                         <dd class="wid R">
-                                            会员：<span class="font_yellow">¥<i class="font18"><%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), EyouSoft.Model.Enum.MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), EyouSoft.Model.Enum.FeeTypes.门票).ToString("0")%></i></span>起</dd>
+                                            优惠：<span class="font_yellow">¥<i class="font18"><%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), EyouSoft.Model.Enum.MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), EyouSoft.Model.Enum.FeeTypes.门票).ToString("0")%></i></span>起</dd>
                                     </dl>
                                 </a></li>
                             </ItemTemplate>
@@ -157,7 +157,8 @@
             wx.onMenuShareTimeline({
                 title: '<%=FenXiangBiaoTi %>',
                 link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>'
+                imgUrl: '<%=FenXiangTuPianFilepath %>',
+                type: 'link'
             });
             //分享给朋友
             wx.onMenuShareAppMessage({

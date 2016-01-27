@@ -4,6 +4,9 @@
 <%@ Register TagPrefix="cc1" Namespace="Adpost.Common.ExporPage" Assembly="ControlLibrary" %>
 <%@ Import Namespace="EyouSoft.Model.Enum" %>
 <asp:Content ContentPlaceHolderID="PageBody" runat="server" ID="PageBody1">
+<style type="text/css">
+    .pnone{display:none;}
+    </style>
     <table width="99%" cellspacing="0" cellpadding="0" border="0" align="center">
         <tbody>
             <tr>
@@ -120,13 +123,16 @@
                                 金额：<%#  Convert.ToDouble(Eval("JinE")).ToString("f2")%>
                                 元
                             </td>
-                            <td align="left">
+                             <td align="left" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"":"pnone"%>">
                                 签证数：<%# Eval("YuDingShuLiang")%>
                                 份<br />
                                 单价：<%#  (Convert.ToDouble(Eval("AgencyJinE")) / Convert.ToDouble(Eval("YuDingShuLiang"))).ToString("f2")%>
                                 元/张<br />
                                 金额：<%# Eval("AgencyId").ToString().Trim().Length > 20 ? Convert.ToDouble(Eval("AgencyJinE")).ToString("f2") : "0"%> 元
                             </td>
+                            <td align="center" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
                              <td align="center">
                              <%# Eval("AgencyId").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("JinE")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2") : "0"%>
                             </td>                            

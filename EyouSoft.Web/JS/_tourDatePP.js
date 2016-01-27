@@ -116,7 +116,7 @@ var tourdate = {
             //var d = _self.jsonDateToDateTime(dayData.ldate);
             var liselector = "#rili_day_" + dayData.ldate;
             $(liselector).append('<span style="padding-right:5px;display:block; height:14px; line-height:14px;" class="fontblue txtr">门市：' + dayData.msj + '</span>');
-            $(liselector).append('<span  style="padding-right:5px;display:block; height:14px; line-height:14px;" class="font_yellow txtr">会员：' + dayData.hyj + '</span>');
+            $(liselector).append('<span  style="padding-right:5px;display:block; height:14px; line-height:14px;" class="font_yellow txtr">优惠：' + dayData.hyj + '</span>');
             $(liselector).append('<span  style="padding-right:5px;display:block; height:14px; line-height:14px;" class="fontgreen txtr">余位：' + dayData.yw + '</span>');
             $(liselector).css({ "cursor": "pointer" });
             $(liselector).hover(function() { $(this).css({ "background": "#FFF5C4" }); }, function() { $(this).css({ "background": "#ffffff" }); })

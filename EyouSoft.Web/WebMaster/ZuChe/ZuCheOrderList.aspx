@@ -28,6 +28,9 @@
     <link href="/Css/webmaster/boxy.css" rel="stylesheet" type="text/css" />
 
     <script src="/JS/bt.min.js" type="text/javascript"></script>
+    <style type="text/css">
+    .pnone{display:none;}
+    </style>
 
 </head>
 <body>
@@ -143,11 +146,14 @@
                      单价：<%#  (Convert.ToDouble(Eval("zujin")) / Convert.ToDouble(Eval("Number"))).ToString("f2")%> 元/辆<br />
                      金额：<%#  Convert.ToDouble(Eval("zujin")).ToString("f2")%> 元
                             </td>
-                            <td align="left">
+                            <td align="left" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"":"pnone"%>">
                                 车辆数：<%# Eval("Number")%> 辆<br />
                      单价：<%#  (Convert.ToDouble(Eval("AgencyJinE")) / Convert.ToDouble(Eval("Number"))).ToString("f2")%> 元/辆<br />
                      金额：<%# Eval("AgencyId").ToString().Trim().Length > 20 ? Convert.ToDouble(Eval("AgencyJinE")).ToString("f2") : "0"%> 元
                             </td>
+                            <td align="center" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
                             <td align="center">
                             <%# Eval("AgencyId").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("zujin")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2") : "0"%>元
                             </td>

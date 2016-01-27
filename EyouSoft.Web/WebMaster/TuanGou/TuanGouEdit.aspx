@@ -37,7 +37,7 @@
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtChanPinMingCheng" MaxLength="40" name="txtChanPinMingCheng" runat="server"
-                        class="inputtext formsize180" valid="required" errmsg="请输入产品名称!"></asp:TextBox>
+                        class="inputtext formsize180" valid="required" errmsg="请输入产品名称!"></asp:TextBox>(<span class="fred">最多20个字</span>)
                 </td>
                 <th width="120" height="30" align="center">
                     <span class="fred">*</span>促销类型:
@@ -62,7 +62,7 @@
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtShuLiang" name="txtShuLiang" runat="server" class="inputtext formsize180"
-                        valid="required|isInt" errmsg="请填写数量!|数量填写不正确！"></asp:TextBox>
+                        valid="required|isInt" errmsg="请填写数量!|数量填写不正确！"></asp:TextBox>件(个,吨等单位)
                 </td>
             </tr>
             <tr class="odd">
@@ -71,29 +71,29 @@
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtShiChangJia" name="txtShiChangJia" runat="server" class="inputtext formsize180"
-                        valid="required|isMoney" errmsg="请填写数量!|市场价格不正确不正确！"></asp:TextBox>
+                        valid="required|isMoney" errmsg="请填写数量!|市场价格不正确不正确！"></asp:TextBox>（如：<span class="fred">12或者12.5或者12.56</span>）
                 </td>
                 <th width="90" height="30" align="center">
                     <span class="fred">*</span>促销价(团购价):
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtCuXiaoJia" name="txtCuXiaoJia" runat="server" class="inputtext formsize180"
-                        valid="required|isMoney" errmsg="请填写数量!|促销价格不正确！"></asp:TextBox>
+                        valid="required|isMoney" errmsg="请填写数量!|促销价格不正确！"></asp:TextBox>（如：<span class="fred">12或者12.5或者12.56</span>）
                 </td>
             </tr>
             <tr class="odd">
                 <th width="90" height="30" align="center">
-                    有效期:
+                    上架到期时间:
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtYouXiaoQi" name="txtYouXiaoQi" runat="server" class="inputtext formsize180"
-                        valid="required" errmsg="请填写有效期!" onclick="WdatePicker()"></asp:TextBox>
+                        valid="required" errmsg="请填写有效期!" onclick="WdatePicker()"></asp:TextBox>（如：<span class="fred">2015-5-10</span>）
                 </td>
                 <th width="90" height="30" align="center">
                     产品图片:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <uc1:UploadControl ID="upImg" runat="server" IsUploadMore="false" IsUploadSelf="true" />
+                    <uc1:UploadControl ID="upImg" runat="server" IsUploadMore="false" IsUploadSelf="true" />（<span class="fred">可上传多张</span>）
                     <asp:Label ID="lblFiles" runat="server" Text=""></asp:Label>
                 </td>
             </tr>
@@ -125,7 +125,7 @@
                 </th>
                 <td bgcolor="#E3F1FC" colspan="3">
                     <asp:TextBox TextMode="MultiLine" ID="txtJieShao" Height="60" name="txtJieShao" runat="server"
-                        CssClass="inputtext" Width="660px"></asp:TextBox>
+                        CssClass="inputtext" Width="660px"></asp:TextBox>(<span class="fred">请使用40-60字简要描述</span>)
                 </td>
             </tr>
             <tr class="odd">
@@ -177,7 +177,7 @@
                     data: $("#btn").closest("form").serialize(),
                     success: function(ret) {
                         if (ret.result == "1") {
-                            tableToolbar._showMsg(ret.msg, function() { window.parent.frames.mainFrame.location.href = '/WebMaster/TuanGou/TuanGouList.aspx'; });
+                            tableToolbar._showMsg(ret.msg, function() { window.parent.frames.mainFrame.location.href = '/WebMaster/TuanGou/TuanGouList.aspx?type=<%=EyouSoft.Common.Utils.GetQueryStringValue("otype") %>'; });
                         }
                         else {
                             tableToolbar._showMsg(ret.msg);

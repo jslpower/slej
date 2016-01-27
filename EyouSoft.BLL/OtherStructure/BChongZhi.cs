@@ -39,6 +39,18 @@ namespace EyouSoft.BLL.OtherStructure
         }
 
         /// <summary>
+        /// 获取充值信息业务实体
+        /// </summary>
+        /// <param name="orderCode">订单编号</param>
+        /// <returns></returns>
+        public EyouSoft.Model.OtherStructure.MChongZhi GetInfoByCode(string orderCode)
+        {
+            if (string.IsNullOrEmpty(orderCode)) return null;
+
+            return dal.GetInfoByCode(orderCode);
+        }
+
+        /// <summary>
         /// 设置支付状态为已支付，返回1成功，其它失败
         /// </summary>
         /// <param name="DingDanId">订单编号</param>

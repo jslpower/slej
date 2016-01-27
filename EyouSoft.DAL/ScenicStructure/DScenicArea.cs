@@ -846,6 +846,8 @@ namespace EyouSoft.DAL.ScenicStructure
                     model.Source = (EyouSoft.Model.Enum.ScenicStructure.ScenicAreaOrderSource)dr.GetByte(dr.GetOrdinal("Source"));
                     model.FuKuanStatus = (EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus)dr.GetByte(dr.GetOrdinal("FuKuanStatus"));
                     model.OperatorId = dr.GetString(dr.GetOrdinal("OperatorId"));
+                    model.OperatorName = dr.GetString(dr.GetOrdinal("OperatorName"));
+                    model.OperatorMobile = dr.GetString(dr.GetOrdinal("OperatorMobile"));
                     model.IssueTime = dr.GetDateTime(dr.GetOrdinal("IssueTime"));
                     model.ScenicName = !dr.IsDBNull(dr.GetOrdinal("ScenicName")) ? dr.GetString(dr.GetOrdinal("ScenicName")) : null;
                     model.TypeName = !dr.IsDBNull(dr.GetOrdinal("TypeName")) ? dr.GetString(dr.GetOrdinal("TypeName")) : null;

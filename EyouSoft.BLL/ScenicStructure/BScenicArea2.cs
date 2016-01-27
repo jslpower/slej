@@ -491,19 +491,18 @@ namespace EyouSoft.BLL.ScenicStructure
                             bool flag = false;
                             if (currentSellerInfo.DengJi == MemberTypes.代理)
                             {
-                                if (memberType == MemberTypes.员工 || memberType == MemberTypes.代理)
-                                {
                                     orderForSubmit.AgencyJinE = model.Num * BHotel2.CalculateFee(ticketInfo.DistributionPrice, ticketInfo.WebsitePrices, MemberTypes.代理, model.FeeSetting, FeeTypes.门票);
                                     flag = true;
-                                }
                             }
                             else if (currentSellerInfo.DengJi == MemberTypes.免费代理)
                             {
-                                if (memberType == MemberTypes.员工 || memberType == MemberTypes.代理 || memberType == MemberTypes.免费代理)
-                                {
                                     orderForSubmit.AgencyJinE = model.Num * BHotel2.CalculateFee(ticketInfo.DistributionPrice, ticketInfo.WebsitePrices, MemberTypes.免费代理, model.FeeSetting, FeeTypes.门票);
                                     flag = true;
-                                }
+                            }
+                            else if (currentSellerInfo.DengJi == MemberTypes.员工)
+                            {
+                                orderForSubmit.AgencyJinE = model.Num * BHotel2.CalculateFee(ticketInfo.DistributionPrice, ticketInfo.WebsitePrices, MemberTypes.员工, model.FeeSetting, FeeTypes.门票);
+                                flag = true;
                             }
                             if (flag == false)
                             {

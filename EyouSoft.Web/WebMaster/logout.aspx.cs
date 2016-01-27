@@ -17,8 +17,18 @@ namespace EyouSoft.Web.WebMaster
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            EyouSoft.Security.Membership.WebmasterProvider.Logout();
-            Response.Redirect(LoginFilePath);
+            if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户 || UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.供应商用户)
+            {
+                EyouSoft.Security.Membership.WebmasterProvider.Logout();
+                EyouSoft.Security.Membership.UserProvider.Logout();
+                Response.Redirect("/Default.aspx");
+            }
+            else
+            {
+                EyouSoft.Security.Membership.WebmasterProvider.Logout();
+                Response.Redirect(LoginFilePath);
+            }
+            
         }
     }
 }

@@ -1,0 +1,6 @@
+E:\杭州金奥\Linq\bin\Debug\Linq.dll.config
+E:\杭州金奥\Linq\bin\Debug\Linq.dll
+E:\杭州金奥\Linq\bin\Debug\Linq.pdb
+E:\杭州金奥\Linq\obj\Debug\ResolveAssemblyReference.cache
+E:\杭州金奥\Linq\obj\Debug\Linq.dll
+E:\杭州金奥\Linq\obj\Debug\Linq.pdb

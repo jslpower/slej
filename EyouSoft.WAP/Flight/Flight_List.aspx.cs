@@ -14,6 +14,14 @@ namespace EyouSoft.WAP.Flight
     public partial class Flight_List : Common.Page.WebPageBase
     {
         protected string st = string.Empty, et = string.Empty, cssDisable = string.Empty;
+        const string none = "display:none";
+        #region 微信分享
+        protected string weixin_jsapi_config = string.Empty
+                                    , FenXiangBiaoTi = string.Empty
+                                    , FenXiangMiaoShu = string.Empty
+                                    , FenXiangTuPianFilepath = string.Empty
+                                    , FenXiangLianJie = string.Empty;
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             string q = Utils.GetQueryStringValue("q");
@@ -32,6 +40,14 @@ namespace EyouSoft.WAP.Flight
                 case "XiangApiFuKuan": XiaoApiFuKuan(); break;
                 default: Utils.RCWE("无对应测试指令"); break;
             }
+
+
+            IList<string> weixin_jsApiList = new List<string>();
+            weixin_jsApiList.Add("onMenuShareTimeline");
+            weixin_jsApiList.Add("onMenuShareAppMessage");
+            weixin_jsApiList.Add("onMenuShareQQ");
+            var weixing_config_info = Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
+            weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
 
         }
 
@@ -62,6 +78,11 @@ namespace EyouSoft.WAP.Flight
             {
                 litCount.Text = string.Format(" {0} 暂无航班", chaXun.HangBanRiQi.ToString("MM月dd日"));
             }
+
+
+            FenXiangBiaoTi = !string.IsNullOrEmpty(chufa[0]) && !string.IsNullOrEmpty(daoda[0]) ? string.Format("{0}-{1}-{2}机票", chaXun.HangBanRiQi.ToString("MM月dd日"), chufa[0], daoda[0]) : "机票预订";
+            FenXiangMiaoShu = "机票预订";
+            FenXiangLianJie = Utils.redirectUrl( HttpContext.Current.Request.Url.ToString());
 
         }
 
@@ -238,14 +259,18 @@ namespace EyouSoft.WAP.Flight
                 if (HangBan.CangWeis != null && HangBan.CangWeis.Count > 0)
                 {
 
+                    var index = 0;
                     foreach (var item in HangBan.CangWeis)
                     {
+
                         item.XianShiJiaGe = EyouSoft.Common.UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe);
                         item.FuJiaFei = HangBan.JiJianJinE + HangBan.RanYouJinE;
                         StringBuilder strbu = new StringBuilder();
                         decimal huiyuanjia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe, EyouSoft.Model.Enum.MemberTypes.普通会员);
+                        decimal daixiaojia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe, EyouSoft.Model.Enum.MemberTypes.免费代理);
                         decimal guibinjia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
                         decimal dailijia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe, EyouSoft.Model.Enum.MemberTypes.代理);
+                        decimal yuangongjia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe, EyouSoft.Model.Enum.MemberTypes.员工);
 
 
 
@@ -255,14 +280,28 @@ namespace EyouSoft.WAP.Flight
 
                             strbu.Append(" <div class=\"youhui_box font12\">");
                             strbu.Append(" <ul>");
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元/人 x 1人  = <span class=\"font_yellow\">{0}</span>元</li>", huiyuanjia.ToString("F0"));
+                            strbu.AppendFormat("<li><span class=\"font_yellow\">优惠：</span>成人{0}元/人 x 1人  = <span class=\"font_yellow\">{0}</span>元</li>", huiyuanjia.ToString("F0"));
                             if (isDisplay)
                             {
+                                if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    strbu.AppendFormat("<li><span class=\"font_yellow\">代销：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", daixiaojia.ToString("F0"), (huiyuanjia - daixiaojia).ToString("F0"));
+                                }
+
                                 strbu.AppendFormat("<li><a  style=\"{2}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", guibinjia.ToString("F0"), (huiyuanjia - guibinjia).ToString("F0"), (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? "" : "display:none");
                                 strbu.AppendFormat(" <li><a  style=\"{2}\" href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", dailijia.ToString("F0"), (huiyuanjia - dailijia).ToString("F0"), (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.代理 ? "" : "display:none");
+                                if (m.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+                                {
+                                    strbu.AppendFormat("<li><span class=\"font_yellow\">员工：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", yuangongjia.ToString("F0"), (huiyuanjia - yuangongjia).ToString("F0"));
+                                }
                             }
                             else
                             {
+                                if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    strbu.AppendFormat("<li><span class=\"font_yellow\">代销：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", daixiaojia.ToString("F0"), (huiyuanjia - daixiaojia).ToString("F0"));
+                                }
+
                                 if (m.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员)
                                 {
                                     strbu.AppendFormat("<li><span class=\"font_yellow\">贵宾：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", guibinjia.ToString("F0"), (huiyuanjia - guibinjia).ToString("F0"));
@@ -271,18 +310,22 @@ namespace EyouSoft.WAP.Flight
                                 {
                                     strbu.AppendFormat(" <li><span class=\"font_yellow\">代理：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", dailijia.ToString("F0"), (huiyuanjia - dailijia).ToString("F0"));
                                 }
+                                if (m.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+                                {
+                                    strbu.AppendFormat(" <li><span class=\"font_yellow\">员工：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", yuangongjia.ToString("F0"), (huiyuanjia - yuangongjia).ToString("F0"));
+                                }
 
                             }
                             strbu.Append(" </ul>");
                             strbu.Append(" </div>");
 
-                            strbu.AppendFormat("<div class=\"padd10 fhui_btn\"><a href=\"javascript:;\" class=\"yudingbtn radius4 floatR\">立即预订</a>合计：<em class=\"font_yellow\">¥ {0}</em></div>", (UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe) + HangBan.RanYouJinE + HangBan.JiJianJinE).ToString("F0"));
+                            strbu.AppendFormat("<div class=\"padd10 fhui_btn\"><a data-identity={1} href=\"javascript:;\" class=\"yudingbtn radius4 floatR\">立即预订</a>合计：<em class=\"font_yellow\">¥ {0}</em></div>", (UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe) + HangBan.RanYouJinE + HangBan.JiJianJinE).ToString("F0"), index);
                         }
                         else//未登录
                         {
                             strbu.Append(" <div class=\"youhui_box font12\">");
                             strbu.Append(" <ul>");
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元/人 x 1人  = <span class=\"font_yellow\">{0}</span>元</li>", huiyuanjia.ToString("F0"));
+                            strbu.AppendFormat("<li><span class=\"font_yellow\">优惠：</span>成人{0}元/人 x 1人  = <span class=\"font_yellow\">{0}</span>元</li>", huiyuanjia.ToString("F0"));
                             if (isDisplay)
                             {
                                 strbu.AppendFormat("<li><a  style=\"{2}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元/人 x 1人 = <span class=\"font_yellow\">{0}</span>元  立省<span class=\"font_yellow\">{1}</span></li>", guibinjia.ToString("F0"), (huiyuanjia - guibinjia).ToString("F0"), "");
@@ -291,7 +334,7 @@ namespace EyouSoft.WAP.Flight
 
                             strbu.Append(" </ul>");
                             strbu.Append(" </div>");
-                            strbu.AppendFormat("<div class=\"padd10 fhui_btn\"><a href=\"javascript:;\" class=\"yudingbtn radius4 floatR\">立即预订</a>合计：<em class=\"font_yellow\">¥ {0}</em></div>", (UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe) + HangBan.RanYouJinE + HangBan.JiJianJinE).ToString("F0"));
+                            strbu.AppendFormat("<div class=\"padd10 fhui_btn\"><a  data-identity={2} href=\"javascript:;\" class=\"yudingbtn radius4 floatR\">立即预订</a><a  href=\"javascript:;\" class=\"gray_btn radius4 floatR BtnLogin\" style=\"color:#fff; margin-right:3px;{1}\">非会员预订</a>合计：<em class=\"font_yellow\">¥ {0}</em></div>", (UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, item.XiaoShouJiaGe, item.PiaoMianJiaGe) + HangBan.RanYouJinE + HangBan.JiJianJinE).ToString("F0"), isLogin ? none : "", index);
                         }
                         //}
                         //else
@@ -320,7 +363,7 @@ namespace EyouSoft.WAP.Flight
 
 
                         item.YouHuiXinXi = strbu.ToString();
-
+                        index++;
 
                     }
 

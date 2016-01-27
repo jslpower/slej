@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>景区</title>
+    <title><%=FenXiangBiaoTi %></title>
 
     <script src="/js/jquery_cm.js" type="text/javascript"></script>
 
@@ -164,7 +164,7 @@
                                                     <dd class="wid">
                                                         零售：¥<strike><%# ((decimal)Eval("TicketFirst.WebsitePrices")).ToString("0")%></strike>起</dd>
                                                     <dd class="wid R">
-                                                        会员：<span class="font_yellow">¥<i class="font18"><%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), EyouSoft.Model.Enum.MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), EyouSoft.Model.Enum.FeeTypes.门票).ToString("0")%></i></span>起</dd>
+                                                        优惠：<span class="font_yellow">¥<i class="font18"><%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), EyouSoft.Model.Enum.MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), EyouSoft.Model.Enum.FeeTypes.门票).ToString("0")%></i></span>起</dd>
                                                 </dl>
                                             </a></li>
                                         </ItemTemplate>
@@ -261,5 +261,36 @@
     document.addEventListener('DOMContentLoaded', loaded, false);
 
 </script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
+    <script type="text/javascript">
+    var wx_jsapi_config=<%=weixin_jsapi_config %>;
+    wx.config(wx_jsapi_config);
+    </script>
+
+    <script type="text/javascript">
+        wx.ready(function() {
+            //分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: '<%=FenXiangBiaoTi %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>'
+            });
+            //分享给朋友
+            wx.onMenuShareAppMessage({
+                title: '<%=FenXiangBiaoTi %>',
+                desc: '<%=FenXiangMiaoShu %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>',
+                type: 'link'
+            });
+            //分享到QQ
+            wx.onMenuShareQQ({
+                title: '<%=FenXiangBiaoTi %>',
+                desc: '<%=FenXiangMiaoShu %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>'
+            });
+        });
+    </script>
 </html>

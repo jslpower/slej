@@ -139,6 +139,14 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                         txtContent.Text = mseller.CompanyContent;
                         CompanyJC.Text = mseller.CompanyJC;
                         CompanyName.Text = mseller.CompanyName;
+                        if ((IsZDaiLi)mseller.IsZDaiLi == IsZDaiLi.不开启总代理配置)
+                        {
+                            IsGYS.Checked = false;
+                        }
+                        else
+                        {
+                            IsGYS.Checked = true;
+                        }
                         NavNum.Value = ((int)mseller.NavNum).ToString();
 
                         if (!string.IsNullOrEmpty(mseller.JinAoPhoto))
@@ -220,6 +228,7 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                         SLMOblie.Enabled = false;
                         SLQQ.Enabled = false;
                         SLTel.Enabled = false;
+                        IsGYS.Enabled = false;
                         SLWeiXin.Enabled = false;
                         XuKeZhengHao.Enabled = false;
                         txtContent.Enabled = false;
@@ -378,6 +387,14 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                             mseller.JinAoQQ = SLQQ.Text;
                             mseller.JinAoTel = SLTel.Text;
                             mseller.JinAoWeiXin = SLWeiXin.Text;
+                            if (IsGYS.Checked == true)
+                            {
+                                mseller.IsZDaiLi = IsZDaiLi.开启总代理配置;
+                            }
+                            else
+                            {
+                                mseller.IsZDaiLi = IsZDaiLi.不开启总代理配置;
+                            }
                             mseller.XuKeZhengHao = XuKeZhengHao.Text;
                             mseller.CompanyContent = Utils.EditInputText(txtContent.Text);
                             mseller.CompanyJC = CompanyJC.Text;
@@ -606,6 +623,14 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                             mseller.JinAoQQ = SLQQ.Text;
                             mseller.JinAoMobile = SLMOblie.Text;
                             mseller.JinAoLXR = SLName.Text;
+                            if (IsGYS.Checked == true)
+                            {
+                                mseller.IsZDaiLi = IsZDaiLi.开启总代理配置;
+                            }
+                            else
+                            {
+                                mseller.IsZDaiLi = IsZDaiLi.不开启总代理配置;
+                            }
                             mseller.XuKeZhengHao = XuKeZhengHao.Text;
                             mseller.CompanyContent = Utils.EditInputText(txtContent.Text);
                             mseller.CompanyJC = CompanyJC.Text;
@@ -701,22 +726,6 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                             webmodel.Username = Model.Account;
                             webmodel.Fax = Model.qq;
                             Save(webmodel);
-                            #endregion
-                            #region
-                            EyouSoft.Model.SystemStructure.MSupplier supmodel = new EyouSoft.Model.SystemStructure.MSupplier();
-                            supmodel = new EyouSoft.BLL.SystemStructure.BSupplier().GetSupplierModel(webmodel.Username);
-                            if (supmodel != null)
-                            {
-                                supmodel.ContactMail = Model.Email;
-                                supmodel.ContactMobile = Model.Mobile;
-                                supmodel.ContactName = Model.MemberName;
-                                supmodel.ContactPhone = Model.Contact;
-                                supmodel.ContactQQ = Model.qq;
-                                supmodel.SuppAddress = Model.Address;
-                                supmodel.SuppName = "G"+webmodel.Username;
-                                supmodel.SuppPwd = webmodel.Password;
-                                new EyouSoft.BLL.SystemStructure.BSupplier().Update(supmodel);
-                            }
                             #endregion
                             ReturnAjax(1, "操作成功");
                         }

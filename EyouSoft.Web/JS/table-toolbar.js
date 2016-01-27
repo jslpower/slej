@@ -641,7 +641,7 @@ jQuery.newAjax = function(options, noneedcheck) {
 */
 (function($) {
     $.fn.autoAdd = function(options) {
-        var settings = { changeInput: $("#input"), tempRowClass: "tempRow", min: 0, max: 90, addButtonClass: "addbtn", delButtonClass: "delbtn", addCallBack: null, delCallBack: null, indexClass: "index", insertClass: "insertbtn", moveUpClass: "moveupbtn", moveDownClass: "movedownbtn", upCallBack: null, downCallBack: null, isEnable: true };
+        var settings = { changeInput: $("#input"), tempRowClass: "tempRow", min: 1, max: 90, addButtonClass: "addbtn", delButtonClass: "delbtn", addCallBack: null, delCallBack: null, indexClass: "index", insertClass: "insertbtn", moveUpClass: "moveupbtn", moveDownClass: "movedownbtn", upCallBack: null, downCallBack: null, isEnable: true };
         if (options) $.extend(settings, options);
         var content = this;
         var count = content.find("." + settings.tempRowClass).length;
@@ -1329,7 +1329,7 @@ var keSimple = ['source', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste'
         'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'clearhtml', 'selectall', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', '|', 'table', 'hr', 'emoticons', 'link', 'unlink'];
 
 var keSimple_HaveImage = ['source', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'clearhtml', 'selectall', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', '|', 'table', 'hr', 'emoticons', 'link', 'unlink', '|', 'image'];
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'clearhtml', 'selectall', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', '|', 'table', 'hr', 'emoticons', 'link', 'unlink', '|', 'image','multiimage'];
 var keMore = ['source', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
         'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'clearhtml', 'quickformat', 'selectall', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', '|', 'table', 'hr', 'emoticons', 'link', 'unlink'];
 
@@ -1400,5 +1400,5 @@ var KEditer = {
             }
         }
     }
-    
+
 }

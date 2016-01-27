@@ -37,7 +37,7 @@
                 <td align="center"><%# Eval("JiaoYiHao")%></td>
                 <td align="center"><%# Eval("JiaoYiLeiBie")%></td>
                 <td align="center"><font class="fontred">
-                    <%#GetJinECaoZuoFu(Eval("ZhiFuFangSHi"),Eval("JiaoYiLeiBie")) %><%#Eval("JiaoYiJinE","{0:F2}") %>
+                    <%#GetJinECaoZuoFu(Eval("ZhiFuFangSHi"),Eval("JiaoYiLeiBie")) %><%#Eval("JiaoYiJinE","{0:F4}") %>
                 </font></td>
                 <td align="center"><font class="fontred"><%# Eval("ZhiFuFangShi")%></font></td>
                 <td align="center"><font class="fontgreen"><%# Eval("JiaoYiStatus")%></font></td>

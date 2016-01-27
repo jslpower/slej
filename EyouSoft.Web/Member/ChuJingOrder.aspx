@@ -68,15 +68,15 @@
                      <td align="center"><%# Convert.ToDateTime(Eval("LDate")).ToString("yyyy-MM-dd")%></td>
                      <td align="left">
                      人数：<%# Eval("ChengRenShu")%>成人<%# Eval("ErTongShu")%>儿童<br />
-                     成人价：<%# UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, Convert.ToDecimal(Eval("JSJCR")), Convert.ToDecimal(Eval("SCJCR")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)Eval("UserType")).ToString())).ToString("f2")%> 元/人<br />
-                     儿童价：<%# UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路,Convert.ToDecimal(Eval("JSJER")),Convert.ToDecimal(Eval("SCJET")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)Eval("UserType")).ToString())).ToString("f2") %> 元/人<br />
+                     成人价：<%# Eval("JiaoYiCR", "{0:f2}")%> 元/人<br />
+                     儿童价：<%# Eval("JiaoYiET", "{0:f2}")%> 元/人<br />
                      金额：<%#  Convert.ToDouble(Eval("JinE")).ToString("f2")%> 元</td>
                      <%if (isAgency == 1)
                      { %>
                      <td align="left">
                      人数：<%# Eval("ChengRenShu")%>成人<%# Eval("ErTongShu")%>儿童<br />
-                     成人价：<%# UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, Convert.ToDecimal(Eval("JSJCR")), Convert.ToDecimal(Eval("SCJCR")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)HuiYuanInfo.UserType).ToString())).ToString("f2")%> 元/人<br />
-                     儿童价：<%# UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, Convert.ToDecimal(Eval("JSJER")), Convert.ToDecimal(Eval("SCJET")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)HuiYuanInfo.UserType).ToString())).ToString("f2")%> 元/人<br />
+                     成人价：<%# Eval("WebSiteCR", "{0:f2}")%> 元/人<br />
+                     儿童价：<%# Eval("WebSiteET", "{0:f2}")%> 元/人<br />
                      金额：<%# Convert.ToDouble(Eval("AgencyJinE")).ToString("f2")%> 元</td>
                      <td align="center"><%# (Convert.ToDouble(Eval("JinE")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2")%> 元</td>
                      <%} %>

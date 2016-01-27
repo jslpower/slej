@@ -27,6 +27,12 @@ namespace EyouSoft.Web.WebMaster.TuanGou
                 Response.Write(UpdateState());
                 Response.End();
             }
+            if (Utils.GetQueryStringValue("dotype") == "isdaili")
+            {
+                Response.Clear();
+                Response.Write(UpdateDaiLiState());
+                Response.End();
+            }
             initList();
 
         }
@@ -37,9 +43,21 @@ namespace EyouSoft.Web.WebMaster.TuanGou
         {
             var serchModel = new EyouSoft.Model.OtherStructure.MTuanGouChanPinSer();
             //serchModel.SupplierID = UserInfo.GysId;
-            if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户)
+            //if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户)
+            //{
+            //    serchModel.SupplierID = UserInfo.GysId;
+            //}
+            serchModel.SupplierID = UserInfo.GysId;
+            serchModel.IsWebmaster = true;
+            if (Utils.GetQueryStringValue("type") =="s")
             {
-                serchModel.SupplierID = UserInfo.GysId;
+                serchModel.SupplierID = null;
+                serchModel.ValiDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                serchModel.IsIndex = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
+            }
+            if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("CompanyName")))
+            {
+               serchModel.CompanyName  = Utils.GetQueryStringValue("CompanyName");
             }
             serchModel.ProductName = Utils.GetQueryStringValue("CpName");
             if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("CpType"))) serchModel.ProductType = (EyouSoft.Model.Enum.ChanPinLeiXing?)Utils.GetEnumValueNull(typeof(EyouSoft.Model.Enum.ChanPinLeiXing), Utils.GetQueryStringValue("CpType"));
@@ -66,6 +84,10 @@ namespace EyouSoft.Web.WebMaster.TuanGou
         void Del()
         {
             int result = new EyouSoft.BLL.OtherStructure.BTuanGou().Delete(Utils.GetInt(Utils.GetQueryStringValue("id")));
+            if (result == 1)
+            {
+                new EyouSoft.BLL.OtherStructure.BTuanGou().DelDaiLiPro(Utils.GetQueryStringValue("id"));
+            }
             Response.Clear();
             Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", result == 1 ? "删除成功" : "删除失败"));
             Response.End();
@@ -112,6 +134,10 @@ namespace EyouSoft.Web.WebMaster.TuanGou
             string msg = "";
             if (bll.UpdateState(id, enstate))
             {
+                if (enstate == EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架)
+                {
+                    new EyouSoft.BLL.OtherStructure.BTuanGou().DelDaiLiPro(id);
+                }
                 msg = UtilsCommons.AjaxReturnJson("1", "修改成功！");
             }
             else
@@ -119,6 +145,138 @@ namespace EyouSoft.Web.WebMaster.TuanGou
                 msg = UtilsCommons.AjaxReturnJson("0", "修改失败！");
             }
             return msg;
+        }
+
+        private string UpdateDaiLiState()
+        {
+            string id = Utils.GetQueryStringValue("id");
+            string state = Utils.GetQueryStringValue("state");
+            string probool = Utils.GetQueryStringValue("probool");
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(state) || string.IsNullOrEmpty(probool)) return UtilsCommons.AjaxReturnJson("0", "修改失败！");
+            var enstate = (EyouSoft.Model.Enum.ProductZT)Utils.GetInt(state);
+            EyouSoft.BLL.OtherStructure.BTuanGou bll = new EyouSoft.BLL.OtherStructure.BTuanGou();
+            string msg = "";
+            if (probool == "1")
+            {
+                //修改
+                int num = bll.UpDateDaiLiUp(id, enstate, UserInfo.GysId);
+                if (num > 0)
+                {
+                    msg = UtilsCommons.AjaxReturnJson("1", "修改成功！");
+                }
+                else
+                {
+                    msg = UtilsCommons.AjaxReturnJson("0", "修改失败！");
+                }
+            }
+            else
+            {
+                //增加
+                int num = bll.AddDaiLiPro(UserInfo.GysId, id, Utils.GetInt(state));
+                if (num > 0)
+                {
+                    msg = UtilsCommons.AjaxReturnJson("1", "修改成功！");
+                }
+                else
+                {
+                    msg = UtilsCommons.AjaxReturnJson("0", "修改失败！");
+                }
+            }
+            return msg;
+        }
+        /// <summary>
+        /// 获取代理商的公司名称
+        /// </summary>
+        /// <param name="DaiLiID"></param>
+        /// <returns></returns>
+        protected string GetCompanyName(object DaiLiID)
+        {
+            var DaiLiModel = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(DaiLiID.ToString());
+            if (DaiLiModel != null)
+            {
+                return "<a href=\"/webmaster/Supplier/SupplierD.aspx?dlsid="+DaiLiID+"\">"+DaiLiModel.CompanyName+"</a>";
+            }
+            else
+            {
+                return "金奥";
+            }
+        }
+        protected string GetDaiLiPro(object isbool, object endtime, object ID)
+        {
+            if (ID == null) return "暂无该商品";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("");
+            if (Convert.ToDateTime(endtime) > DateTime.Now.AddDays(-1))
+            {
+                int Pstatus = new EyouSoft.BLL.OtherStructure.BTuanGou().GetDaiLiPro(ID.ToString(), UserInfo.GysId);
+                if (Pstatus == -1)//表示上架中
+                {
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>", ID.ToString(),
+                       EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
+                    sb.AppendFormat("&nbsp;");
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>", ID.ToString(),
+                         "取消代理", (int)EyouSoft.Model.Enum.ProductZT.下架);
+                }
+                else if (Pstatus != -2 && Pstatus != -1)//表示已下架
+                {
+                    var isindex = (EyouSoft.Model.Enum.ProductZT)Pstatus;
+                    if (isindex == EyouSoft.Model.Enum.ProductZT.上架)
+                    {
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
+                        sb.AppendFormat("&nbsp;");
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           "取消代理", (int)EyouSoft.Model.Enum.ProductZT.下架);
+                    }
+                    else if (isindex == EyouSoft.Model.Enum.ProductZT.首页推荐)
+                    {
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           "取消推荐", (int)EyouSoft.Model.Enum.ProductZT.上架);
+                        sb.AppendFormat("&nbsp;");
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           "取消代理", (int)EyouSoft.Model.Enum.ProductZT.下架);
+                    }
+                    else if (isindex == EyouSoft.Model.Enum.ProductZT.下架)
+                    {
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                          "我要代理", (int)EyouSoft.Model.Enum.ProductZT.上架);
+                        sb.AppendFormat("&nbsp;");
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
+                    }
+                    else if (isindex == EyouSoft.Model.Enum.ProductZT.暂无该商品)
+                    {
+                        if (isbool == null)
+                        {
+                            sb.Append("暂无该商品");
+                        }
+                        else
+                        {
+                            if ((EyouSoft.Model.Enum.XianLuStructure.XianLuZT)isbool == EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架)
+                            {
+                                sb.Append("暂无该商品");
+                            }
+                            else
+                            {
+                                sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                         "我要代理", (int)EyouSoft.Model.Enum.ProductZT.上架);
+                                sb.AppendFormat("&nbsp;");
+                                sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                                   "首页推荐", (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    sb.Append("暂无该商品");
+                }
+            }
+            else
+            {
+                sb.Append("暂无该商品");
+            }
+            return sb.ToString();
         }
         #region 绑定分页控件
         /// <summary>

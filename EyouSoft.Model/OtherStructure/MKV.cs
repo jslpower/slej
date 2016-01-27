@@ -230,6 +230,19 @@ namespace EyouSoft.Model
         /// 手机版关于商旅e家
         /// </summary>
         public string MoblieSLEJText { get; set; }
+        /// <summary>
+        /// 代理条款
+        /// </summary>
+        public string DaiLiTiaoKuan { get; set; }
+        /// <summary>
+        /// 手机网站设置
+        /// </summary>
+        public string WapSet { get; set; }
+        /// <summary>
+        /// 平台交易费率
+        /// </summary>
+        public decimal JiaoYiLv { get; set; }
+
 
         #region 201411114更新
         /// <summary>
@@ -274,6 +287,29 @@ namespace EyouSoft.Model
         public string EBaoJFZZ { get; set; }
 
 
+        #endregion
+
+        #region 20150713手机版加入我们
+        /// <summary>
+        /// Wap我要做分销商
+        /// </summary>
+        public string WapMakeFenXiao { get; set; }
+        /// <summary>
+        /// Wap我要做贵宾会员
+        /// </summary>
+        public string WapMakeGuiBin { get; set; }
+        /// <summary>
+        /// Wap我要做普通会员
+        /// </summary>
+        public string WapMakePuTong { get; set; }
+        /// <summary>
+        /// Wap我要应聘专职
+        /// </summary>
+        public string WapMakeYingPing { get; set; }
+        /// <summary>
+        /// Wap我要做供应商
+        /// </summary>
+        public string WapMakeGongYing { get; set; }
         #endregion
 
     }

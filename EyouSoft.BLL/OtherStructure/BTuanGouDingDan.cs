@@ -91,5 +91,13 @@ namespace EyouSoft.BLL.OtherStructure
         {
             return dal.GetOrderNum(Status);
         }
+        /// <summary>
+        /// 订单分润
+        /// </summary>
+        public int FenRun(string orderid, EyouSoft.Model.Enum.DingDanLeiBie OrderLeiBie)
+        {
+            if (string.IsNullOrEmpty(orderid)) return 0;
+            return dal.FenRun(orderid, OrderLeiBie);
+        }
     }
 }

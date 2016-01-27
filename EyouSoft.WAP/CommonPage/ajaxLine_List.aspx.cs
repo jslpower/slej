@@ -33,7 +33,7 @@ namespace EyouSoft.WAP.CommonPage
             EyouSoft.Model.XianLuStructure.MXianLuChaXunInfo searchmodel = new EyouSoft.Model.XianLuStructure.MXianLuChaXunInfo();
             searchmodel.Xianluzt = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
             searchmodel.isNoTour = true;
-            string routeName = Utils.GetQueryStringValue("lineName");
+            string routeName = Utils.GetQueryStringValue("keyword");
             searchmodel.RouteName = routeName == "目的地或关键词" ? "" : routeName;
             searchmodel.TianShu = Utils.GetIntNull(Utils.GetQueryStringValue("days"));
             searchmodel.sPrice = Utils.GetDecimal(Utils.GetQueryStringValue("spri"));
@@ -45,12 +45,20 @@ namespace EyouSoft.WAP.CommonPage
             {
                 searchmodel.LineSource = (LineSource)Utils.GetInt(source);
             }
-            string cityid = Utils.GetQueryStringValue("cityid");
-            if (!string.IsNullOrEmpty(cityid))
+            int cityid = Utils.GetInt(Utils.GetQueryStringValue("cityid"));
+            if (cityid > 0)
             {
-                searchmodel.DepCityIds = new int[Utils.GetInt(cityid)];
+                searchmodel.DepCityIds = new int[] { cityid };
             }
+            else
+            {
+                var citymodel = EyouSoft.Security.Membership.UserProvider.GetCityInfo();
+                if (citymodel != null && citymodel.Id > 0)
+                {
 
+                    searchmodel.DepCityIds = new int[] { citymodel.Id };
+                }
+            }
             if (areaid > 0)
             {
                 searchmodel.AreaIds = new int[] { areaid };
@@ -158,6 +166,22 @@ namespace EyouSoft.WAP.CommonPage
             string src = objStr.ToString();
             if (string.IsNullOrEmpty(src)) return defaultImg;
             return TuPian.F1(src, 320, 240, PID.ToString());
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="lineType"></param>
+        /// <returns></returns>
+        protected string getSourceJP(object lineType)
+        {
+            LineSource source = (LineSource)lineType;
+            if (source == LineSource.系统) return "JA";
+            if (source == LineSource.博客) return "BK";
+            if (source == LineSource.光大) return "GD";
+            if (source == LineSource.欢途) return "HT";
+            if (source == LineSource.省中旅) return "SZL";
+            if (source == LineSource.旅游圈) return "LYQ";
+            return "JA";
         }
     }
 }

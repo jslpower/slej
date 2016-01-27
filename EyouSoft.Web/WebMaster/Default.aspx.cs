@@ -16,7 +16,7 @@ namespace EyouSoft.Web.WebMaster
             {
                 if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户)
                 {
-                    rightUrl = "/webmaster/shangcheng/productlist.aspx";
+                    rightUrl = "/webmaster/shangcheng/productlist.aspx?type=s";
                 }
                 else if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.供应商用户)
                 {

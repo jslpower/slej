@@ -1,0 +1,5 @@
+E:\杭州金奥\Interface\Hotelbe\hotelbe-sdk-pure\bin\Debug\hotelbe-sdk-pure.dll
+E:\杭州金奥\Interface\Hotelbe\hotelbe-sdk-pure\bin\Debug\hotelbe-sdk-pure.pdb
+E:\杭州金奥\Interface\Hotelbe\hotelbe-sdk-pure\obj\Debug\ResolveAssemblyReference.cache
+E:\杭州金奥\Interface\Hotelbe\hotelbe-sdk-pure\obj\Debug\hotelbe-sdk-pure.dll
+E:\杭州金奥\Interface\Hotelbe\hotelbe-sdk-pure\obj\Debug\hotelbe-sdk-pure.pdb

@@ -160,6 +160,7 @@
     <Compile Include="OtherStructure\ITuiGuang.cs" />
     <Compile Include="OtherStructure\IXiaJiFenXiaoTiCheng.cs" />
     <Compile Include="OtherStructure\IYanZhengMa.cs" />
+    <Compile Include="OtherStructure\IYouJi.cs" />
     <Compile Include="OtherStructure\IYuMing.cs" />
     <Compile Include="OtherStructure\IZuTuan.cs" />
     <Compile Include="SystemStructure\ISupplier.cs" />

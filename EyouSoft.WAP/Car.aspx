@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>客车包租</title>
+    <title><%=FenXiangBiaoTi %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
         #allmap
@@ -961,7 +961,7 @@ else{
                 }
                 else
                 {
-                html += "<span style=\"white-space:nowrap; padding-left:70px;\">会员价：<i class=\"font_yellow\">" + (jsonZ.Zhy/carnum).toFixed(2) + "元</i>/辆</span>";
+                html += "<span style=\"white-space:nowrap; padding-left:70px;\">优惠价：<i class=\"font_yellow\">" + (jsonZ.Zhy/carnum).toFixed(2) + "元</i>/辆</span>";
                 }
 
                 $(".tr_JinE").html(html);
@@ -996,7 +996,7 @@ else{
                 }
                 else
                 {
-                 html1 += "<span style=\"white-space:nowrap; padding-left:70px;\">会员费：<i class=\"font_yellow\">" + jsonZ.Zhy.toFixed(2) + "元</i></span>";
+                 html1 += "<span style=\"white-space:nowrap; padding-left:70px;\">优惠费：<i class=\"font_yellow\">" + jsonZ.Zhy.toFixed(2) + "元</i></span>";
              $("#ZongJia").html(jsonZ.Zhy.toFixed(2));
                 }
                 
@@ -1035,7 +1035,7 @@ else{
                 dlls ="";
             }
            
-            html2 += "<li>" + hysq + "<span class=\"font_yellow\">会员：</span>" + tableToolbar.getFloat(jsonZ.Zhy/num) + "元 x " + num + "辆 = <span class=\"font_yellow\">" + jsonZ.Zhy.toFixed(2) + "</span>元 "+hyls+"</li>";
+            html2 += "<li>" + hysq + "<span class=\"font_yellow\">优惠：</span>" + tableToolbar.getFloat(jsonZ.Zhy/num) + "元 x " + num + "辆 = <span class=\"font_yellow\">" + jsonZ.Zhy.toFixed(2) + "</span>元 "+hyls+"</li>";
             html2 += "<li>" + gbsq + "<span class=\"font_yellow\">贵宾：</span>" + tableToolbar.getFloat(jsonZ.Zgb/num) + "元 x " + num + "辆 = <span class=\"font_yellow\">" + jsonZ.Zgb.toFixed(2) + "</span>元 "+gbls+"</li>";
             html2 += "<li>" + dlsq + "<span class=\"font_yellow\">代理：</span>" + tableToolbar.getFloat(jsonZ.Zfx/num) + "元 x " + num + "辆 = <span class=\"font_yellow\">" + jsonZ.Zfx.toFixed(2) + "</span>元 "+dlls+"</li>";
             

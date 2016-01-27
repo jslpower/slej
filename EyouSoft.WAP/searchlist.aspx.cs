@@ -14,6 +14,7 @@ namespace EyouSoft.WAP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            hidcityid.Value = "-1";
             WapHeader1.HeadText = "旅游线路";
             PageInit();
         }
@@ -23,6 +24,21 @@ namespace EyouSoft.WAP
             EyouSoft.Model.XianLuStructure.MXianLuChaXunInfo searchmodel = new EyouSoft.Model.XianLuStructure.MXianLuChaXunInfo();
             searchmodel.Xianluzt = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
             searchmodel.RouteName = Utils.GetQueryStringValue("keyword");
+            int cityid = Utils.GetInt(Utils.GetQueryStringValue("cityid"));
+            if (cityid > 0)
+            {
+                hidcityid.Value =cityid.ToString();
+                searchmodel.DepCityIds = new int[] { cityid };
+            }
+            else
+            {
+                var citymodel = EyouSoft.Security.Membership.UserProvider.GetCityInfo();
+                if (citymodel != null)
+                {
+                    hidcityid.Value = citymodel.Id.ToString();
+                    searchmodel.DepCityIds = new int[] { citymodel.Id };
+                }
+            }
             searchmodel.isNoTour = true;
 
             int recordCount = 0;

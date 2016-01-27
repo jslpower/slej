@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="首页" Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage/Front.Master"
     CodeBehind="Default.aspx.cs" Inherits="EyouSoft.Web.Defalut" %>
-
 <%@ Register Src="~/UserControl/Search.ascx" TagName="Search" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/TravelTools.ascx" TagName="TravelTools" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/UserLoginOrReg.ascx" TagName="UserLoginOrReg" TagPrefix="uc1" %>

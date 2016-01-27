@@ -41,6 +41,10 @@ namespace EyouSoft.Web
          (Master as Front).HeadMenuIndex = 6;
          Model.SearchInfo.PageInfo = PageInfo;
          Model.IsIndex = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
+         if (Model.CityId == 0)
+         {
+             Model.CityId = null;
+         }
          var list = bll.GetScenicList(Model);
 
          Repeater1.DataSource = list;
@@ -80,7 +84,7 @@ namespace EyouSoft.Web
           {
               EyouSoft.BLL.OtherStructure.BSysAreaInfo bll = new EyouSoft.BLL.OtherStructure.BSysAreaInfo();
               IList<EyouSoft.Model.MSysCity> cList = bll.GetSysCityList(0, new EyouSoft.Model.MSysCity { ProvinceId = Utils.GetInt(Utils.GetQueryStringValue("ProvinceId")) });
-              OptionList.Append("<option value >-请选择-</option>");
+              OptionList.Append("<option value=\"0\" >-请选择-</option>");
               if (cList != null)
               {
                   for (int i = 0; i < cList.Count; i++)

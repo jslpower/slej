@@ -111,7 +111,7 @@ namespace EyouSoft.DAL.MallStructure
         /// <returns></returns>
         public MShangChengShangPin GetModel(string ShangPinID)
         {
-            MShangChengShangPin info = new MShangChengShangPin();
+            MShangChengShangPin info = null;
 
             StringBuilder query = new StringBuilder();
 
@@ -125,6 +125,7 @@ namespace EyouSoft.DAL.MallStructure
             {
                 while (dr.Read())
                 {
+                    info = new MShangChengShangPin();
                     info.ProductID = dr.GetString(dr.GetOrdinal("ProductID"));
                     info.TypeID = dr.GetInt32(dr.GetOrdinal("TypeID"));
                     info.ProductName = dr.GetString(dr.GetOrdinal("ProductName"));
@@ -250,6 +251,10 @@ namespace EyouSoft.DAL.MallStructure
                 {
                     query.AppendFormat(" and  SupplierName = '{0}'", chaXun.GYSName);
                 }
+                if (!string.IsNullOrEmpty(chaXun.CompanyName))
+                {
+                    query.Append(" and GYSid in (select ID from tbl_JA_Sellers where CompanyName like '%" + chaXun.CompanyName + "%' )");
+                }
                 if (!string.IsNullOrEmpty(chaXun.sqlWhere))
                 {
                     query.AppendFormat(" and ProductID not in (SELECT ProductId from tbl_Seller_ShangCheng where MemberId='{0}' and ProductStatus in(1,3))", chaXun.sqlWhere);
@@ -331,7 +336,7 @@ namespace EyouSoft.DAL.MallStructure
         /// <param name="isup">上架or下架（0-上架，1-下架）</param>
         /// <param name="MemberId">代理商id</param>
         /// <returns></returns>
-        public int UpDateDaiLiUp(string ShangPinID, ProductZT isup,string MemberId)
+        public int UpDateDaiLiUp(string ShangPinID, ProductZT isup, string MemberId)
         {
             string SQL_UPDATE_Update = "UPDATE [tbl_Seller_ShangCheng] SET [ProductStatus]=@ProductStatus WHERE [ProductId]=@ProductID and [MemberId]=@MemberId ";
             DbCommand cmd = _db.GetSqlStringCommand(SQL_UPDATE_Update);
@@ -342,6 +347,32 @@ namespace EyouSoft.DAL.MallStructure
 
 
             return DbHelper.ExecuteSql(cmd, _db) == 1 ? 1 : -100;
+        }
+
+        /// <summary>
+        /// 更新商品上下架
+        /// </summary>
+        /// <param name="ShangPinID">商品[]id</param>
+        /// <param name="isup">上架or下架（0-上架，1-下架）</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <returns></returns>
+        public int UpDateDaiLiUp(string[] ShangPinID, ProductZT isup, string MemberId)
+        {
+            StringBuilder SQL_UPDATE_Update = new StringBuilder();
+            SQL_UPDATE_Update.AppendFormat(" DELETE tbl_Seller_ShangCheng WHERE ProductId in ({0}) ;", Utils.GetSqlInExpression(ShangPinID));
+            for (int i = 0; i < ShangPinID.Length; i++)
+            {
+                SQL_UPDATE_Update.AppendFormat("INSERT INTO [tbl_Seller_ShangCheng]([MemberId],[ProductId],[ProductStatus] ) values ('{0}','{1}','{2}')	;", MemberId, ShangPinID[i], (int)isup);
+            }
+
+            //string SQL_UPDATE_Update = string.Format(" DELETE tbl_Seller_ShangCheng WHERE ProductId in ({0}) ;", Utils.GetSqlInExpression(ShangPinID));
+            //SQL_UPDATE_Update += string.Format("UPDATE [tbl_Seller_ShangCheng] SET [ProductStatus]='{2}' WHERE [ProductId] in ({0}) and [MemberId]='{1}' ", Utils.GetSqlInExpression(ShangPinID), MemberId, (int)isup);
+
+            DbCommand cmd = _db.GetSqlStringCommand(SQL_UPDATE_Update.ToString());
+
+
+
+            return DbHelper.ExecuteSql(cmd, _db) > 0 ? 1 : -100;
         }
 
         /// <summary>
@@ -364,7 +395,8 @@ namespace EyouSoft.DAL.MallStructure
             {
                 return (int)obj;
             }
-            else {
+            else
+            {
                 return -1;
             }
         }
@@ -398,7 +430,7 @@ namespace EyouSoft.DAL.MallStructure
         public int DelDaiLiPro(string ProductId)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.AppendFormat(" DELETE tbl_Seller_ShangCheng WHERE ProductId='{0}'",ProductId);
+            strSql.AppendFormat(" DELETE tbl_Seller_ShangCheng WHERE ProductId='{0}'", ProductId);
 
             DbCommand cmd = this._db.GetSqlStringCommand(strSql.ToString());
             return DbHelper.ExecuteSql(cmd, this._db);
@@ -420,10 +452,10 @@ namespace EyouSoft.DAL.MallStructure
 
             string tableName = "View_DaiLiChanPin";
             string fileds = "ProductID,TypeID,ProductName,ProductNum,MarketPrice,SalePrice,ContentService,UnContentService,UseRule,NoticeKnow,ProductionDate,EffectDate,ShelfDate,IssueTime,Remark,ModelDesc,ColorDesc,StylesDesc,MailWay,StockNum,TypeName,ProductImgs,ParentID,GYSid,Unit,SupplierName";
-            string orderByString = "IssueTime desc";
+            string orderByString = " PSort asc,IssueTime desc ";
 
             StringBuilder query = new StringBuilder();
-            query.Append(" 1=1 ");
+            query.Append(" 1=1 and PSort>0 ");
 
             if (chaXun != null)
             {
@@ -487,7 +519,38 @@ namespace EyouSoft.DAL.MallStructure
             return list;
         }
 
+        /// <summary>
+        /// 更新产品排序
+        /// </summary>
+        /// <param name="DaiLiId">代理id</param>
+        /// <param name="id">产品主id</param>
+        /// <param name="xuhao">序号</param>
+        /// <returns></returns>
+        public int UpdateProductSort(string DaiLiId, string id, int xuhao)
+        {
+            string TableName = "";
+            string strwhere = " ProductId ='" + id + "' and MemberId='" + DaiLiId + "' and ProductStatus=2";
+            string sql = "update tbl_Seller_ShangCheng set PSort=@XuHao where " + strwhere;
+            DbCommand cmd = this._db.GetSqlStringCommand(sql);
+            this._db.AddInParameter(cmd, "XuHao", DbType.Int32, xuhao);
 
+            return DbHelper.ExecuteSql(cmd, this._db);
+        }
+
+        /// <summary>
+        /// 根据表获取产品的排序
+        /// </summary>
+        /// <param name="dailiid"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int GetProductSort(string dailiid, string id)
+        {
+            string TableName = "";
+            string strwhere = "";
+            string sql = "select PSort from tbl_Seller_ShangCheng where  ProductId ='" + id + "' and MemberId='" + dailiid + "' and ProductStatus=2";
+            DbCommand cmd = this._db.GetSqlStringCommand(sql);
+            return Convert.ToInt32(DbHelper.GetSingle(cmd, this._db));
+        }
 
         #region 私有方法
 

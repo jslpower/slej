@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="CompanyStructure\CompanyUser.cs" />
     <Compile Include="ConvertToMModel.cs" />
+    <Compile Include="Enum\EnumYouJi.cs" />
     <Compile Include="Enum\OrderSite.cs" />
     <Compile Include="Enum\Supplier.cs" />
     <Compile Include="Enum\TransactionCate.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="SystemStructure\MSupplier.cs" />
     <Compile Include="SystemStructure\WebModel\MFeeSettingsSearchModel.cs" />
     <Compile Include="WeiXin\MWinXin.cs" />
+    <Compile Include="WeiXin\MYouJi.cs" />
     <Compile Include="XianLuStructure\MOrderInfo.cs" />
     <Compile Include="XianLuStructure\MXianLuInfo.cs" />
     <Compile Include="MoneyStructure\MChongZhi.cs" />

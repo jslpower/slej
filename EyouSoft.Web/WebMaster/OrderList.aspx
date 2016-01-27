@@ -25,6 +25,9 @@
 
     <link href="/Css/webmaster/style.css" rel="stylesheet" type="text/css" />
     <link href="/Css/webmaster/boxy.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    .pnone{display:none;}
+    </style>
 </head>
 <body>
     <table width="99%" cellspacing="0" cellpadding="0" border="0" align="center">
@@ -145,16 +148,19 @@
                             </td>
                             <td align="left">
                             人数：<%# Eval("ChengRenShu")%>成人<%# Eval("ErTongShu")%>儿童<br />
-                     成人价：<%# UtilsCommons.GetGYStijia(feetype, Convert.ToDecimal(Eval("JSJCR")), Convert.ToDecimal(Eval("SCJCR")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)Eval("UserType")).ToString())).ToString("f2")%> 元/人<br />
-                     儿童价：<%# UtilsCommons.GetGYStijia(feetype, Convert.ToDecimal(Eval("JSJER")), Convert.ToDecimal(Eval("SCJET")), (EyouSoft.Model.Enum.MemberTypes)EyouSoft.Common.Utils.GetInt(((int)Eval("UserType")).ToString())).ToString("f2")%> 元/人<br />
+                     成人价：<%# Eval("JiaoYiCR", "{0:f2}")%> 元/人<br />
+                     儿童价：<%# Eval("JiaoYiET", "{0:f2}")%> 元/人<br />
                      金额：<%#  Convert.ToDouble(Eval("JinE")).ToString("f2")%> 元
                             </td>
-                            <td align="left">
+                            <td align="left" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"":"pnone"%>">
                                 人数：<%# Eval("ChengRenShu")%>成人<%# Eval("ErTongShu")%>儿童<br />
-                     成人价：<%# GetDengJiByID(feetype, Eval("JSJCR"), Eval("SCJCR"), Eval("AgencyId")).ToString("f2")%> 元/人<br />
-                     儿童价：<%# GetDengJiByID(feetype, Eval("JSJER"), Eval("SCJET"), Eval("AgencyId")).ToString("f2")%> 元/人<br />
+                     成人价：<%# Eval("WebSiteCR", "{0:f2}")%> 元/人<br />
+                     儿童价：<%# Eval("WebSiteET","{0:f2}")%> 元/人<br />
                      金额：<%# Eval("AgencyId").ToString().Trim().Length > 20 ? Convert.ToDouble(Eval("AgencyJinE")).ToString("f2") : "0"%> 元
                             </td>
+                             <td align="center" class="<%#Eval("AgencyId").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
                             <td align="center">
                             
                             <%# Eval("AgencyId").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("JinE")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2") : "0"%>元

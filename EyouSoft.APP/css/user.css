@@ -1,0 +1,6 @@
+﻿body{ background:#fff;}
+.store_box{width:260px; height:110px; background:#fff; position:absolute; left:50%;top:50%; margin-left:-130px;margin-top:-55px;}
+.store_box li .y_btn{text-align:left;text-indent:20px;}
+
+.code_box{ padding:0 10px 20px 10px;}
+.code_box img{width:280px; height:137px;}

@@ -92,7 +92,7 @@ namespace EyouSoft.Web
                     FenxiaoJiaGe.Visible = false;
                     string jiagexianshi = "";
                     jiagexianshi += "<dd>门市价：<span class=\"font18 font_yellow\" style=\"text-decoration:line-through\">¥ " + Convert.ToInt32(model.JiaGeMenShi).ToString() + "</span>元起&nbsp;&nbsp;&nbsp;&nbsp;";
-                    jiagexianshi += "会员价：<span class=\"font18 font_yellow\">¥ " + (model.JiaGe + (model.JiaGeMenShi - model.JiaGe) * feeSettings.PuTongHuiYuanJia / 100).ToString("f0") + "</span>元起";
+                    jiagexianshi += "优惠价：<span class=\"font18 font_yellow\">¥ " + (model.JiaGe + (model.JiaGeMenShi - model.JiaGe) * feeSettings.PuTongHuiYuanJia / 100).ToString("f0") + "</span>元起";
                     Model.SSOStructure.MUserInfo userInfo = null;
                     Security.Membership.UserProvider.IsLogin(out userInfo);
                     if (userInfo != null)

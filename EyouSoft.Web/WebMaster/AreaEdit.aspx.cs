@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using EyouSoft.Common;
+using System.Text;
 
 namespace EyouSoft.Web.WebMaster
 {
@@ -47,6 +48,14 @@ namespace EyouSoft.Web.WebMaster
 
             if (ddlType.Items.FindByValue(((int)model.RouteType).ToString()) != null)
                 ddlType.Items.FindByValue(((int)model.RouteType).ToString()).Selected = true;
+            if (!string.IsNullOrEmpty(model.ImgPath))
+            {
+                 StringBuilder uploadstr = new StringBuilder();
+                 uploadstr.AppendFormat("<img height='75' width='100' alt='' class='addpic img' style='vertical-align:bottom' src='{0}' /><span style='vertical-align: bottom;'><img alt='' class='pand4' style='vertical-align: bottom;' onclick=\"LineAdd.DelImg(this)\" src='/images/webmaster/cha.gif' /><input type='hidden' name='hideimg' value='|{0}' /></span>", model.ImgPath);
+                        this.lbUploadInfo.Text = uploadstr.ToString();
+            }
+            txtYinXiaoLJ.Text = model.AdvLink;
+            txtYinXiaoWZ.Text = model.AdvTitle;
         }
 
         private void InitDropDownList()
@@ -61,12 +70,24 @@ namespace EyouSoft.Web.WebMaster
 
         private string Save(string action, string areaid)
         {
+            string[] imgUpload = Utils.GetFormValues(this.UploadControl1.ClientHideID);
+            string[] oldimgUpload = Utils.GetFormValues("hideimg");
             var model = new Model.MSysArea
                 {
                     AreaName = Utils.GetFormValue(txtAreaName.UniqueID),
-                    RouteType = (Model.Enum.AreaType)Utils.GetInt(Utils.GetFormValue(ddlType.UniqueID))
+                    RouteType = (Model.Enum.AreaType)Utils.GetInt(Utils.GetFormValue(ddlType.UniqueID)),
+                    AdvLink = Utils.GetFormValue(txtYinXiaoLJ.UniqueID),
+                    AdvTitle = Utils.GetFormValue(txtYinXiaoWZ.UniqueID),
+                    
                 };
-
+            if (imgUpload.Length>0)
+            {
+                model.ImgPath = imgUpload[0].Split('|')[1];
+            }
+            else if (oldimgUpload.Length>0)
+            {
+                model.ImgPath = oldimgUpload[0].Split('|')[1];
+            }
             int r = 0;
             var bll = new BLL.OtherStructure.BSysAreaInfo();
             if (action == "edit")

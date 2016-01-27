@@ -67,31 +67,31 @@ namespace EyouSoft.Web.print
             if (m.XingChengs != null && m.XingChengs.Count > 0) { rpt.DataSource = m.XingChengs; rpt.DataBind(); }
             if (m.FuWu != null)
             {
-                if (m.Line_Source != EyouSoft.Model.XianLuStructure.LineSource.光大 && m.Line_Source != EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
+                if (m.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.光大 || m.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
                 {
-                    FuWuBiaoZhun.Text = StringValidate.TextToHtml(m.FuWu.FuWuBiaoZhun);
-                    BuHanXiangMu.Text = StringValidate.TextToHtml(m.FuWu.BuHanXiangMu);
-                    ErTongAnPai.Text = StringValidate.TextToHtml(m.FuWu.ErTongAnPai);
-                    GouWuAnPai.Text = StringValidate.TextToHtml(m.FuWu.GouWuAnPai);
-                    ZiFeiXiangMu.Text = StringValidate.TextToHtml(m.FuWu.ZiFeiXiangMu);
-                    ZhuYiShiXiang.Text = StringValidate.TextToHtml(m.FuWu.ZhuYiShiXiang);
-                    WenXinTiXing.Text = StringValidate.TextToHtml(m.FuWu.WenXinTiXing);
-                    QiTaShiXiang.Text = StringValidate.TextToHtml(m.FuWu.QiTaShiXiang);
-                    BaoMingXuZhi.Text = StringValidate.TextToHtml(m.FuWu.BaoMingXuZhi);
-                    ZengSongXiangMu.Text = StringValidate.TextToHtml(m.FuWu.ZengSongXiangMu);
+                    FuWuBiaoZhun.Text = Utils.ConverToHtml(m.FuWu.FuWuBiaoZhun);
+                    BuHanXiangMu.Text = Utils.ConverToHtml(m.FuWu.BuHanXiangMu);
+                    ErTongAnPai.Text = Utils.ConverToHtml(m.FuWu.ErTongAnPai);
+                    GouWuAnPai.Text = Utils.ConverToHtml(m.FuWu.GouWuAnPai);
+                    ZiFeiXiangMu.Text = Utils.ConverToHtml(m.FuWu.ZiFeiXiangMu);
+                    ZhuYiShiXiang.Text = Utils.ConverToHtml(m.FuWu.ZhuYiShiXiang);
+                    WenXinTiXing.Text = Utils.ConverToHtml(m.FuWu.WenXinTiXing);
+                    QiTaShiXiang.Text = Utils.ConverToHtml(m.FuWu.QiTaShiXiang);
+                    BaoMingXuZhi.Text = Utils.ConverToHtml(m.FuWu.BaoMingXuZhi);
+                    ZengSongXiangMu.Text = Utils.ConverToHtml(m.FuWu.ZengSongXiangMu);
                 }
                 else
                 {
-                    FuWuBiaoZhun.Text = m.FuWu.FuWuBiaoZhun;
-                    BuHanXiangMu.Text = m.FuWu.BuHanXiangMu;
-                    ErTongAnPai.Text = m.FuWu.ErTongAnPai;
-                    GouWuAnPai.Text = m.FuWu.GouWuAnPai;
-                    ZiFeiXiangMu.Text = m.FuWu.ZiFeiXiangMu;
-                    ZhuYiShiXiang.Text = m.FuWu.ZhuYiShiXiang;
-                    WenXinTiXing.Text = m.FuWu.WenXinTiXing;
-                    QiTaShiXiang.Text = m.FuWu.QiTaShiXiang;
-                    BaoMingXuZhi.Text = m.FuWu.BaoMingXuZhi;
-                    ZengSongXiangMu.Text = m.FuWu.ZengSongXiangMu;
+                    FuWuBiaoZhun.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.FuWuBiaoZhun));
+                    BuHanXiangMu.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.BuHanXiangMu));
+                    ErTongAnPai.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.ErTongAnPai));
+                    GouWuAnPai.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.GouWuAnPai));
+                    ZiFeiXiangMu.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.ZiFeiXiangMu));
+                    ZhuYiShiXiang.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.ZhuYiShiXiang));
+                    WenXinTiXing.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.WenXinTiXing));
+                    QiTaShiXiang.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.QiTaShiXiang));
+                    BaoMingXuZhi.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.BaoMingXuZhi));
+                    ZengSongXiangMu.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(m.FuWu.ZengSongXiangMu));
                 }
             }
             string website = HttpContext.Current.Request.Url.Host.ToLower();

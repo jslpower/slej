@@ -194,7 +194,7 @@ namespace EyouSoft.DAL.MallStructure
 
 
             string tableName = "view_ShangChengOrder";
-            string fileds = "OrderID,ProductID,ProductName,ProductNum,IssueTime,ContactName,OrderState,OrderPrice,OrderCode,PayState,SupplierID,ContactPhone,UserType,OperatorName,OperatorMobile,SupplierMoney";
+            string fileds = "OrderID,ProductID,ProductName,ProductNum,IssueTime,ContactName,OrderState,OrderPrice,OrderCode,PayState,SupplierID,ContactPhone,UserType,OperatorName,OperatorMobile,SupplierMoney,JiaoYiLv,SalePrice";
             string orderByString = "IssueTime desc";
 
             StringBuilder query = new StringBuilder();
@@ -237,7 +237,17 @@ namespace EyouSoft.DAL.MallStructure
                 {
                     query.AppendFormat(" and  GYSid = '{0}' ", chaXun.GYSid);
                 }
-
+                if (!string.IsNullOrEmpty(chaXun.IsTeYue))
+                {
+                    if (chaXun.IsTeYue == "1")//表示是查询特约订单，但是没有指定某个特约商户
+                    {
+                        query.Append(" and  IsTeYue<>'0' ");
+                    }
+                    else
+                    {
+                        query.AppendFormat(" and  IsTeYue='" + chaXun.IsTeYue + "' ", chaXun.IsTeYue);
+                    }
+                }
                 if (chaXun.XiaDanBeginTime > Convert.ToDateTime("1990-01-01"))
                 {
                     query.AppendFormat(" AND IssueTime>='{0}' ", chaXun.XiaDanBeginTime);
@@ -270,6 +280,9 @@ namespace EyouSoft.DAL.MallStructure
                     info.ContactPhone = dr["ContactPhone"].ToString();
                     info.OperatorMobile = dr["OperatorMobile"].ToString();
                     info.OperatorName = dr["OperatorName"].ToString();
+                    info.JiaoYiLv = dr.GetDecimal(dr.GetOrdinal("JiaoYiLv"));
+                    info.SalePrice = dr.GetDecimal(dr.GetOrdinal("SalePrice"));
+                    
                     if (dr["UserType"] != null && dr["UserType"] != DBNull.Value)
                     {
                         info.UserType = (EyouSoft.Model.Enum.MemberTypes)dr.GetInt32(dr.GetOrdinal("UserType"));

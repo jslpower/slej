@@ -131,5 +131,54 @@ namespace EyouSoft.Web.WebMaster.MoneyManagement
             return "会员姓名：" + model.MemberName + "<br />会员帐号：" + model.Account;
 
         }
+
+        /// <summary>
+        /// 返回交易金额对于系统的余额的增加或减少
+        /// </summary>
+        /// <param name="JinE">交易金额</param>
+        /// <param name="LeiBie">交易类别</param>
+        /// <returns></returns>
+        protected string GetJinE(object JinE,object LeiBie)
+        {
+            decimal JYJinE = 0;
+            if (JinE != null && !string.IsNullOrEmpty(JinE.ToString()))
+            {
+                JYJinE = System.Math.Abs(Convert.ToDecimal(JinE));
+            }
+            JiaoYiLeiBie JYLeiBie = (JiaoYiLeiBie)LeiBie;
+            switch (JYLeiBie)
+            {
+                case JiaoYiLeiBie.产品销售款:
+                    return "-"+JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.充值:
+                    return JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.返利:
+                    return "-" + JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.返联盟推广返利:
+                    return "-" + JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.分销奖金:
+                    return "-" + JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.分销利润:
+                    return "-" + JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.平台交易费:
+                    return JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.提现:
+                    return "-" + JYJinE.ToString("f4");
+                    break;
+                case JiaoYiLeiBie.消费:
+                    return JYJinE.ToString("f4");
+                    break;
+                default:
+                    return JYJinE.ToString("f4");
+                    break;
+            }
+        }
     }
 }

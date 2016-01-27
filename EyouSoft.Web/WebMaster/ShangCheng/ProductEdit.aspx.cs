@@ -27,8 +27,8 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
             model.EffectDate = Utils.GetDateTimeNullable(Utils.GetFormValue(txtYouXiaoQi.UniqueID));
             model.ProductionDate = Utils.GetDateTimeNullable(Utils.GetFormValue(txtShengChanRiQi.UniqueID));
             model.ShelfDate = Utils.GetInt(Utils.GetFormValue(txtBaoZhiQi.UniqueID));
-            model.ModelDesc = Utils.GetFormValue(txtXingHao.UniqueID);
-            model.ColorDesc = Utils.GetFormValue(txtYanSe.UniqueID);
+            model.ModelDesc = Utils.GetFormValue(txtXingHao.UniqueID).Replace("，", ",");
+            model.ColorDesc = Utils.GetFormValue(txtYanSe.UniqueID).Replace("，", ",");
             model.MarketPrice = Utils.GetDecimal(Utils.GetFormValue(txtMenShiJia.UniqueID));
             model.SalePrice = Utils.GetDecimal(Utils.GetFormValue(txtYouHuiJia.UniqueID));
             model.Remark = Utils.EditInputText(Request.Form[txtChanPinJieShao.UniqueID]);
@@ -38,7 +38,7 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
             model.NoticeKnow = Utils.EditInputText(Request.Form[txtZhuYi.UniqueID]);
             model.MailWay = Utils.EditInputText(Request.Form[txtYouJi.UniqueID]);
             
-            model.StylesDesc = Utils.GetFormValue(txtKuanShi.UniqueID);
+            model.StylesDesc = Utils.GetFormValue(txtKuanShi.UniqueID).Replace("，",",");
             model.ProductNum = Utils.GetInt(Utils.GetFormValue(txtShuLiang.UniqueID));
             model.Unit = Utils.GetFormValue(txtDanWei.UniqueID);
             model.GYSid = UserInfo.GysId;

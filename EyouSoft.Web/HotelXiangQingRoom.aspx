@@ -27,7 +27,7 @@
     <% if (IsShowHuiYuan())
        { %>
     <th>
-        会员价
+        优惠价
     </th>
     <%} %>
     <% if (IsShowErJiDaiLi())

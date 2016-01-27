@@ -1,0 +1,64 @@
+.fenxiang_list{ padding:0 10px 10px 10px; overflow:hidden;}
+.fenxiang_list li{margin-top:10px; padding:10px; border:#e1e1e1 solid 1px; background:#fff;color:#4f4f4f;}
+.fenxiang_list .title{padding-bottom:5px;font-size:16px; color:#464646;}
+
+.fenxiang_list .name{ height:21px;background:url(../images/tx.gif) no-repeat left center; padding-left:20px; color:#4f4f4f;}
+.fenxiang_list .time{ font-size:12px; line-height:28px; padding-left:20px;color:#4f4f4f;}
+
+.btn,.btn2{width:70px; height:26px; line-height:26px;text-align:center; display:inline-block; float:right; font-size:14px;}
+.btn{color:#fff; background:#fe6d14; border:#fe6d14 solid 1px;}
+.btn2{color:#4f4f4f; background:#fff; border:#ccc solid 1px; margin-right:5px; display:inline;}
+
+
+.add_fx{ display:inline-block; height:40px; line-height:40px;font-size:16px; color:#fff; position:absolute; left:50%; bottom:0; margin-left:-42px; padding-left:20px;}
+.add_fx .ico{ width:17px; height:17px; border-radius:50%; background:#fff; position:absolute; left:0; top:13px;}
+.add_fx .ico:before{ background:#f77408;border-radius:50%;color: #fff;content: attr(data-text);width:13px;height:13px;line-height: 10px;position: absolute;text-align: center;left:2px;top:2px;}
+
+/*******发布分享******/
+.fenxiang_main{ padding:10px;overflow:hidden;}
+.fenxiang_fabu_title{ height:21px; line-height:21px; position:relative;padding:10px 10px 10px 52px;background:#fff;}
+.fenxiang_fabu_title span{ position:absolute; left:10px; top:10px; display:inline-block;width:42px; text-align:right; color:#4f4f4f;}
+.fenxiang_fabu_title .u-input{ height:20px; border-bottom:#e1e1e1 solid 1px; background:#fff; text-align:left; color:#505050; font-size:14px;}
+
+.fenxiang_fabu_box{ position:relative; margin-top:10px;border:1px solid #E1E1E1; background:#fff; padding:10px; color:#4f4f4f;}
+.fenxiang_fabu_box li{ padding-bottom:10px;width:100%;}
+.fenxiang_fabu_box li .uplode_img{width:116px; height:37px; line-height:37px; background:#c5c5c5; display:inline-block; color:#505050; text-align:center;}
+
+.uplode_img {
+    position: relative;
+    display: inline-block;
+	height:37px;
+	width:118px;
+    background: #c5c5c5;
+    color: #505050;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 37px;
+	text-align:center;
+}
+.uplode_img input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+ 
+.fenxiang_fabu_box li.txt{ height:120px;position:relative; padding-left:42px;}
+.fenxiang_fabu_box li.txt span{position:absolute; left:0; top:0; display:inline-block;width:auto; text-align:left; color:#4f4f4f; height:21px;}
+.fenxiang_fabu_box .u-input{width:100%; height:120px; padding:10px; border:#e1e1e1 solid 1px;text-align:left; color:#505050; font-size:14px;}
+
+.fx_del_icon{ position:absolute; right:-6px; top:-6px; background:url(../images/del.png) no-repeat;width:19px; height:19px; display:inline-block;}
+
+.fenxiang_fabu_box .ok{ background:url(../images/ok.gif) no-repeat left center; width:14px; height:14px; display:inline-block; margin-left:10px;}
+
+/******分享列表*********/
+.fenxiang_title{ background:#2064c7 url(../images/fx_t_right.gif) no-repeat right; height:41px;width:100%;}
+.fenxiang_news{ padding-top:10px; background:#fff;}
+.fenxiang_news li{ height:40px; line-height:40px; padding-right:96px; position:relative; background:url(../images/dian.gif) no-repeat 7px; center; padding-left:15px; border-bottom:#b3b3b3 dotted 1px;overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.fenxiang_news li .date{width:80px; text-align:right; position:absolute; right:10px;top:0;}
+
+/********分享详细*********/
+.fenxiang_cont{ background:#fff; padding:10px; overflow:hidden;}
+.fenxiang_cont img{width:100%; height:auto; margin:10px auto;}

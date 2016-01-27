@@ -20,6 +20,7 @@ namespace EyouSoft.Web.WebMaster
 {
     public partial class OrderEdit : EyouSoft.Common.Page.WebmasterPageBase
     {
+        //待删除页面 订单修改
         protected string Strsex = string.Empty;
         protected string StrOrderStatus = string.Empty;
         protected string StrPayStatus = string.Empty;
@@ -50,9 +51,9 @@ namespace EyouSoft.Web.WebMaster
                 if (model != null)
                 {
                     this.txtadultcount.Text = model.ChengRenShu.ToString();
-                    this.txtadultprice.Text = model.JSJCR.ToString("f2");
+                    //this.txtadultprice.Text = model.JSJCR.ToString("f2");
                     this.txtchildcount.Text = model.ErTongShu.ToString();
-                    this.txtchildprice.Text = model.JSJER.ToString("f2");
+                    //this.txtchildprice.Text = model.JSJER.ToString("f2");
                     this.txtContactMobile.Text = model.LxrTelephone;
                     this.txtContactName.Text = model.LxrName;
                     this.txtHetongMoney.Text = model.JinE.ToString("f2");
@@ -117,8 +118,8 @@ namespace EyouSoft.Web.WebMaster
                 model.ErTongShu = Utils.GetInt(childcount);
                 //model.Historys
                 model.JinE = hetongmoney;
-                model.JSJCR = adultprice;
-                model.JSJER = childprice;
+                //model.JSJCR = adultprice;
+                //model.JSJER = childprice;
                 model.LDate = Utils.GetDateTime(leavedate);
                 model.LxrGender = (Gender)Utils.GetInt(sex);
                 model.LxrName = contactname;

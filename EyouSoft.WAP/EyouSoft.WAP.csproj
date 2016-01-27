@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\EyouSoft.Document\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EyouSoft.Document\lib\PayAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -95,6 +99,22 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="99bill\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="99bill\receive.aspx.cs">
+      <DependentUpon>receive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="99bill\send.aspx.cs">
+      <DependentUpon>send.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="99bill\show.aspx.cs">
+      <DependentUpon>show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="about.aspx.cs">
       <DependentUpon>about.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,6 +152,13 @@
     <Compile Include="ashx\Handler.ashx.cs">
       <DependentUpon>Handler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="AutoRedirect.aspx.cs">
+      <DependentUpon>AutoRedirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AutoRedirect.aspx.designer.cs">
+      <DependentUpon>AutoRedirect.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BaiDuMap.aspx.cs">
       <DependentUpon>BaiDuMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -141,7 +168,6 @@
     </Compile>
     <Compile Include="Car.aspx.cs">
       <DependentUpon>Car.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Car.aspx.designer.cs">
       <DependentUpon>Car.aspx</DependentUpon>
@@ -169,42 +195,43 @@
     </Compile>
     <Compile Include="CommonPage\ajaxChongZhi.aspx.cs">
       <DependentUpon>ajaxChongZhi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxChongZhi.aspx.designer.cs">
       <DependentUpon>ajaxChongZhi.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxDingDan.aspx.cs">
       <DependentUpon>ajaxDingDan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxDingDan.aspx.designer.cs">
       <DependentUpon>ajaxDingDan.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxEBao.aspx.cs">
       <DependentUpon>ajaxEBao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxEBao.aspx.designer.cs">
       <DependentUpon>ajaxEBao.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxFanLi.aspx.cs">
       <DependentUpon>ajaxFanLi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxFanLi.aspx.designer.cs">
       <DependentUpon>ajaxFanLi.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxFenSiJiaoYi.aspx.cs">
       <DependentUpon>ajaxFenSiJiaoYi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxFenSiJiaoYi.aspx.designer.cs">
       <DependentUpon>ajaxFenSiJiaoYi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CommonPage\ajaxFenXiang.aspx.cs">
+      <DependentUpon>ajaxFenXiang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\ajaxFenXiang.aspx.designer.cs">
+      <DependentUpon>ajaxFenXiang.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CommonPage\ajaxFenXiao.aspx.cs">
       <DependentUpon>ajaxFenXiao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxFenXiao.aspx.designer.cs">
       <DependentUpon>ajaxFenXiao.aspx</DependentUpon>
@@ -218,35 +245,30 @@
     </Compile>
     <Compile Include="CommonPage\ajaxGongGao.aspx.cs">
       <DependentUpon>ajaxGongGao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxGongGao.aspx.designer.cs">
       <DependentUpon>ajaxGongGao.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxHotel.aspx.cs">
       <DependentUpon>ajaxHotel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxHotel.aspx.designer.cs">
       <DependentUpon>ajaxHotel.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxJiaoYi.aspx.cs">
       <DependentUpon>ajaxJiaoYi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxJiaoYi.aspx.designer.cs">
       <DependentUpon>ajaxJiaoYi.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxJiFenDuiHuan.aspx.cs">
       <DependentUpon>ajaxJiFenDuiHuan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxJiFenDuiHuan.aspx.designer.cs">
       <DependentUpon>ajaxJiFenDuiHuan.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxJingQu.aspx.cs">
       <DependentUpon>ajaxJingQu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxJingQu.aspx.designer.cs">
       <DependentUpon>ajaxJingQu.aspx</DependentUpon>
@@ -258,9 +280,22 @@
     <Compile Include="CommonPage\ajaxLine_List.aspx.designer.cs">
       <DependentUpon>ajaxLine_List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CommonPage\ajaxShangChengDefault.aspx.cs">
+      <DependentUpon>ajaxShangChengDefault.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\ajaxShangChengDefault.aspx.designer.cs">
+      <DependentUpon>ajaxShangChengDefault.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonPage\ajaxShangChengList.aspx.cs">
+      <DependentUpon>ajaxShangChengList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\ajaxShangChengList.aspx.designer.cs">
+      <DependentUpon>ajaxShangChengList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CommonPage\ajaxTiXian.aspx.cs">
       <DependentUpon>ajaxTiXian.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxTiXian.aspx.designer.cs">
       <DependentUpon>ajaxTiXian.aspx</DependentUpon>
@@ -274,28 +309,24 @@
     </Compile>
     <Compile Include="CommonPage\ajaxWeiChuLi.aspx.cs">
       <DependentUpon>ajaxWeiChuLi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxWeiChuLi.aspx.designer.cs">
       <DependentUpon>ajaxWeiChuLi.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxXianLuList.aspx.cs">
       <DependentUpon>ajaxXianLuList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxXianLuList.aspx.designer.cs">
       <DependentUpon>ajaxXianLuList.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxXianLuOrder.aspx.cs">
       <DependentUpon>ajaxXianLuOrder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxXianLuOrder.aspx.designer.cs">
       <DependentUpon>ajaxXianLuOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="CommonPage\ajaxZengZhi.aspx.cs">
       <DependentUpon>ajaxZengZhi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ajaxZengZhi.aspx.designer.cs">
       <DependentUpon>ajaxZengZhi.aspx</DependentUpon>
@@ -328,9 +359,15 @@
     <Compile Include="CommonPage\SelectDate.aspx.designer.cs">
       <DependentUpon>SelectDate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CommonPage\SelectSYCity.aspx.cs">
+      <DependentUpon>SelectSYCity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\SelectSYCity.aspx.designer.cs">
+      <DependentUpon>SelectSYCity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -344,7 +381,6 @@
     </Compile>
     <Compile Include="ErWeiMa.aspx.cs">
       <DependentUpon>ErWeiMa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ErWeiMa.aspx.designer.cs">
       <DependentUpon>ErWeiMa.aspx</DependentUpon>
@@ -358,14 +394,12 @@
     </Compile>
     <Compile Include="Flight\Flight_Buy.aspx.cs">
       <DependentUpon>Flight_Buy.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Flight\Flight_Buy.aspx.designer.cs">
       <DependentUpon>Flight_Buy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Flight\Flight_List.aspx.cs">
       <DependentUpon>Flight_List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Flight\Flight_List.aspx.designer.cs">
       <DependentUpon>Flight_List.aspx</DependentUpon>
@@ -400,21 +434,18 @@
     </Compile>
     <Compile Include="HotelList.aspx.cs">
       <DependentUpon>HotelList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HotelList.aspx.designer.cs">
       <DependentUpon>HotelList.aspx</DependentUpon>
     </Compile>
     <Compile Include="HotelMapList.aspx.cs">
       <DependentUpon>HotelMapList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HotelMapList.aspx.designer.cs">
       <DependentUpon>HotelMapList.aspx</DependentUpon>
     </Compile>
     <Compile Include="HotelOrder.aspx.cs">
       <DependentUpon>HotelOrder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HotelOrder.aspx.designer.cs">
       <DependentUpon>HotelOrder.aspx</DependentUpon>
@@ -442,28 +473,24 @@
     </Compile>
     <Compile Include="JingQu.aspx.cs">
       <DependentUpon>JingQu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="JingQu.aspx.designer.cs">
       <DependentUpon>JingQu.aspx</DependentUpon>
     </Compile>
     <Compile Include="JingQuList.aspx.cs">
       <DependentUpon>JingQuList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="JingQuList.aspx.designer.cs">
       <DependentUpon>JingQuList.aspx</DependentUpon>
     </Compile>
     <Compile Include="JingQuOrder.aspx.cs">
       <DependentUpon>JingQuOrder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="JingQuOrder.aspx.designer.cs">
       <DependentUpon>JingQuOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="JingQuXX.aspx.cs">
       <DependentUpon>JingQuXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="JingQuXX.aspx.designer.cs">
       <DependentUpon>JingQuXX.aspx</DependentUpon>
@@ -484,35 +511,30 @@
     </Compile>
     <Compile Include="Line_Flight.aspx.cs">
       <DependentUpon>Line_Flight.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Line_Flight.aspx.designer.cs">
       <DependentUpon>Line_Flight.aspx</DependentUpon>
     </Compile>
     <Compile Include="Line_Info.aspx.cs">
       <DependentUpon>Line_Info.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Line_Info.aspx.designer.cs">
       <DependentUpon>Line_Info.aspx</DependentUpon>
     </Compile>
     <Compile Include="Line_List.aspx.cs">
       <DependentUpon>Line_List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Line_List.aspx.designer.cs">
       <DependentUpon>Line_List.aspx</DependentUpon>
     </Compile>
     <Compile Include="Line_LXRXX.aspx.cs">
       <DependentUpon>Line_LXRXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Line_LXRXX.aspx.designer.cs">
       <DependentUpon>Line_LXRXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Line_Tours.aspx.cs">
       <DependentUpon>Line_Tours.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Line_Tours.aspx.designer.cs">
       <DependentUpon>Line_Tours.aspx</DependentUpon>
@@ -540,14 +562,19 @@
     </Compile>
     <Compile Include="Mall\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Mall\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Mall\MallType.aspx.cs">
+      <DependentUpon>MallType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mall\MallType.aspx.designer.cs">
+      <DependentUpon>MallType.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Mall\MoDetail.aspx.cs">
       <DependentUpon>MoDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Mall\MoDetail.aspx.designer.cs">
       <DependentUpon>MoDetail.aspx</DependentUpon>
@@ -561,7 +588,6 @@
     </Compile>
     <Compile Include="Mall\OrderPage.aspx.cs">
       <DependentUpon>OrderPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Mall\OrderPage.aspx.designer.cs">
       <DependentUpon>OrderPage.aspx</DependentUpon>
@@ -589,140 +615,152 @@
     </Compile>
     <Compile Include="Member\ChongZhi.aspx.cs">
       <DependentUpon>ChongZhi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ChongZhi.aspx.designer.cs">
       <DependentUpon>ChongZhi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ChongZhiList.aspx.cs">
       <DependentUpon>ChongZhiList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ChongZhiList.aspx.designer.cs">
       <DependentUpon>ChongZhiList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\DingDanList.aspx.cs">
       <DependentUpon>DingDanList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\DingDanList.aspx.designer.cs">
       <DependentUpon>DingDanList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\DingDanMingXi.aspx.cs">
       <DependentUpon>DingDanMingXi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\DingDanMingXi.aspx.designer.cs">
       <DependentUpon>DingDanMingXi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\DuiHuan.aspx.cs">
       <DependentUpon>DuiHuan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\DuiHuan.aspx.designer.cs">
       <DependentUpon>DuiHuan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\EBaoList.aspx.cs">
       <DependentUpon>EBaoList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\EBaoList.aspx.designer.cs">
       <DependentUpon>EBaoList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\EJiaFenXiang.aspx.cs">
+      <DependentUpon>EJiaFenXiang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\EJiaFenXiang.aspx.designer.cs">
+      <DependentUpon>EJiaFenXiang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\EJiaFenXiangInfo.aspx.cs">
+      <DependentUpon>EJiaFenXiangInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\EJiaFenXiangInfo.aspx.designer.cs">
+      <DependentUpon>EJiaFenXiangInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\FanLiList.aspx.cs">
       <DependentUpon>FanLiList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\FanLiList.aspx.designer.cs">
       <DependentUpon>FanLiList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\FenSi.aspx.cs">
       <DependentUpon>FenSi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\FenSi.aspx.designer.cs">
       <DependentUpon>FenSi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\FenSiJiaoYi.aspx.cs">
       <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\FenSiJiaoYi.aspx.designer.cs">
       <DependentUpon>FenSiJiaoYi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\FenXiangFaBu.aspx.cs">
+      <DependentUpon>FenXiangFaBu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenXiangFaBu.aspx.designer.cs">
+      <DependentUpon>FenXiangFaBu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FexXiangList.aspx.cs">
+      <DependentUpon>FexXiangList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FexXiangList.aspx.designer.cs">
+      <DependentUpon>FexXiangList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\GongGaoList.aspx.cs">
       <DependentUpon>GongGaoList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\GongGaoList.aspx.designer.cs">
       <DependentUpon>GongGaoList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\GongGaoXX.aspx.cs">
       <DependentUpon>GongGaoXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\GongGaoXX.aspx.designer.cs">
       <DependentUpon>GongGaoXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\HotelOrderXX.aspx.cs">
       <DependentUpon>HotelOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\HotelOrderXX.aspx.designer.cs">
       <DependentUpon>HotelOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\JieSuanShenQing.aspx.cs">
       <DependentUpon>JieSuanShenQing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\JieSuanShenQing.aspx.designer.cs">
       <DependentUpon>JieSuanShenQing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\JiFenDuiHuan.aspx.cs">
       <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\JiFenDuiHuan.aspx.designer.cs">
       <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\JpOrderList.aspx.cs">
       <DependentUpon>JpOrderList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\JpOrderList.aspx.designer.cs">
       <DependentUpon>JpOrderList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\JpOrderXX.aspx.cs">
       <DependentUpon>JpOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\JpOrderXX.aspx.designer.cs">
       <DependentUpon>JpOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\MenPiaoOrderXX.aspx.cs">
       <DependentUpon>MenPiaoOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\MenPiaoOrderXX.aspx.designer.cs">
       <DependentUpon>MenPiaoOrderXX.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\MoblieSheZhi.aspx.cs">
+      <DependentUpon>MoblieSheZhi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MoblieSheZhi.aspx.designer.cs">
+      <DependentUpon>MoblieSheZhi.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\ScOrderXX.aspx.cs">
       <DependentUpon>ScOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ScOrderXX.aspx.designer.cs">
       <DependentUpon>ScOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\TiXian.aspx.cs">
       <DependentUpon>TiXian.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\TiXian.aspx.designer.cs">
       <DependentUpon>TiXian.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\TiXianList.aspx.cs">
       <DependentUpon>TiXianList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\TiXianList.aspx.designer.cs">
       <DependentUpon>TiXianList.aspx</DependentUpon>
@@ -736,112 +774,102 @@
     </Compile>
     <Compile Include="Member\TuanGouOrderXX.aspx.cs">
       <DependentUpon>TuanGouOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\TuanGouOrderXX.aspx.designer.cs">
       <DependentUpon>TuanGouOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\UpdateMember.aspx.cs">
       <DependentUpon>UpdateMember.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\UpdateMember.aspx.designer.cs">
       <DependentUpon>UpdateMember.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\UpdateMiMa.aspx.cs">
       <DependentUpon>UpdateMiMa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\UpdateMiMa.aspx.designer.cs">
       <DependentUpon>UpdateMiMa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\UpdateWebSet.aspx.cs">
+      <DependentUpon>UpdateWebSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\UpdateWebSet.aspx.designer.cs">
+      <DependentUpon>UpdateWebSet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\UserCenter.aspx.cs">
       <DependentUpon>UserCenter.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\UserCenter.aspx.designer.cs">
       <DependentUpon>UserCenter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\WeiChuLiDingDan.aspx.cs">
       <DependentUpon>WeiChuLiDingDan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\WeiChuLiDingDan.aspx.designer.cs">
       <DependentUpon>WeiChuLiDingDan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\XiaJiFenXiao.aspx.cs">
       <DependentUpon>XiaJiFenXiao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\XiaJiFenXiao.aspx.designer.cs">
       <DependentUpon>XiaJiFenXiao.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\XianLuOrderList.aspx.cs">
       <DependentUpon>XianLuOrderList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\XianLuOrderList.aspx.designer.cs">
       <DependentUpon>XianLuOrderList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\XianLuOrderXX.aspx.cs">
       <DependentUpon>XianLuOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\XianLuOrderXX.aspx.designer.cs">
       <DependentUpon>XianLuOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\XieYi.aspx.cs">
       <DependentUpon>XieYi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\XieYi.aspx.designer.cs">
       <DependentUpon>XieYi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\YuEGuanLi.aspx.cs">
       <DependentUpon>YuEGuanLi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\YuEGuanLi.aspx.designer.cs">
       <DependentUpon>YuEGuanLi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZengZhi.aspx.cs">
       <DependentUpon>ZengZhi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZengZhi.aspx.designer.cs">
       <DependentUpon>ZengZhi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZhiFu.aspx.cs">
       <DependentUpon>ZhiFu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZhiFu.aspx.designer.cs">
       <DependentUpon>ZhiFu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZhiFuMiMa.aspx.cs">
       <DependentUpon>ZhiFuMiMa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZhiFuMiMa.aspx.designer.cs">
       <DependentUpon>ZhiFuMiMa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZiZuTuanOrderXX.aspx.cs">
       <DependentUpon>ZiZuTuanOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZiZuTuanOrderXX.aspx.designer.cs">
       <DependentUpon>ZiZuTuanOrderXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZongHeMingXi.aspx.cs">
       <DependentUpon>ZongHeMingXi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZongHeMingXi.aspx.designer.cs">
       <DependentUpon>ZongHeMingXi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Member\ZuCheOrderXX.aspx.cs">
       <DependentUpon>ZuCheOrderXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Member\ZuCheOrderXX.aspx.designer.cs">
       <DependentUpon>ZuCheOrderXX.aspx</DependentUpon>
@@ -870,10 +898,54 @@
     </Compile>
     <Compile Include="searchlist.aspx.cs">
       <DependentUpon>searchlist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="searchlist.aspx.designer.cs">
       <DependentUpon>searchlist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SetShop.aspx.cs">
+      <DependentUpon>SetShop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SetShop.aspx.designer.cs">
+      <DependentUpon>SetShop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShenQing.aspx.cs">
+      <DependentUpon>ShenQing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShenQing.aspx.designer.cs">
+      <DependentUpon>ShenQing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShenQingSuccess.aspx.cs">
+      <DependentUpon>ShenQingSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShenQingSuccess.aspx.designer.cs">
+      <DependentUpon>ShenQingSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tenPay\czrequest.aspx.cs">
+      <DependentUpon>czrequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tenPay\czrequest.aspx.designer.cs">
+      <DependentUpon>czrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tenPay\czSend.aspx.cs">
+      <DependentUpon>czSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tenPay\czSend.aspx.designer.cs">
+      <DependentUpon>czSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tenPay\orderrequest.aspx.cs">
+      <DependentUpon>orderrequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tenPay\orderrequest.aspx.designer.cs">
+      <DependentUpon>orderrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="TuanGouList.aspx.cs">
       <DependentUpon>TuanGouList.aspx</DependentUpon>
@@ -884,7 +956,6 @@
     </Compile>
     <Compile Include="TuanGouTJ.aspx.cs">
       <DependentUpon>TuanGouTJ.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TuanGouTJ.aspx.designer.cs">
       <DependentUpon>TuanGouTJ.aspx</DependentUpon>
@@ -912,7 +983,6 @@
     </Compile>
     <Compile Include="userControl\PriceInfo.ascx.cs">
       <DependentUpon>PriceInfo.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="userControl\PriceInfo.ascx.designer.cs">
       <DependentUpon>PriceInfo.ascx</DependentUpon>
@@ -945,12 +1015,26 @@
     <Compile Include="userControl\ZuTuanHead.ascx.designer.cs">
       <DependentUpon>ZuTuanHead.ascx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\get_media.aspx.cs">
+      <DependentUpon>get_media.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\get_media.aspx.designer.cs">
+      <DependentUpon>get_media.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\MenuView.aspx.cs">
       <DependentUpon>MenuView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="weixin\MenuView.aspx.designer.cs">
       <DependentUpon>MenuView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\OauthRedirectUri.aspx.cs">
+      <DependentUpon>OauthRedirectUri.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\OauthRedirectUri.aspx.designer.cs">
+      <DependentUpon>OauthRedirectUri.aspx</DependentUpon>
     </Compile>
     <Compile Include="weixin\WinXin.ashx.cs">
       <DependentUpon>WinXin.ashx</DependentUpon>
@@ -963,6 +1047,12 @@
     <Compile Include="WinXinBind.aspx.designer.cs">
       <DependentUpon>WinXinBind.aspx</DependentUpon>
     </Compile>
+    <Compile Include="yaoqing.aspx.cs">
+      <DependentUpon>yaoqing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="yaoqing.aspx.designer.cs">
+      <DependentUpon>yaoqing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="YuDingChengGong.aspx.cs">
       <DependentUpon>YuDingChengGong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -972,7 +1062,6 @@
     </Compile>
     <Compile Include="ZiZuTuan.aspx.cs">
       <DependentUpon>ZiZuTuan.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ZiZuTuan.aspx.designer.cs">
       <DependentUpon>ZiZuTuan.aspx</DependentUpon>
@@ -1183,43 +1272,113 @@
     <Content Include="ZuTuanIndex.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="99bill\Default.aspx" />
+    <Content Include="99bill\receive.aspx" />
+    <Content Include="99bill\send.aspx" />
+    <Content Include="99bill\show.aspx" />
     <Content Include="ashx\CityHandler.ashx" />
+    <Content Include="AutoRedirect.aspx" />
     <Content Include="CommonPage\ajaxFenSiJiaoYi.aspx" />
+    <Content Include="CommonPage\ajaxFenXiang.aspx" />
     <Content Include="CommonPage\ajaxFenXiao.aspx" />
     <Content Include="CommonPage\ajaxGetCarPrice.aspx" />
+    <Content Include="CommonPage\ajaxShangChengDefault.aspx" />
+    <Content Include="CommonPage\ajaxShangChengList.aspx" />
     <Content Include="CommonPage\ajaxWeiChuLi.aspx" />
     <Content Include="CommonPage\ajaxZengZhi.aspx" />
+    <Content Include="CommonPage\SelectSYCity.aspx" />
     <Content Include="css\dindan.css" />
     <Content Include="css\e.css" />
+    <Content Include="css\fenxiang.css" />
     <Content Include="css\flight.css" />
     <Content Include="css\home.css" />
+    <Content Include="css\iconfont.css" />
+    <Content Include="css\mall.css" />
+    <Content Include="css\user.css" />
+    <Content Include="css\weidian.css" />
     <Content Include="ErWeiMa.aspx" />
     <Content Include="Flight\xuzhi.aspx" />
     <Content Include="HuiYuanCenter.aspx" />
     <Content Include="HuiYuanReg.aspx" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\code2.png" />
+    <Content Include="images\code_big.png" />
+    <Content Include="images\code_big2.png" />
     <Content Include="images\dindan_icon.png" />
     <Content Include="images\e-fx.jpg" />
+    <Content Include="images\fenqifukuan.jpg" />
+    <Content Include="images\fx_001.gif" />
+    <Content Include="images\fx_img.png" />
+    <Content Include="images\fx_t.gif" />
+    <Content Include="images\fx_t_right.gif" />
+    <Content Include="images\fx_x1.gif" />
     <Content Include="images\head_icon.png" />
     <Content Include="images\jifen-zzbanner.jpg" />
+    <Content Include="images\join_01.gif" />
+    <Content Include="images\join_02.gif" />
+    <Content Include="images\join_03.gif" />
+    <Content Include="images\join_04.gif" />
+    <Content Include="images\join_05.gif" />
+    <Content Include="images\logo.jpg" />
+    <Content Include="images\mall_type_icon.png" />
     <Content Include="images\my_address.png" />
+    <Content Include="images\pc_img.jpg" />
+    <Content Include="images\pc_img1.jpg" />
+    <Content Include="images\tx.gif" />
+    <Content Include="images\wap_img.jpg" />
+    <Content Include="images\wap_img1.jpg" />
+    <Content Include="images\wd_check.png" />
+    <Content Include="images\weidian_banner.jpg" />
+    <Content Include="images\weidian_bg2.jpg" />
     <Content Include="images\zd-btn.png" />
     <Content Include="images\zd-img.png" />
+    <Content Include="images\zf_icon.png" />
     <Content Include="JinRiApi\JinRi_Notify.aspx" />
+    <Content Include="js\jquery-1.4.2.min.js" />
     <Content Include="js\jquery-1.7.1.min.js" />
     <Content Include="js\jquery.event.drag-1.5.min.js" />
     <Content Include="js\jquery.touchSlider.js" />
+    <Content Include="Mall\MallType.aspx" />
     <Content Include="Mall\ShangChengLianMeng.aspx" />
     <Content Include="Mall\ShangLvEJia.aspx" />
     <Content Include="Mall\XiuXianYuLe.aspx" />
     <Content Include="Member\DingDanMingXi.aspx" />
     <Content Include="Member\DuiHuan.aspx" />
+    <Content Include="Member\EJiaFenXiang.aspx" />
+    <Content Include="Member\EJiaFenXiangInfo.aspx" />
     <Content Include="Member\FenSi.aspx" />
     <Content Include="Member\FenSiJiaoYi.aspx" />
+    <Content Include="Member\FenXiangFaBu.aspx" />
+    <Content Include="Member\FexXiangList.aspx" />
     <Content Include="Member\JieSuanShenQing.aspx" />
+    <Content Include="Member\MoblieSheZhi.aspx" />
+    <Content Include="Member\UpdateWebSet.aspx" />
     <Content Include="Member\WeiChuLiDingDan.aspx" />
     <Content Include="Member\XiaJiFenXiao.aspx" />
     <Content Include="Member\XieYi.aspx" />
     <Content Include="Member\ZengZhi.aspx" />
+    <Content Include="SetShop.aspx" />
+    <Content Include="ShenQing.aspx" />
+    <Content Include="ShenQingSuccess.aspx" />
+    <Content Include="tenPay\czrequest.aspx" />
+    <Content Include="tenPay\czSend.aspx" />
+    <Content Include="tenPay\orderrequest.aspx" />
+    <Content Include="test.aspx" />
+    <Content Include="weixin\get_media.aspx" />
+    <Content Include="weixin\OauthRedirectUri.aspx" />
+    <Content Include="yaoqing.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="99bill\99bill-rsa.pfx" />
+    <None Include="99bill\99bill.cert.rsa.20340630.cer" />
+    <None Include="99bill\99bill[1].cert.rsa.20140803.cer" />
+    <None Include="99bill\public-rsa.cer" />
+    <None Include="99bill\tester-rsa.pfx" />
+    <None Include="fonts\iconfont.eot" />
+    <None Include="fonts\iconfont.svg" />
+    <None Include="fonts\iconfont.ttf" />
+    <None Include="fonts\iconfont.woff" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1239,7 +1398,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3976</DevelopmentServerPort>
+          <DevelopmentServerPort>11567</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

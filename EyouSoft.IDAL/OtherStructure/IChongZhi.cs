@@ -20,6 +20,12 @@ namespace EyouSoft.IDAL.OtherStructure
         /// <returns></returns>
         EyouSoft.Model.OtherStructure.MChongZhi GetInfo(string dingDanId);
         /// <summary>
+        /// 获取充值信息业务实体
+        /// </summary>
+        /// <param name="orderCode">订单编号</param>
+        /// <returns></returns>
+        EyouSoft.Model.OtherStructure.MChongZhi GetInfoByCode(string orderCode);
+        /// <summary>
         /// 设置支付状态，返回1成功，其它失败
         /// </summary>
         /// <param name="DingDanId">订单编号</param>

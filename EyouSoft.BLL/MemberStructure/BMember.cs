@@ -31,6 +31,44 @@ namespace EyouSoft.BLL.MemberStructure
 
         }
         /// <summary>
+        /// 代理商，员工，免费代理修改信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateDaiLiMemberInfo(MMember2 model)
+        {
+            if (string.IsNullOrEmpty(model.MemberID)) return false;
+
+            int count = dal.UpdateDaiLiMemberInfo(model);
+            if (count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 代理商，员工，免费代理修改代理信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateDaiLiSellerInfo(EyouSoft.Model.AccountStructure.MSellers model)
+        {
+            if (string.IsNullOrEmpty(model.ID)) return false;
+
+            int count = dal.UpdateDaiLiSellerInfo(model);
+            if (count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
         /// 更新会员支付密码
         /// </summary>
         /// <param name="model"></param>
@@ -167,6 +205,169 @@ namespace EyouSoft.BLL.MemberStructure
         {
             if (string.IsNullOrEmpty(OrderId)) return "暂未付款";
             return dal.GetZhiFuWay(OrderId);
+        }
+        /// <summary>
+        /// 获取代理我商品的代理商列表
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyDaiLi(string GYSId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(GYSId)) return null;
+            return dal.GetMyDaiLi(GYSId,PageIndex,PageSize, sermodel);
+        }
+        /// <summary>
+        /// 获取选择我的商品的代理总数
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int GetMyDaiLiNum(string GYSId, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(GYSId)) return 0;
+            return dal.GetMyDaiLiNum(GYSId, sermodel);
+        }
+        /// <summary>
+        /// 判断该代理商是否为我的下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int JudgeDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.JudgeDaiLi(GYSId,DaiLiId);
+        }
+        /// <summary>
+        /// 添加我的下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int AddDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.AddDaiLi(GYSId, DaiLiId);
+        }
+        /// <summary>
+        /// 删除我的下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int DelDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.DelDaiLi(GYSId, DaiLiId);
+        }
+        /// <summary>
+        /// 获取代理我团购商品的代理商列表
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTGDaiLi(string GYSId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(GYSId)) return null;
+            return dal.GetMyTGDaiLi(GYSId, PageIndex, PageSize, sermodel);
+        }
+        /// <summary>
+        /// 获取选择我的团购商品的代理总数
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int GetMyTGDaiLiNum(string GYSId, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(GYSId)) return 0;
+            return dal.GetMyTGDaiLiNum(GYSId, sermodel);
+        }
+        /// <summary>
+        /// 判断该代理商是否为我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int JudgeTGDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.JudgeTGDaiLi(GYSId, DaiLiId);
+        }
+        /// <summary>
+        /// 添加我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int AddTGDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.AddTGDaiLi(GYSId, DaiLiId);
+        }
+        /// <summary>
+        /// 删除我的团购下级代理
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int DelTGDaiLi(string GYSId, string DaiLiId)
+        {
+            if (string.IsNullOrEmpty(GYSId) || string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.DelTGDaiLi(GYSId, DaiLiId);
+        }
+
+        /// <summary>
+        /// 获取代理商城商品的代理商列表
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyGYS(string DaiLiId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(DaiLiId)) return null;
+            return dal.GetMyGYS(DaiLiId, PageIndex, PageSize, sermodel);
+        }
+        /// <summary>
+        ///  获取代理商城商品的代理商总数
+        /// </summary>
+        /// <param name="GYSId"></param>
+        /// <returns></returns>
+        public int GetMyGYSNum(string DaiLiId, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.GetMyGYSNum(DaiLiId, sermodel);
+        }
+        /// <summary>
+        /// 获取代理团购商品的供应商列表
+        /// </summary>
+        /// <param name="DaiLiId">代理商id</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTGGYS(string DaiLiId, int PageIndex, int PageSize, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(DaiLiId)) return null;
+            return dal.GetMyTGGYS(DaiLiId, PageIndex, PageSize, sermodel);
+        }
+        /// <summary>
+        ///  获取代理团购商品的供应商总数
+        /// </summary>
+        /// <param name="DaiLiId"></param>
+        /// <returns></returns>
+        public int GetMyTGGYSNum(string DaiLiId, MTeYueSer sermodel)
+        {
+            if (string.IsNullOrEmpty(DaiLiId)) return 0;
+            return dal.GetMyTGGYSNum(DaiLiId, sermodel);
+        }
+        /// <summary>
+        /// 获取我的特约代理
+        /// </summary>
+        /// <param name="GYSId">供应商id</param>
+        /// <param name="LeiBie">商城-0，团购-1</param>
+        /// <returns></returns>
+        public IList<MTeYue> GetMyTY(string GYSId, int LeiBie)
+        {
+            if (string.IsNullOrEmpty(GYSId)) return null;
+            return dal.GetMyTY(GYSId, LeiBie);
+        }
+
+        /// <summary>
+        /// 获取域名（按邀请码）
+        /// </summary>
+        /// <param name="yaQingMa"></param>
+        /// <returns></returns>
+        public string GetYuMing_YaoQingMa(string yaQingMa)
+        {
+            if (string.IsNullOrEmpty(yaQingMa)) return string.Empty;
+            return dal.GetYuMing_YaoQingMa(yaQingMa);
         }
     }
 }

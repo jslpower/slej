@@ -140,3 +140,63 @@ public class MMember2
    public DateTime? ValidDate { get; set; }
 
 }
+/// <summary>
+/// 特约代理
+/// </summary>
+public class MTeYue
+{
+    /// <summary>
+    /// 供应商id
+    /// </summary>
+    public string ID { get; set; }
+    /// <summary>
+    /// 会员id
+    /// </summary>
+    public string MemberID { get; set; }
+    /// <summary>
+    /// 网店名称
+    /// </summary>
+    public string WebsiteName { get; set; }
+    /// <summary>
+    /// 公司名称
+    /// </summary>
+    public string CompanyName { get; set; }
+    /// <summary>
+    /// 联系人
+    /// </summary>
+    public string MemberName { get; set; }
+    /// <summary>
+    /// 联系人手机
+    /// </summary>
+    public string Mobile { get; set; }
+    /// <summary>
+    /// 网站域名
+    /// </summary>
+    public string WebSite { get; set; }
+}
+/// <summary>
+/// 我的下级分销搜索
+/// </summary>
+public class MTeYueSer
+{
+    /// <summary>
+    /// 网店名称
+    /// </summary>
+    public string WebsiteName { get; set; }
+    /// <summary>
+    /// 公司名称
+    /// </summary>
+    public string CompanyName { get; set; }
+    /// <summary>
+    /// 联系人
+    /// </summary>
+    public string MemberName { get; set; }
+    /// <summary>
+    /// 联系人手机
+    /// </summary>
+    public string Mobile { get; set; }
+    /// <summary>
+    /// 是否是我的代理(1-是，2-不是，0-未选择）
+    /// </summary>
+    public int IsMyDaiLi { get; set; }
+}

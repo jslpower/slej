@@ -96,9 +96,9 @@
         <div class="line_xx_box margin_T10">
             <div class="zhifu_box">
                 <h3>
-                    配送信息</h3>
+                    客户信息</h3>
                 <ul class="fixed">
-                    <li><span><font class="fontred">*</font>&nbsp;收货人：</span>
+                    <li><span><font class="fontred">*</font>&nbsp;客户联系人：</span>
                         <asp:TextBox ID="txtShouHuoRen" runat="server" CssClass="input_bluebk formsize180"
                             valid="required" errmsg="请输入收货人!"></asp:TextBox>
                     </li>

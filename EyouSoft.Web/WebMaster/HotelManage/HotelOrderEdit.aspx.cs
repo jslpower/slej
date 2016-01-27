@@ -29,7 +29,7 @@ namespace EyouSoft.Web.WebMaster.HotelManage
             {
                 orderCode.Text = model.OrderCode;
                 hotelName.Text = model.HotelName;
-                destineDate.Text = model.CheckOutDate.ToString("yyyy-MM-dd");
+                destineDate.Text = model.IssueTime.ToString();
                 txt_inDate.Text = model.CheckInDate.ToString("yyyy-MM-dd");
                 txt_outDate.Text = model.CheckOutDate.ToString("yyyy-MM-dd");
                 txt_roomNum.Text = model.RoomCount.ToString();
@@ -39,6 +39,19 @@ namespace EyouSoft.Web.WebMaster.HotelManage
                 txt_hotelback.Text = model.Remark;
                 PayState.Text = (model.PaymentState).ToString();
                 orderState.Text = (model.OrderState).ToString();
+                if (model.HotelXC != null)
+                {
+                    IList<HotelXingCheng> xcmodel = Utils.JsonDeserialize<HotelXingCheng>(model.HotelXC);
+                    if (xcmodel != null && xcmodel.Count > 0)
+                    {
+                        for(int m=0;m<xcmodel.Count;m++)
+                        {
+                            string CBJia = xcmodel[m].ChengBenJia == 0 ? "总站交易" : xcmodel[m].ChengBenJia.ToString("f2") + "元/间/天  *  " + model.RoomCount + "间 = " + (xcmodel[m].ChengBenJia * model.RoomCount).ToString("f2") + "元/天";
+
+                            XC.Text += "<tr><th width=\"146\" height=\"28\" style=\"text-align:center\">" + xcmodel[m].ChenkInDate.ToShortDateString() + "</th><td height=\"28\" width=\"300\"  bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + xcmodel[m].MenShiJia.ToString("f2") + "元/间/天  *  " + model.RoomCount + "间 = "+(xcmodel[m].MenShiJia*model.RoomCount).ToString("f2")+"元/天</td><td height=\"28\" width=\"307\"   bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + CBJia + "</td></tr>";
+                        }
+                    }
+                }
             }
         }
 

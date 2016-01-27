@@ -90,6 +90,24 @@ namespace EyouSoft.Model.JPStructure
         /// <summary>
         /// 舱位 xml>JIT-Flight-Response>Response>Cabin.C
         /// </summary>
+        public string CangWeiTitle {
+            get 
+            {
+                if (CangWei == "C")
+                    return "公务舱";
+                else if (CangWei == "Y")
+                    return "全价舱";
+                else if (CangWei == "F")
+                    return "头等舱";
+                else
+                    return "经济舱";
+
+            }            
+               
+        }
+        /// <summary>
+        /// 舱位 xml>JIT-Flight-Response>Response>Cabin.C
+        /// </summary>
         public string CangWei { get; set; }
         /// <summary>
         /// 舱位数量 1-9 A(>9) xml>JIT-Flight-Response>Response>Cabin.N

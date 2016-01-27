@@ -22,7 +22,7 @@ namespace EyouSoft.Model.XianLuStructure
         /// <summary>
         /// 订单编号
         /// </summary>
-        public string OrderId{get;set;}
+        public string OrderId { get; set; }
         /// <summary>
         /// 线路编号
         /// </summary>
@@ -51,22 +51,6 @@ namespace EyouSoft.Model.XianLuStructure
         /// 儿童数
         /// </summary>
         public int ErTongShu { get; set; }
-        /// <summary>
-        /// 成人价
-        /// </summary>
-        public decimal JSJCR { get; set; }
-        /// <summary>
-        /// 儿童价
-        /// </summary>
-        public decimal JSJER { get; set; }
-        /// <summary>
-        /// 成人门市价
-        /// </summary>
-        public decimal SCJCR { get; set; }
-        /// <summary>
-        /// 儿童门市价
-        /// </summary>
-        public decimal SCJET { get; set; }
         /// <summary>
         /// 合同金额
         /// </summary>
@@ -172,6 +156,22 @@ namespace EyouSoft.Model.XianLuStructure
         /// 订单来源
         /// </summary>
         public OrderSite OrderSite { get; set; }
+        /// <summary>
+        /// 客户交易成人价
+        /// </summary>
+        public decimal JiaoYiCR { get; set; }
+        /// <summary>
+        /// 客户交易儿童价
+        /// </summary>
+        public decimal JiaoYiET { get; set; }
+        /// <summary>
+        /// 分销交易成人价
+        /// </summary>
+        public decimal WebSiteCR { get; set; }
+        /// <summary>
+        /// 分销交易成人价
+        /// </summary>
+        public decimal WebSiteET { get; set; }
     }
     #endregion
 

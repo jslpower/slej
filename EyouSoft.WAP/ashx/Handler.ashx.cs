@@ -150,9 +150,9 @@ namespace EyouSoft.Web.ashx
         /// </summary>
         void ZhuCe()
         {
-            string username = Utils.GetFormValue("txt_zhuce_shouji");
-            string xingMing = Utils.GetFormValue("txt_zhuce_xingming");
-            string yanZhengMa = Utils.GetFormValue("txt_zhuce_yanzhengma");
+            string username = Utils.GetFormValue("txt_zhuce_shouji").Trim();
+            string xingMing = Utils.GetFormValue("txt_zhuce_xingming").Trim();
+            string yanZhengMa = Utils.GetFormValue("txt_zhuce_yanzhengma").Trim();
 
             var yanZhengMaInfo = new EyouSoft.BLL.OtherStructure.BYanZhengMa().GetInfo(username, yanZhengMa, EyouSoft.Model.Enum.YanZhengMaLeiXing.用户注册);
             if (yanZhengMaInfo == null

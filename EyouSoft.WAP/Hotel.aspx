@@ -7,7 +7,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>酒店</title>
+    <title><%=FenXiangBiaoTi %></title>
 
     <link href="/css/hotel.css" rel="stylesheet" type="text/css" />
     <link href="/css/slider.css" rel="stylesheet" type="text/css" />
@@ -126,7 +126,13 @@
             </div>
         </div>
         
-        
+        <div class="user_form h_form mt10">
+            <ul>
+                <li class="R_jiantou"><span class="label_name"><s class="ico_city"></s>酒店名称</span>
+                    <input  class="u-input " type="text" id="HotelName" value="" />
+                </li>
+            </ul>
+        </div>
         
         <div class="hotel_address mt10 clearfix">
             <ul>
@@ -524,16 +530,16 @@ addComp.district + addComp.street + addComp.streetNumber);
     });
     //星级结束
     $("#LieBiaoGet").click(function() {
-        var url = "/HotelList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
+    var url = "/HotelList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=" + $("#HotelName").val() + "&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
         window.location.href = url;
     });
     $("#MapGet").click(function() {
         if ($("#mylatitude").val() != null && $("#mylongitude").val() != null && $("#mylatitude").val() != "" && $("#mylongitude").val() != "") {
-            var url = "/HotelMapList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
+            var url = "/HotelMapList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=" + $("#HotelName").val() + "&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
             window.location.href = url;
         }
         else {
-            var url = "/HotelMapList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
+            var url = "/HotelMapList.aspx?CityName=" + $("#startcity").val() + "&CityCode=" + $("#CitySZM").val() + "&longitude=" + $("#mylongitude").val() + "&latitude=" + $("#mylatitude").val() + "&HotelName=" + $("#HotelName").val() + "&Star=" + $("#StarNum").val() + "&RuZhuRiQi=" + $("#ruzhu").val() + "&LiDianRiQi=" + $("#lidian").val() + "&JiaGe1=" + $("#StartPrice").val() + "&JiaGe2=" + $("#EndPrice").val() + "&LandMark=" + $("#LandMark").val() + "&LandMarkID=" + $("#LandMarkID").val() + "&";
             window.location.href = url;
         }
     });

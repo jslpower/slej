@@ -263,8 +263,8 @@ namespace EyouSoft.Web.WebMaster
             info.ErTongShu = Utils.GetInt(Utils.GetFormValue("txtETS"));
             info.TourId = Utils.GetFormValue("txtTourId");
             info.XiaDanBeiZhu = Utils.GetFormValue("txtBeiZhu");
-            info.JSJCR = Utils.GetDecimal(Utils.GetFormValue("txtCRJ"));
-            info.JSJER = Utils.GetDecimal(Utils.GetFormValue("txtETJ"));
+            //info.JSJCR = Utils.GetDecimal(Utils.GetFormValue("txtCRJ"));
+            //info.JSJER = Utils.GetDecimal(Utils.GetFormValue("txtETJ"));
             info.JinE = Utils.GetDecimal(Utils.GetFormValue("txtJinE"));
             info.YouKes = new List<EyouSoft.Model.XianLuStructure.MOrderYouKeInfo>();
             info.OperatorId = UserInfo.UserId.ToString();

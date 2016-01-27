@@ -90,7 +90,7 @@
                                 <% if (IsShowHuiYuan())
                                    { %>
                                 <dd>
-                                    <strong>会员价：</strong><font class="font18 font_yellow">¥<%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), FeeTypes.门票).ToString("0")%></font>起/人</dd>
+                                    <strong>优惠价：</strong><font class="font18 font_yellow">¥<%# EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee((decimal)Eval("TicketFirst.DistributionPrice"), (decimal)Eval("TicketFirst.WebsitePrices"), MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)Eval("TicketFirst.FeeSetting"), FeeTypes.门票).ToString("0")%></font>起/人</dd>
                                 <%} %>
                             </dl>
                         </li>

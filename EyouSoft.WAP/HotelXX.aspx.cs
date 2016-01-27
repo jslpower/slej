@@ -27,7 +27,7 @@ namespace EyouSoft.WAP
         protected string Address = "";
         protected string Mobile = "";
         protected string jiudianid = "";
-        protected string fangxin="";
+        protected string fangxin = "";
         #region 微信分享
         protected string weixin_jsapi_config = string.Empty
                                     , FenXiangBiaoTi = string.Empty
@@ -96,10 +96,13 @@ namespace EyouSoft.WAP
             var imglist = bll.GetHotelImgList(imgmodel);
 
 
-            FenXiangBiaoTi = model.HotelName;
-            FenXiangMiaoShu = Utils.GetText2(model.LongDesc, 30, true);
-            FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imglist[0].FilePath, 640, 400);
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangBiaoTi = model.HotelName.Trim();
+            FenXiangMiaoShu = Utils.GetText2(model.LongDesc, 30, true).Trim();
+            if (imglist.Count > 0 && !string.IsNullOrEmpty(imglist[0].FilePath))
+            {
+                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imglist[0].FilePath, 640, 400);
+            }
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
             #region 图片处理
 
@@ -120,18 +123,19 @@ namespace EyouSoft.WAP
             ScrollImg1.ImgWid = 640;
             #endregion
             var list = bll.GetHotelList(searchmodel, false, EyouSoft.Model.Enum.MemberTypes.普通会员, false);
-            if (list != null && list.Count>0)
+            if (list != null && list.Count > 0)
             {
                 if (list[0].RoomRateInfo.Count > 0)
                 {
-                    
+
 
                     DateTime checkInDate = Model.RuZhuRiQi.Value.Date;
                     DateTime checkOutDate = Model.LiDianRiQi.Value.Date;
 
-                    var group = list[0].RoomRateInfo.OrderBy(x => x.RoomTypeInfo.RoomTypeId).ThenByDescending(x=>x.RoomRateId).GroupBy(x => x.RoomTypeInfo.RoomTypeId);
+                    var group = list[0].RoomRateInfo.OrderBy(x => x.RoomTypeInfo.RoomTypeId).ThenByDescending(x => x.RoomRateId).GroupBy(x => x.RoomTypeInfo.RoomTypeId);
                     foreach (var g in group)
                     {
+                        string RoomIdLists = "";
                         var roomTypeInfo = list[0].RoomRateInfo.FirstOrDefault(x => x.RoomTypeInfo.RoomTypeId == g.Key).RoomTypeInfo;
                         var currentGroupArr = g.OrderBy(x => x.StartDate).ToArray();
 
@@ -157,6 +161,10 @@ namespace EyouSoft.WAP
                                         SettlementPrice = new List<decimal> { currentRoomRate.SettlementPrice },
                                         BreakFasts = new List<string> { currentRoomRate.Breakfast },
                                     });
+                                    for (int mday = 0; mday < (checkOutDate - checkInDate).Days; mday++)
+                                    {
+                                        RoomIdLists += currentRoomRate.RoomRateId + ",";
+                                    }
                                 }
                                 else
                                 {
@@ -178,9 +186,20 @@ namespace EyouSoft.WAP
                                             SettlementPrice = new List<decimal> { currentRoomRate.SettlementPrice },
                                             BreakFasts = new List<string> { currentRoomRate.Breakfast },
                                         });
+                                    for (DateTime SInDate = checkInDate; SInDate < checkOutDate && SInDate <= currentRoomRate.EndDate; SInDate = SInDate.AddDays(1))
+                                    {
+                                        RoomIdLists += currentRoomRate.RoomRateId + ",";
+                                    }
                                 }
                                 else
                                 {
+                                    for (DateTime SInDate = checkInDate; SInDate < checkOutDate; SInDate = SInDate.AddDays(1))
+                                    {
+                                        if (SInDate >= currentRoomRate.StartDate)
+                                        {
+                                            RoomIdLists += currentRoomRate.RoomRateId + ",";
+                                        }
+                                    }
                                     rooRateInfo[rate_plan_code].RoomRateIds.Add(currentRoomRate.RoomRateId);
                                     rooRateInfo[rate_plan_code].PreferentialPrice.Add(currentRoomRate.PreferentialPrice);
                                     rooRateInfo[rate_plan_code].SettlementPrice.Add(currentRoomRate.SettlementPrice);
@@ -194,7 +213,7 @@ namespace EyouSoft.WAP
                             int index;
                             decimal min_settlementprice = SearchMin(item.Value.SettlementPrice, out index);
                             decimal min_preferentialprice = item.Value.PreferentialPrice[index];
-                            fangxin += "<div class=\"hotel_fx\"><div class=\"fx_name\"><i class=\"add\"></i>" + roomTypeInfo.RoomName + "--" + item.Value.RoomRateName[0] + "<span class=\"price_R\">¥ " + (min_preferentialprice * BHotel2.RetialPricePercent).ToString("0") + "</span></div><div class=\"fx_more\" style=\"display:none;\"><div class=\"fx_box\"><ul>";
+                            fangxin += "<div class=\"hotel_fx\"><div class=\"fx_name\"><i class=\"minus\"></i>" + roomTypeInfo.RoomName + "--" + item.Value.RoomRateName[0] + "<span class=\"price_R\">¥ " + (min_preferentialprice * BHotel2.RetialPricePercent).ToString("0") + "</span></div><div class=\"fx_more\" ><div class=\"fx_box\"><ul>";
                             if (roomTypeInfo.BedType == 0)
                             {
                                 fangxin += "<li>床型：" + roomTypeInfo.BedTypeDescription + "</li>";
@@ -209,7 +228,7 @@ namespace EyouSoft.WAP
                                 string bf = BHotel2.TransBreakFastBetweenInterfaceAndSelfProject(item.Value.BreakFasts[0]).ToString();
                                 fangxin += "<li class=\"wid50\">早餐：" + bf + "</li>";
                             }
-                            
+
                             fangxin += "<li class=\"wid50 right_txt\">上网：" + (EyouSoft.Model.Enum.IsInternet)roomTypeInfo.IsInternet + "</li>";
                             string RoomRateIdslist = "";
                             for (int m = 0; m < item.Value.RoomRateIds.Count; m++)
@@ -218,7 +237,7 @@ namespace EyouSoft.WAP
                             }
                             RoomRateIdslist = RoomRateIdslist.TrimEnd(',');
                             string jiage = BHotel2.CalculateFee(min_settlementprice, min_preferentialprice, MemberTypes.普通会员, item.Value.FeeSetting, FeeTypes.酒店).ToString("0");
-                            string TypeName = "会员价";
+                            string TypeName = "优惠价";
                             Model.SSOStructure.MUserInfo userInfo = null;
                             Security.Membership.UserProvider.IsLogin(out userInfo);
                             if (userInfo != null)
@@ -228,7 +247,7 @@ namespace EyouSoft.WAP
                                 {
                                     TypeName = "代理价";
                                 }
-                                else if(userInfo.UserType == MemberTypes.贵宾会员)
+                                else if (userInfo.UserType == MemberTypes.贵宾会员)
                                 {
                                     TypeName = "贵宾价";
                                 }
@@ -241,7 +260,7 @@ namespace EyouSoft.WAP
                                     TypeName = "员工价";
                                 }
                             }
-                            fangxin += "<li class=\"font13 mt10\"><a href=\"javascript:void(0);\" data-roomTypeId=\"" + roomTypeInfo.RoomTypeId + "\" data-RoomRateIds=\"" + RoomRateIdslist + "\" class=\"yudin_btn\">预订</a><i class=\"line_x font_gray\">销售价:¥" + (min_preferentialprice * BHotel2.RetialPricePercent).ToString("0") + "元</i>　" + TypeName + "：<span class=\"font_yellow\">¥<i class=\"font18\">" + jiage + "</i></span>元</li>";
+                            fangxin += "<li class=\"font13 mt10\"><a href=\"javascript:void(0);\" data-roomTypeId=\"" + roomTypeInfo.RoomTypeId + "\" data-RoomRateIds=\"" + RoomIdLists.Trim().TrimEnd(',') + "\" class=\"yudin_btn\">预订</a><i class=\"line_x font_gray\">销售价:¥" + (min_preferentialprice * BHotel2.RetialPricePercent).ToString("0") + "元</i>　" + TypeName + "：<span class=\"font_yellow\">¥<i class=\"font18\">" + jiage + "</i></span>元</li>";
                             fangxin += "</ul></div></div></div>";
                         }
 

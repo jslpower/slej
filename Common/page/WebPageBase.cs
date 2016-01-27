@@ -49,10 +49,10 @@ namespace EyouSoft.Common.Page
 
             //是否分销
             string requesturl = System.Web.HttpContext.Current.Request.Url.Host.ToLower();
-            if (requesturl.IndexOf("m.") > -1)
+            if (requesturl.IndexOf("m.") > -1 || requesturl.IndexOf("p.") > -1)
             {
                 //m.1234.slej.cn   m.slej.cn
-                requesturl = requesturl.Replace("m.", "");
+                requesturl = requesturl.Replace("m.", "").Replace("p.", "");
                 if (requesturl.IndexOf("slej.cn") > 1)
                 {
                     isfenxiao = true;
@@ -65,9 +65,9 @@ namespace EyouSoft.Common.Page
             if (isfenxiao)
             {
                 string url = System.Web.HttpContext.Current.Request.Url.Host.ToLower();
-                if (url.IndexOf("m.") > -1)
+                if (url.IndexOf("m.") > -1 || url.IndexOf("p.") > -1)
                 {
-                    url = url.Replace("m.", "");
+                    url = url.Replace("m.", "").Replace("p.", "");
                 }
                 isDisplay = new EyouSoft.IDAL.AccountStructure.BSellers().WebSiteShowOrHidden(url) == EyouSoft.Model.Enum.ShowHidden.显示 ? true : false;
                 BSellers bsells = new BSellers();

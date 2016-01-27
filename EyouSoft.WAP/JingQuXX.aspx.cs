@@ -128,10 +128,10 @@ namespace EyouSoft.WAP
                     DistributionPrice = area.TicketInfo.Last().DistributionPrice;
                     ticklist.DataBind();
                 }
-                FenXiangBiaoTi = area.ScenicName;
-                FenXiangMiaoShu = Utils.GetText2(area.Description, 30, true);
+                FenXiangBiaoTi = area.ScenicName.Trim();
+                FenXiangMiaoShu = Utils.GetText2(area.Description, 30, true).Trim();
                 FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(area.ImgList[0].Address, 640, 400);
-                FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+                FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
             }
         }
         /// <summary>

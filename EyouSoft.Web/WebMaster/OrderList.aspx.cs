@@ -292,7 +292,7 @@ namespace EyouSoft.Web.WebMaster
                     return string.Format("  <a href='javascript:;' onclick=\"javascript:OrderList.setOrder('{0}','{1}');\"  ><span style='background-color:#060;color:#FFF;'>付款成功，<br />请通知出行!</span></a>", orderid, (byte)EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货);
                 //return string.Format("  <a href='javascript:;' onclick=\"javascript:OrderList.setOrder('{0}','{1}');\"  >订单出货</a>", orderid, (byte)EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货);
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货:
-                    return string.Format("  <span  style='background-color:#F08C0C;color:#FFF;'>等待收货</span>");
+                    return string.Format("  <span  style='background-color:#F08C0C;color:#FFF;'>等待出行</span>");
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待返利:
                     if (!string.IsNullOrEmpty(AgencyId.ToString().Trim()) && AgencyId.ToString() != "0")
                     {

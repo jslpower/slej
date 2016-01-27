@@ -54,13 +54,13 @@ namespace EyouSoft.Web.WebMaster.TuanGou
             model.ProductName = Utils.GetFormValue(txtChanPinMingCheng.UniqueID);
             model.SaleType = (EyouSoft.Model.Enum.CuXiaoLeiXing)Utils.GetInt(Utils.GetFormValue("ddlCxType"));
             model.ProductType = (EyouSoft.Model.Enum.ChanPinLeiXing)Utils.GetInt(Utils.GetFormValue("ddlCpType"));
-            if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户)
+            if (Utils.GetInt(Utils.GetFormValue("ddlweizhi")) > 0)
             {
-                model.WeiZhi = EyouSoft.Model.Enum.XianShiWeiZhi.网站首页;
+                model.WeiZhi = (EyouSoft.Model.Enum.XianShiWeiZhi)Utils.GetInt(Utils.GetFormValue("ddlweizhi"));
             }
             else
             {
-                model.WeiZhi = (EyouSoft.Model.Enum.XianShiWeiZhi)Utils.GetInt(Utils.GetFormValue("ddlweizhi"));
+                model.WeiZhi = EyouSoft.Model.Enum.XianShiWeiZhi.网站首页;
             }
             model.ProductNum = Utils.GetInt(Utils.GetFormValue(txtShuLiang.UniqueID));
             model.MarketPrice = Utils.GetDecimal(Utils.GetFormValue(txtShiChangJia.UniqueID));
@@ -119,7 +119,7 @@ namespace EyouSoft.Web.WebMaster.TuanGou
                 result = new EyouSoft.BLL.OtherStructure.BTuanGou().Update(model);
             }
             Response.Clear();
-            Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", dotype == "add" ? "添加" + (result == 1 ? "成功" : "失败") : "修改" + (result == 1 ? "成功" : "失败")));
+            Response.Write(UtilsCommons.AjaxReturnJson(result >= 1 ? "1" : "0", dotype == "add" ? "添加" + (result >= 1 ? "成功" : "失败") : "修改" + (result >= 1 ? "成功" : "失败")));
             Response.End();
         }
     }

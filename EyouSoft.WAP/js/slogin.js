@@ -156,5 +156,28 @@ var iLogin = {
         });
 
         return _v;
+    },
+    zhuCeSq: function(data) {
+        var _v = { success: false, code: 0 };
+        if (typeof data == "undefined" || data == null) return _v;
+        if (typeof data.shouJi == "undefined" || data.shouJi.length == 0) { alert("请输入手机号码"); return _v; }
+        if (!shuoJiReg.test(data.shouJi)) { alert("请输入正确的手机号码"); return _v; }
+        if (typeof data.xingMing == "undefined" || data.xingMing.length == 0) { alert("请输入姓名"); return _v; }
+        if (typeof data.yanZhengMa == "undefined" || data.yanZhengMa.length == 0) { alert("请输入验证码"); return _v; }
+
+        var _data = { txt_zhuce_xingming: data.xingMing, txt_zhuce_shouji: data.shouJi, txt_zhuce_yanzhengma: data.yanZhengMa }
+
+        $.ajax({ type: "POST", url: "/ashx/handler.ashx?dotype=zhuce", cache: false, async: false, dataType: "json", data: _data,
+            success: function(response) {
+                _v.code = response.result;
+                if (response.result == 1) {
+                    _v.success = true;
+                } else {
+                    _v.success = false;
+                }
+            }
+        });
+
+        return _v;
     }
 };

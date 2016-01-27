@@ -19,6 +19,12 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Utils.GetQueryStringValue("del") == "1") Del();
+
+            if (Utils.GetQueryStringValue("dotype") == "xiajia")
+            {
+                xiajia();
+            }
+
             if (Utils.GetQueryStringValue("dotype") == "isindex")
             {
                 Response.Clear();
@@ -31,9 +37,11 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
                 Response.Write(UpdateDaiLiState());
                 Response.End();
             }
+            initDDL();
             initList();
 
         }
+
         /// <summary>
         /// 初始化列表
         /// </summary>
@@ -42,8 +50,12 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
             var serchModel = new EyouSoft.Model.MallStructure.MShangChengShangPinSer();
             pageIndex = UtilsCommons.GetPagingIndex();
             serchModel.ProductName = Utils.GetQueryStringValue("CName");
+            if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("CompanyName")))
+            {
+                serchModel.CompanyName = Utils.GetQueryStringValue("CompanyName");
+            }
             serchModel.GYSid = UserInfo.GysId;
-            if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.代理商用户)
+            if (Utils.GetQueryStringValue("type") == "s")
             {
                 serchModel.GYSid = null;
                 serchModel.isGetTrue = true;
@@ -70,26 +82,35 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
         /// <summary>
         /// 绑定分类
         /// </summary>
-        protected string initDDL(string defaultValue)
+        protected void initDDL()
         {
             var typeList = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetList(new EyouSoft.Model.MallStructure.MShangChengLeiBieSer() { }, false);
+
             System.Text.StringBuilder strbu = new System.Text.StringBuilder();
-            strbu.Append("<option value='0'>请选择</option>");
-            if (typeList != null && typeList.Count > 0)
-            {
-                for (int i = 0; i < typeList.Count; i++)
-                {
-                    if (typeList[i].TypeID.ToString() == defaultValue)
-                    {
-                        strbu.AppendFormat("<option value=\"{0}\" selected=\"selected\">{1}</option>", typeList[i].TypeID, typeList[i].TypeName);
-                    }
-                    else
-                    {
-                        strbu.AppendFormat("<option value=\"{0}\" >{1}</option>", typeList[i].TypeID, typeList[i].TypeName);
-                    }
-                }
-            }
-            return strbu.ToString();
+
+            string dataJson = string.Format("pageData.dataJson={0}", Newtonsoft.Json.JsonConvert.SerializeObject(typeList));
+
+            RegisterScript(dataJson);
+
+
+
+            //strbu.Append("<option value='0'>请选择</option>");
+            //if (typeList != null && typeList.Count > 0)
+            //{
+            //    for (int i = 0; i < typeList.Count; i++)
+            //    {
+            //        if (typeList[i].TypeID.ToString() == defaultValue)
+            //        {
+            //            strbu.AppendFormat("<option value=\"{0}\" selected=\"selected\">{1}</option>", typeList[i].TypeID, typeList[i].TypeName);
+            //        }
+            //        else
+            //        {
+            //            strbu.AppendFormat("<option value=\"{0}\" >{1}</option>", typeList[i].TypeID, typeList[i].TypeName);
+            //        }
+            //    }
+            //}
+
+            //return strbu.ToString();
         }
 
         /// <summary>
@@ -116,20 +137,7 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
         }
         #endregion
 
-        //void UpDateIsUp()
-        //{
-        //    int result = new EyouSoft.BLL.MallStructure.BShangChengShangPin().UpDateUp(Utils.GetQueryStringValue("pid"), Convert.ToInt32(Utils.GetQueryStringValue("up")));
-        //    Response.Clear();
-        //    if (Utils.GetQueryStringValue("up") == "0")
-        //    {
-        //        Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", result == 1 ? "该商品已上架" : "操作失败"));
-        //    }
-        //    else
-        //    {
-        //        Response.Write(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", result == 1 ? "该商品已下架" : "操作失败"));
-        //    }
-        //    Response.End();
-        //}
+
         /// <summary>
         /// 修改状态
         /// </summary>
@@ -204,43 +212,28 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
                 var isindex = (EyouSoft.Model.Enum.XianLuStructure.XianLuZT)isbool;
                 if (isindex == EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态)
                 {
-                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>  ", ID.ToString(),
-                       EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐);
-                    sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
+                    //sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>  ", ID.ToString(),
+                    //   EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐);
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
                        EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架);
                 }
                 else if (isindex == EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐)
                 {
-                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>  ", ID.ToString(),
-                       "取消推荐", (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态);
+                    //sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>  ", ID.ToString(),
+                    //   "取消推荐", (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态);
                     sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
                        EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架);
                 }
                 else if (isindex == EyouSoft.Model.Enum.XianLuStructure.XianLuZT.下架)
                 {
-                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>  ", ID.ToString(),
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
                       "上架", (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态);
-                    sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
-                       EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐);
+                    //sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.EnIndex(this)\" data-id='{0}' data-state='{2}' >{1}</a>", ID.ToString(),
+                    //   EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐);
                 }
             }
             return sb.ToString();
 
-
-            //string trueurl = "";
-            //if (Convert.ToDateTime(endtime) > DateTime.Now.AddDays(-1))
-            //{
-            //    if (isbool.ToString() == "1")
-            //    {
-            //        //该商品为下架状态
-            //        trueurl = "<a class=\"table_up\" href=\"javascript:;\" data-id=\""+productid+"\">上架</a>";
-            //    }
-            //    else
-            //    {
-            //        trueurl = "<a class=\"table_dwon\" href=\"javascript:;\" data-id=\"" + productid + "\">下架</a>";
-            //    }
-            //}
-            //return trueurl;
         }
         protected string GetDaiLiPro(object isbool, object endtime, object ID)
         {
@@ -252,10 +245,10 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
                 int Pstatus = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetDaiLiPro(ID.ToString(), UserInfo.GysId);
                 if (Pstatus == -1)//表示上架中
                 {
-                    sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>", ID.ToString(),
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>", ID.ToString(),
                        EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
                     sb.AppendFormat("&nbsp;");
-                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>  ", ID.ToString(),
+                    sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='0' >{1}</a>", ID.ToString(),
                          "下架", (int)EyouSoft.Model.Enum.ProductZT.下架);
                 }
                 else if (Pstatus != -2 && Pstatus != -1)//表示已下架
@@ -263,26 +256,27 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
                     var isindex = (EyouSoft.Model.Enum.ProductZT)Pstatus;
                     if (isindex == EyouSoft.Model.Enum.ProductZT.上架)
                     {
-                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>  ", ID.ToString(),
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                            EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
-                        sb.AppendFormat("&nbsp;");
-                        sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
-                           EyouSoft.Model.Enum.ProductZT.下架.ToString(), (int)EyouSoft.Model.Enum.ProductZT.下架);
-                    }
-                    else if (isindex == EyouSoft.Model.Enum.ProductZT.首页推荐)
-                    {
-                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>  ", ID.ToString(),
-                           "取消推荐", (int)EyouSoft.Model.Enum.ProductZT.上架);
                         sb.AppendFormat("&nbsp;");
                         sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                            EyouSoft.Model.Enum.ProductZT.下架.ToString(), (int)EyouSoft.Model.Enum.ProductZT.下架);
                     }
+                    else if (isindex == EyouSoft.Model.Enum.ProductZT.首页推荐)
+                    {
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           "取消推荐", (int)EyouSoft.Model.Enum.ProductZT.上架);
+                        sb.AppendFormat("&nbsp;");
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                           EyouSoft.Model.Enum.ProductZT.下架.ToString(), (int)EyouSoft.Model.Enum.ProductZT.下架);
+                        sb.AppendFormat("&nbsp;<a data-class=\"paixu\" href=\"javascript:;\" data-id=\"{0}\">排序</a>", ID.ToString());
+                    }
                     else if (isindex == EyouSoft.Model.Enum.ProductZT.下架)
                     {
-                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>  ", ID.ToString(),
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                           "上架", (int)EyouSoft.Model.Enum.ProductZT.上架);
                         sb.AppendFormat("&nbsp;");
-                        sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                        sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                            EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
                     }
                     else if (isindex == EyouSoft.Model.Enum.ProductZT.暂无该商品)
@@ -299,10 +293,10 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
                             }
                             else
                             {
-                                sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>  ", ID.ToString(),
+                                sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                          "上架", (int)EyouSoft.Model.Enum.ProductZT.上架);
                                 sb.AppendFormat("&nbsp;");
-                                sb.AppendFormat("  <a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
+                                sb.AppendFormat("<a href=\"javascript:;\" onclick=\"pageData.SheZhiStatus(this)\" data-id='{0}' data-state='{2}' data-bool='1' >{1}</a>", ID.ToString(),
                                    EyouSoft.Model.Enum.ProductZT.首页推荐.ToString(), (int)EyouSoft.Model.Enum.ProductZT.首页推荐);
                             }
                         }
@@ -319,5 +313,44 @@ namespace EyouSoft.Web.WebMaster.ShangCheng
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 获取代理商的公司名称
+        /// </summary>
+        /// <param name="DaiLiID"></param>
+        /// <returns></returns>
+        protected string GetCompanyName(object DaiLiID)
+        {
+            var DaiLiModel = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(DaiLiID.ToString());
+            if (DaiLiModel != null)
+            {
+                return DaiLiModel.CompanyName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        /// <summary>
+        /// 下架产品
+        /// </summary>
+        void xiajia()
+        {
+
+            string[] ids = Utils.GetFormValues("arrid[]");
+            EyouSoft.Model.Enum.ProductZT enstate = EyouSoft.Model.Enum.ProductZT.下架;
+            EyouSoft.BLL.MallStructure.BShangChengShangPin bll = new EyouSoft.BLL.MallStructure.BShangChengShangPin();
+
+            //修改
+            int num = bll.UpDateDaiLiUp(ids, enstate, UserInfo.GysId);
+            if (num > 0) Utils.RCWE(UtilsCommons.AjaxReturnJson("1", "修改成功！"));
+            Utils.RCWE(UtilsCommons.AjaxReturnJson("0", "修改失败！"));
+
+
+
+
+        }
+
+
+
     }
 }

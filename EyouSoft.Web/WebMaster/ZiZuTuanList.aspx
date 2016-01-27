@@ -20,6 +20,10 @@
     <script src="/JS/datepicker/WdatePicker.js" type="text/javascript"></script>
 
     <script src="/JS/InitialPageInputTagValue.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+    .pnone{display:none;}
+    </style>
 </head>
 <body>
     <table width="99%" cellspacing="0" cellpadding="0" border="0" align="center">
@@ -113,15 +117,22 @@
                                 <br />
                                 总价：<%# Convert.ToDecimal(Convert.ToDecimal(Eval("CRJiage")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETJiage")) * Convert.ToDecimal(Eval("ErTongNum"))).ToString("f2")%>元
                             </td>
-                            <td align="left">
+                            <td align="left" class="<%#  Eval("AgencyId")!=null && Eval("AgencyId").ToString().Trim().Length > 20?"":"pnone"%>">
                                 成人价：<%# Convert.ToDecimal(Eval("AgencyJinE")).ToString("f2")%>元
                                 <br />
                                 儿童价：<%# Convert.ToDecimal(Eval("ETAgencyJinE")).ToString("f2")%>元
                                 <br />
                                 总价：<%# Convert.ToDecimal(Convert.ToDecimal(Eval("AgencyJinE")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETAgencyJinE")) * Convert.ToDecimal(Eval("ErTongNum"))).ToString("f2")%>元
                             </td>
-                            <td align="left">
-                                <%# Convert.ToDecimal(Convert.ToDecimal(Convert.ToDecimal(Eval("CRJiage")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETJiage")) * Convert.ToDecimal(Eval("ErTongNum"))) - Convert.ToDecimal(Convert.ToDecimal(Eval("AgencyJinE")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETAgencyJinE")) * Convert.ToDecimal(Eval("ErTongNum")))).ToString("f2")%>元
+                            <td align="center" class="<%#  Eval("AgencyId")!=null && Eval("AgencyId").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
+                            <td align="left" class="<%# Eval("AgencyId")!=null && Eval("AgencyId").ToString().Trim().Length > 20?"":"pnone"%>">
+                            <%# Convert.ToDecimal(Convert.ToDecimal(Convert.ToDecimal(Eval("CRJiage")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETJiage")) * Convert.ToDecimal(Eval("ErTongNum"))) - Convert.ToDecimal(Convert.ToDecimal(Eval("AgencyJinE")) * Convert.ToDecimal(Eval("RenShu")) + Convert.ToDecimal(Eval("ETAgencyJinE")) * Convert.ToDecimal(Eval("ErTongNum")))).ToString("f2")%>元
+                            </td>
+                             <td align="center" class="<%#  Eval("AgencyId")!=null && Eval("AgencyId").ToString().Trim().Length > 20?"pnone":""%>">
+                            0
+                        </td>   
                             </td>
                             <td align="left">
                             <span style="color:Red"><%# Eval("UserType") %></span><br />

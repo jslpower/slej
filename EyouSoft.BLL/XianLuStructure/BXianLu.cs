@@ -467,6 +467,20 @@ namespace EyouSoft.BLL.XianLuStructure
         {
             return dal.getChuFaCitys();
         }
+        /// 获取出发地列表
+        /// </summary>
+        /// <returns></returns>
+        public IList<EyouSoft.Model.MSysCity> getChuFaCitys(string CityName)
+        {
+            return dal.getChuFaCitys(CityName);
+        }
+        /// 获取出发地
+        /// </summary>
+        /// <returns></returns>
+        public EyouSoft.Model.MSysCity getChuFaCityModel(int CityId)
+        {
+            return dal.getChuFaCityModel(CityId);
+        }
         #endregion
     }
 }

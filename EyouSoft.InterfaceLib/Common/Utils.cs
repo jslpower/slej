@@ -1683,5 +1683,22 @@ namespace EyouSoft.InterfaceLib.Common
                 }
             }
         }
+
+        #region 返回电脑版的域名
+        /// <summary>
+        /// 返回电脑版的域名
+        /// </summary>
+        /// <param name="host">域名、m.0211.slej.cn</param>
+        /// <returns></returns>
+        public static string getPCDomainUrl(string host)
+        {
+            string retStr = host.ToLower();
+
+            if (retStr.StartsWith("p.")) retStr = retStr.Replace("p.", "");
+            if (retStr.StartsWith("m.")) retStr = retStr.Replace("m.", "");
+
+            return retStr;
+        }
+        #endregion
     }
 }

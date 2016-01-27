@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>登录</title>
 
-
     <script src="/js/jquery_cm.js" type="text/javascript"></script>
 
     <script src="/js/slogin.js" type="text/javascript"></script>
 
     <script src="/js/table-toolbar.js" type="text/javascript"></script>
 
+    <link rel="stylesheet" type="text/css" href="css/user.css" />
 </head>
 <body>
     <uc1:WapHeader ID="WapHeader1" runat="server" HeadText="会员登录" />
@@ -54,8 +54,8 @@
                         onblur="javascript:if(this.value=='')this.value='请输入手机号';">
                 </li>
                 <li><span class="label_name">验证码</span>
-                    <input type="tel" id="txt_denglu_yzm" class="u-input" style="width: 80px;" value="验证码" onfocus="javascript:if(this.value=='验证码')this.value='';"
-                        onblur="javascript:if(this.value=='')this.value='验证码';">
+                    <input type="tel" id="txt_denglu_yzm" class="u-input" style="width: 80px;" value="验证码"
+                        onfocus="javascript:if(this.value=='验证码')this.value='';" onblur="javascript:if(this.value=='')this.value='验证码';">
                     <a id="l_huoquyzm" class="yzm">获取验证码</a> <a class="code_btn" style="display: none;">
                         50秒后重新发送</a> </li>
             </ul>
@@ -64,6 +64,15 @@
             <input id="loginbtn" type="button" class="y_btn" value="马上登录"></div>
         <div class="padd10 cent">
             <a href="/RegisterStep1.aspx" class="b_btn">1分钟免费注册</a></div>
+        <div class="cent code_box">
+            <p>
+                <img src="/ErWeiMa.aspx?codeurl=<%=HttpContext.Current.Request.Url.AbsoluteUri.ToLower() %>" />
+            </p>
+            <p>
+                长按上方二维码</p>
+            <p>
+                分享给朋友~~</p>
+        </div>
     </div>
     <div id="TiJiaoMask" class="user-mask" style="display: none;">
         <div class="h-mask-cnt" style="margin-top: 200px;">
@@ -76,18 +85,18 @@
 
 <script type="text/javascript">
     $(function() {
-    $("input[name=dlfs]").click(function() {
-        $("#dlfs").val($(this).val());
-        var fangshi = $("#dlfs").val();
-        if (fangshi == "2") {
-            $("#shouji").show();
-            $("#zhanghao").hide();
-        }
-        else {
-            $("#shouji").hide();
-            $("#zhanghao").show();
-        }
-    });
+        $("input[name=dlfs]").click(function() {
+            $("#dlfs").val($(this).val());
+            var fangshi = $("#dlfs").val();
+            if (fangshi == "2") {
+                $("#shouji").show();
+                $("#zhanghao").hide();
+            }
+            else {
+                $("#shouji").hide();
+                $("#zhanghao").show();
+            }
+        });
     });
     function login() {
         var u, p, ckcode;
@@ -137,12 +146,20 @@
         getDLYanZhengMa: function(obj) {
             $(obj).unbind("click");
             var _data = { shouJi: $.trim($("#txt_denglu_shouji").val()) };
+            var clock = 60;
             var _getYanZhengMaResult = iLogin.getDengLuYanZhengMa(_data);
 
-            if (!_getYanZhengMaResult.success) { $(obj).click(function() { userLoginReg.getDLYanZhengMa(obj); }); return; }
+             if (!_getYanZhengMaResult.success) { $(obj).click(function() { userLoginReg.getDLYanZhengMa(obj); }); return; }
 
-            $(obj).removeClass("yzm").addClass("code_btn").text("验证码已发送");
-            setTimeout(function() { $(obj).removeClass("code_btn").addClass("yzm").text("获取验证码").click(function() { userLoginReg.getDLYanZhengMa(obj); }); }, 30000);
+             $(obj).removeClass("yzm").addClass("code_btn").text("验证码已发送");
+            var iii = setInterval(function() {
+            clock = clock - 1;
+            $(obj).text("已发送(" + clock + "s)");
+                if (clock <= 0) {
+                    clearInterval(iii);
+                    $(obj).removeClass("code_btn").addClass("yzm").text("获取验证码").click(function() { userLoginReg.getDLYanZhengMa(obj); });
+                }
+            }, 1000);
         }
     }
 </script>

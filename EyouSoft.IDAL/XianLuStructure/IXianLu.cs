@@ -192,5 +192,15 @@ namespace EyouSoft.IDAL.XianLuStructure
         /// </summary>
         /// <returns></returns>
         IList<EyouSoft.Model.MSysCity> getChuFaCitys();
+        /// <summary>
+        /// 获取出发地列表
+        /// </summary>
+        /// <returns></returns>
+        IList<EyouSoft.Model.MSysCity> getChuFaCitys(string CityName);
+        /// <summary>
+        /// 获取出发地列表
+        /// </summary>
+        /// <returns></returns>
+        EyouSoft.Model.MSysCity getChuFaCityModel(int CityId);
     }
 }

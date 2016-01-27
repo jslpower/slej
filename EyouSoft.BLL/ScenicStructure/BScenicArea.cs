@@ -458,6 +458,11 @@ namespace EyouSoft.BLL.ScenicStructure
 
          int dalRetCode = dal.SheZhiOrderStatus(orderId, status);
 
+         if (status == OrderStatus.待付款)
+         {
+             new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(orderId, EyouSoft.Model.Enum.DingDanLeiBie.线路订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.确认);
+         }
+
          return dalRetCode;
       }
       /// <summary>

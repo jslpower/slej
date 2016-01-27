@@ -40,7 +40,7 @@ namespace EyouSoft.WAP
             {
                 //CxType = ((int)model.SaleType).ToString();
                 //CpType = ((int)model.ProductType).ToString();
-                int count = model.GouMaiRenShu;
+                int count = model.Salevolume;
                 if (count == 0)
                 {
                     goumaishu.Text = "还未有人购买";
@@ -72,11 +72,11 @@ namespace EyouSoft.WAP
                 yuanjia.Text = Convert.ToInt32(model.MarketPrice).ToString();
                 qianggoujia.Text = Convert.ToInt32(model.GroupPrice).ToString();
                 jieshao.Text = model.DetailInfo;
-                if (!string.IsNullOrEmpty(model.ProductImg)) ProductImg.Text = "<img src='" + TuPian.F1(model.ProductImg,640,400) + "' />";
-                FenXiangBiaoTi = model.ProductName;
-                FenXiangMiaoShu = Utils.GetText2(model.SimpleInfo, 30, true);
+                if (!string.IsNullOrEmpty(model.ProductImg)) ProductImg.Text = "<img src='" + TuPian.F1(model.ProductImg, 640, 400) + "' />";
+                FenXiangBiaoTi = model.ProductName.Trim();
+                FenXiangMiaoShu = Utils.GetText2(model.SimpleInfo, 30, true).Trim();
                 FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(model.ProductImg, 640, 400);
-                FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+                FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
             }
 
 

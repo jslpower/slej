@@ -150,6 +150,10 @@ namespace EyouSoft.Model.HotelStructure
       /// </summary>
       [ColumnIgnore]
       public IList<MHotelOrderContact> OrderContact { get; set; }
+      /// <summary>
+      /// 酒店入住日程
+      /// </summary>
+      public string HotelXC { get; set; }
    }
 
 
@@ -258,5 +262,24 @@ namespace EyouSoft.Model.HotelStructure
       /// 订单所属单位
       /// </summary>
       public string BuyCompanyName { get; set; }
+   }
+
+    /// <summary>
+    /// 酒店订单行程
+    /// </summary>
+   public class HotelXingCheng
+   {
+       /// <summary>
+       /// 入住时间
+       /// </summary>
+       public DateTime ChenkInDate { get; set; }
+       /// <summary>
+       /// 价格
+       /// </summary>
+       public decimal MenShiJia { get; set; }
+       /// <summary>
+       /// 分销价
+       /// </summary>
+       public decimal ChengBenJia { get; set; }
    }
 }

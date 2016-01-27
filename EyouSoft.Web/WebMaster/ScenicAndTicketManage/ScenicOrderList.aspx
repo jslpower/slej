@@ -26,6 +26,10 @@
 
     <link href="/Css/webmaster/style.css" rel="stylesheet" type="text/css" />
     <link href="/Css/webmaster/boxy.css" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+    .pnone{display:none;}
+    </style>
 </head>
 <body>
     <table width="99%" cellspacing="0" cellpadding="0" border="0" align="center">
@@ -144,10 +148,13 @@
                      单价：<%#  (Convert.ToDouble(Eval("Price")) / Convert.ToDouble(Eval("Num"))).ToString("f2")%> 元/张<br />
                      金额：<%#  Convert.ToDouble(Eval("Price")).ToString("f2")%> 元
                             </td>
-                            <td align="left">
+                             <td align="left" class="<%#Eval("SellerID").ToString().Trim().Length > 20?"":"pnone"%>">
                                门票数：<%# Eval("Num")%> 张<br />
                      单价：<%#  (Convert.ToDouble(Eval("AgencyJinE")) / Convert.ToDouble(Eval("Num"))).ToString("f2")%> 元/张<br />
                      金额：<%# Eval("SellerID").ToString().Trim().Length > 20 ? Convert.ToDouble(Eval("AgencyJinE")).ToString("f2") : "0"%> 元</td>
+                             <td align="center" class="<%#Eval("SellerID").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
                             <td align="center">
                             <%# Eval("SellerID").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("Price")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2") : "0"%>元
                             </td>

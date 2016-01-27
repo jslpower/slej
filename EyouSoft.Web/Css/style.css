@@ -30,6 +30,7 @@ a{ cursor:pointer;text-decoration:none; color:#333;}
 .font16{ font-size:16px;}
 .font18{ font-size:18px;}
 .font24{ font-size:24px;}
+.font20{ font-size:20px;}
 
 .font_yellow{ color:#fe6600;}
 .fontblue{ color:#2064c8;}
@@ -693,7 +694,7 @@ a.ydin_btn{ background:url(../images/ydin.gif) no-repeat;width:95px; height:32px
 
 /*****会员商城********/
 .mall-search{background:#f3f3f3; border:#ddd solid 1px;}
-.mall_type{width:254px;height:279px; border:#3b8fff solid 3px;}
+.mall_type{width:254px;border:#3b8fff solid 3px;}
 .mall_type h2{ height:39px; line-height:39px; background:#3b8fff; font-size:17px; color:#fff;font-family:"microsoft yahei"; text-indent:18px; font-weight:normal;}
 
 .L_side01box li{width:254px;height:30px;position:relative;z-index:6; vertical-align:middle;}
@@ -712,7 +713,7 @@ a.ydin_btn{ background:url(../images/ydin.gif) no-repeat;width:95px; height:32px
 .L_side01box li .sub-menu a:hover{ color:#2064c8;}
 
 .mall_piclist{padding-top:6px;margin-right:-20px; overflow:hidden; zoom:1;}
-.mall_piclist li{ width:245px; height:398px; padding:8px; border:#dfdfdf solid 1px ; background:#f8f8f8; float:left;margin-right:16px; margin-bottom:16px; display:inline;color:#6c6c6c; overflow:hidden;}
+.mall_piclist li{ width:245px; height:398px; padding:8px; border:#dfdfdf solid 1px ; background:#f8f8f8; float:left;margin-right:20px; margin-bottom:16px; display:inline;color:#6c6c6c; overflow:hidden;}
 .mall_piclist li img{width:245px; height:245px; display:block;}
 .mall_piclist li .m_title{ color:#2064c8;font-family:"microsoft yahei"; font-size:18px; height:30px; line-height:30px; overflow:hidden;}
 .mall_piclist li .m_cont{ height:48px; line-height:24px; overflow:hidden;  border-bottom:#e7e7e7 solid 1px; padding-bottom:7px;}
@@ -1359,4 +1360,3 @@ a.ydin_btn{ background:url(../images/ydin.gif) no-repeat;width:95px; height:32px
 #ShangChengSrcoll .box{overflow:hidden;position:relative;width:812px;height:202px;}
 
 
-.home_R_side01R { float:right; margin:0;}

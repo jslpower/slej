@@ -5,6 +5,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
+<title><%=FenXiangBiaoTi %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/css/zt.css" rel="stylesheet" type="text/css" />
@@ -224,11 +225,7 @@
             pageOpt.initClick();
             pageOpt.initClickClass();
             $(".step_btn").click(function() {
-                if ('<%=isLogin %>' == 'True') {
-                    location.href = "/Mall/OrderPage.aspx?" + $.param({ id: pageOpt.id, color: encodeURIComponent($("#color_a").val()), model: encodeURIComponent($("#model_a").val()), type: encodeURIComponent($("#type_a").val()), num: $("#num").val() })
-                } else {
-                    location.href = "/login.aspx?rurl=" + encodeURIComponent("/Mall/OrderPage.aspx?" + $.param({ id: pageOpt.id, color: encodeURIComponent($("#color_a").val()), model: encodeURIComponent($("#model_a").val()), type: encodeURIComponent($("#type_a").val()), num: $("#num").val() }))
-                }
+                location.href = "/Mall/OrderPage.aspx?" + $.param({ id: pageOpt.id, color: encodeURIComponent($("#color_a").val()), model: encodeURIComponent($("#model_a").val()), type: encodeURIComponent($("#type_a").val()), num: $("#num").val() })
             })
 
         })

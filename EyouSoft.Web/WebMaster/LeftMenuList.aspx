@@ -531,8 +531,7 @@
                         <td>
                             <asp:PlaceHolder ID="PlaceHolder59" runat="server">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <img src="/images/webmaster/func_default.gif" />
-                                <a href="JiFenDuiHuan.aspx" target="mainFrame" style="font-size: 14px">
-                                    积分兑换审核</a></asp:PlaceHolder>
+                                <a href="JiFenDuiHuan.aspx" target="mainFrame" style="font-size: 14px">积分兑换审核</a></asp:PlaceHolder>
                         </td>
                     </tr>
                     <tr id="tr31" runat="server">
@@ -592,6 +591,14 @@
                                 <img src="/images/webmaster/func_default.gif" />
                                 <a href="/WebMaster/FeeSetting.aspx?searchinfo.showmode=update" target="mainFrame"
                                     style="font-size: 14px">费用相关</a></asp:PlaceHolder>
+                        </td>
+                    </tr>
+                    <tr id="tr10" runat="server">
+                        <td>
+                            <asp:PlaceHolder ID="PlaceHolder60" runat="server">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img src="/images/webmaster/func_default.gif" />
+                                <a href="/WebMaster/JiaoYiFeiLv.aspx" target="mainFrame"
+                                    style="font-size: 14px">平台交易费率</a></asp:PlaceHolder>
                         </td>
                     </tr>
                 </table>
@@ -677,6 +684,14 @@
                             <asp:PlaceHolder ID="PlaceHolder56" runat="server">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <img src="/images/webmaster/func_default.gif" />
                                 <a href="/WebMaster/EBaoInfo.aspx" target="mainFrame" style="font-size: 14px">E额宝介绍</a></asp:PlaceHolder>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:PlaceHolder ID="PlaceHolder9" runat="server">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img src="/images/webmaster/func_default.gif" />
+                                <a href="/WebMaster/youji/youjilist.aspx" target="mainFrame" style="font-size: 14px">
+                                    E家分享</a></asp:PlaceHolder>
                         </td>
                     </tr>
                     <tr id="tr5" runat="server" visible="false">
@@ -781,14 +796,14 @@
                             </asp:PlaceHolder>
                         </td>
                     </tr>
-                    <tr id="trMasterProviders" runat="server">
+                    <%--<tr id="trMasterProviders" runat="server">
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
                             <a href="/WebMaster/Supplier/SupplierList.aspx" target="mainFrame" style="font-size: 14px">
                                 供应商用户管理</a>
                         </td>
-                    </tr>
+                    </tr>--%>
                 </table>
             </span>
         </div>
@@ -921,54 +936,121 @@
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/webmaster/shangcheng/productlist.aspx" target="mainFrame" style="font-size: 14px">
-                                商城产品选择</a>
+                            <a href="/webmaster/shangcheng/productlist.aspx?type=s" target="mainFrame"
+                                style="font-size: 14px" class="menuon">商城产品选择</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/webmaster/TuanGou/TuanGouList.aspx" target="mainFrame" style="font-size: 14px">
-                                促销秒杀管理</a>
+                            <a href="/webmaster/TuanGou/TuanGouList.aspx?type=s" target="mainFrame"
+                                style="font-size: 14px">促销秒杀选择</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/WebMaster/AdvList.aspx" target="mainFrame" style="font-size: 14px">首页广告设置</a>
+                            <a href="/webmaster/TuanGou/TuanGouList.aspx?type=g" target="mainFrame"
+                                style="font-size: 14px">促销秒杀管理</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=g&url=/WebMaster/Supplier/SupplierEdit.aspx?type=left" target="mainFrame" style="font-size: 14px">
-                                供应信息管理</a>
+                            <a href="/WebMaster/AdvList.aspx?type=s" target="mainFrame" style="font-size: 14px">
+                                首页广告设置</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=g&url=/webmaster/shangcheng/productlist.aspx" target="mainFrame" style="font-size: 14px">
-                                供应商品管理</a>
+                            <a href="/WebMaster/Supplier/SupplierEdit.aspx?type=g" target="mainFrame"
+                                style="font-size: 14px">公司信息管理</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=g&url=/webmaster/shangcheng/OrderList.aspx" target="mainFrame" style="font-size: 14px">
-                                供应订单管理</a>
+                            <a href="/webmaster/shangcheng/productlist.aspx?type=g" target="mainFrame"
+                                style="font-size: 14px">商城商品管理</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/webmaster/ShowHidden.aspx" target="mainFrame" style="font-size: 14px">
+                            <a href="/webmaster/shangcheng/OrderList.aspx?type=g" target="mainFrame"
+                                style="font-size: 14px">商城订单管理</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/TuanGou/TuanGouDingDans.aspx?type=g" target="mainFrame"
+                                style="font-size: 14px">团购订单管理</a>
+                        </td>
+                    </tr>
+                    <%if(IsXianShi){ %>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/shangcheng/OrderList.aspx?type=s" target="mainFrame"
+                                style="font-size: 14px">特约商城订单</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/TuanGou/TuanGouDingDans.aspx?type=s" target="mainFrame"
+                                style="font-size: 14px">特约团购订单</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/MyTeYue.aspx" target="mainFrame" style="font-size: 14px">
+                                 商城特约代理</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/MyTuanGouTeYue.aspx" target="mainFrame" style="font-size: 14px">
+                                 团购特约代理</a>
+                        </td>
+                    </tr>
+                    <%} %>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/MyGYSList.aspx" target="mainFrame" style="font-size: 14px">
+                                 商城特约供应</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/MyTGGysList.aspx" target="mainFrame" style="font-size: 14px">
+                                 团购特约供应</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/webmaster/func_default.gif" />
+                            <a href="/webmaster/ShowHidden.aspx?type=s" target="mainFrame" style="font-size: 14px">
                                 发展下级代理</a>
                         </td>
                     </tr>
@@ -976,7 +1058,7 @@
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/webmaster/NavNum.aspx" target="mainFrame" style="font-size: 14px">
+                            <a href="/webmaster/NavNum.aspx?type=s" target="mainFrame" style="font-size: 14px">
                                 网站导航选择</a>
                         </td>
                     </tr>
@@ -984,7 +1066,7 @@
                         <td>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="/images/webmaster/func_default.gif" />
-                            <a href="login.aspx?type=s&url=/webmaster/DaiLiCompany.aspx" target="mainFrame" style="font-size: 14px">
+                            <a href="/webmaster/DaiLiCompany.aspx?type=s" target="mainFrame" style="font-size: 14px">
                                 我的店铺介绍</a>
                         </td>
                     </tr>

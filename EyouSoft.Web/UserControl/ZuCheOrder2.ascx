@@ -152,7 +152,7 @@
             </tr>
             <tr>
                 <td id="tr_JinE" colspan="4" align="left" class="padd2">
-                    <strong>门市价：<font class="font14 fontblue">0</font> 元/台； 会员价：<font class="font14 fontblue">0</font>
+                    <strong>门市价：<font class="font14 fontblue">0</font> 元/台； 优惠价：<font class="font14 fontblue">0</font>
                         元/台； 贵宾价 ：<font class="font14 fontblue">0</font>元/台； 二级代理价 ：<font class="font14 fontblue">0</font>元；
                         代理价：<font class="font14 fontblue">0</font> 元/台； 员工价：<font class="font14 fontblue">0</font>
                         元/台；</strong>
@@ -165,7 +165,7 @@
             </tr>
             <tr>
                 <td id="tr_JinEZong" colspan="4" align="left" class="padd2">
-                    <strong>门市费：<font class="font14 fontblue">0</font> 元； 会员费：<font class="font14 fontblue">0</font>
+                    <strong>门市费：<font class="font14 fontblue">0</font> 元； 优惠费：<font class="font14 fontblue">0</font>
                         元； 贵宾费 ：<font class="font14 fontblue">0</font>元； 二级代理费：<font class="font14 fontblue">0</font>元；
                         代理费：<font class="font14 fontblue">0</font> 元； 员工费：<font class="font14 fontblue">0</font>
                         元；</strong>
@@ -772,7 +772,7 @@
             
             
             
-                var html = "<strong>门市价：<font class=\"font14 fontblue\" style=\"text-decoration:line-through\">" + (jsonZ.Zjc/carnum).toFixed(2) + "</font> 元/台； 会员价：<font class=\"font14 fontblue\">" + (jsonZ.Zhy/carnum).toFixed(2) + "</font>元/台；";
+                var html = "<strong>门市价：<font class=\"font14 fontblue\" style=\"text-decoration:line-through\">" + (jsonZ.Zjc/carnum).toFixed(2) + "</font> 元/台； 优惠价：<font class=\"font14 fontblue\">" + (jsonZ.Zhy/carnum).toFixed(2) + "</font>元/台；";
                 if(usercate==2)
                 {
                   html += " 代销价 ：<font class=\"font14 fontblue\">" + (jsonZ.Zmfx/carnum).toFixed(2) + "</font>元/台； 贵宾价 ：<font class=\"font14 fontblue\">" + (jsonZ.Zgb/carnum).toFixed(2) + "</font>元/台；";
@@ -866,7 +866,7 @@
             }
             }
             
-            html2 ="<ul><li class=\"mar5\"><div class=\"tixing\"><b>会员价总金额：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zhy/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font> <font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zhy.toFixed(2)+"</b>元</font></div> </li><li class=\"mar5\"><div class=\"tixing\"><b>"+guibinname+"：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zgb/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font><font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zgb.toFixed(2)+"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp;"+guibinurl+" </div> </li><li><div class=\"tixing\"><b>"+dailiname+"：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zfx/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font><font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zfx.toFixed(2)+"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp; "+dailiurl+"</div>  </li></ul>";
+            html2 ="<ul><li class=\"mar5\"><div class=\"tixing\"><b>优惠价总金额：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zhy/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font> <font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zhy.toFixed(2)+"</b>元</font></div> </li><li class=\"mar5\"><div class=\"tixing\"><b>"+guibinname+"：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zgb/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font><font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zgb.toFixed(2)+"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp;"+guibinurl+" </div> </li><li><div class=\"tixing\"><b>"+dailiname+"：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+(jsonZ.Zfx/carnum).toFixed(2)+"</b>元/台 x <b class=\"font14\">"+carnum+"</b>台 = </font><font class=\"fontblue\"><b class=\"font14\">"+jsonZ.Zfx.toFixed(2)+"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp; "+dailiurl+"</div>  </li></ul>";
             
             
             $("#carpricelist").html(html2);

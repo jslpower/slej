@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <meta charset="utf-8">
+    <title><%=FenXiangBiaoTi %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script src="/js/jquery_cm.js" type="text/javascript"></script>
@@ -44,7 +45,7 @@
                                     <div>
                                         <%#Eval("ChuFaHangZhanLou")%>航站楼</div>
                                     <div>
-                                        (<%# EyouSoft.Common.Utils.getCompanyName(Eval("HangKongGongSiErZiMa")) %>)</div>
+                                        (<%# EyouSoft.Common.Utils.getCompanyName(Eval("HangKongGongSiErZiMa")) %>)<%#Eval("HangBanHao")%></div>
                                 </li>
                                 <li>
                                     <div>
@@ -66,7 +67,7 @@
                                 <ItemTemplate>
                                     <div class="flight_detail">
                                         <ul>
-                                            <li class="t1">舱位：<%# Eval("CangWei")%>
+                                            <li class="t1"><%# Eval("CangWeiTitle")%><%# Eval("CangWei")%>
                                                 <span class="font_yellow">
                                                     <%# getZK(Eval("ZheKouLv"))%></span></li>
                                             <li><span class="floatR"><em class="font_yellow">¥<%# Eval("PiaoMianJiaGe","{0:f0}")%></em>+机/油：¥<%#Eval("FuJiaFei","{0:F0}")%></span>剩：<%#    Eval("CangWeiShu").ToString()=="A" ? "≥9" : Eval("CangWeiShu")%></li>
@@ -108,6 +109,7 @@
             }
         }
         $(function() {
+            $(".BtnLogin").click(function() { window.location.href = '/HuiYuanReg.aspx?rurl=' + encodeURIComponent(window.location.href); });
             //            $(".y_btn").click(function() {
             //                window.location.href = '/RegisterStep1.aspx?rurl=' + encodeURIComponent(window.location.href);
             //            });
@@ -131,6 +133,40 @@
             })
 
         })
+    </script>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script type="text/javascript">
+    var wx_jsapi_config=<%=weixin_jsapi_config %>;
+    wx.config(wx_jsapi_config);
+    </script>
+
+    <script type="text/javascript">
+        wx.ready(function() {
+            //分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: '<%=FenXiangBiaoTi %>',
+                desc: '<%=FenXiangMiaoShu %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>'
+            });
+            //分享给朋友
+            wx.onMenuShareAppMessage({
+                title: '<%=FenXiangBiaoTi %>',
+                desc: '<%=FenXiangMiaoShu %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>',
+                type: 'link'
+            });
+            //分享到QQ
+            wx.onMenuShareQQ({
+                title: '<%=FenXiangBiaoTi %>',
+                desc: '<%=FenXiangMiaoShu %>',
+                link: '<%= FenXiangLianJie %>',
+                imgUrl: '<%=FenXiangTuPianFilepath %>'
+            });
+        });
     </script>
 
 </body>

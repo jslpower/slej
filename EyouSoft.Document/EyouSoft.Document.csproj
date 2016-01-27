@@ -85,6 +85,7 @@
     <Content Include="lib\Microsoft.Practices.Unity.Interception.dll" />
     <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\Newtonsoft.Json.xml" />
+    <Content Include="lib\PayAPI.dll" />
     <Content Include="lib\ThoughtWorks.QRCode.dll" />
   </ItemGroup>
   <ItemGroup>

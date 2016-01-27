@@ -145,6 +145,7 @@ namespace EyouSoft.DAL.HotelStructure
                     model.SellerID = dr.GetString(dr.GetOrdinal("SellerID"));
                     model.AgencyJinE = dr.GetDecimal(dr.GetOrdinal("AgencyJinE"));
                     model.Star = (EyouSoft.Model.Enum.HotelStar)dr.GetByte(dr.GetOrdinal("Star"));
+                    model.HotelXC = dr.IsDBNull(dr.GetOrdinal("HotelXC")) ? null : dr.GetString(dr.GetOrdinal("HotelXC"));
 
                     if (model != null)
                     {
@@ -324,6 +325,7 @@ namespace EyouSoft.DAL.HotelStructure
                     }
                     model.SellerID = dr.GetString(dr.GetOrdinal("SellerID"));
                     model.AgencyJinE = dr.GetDecimal(dr.GetOrdinal("AgencyJinE"));
+                    model.HotelXC = dr.IsDBNull(dr.GetOrdinal("HotelXC")) ? null : dr.GetString(dr.GetOrdinal("HotelXC"));
                     list.Add(model);
                 }
             };
@@ -571,6 +573,34 @@ namespace EyouSoft.DAL.HotelStructure
         }
         #endregion
 
+        /// <summary>
+        /// 序列化返回string类型
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static string getJsonStr(IList<HotelXingCheng> list)
+        {
+
+            if (list == null || list.Count == 0) return string.Empty;
+
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(list);
+
+        }
+
+        /// <summary>
+        /// 反序列化返回list
+        /// </summary>
+        /// <param name="jsonStr"></param>
+        /// <returns></returns>
+        public static IList<HotelXingCheng> getStrJson(string jsonStr)
+        {
+
+            if (string.IsNullOrEmpty(jsonStr)) return null;
+
+
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<IList<HotelXingCheng>>(jsonStr);
+
+        }
 
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using EyouSoft.Common;
+using EyouSoft.IDAL.AccountStructure;
 
 namespace EyouSoft.Web.WebMaster
 {
@@ -51,6 +52,14 @@ namespace EyouSoft.Web.WebMaster
             {
                 searchModel.AgencyId = UserInfo.GysId;
             }
+            if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("txtWebName")))
+            {
+                searchModel.WebSiteName = Utils.GetQueryStringValue("txtWebName");
+            }
+            if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("txtCJC")))
+            {
+                searchModel.CompanyJC = Utils.GetQueryStringValue("txtCJC");
+            }
             IList<EyouSoft.Model.MSysAdv> list = bll.GetList(pageSize, pageIndex, ref recordCount, searchModel);
             if (list != null && list.Count > 0)
             {
@@ -62,6 +71,35 @@ namespace EyouSoft.Web.WebMaster
             {
                 lbemptymsg.Text = "<tr><td colspan='6' align='center' height='30px'>暂无数据!</td></tr>";
             }
+        }
+
+        /// <summary>
+        /// 返回网点名称
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
+        protected string GetWangDianByID(object AgencyId)
+        {
+            string id = "";
+            if (AgencyId != null)
+            {
+                id = Utils.GetString(AgencyId.ToString(), "");
+            }
+            if (id == "" || id == null) return "金奥";
+            BSellers bsells = new BSellers();
+            EyouSoft.Model.AccountStructure.MSellers mseller = new EyouSoft.Model.AccountStructure.MSellers();
+            mseller = bsells.GetWebSiteName(id);
+            if (mseller == null) return "金奥";
+            if (!string.IsNullOrEmpty(mseller.CompanyJC))
+            {
+                return mseller.CompanyJC +  mseller.WebsiteName;
+            }
+            else
+            {
+                return mseller.WebsiteName;
+            }
+
+
         }
         /// <summary>
         /// ajax操作
@@ -81,6 +119,7 @@ namespace EyouSoft.Web.WebMaster
             Response.Write(msg);
             Response.End();
         }
+
 
         /// <summary>
         /// 删除操作

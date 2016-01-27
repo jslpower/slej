@@ -28,6 +28,8 @@ namespace EyouSoft.Web.UserControl
         protected string toplist = string.Empty;
         protected string dianlist = string.Empty;//确认个数
         protected string dailiId = null;
+        protected int cxnum = 0;//促销数据量
+        protected int msnum = 0;//秒杀数据量
         private const string NoImgSrc = "<img alt=\"暂无图片\" src=\"/images/NoPic.jpg\" />";
         /// <summary>
         /// 酒店星级html
@@ -102,13 +104,21 @@ namespace EyouSoft.Web.UserControl
         /// </summary>
         private void InitCuXiao()
         {
-            var serchModel = new EyouSoft.Model.OtherStructure.MTuanGouChanPinSer();
+            var serchModel = new EyouSoft.Model.OtherStructure.MDaiLiTuanGouSer();
             serchModel.SaleType = EyouSoft.Model.Enum.CuXiaoLeiXing.促销;
-            serchModel.IsIndex = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
-            serchModel.SupplierID = dailiId;
-            serchModel.WeiZhi = new List<EyouSoft.Model.Enum.XianShiWeiZhi> { EyouSoft.Model.Enum.XianShiWeiZhi.网站首页};
-            serchModel.ProductSort = 0;
-            var list = new EyouSoft.BLL.OtherStructure.BTuanGou().GetList(10, serchModel);
+            serchModel.ProductStatus = new[] { EyouSoft.Model.Enum.ProductZT.首页推荐 };
+            serchModel.MemberId = dailiId;
+            serchModel.isGetTrue = true;
+            int recount =0;
+            var list = new EyouSoft.BLL.OtherStructure.BTuanGou().GetDaiLiList(10, 1, ref recount, serchModel);
+            if (list != null)
+            {
+                cxnum = list.Count;
+            }
+            if (list.Count > 2 && list.Count % 2 != 0)
+            {
+                list.Remove(list[list.Count - 1]);
+            }
             CuXiao.DataSource = list;
             CuXiao.DataBind();
         }
@@ -117,13 +127,17 @@ namespace EyouSoft.Web.UserControl
         /// </summary>
         private void InitMiaoSha()
         {
-            var serchModel = new EyouSoft.Model.OtherStructure.MTuanGouChanPinSer();
+            var serchModel = new EyouSoft.Model.OtherStructure.MDaiLiTuanGouSer();
             serchModel.SaleType = EyouSoft.Model.Enum.CuXiaoLeiXing.秒杀;
-            serchModel.IsIndex = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 };
-            serchModel.WeiZhi = new List<EyouSoft.Model.Enum.XianShiWeiZhi> { EyouSoft.Model.Enum.XianShiWeiZhi.网站首页 }; ;
-            serchModel.SupplierID = dailiId;
-            serchModel.ProductSort = 0;
-            var list = new EyouSoft.BLL.OtherStructure.BTuanGou().GetList(10, serchModel);
+            serchModel.ProductStatus = new[] { EyouSoft.Model.Enum.ProductZT.首页推荐 };
+            serchModel.MemberId = dailiId;
+            serchModel.isGetTrue = true;
+            int recount = 0;
+            var list = new EyouSoft.BLL.OtherStructure.BTuanGou().GetDaiLiList(10, 1, ref recount, serchModel);
+            if (list != null)
+            {
+                msnum = list.Count;
+            }
             if (list.Count > 2 && list.Count % 2 != 0)
             {
                 list.Remove(list[list.Count-1]);

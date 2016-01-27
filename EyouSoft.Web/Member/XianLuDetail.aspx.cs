@@ -32,23 +32,23 @@ namespace EyouSoft.Web.Member
             ormodel = bll.GetInfo(orderid);
             if (ormodel !=null && ormodel.OperatorId == HuiYuanInfo.UserId)
             {
-                string ChengRenJia ="0.00";
-                string ErTongJia ="0.00";
-                if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.周边短线)
-                {
-                    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
-                    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
-                }
-                else if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.国内长线)
-                {
-                    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
-                    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
-                }
-                else if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.出境线路)
-                {
-                    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
-                    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
-                }
+                string ChengRenJia = ormodel.JiaoYiCR.ToString("f2");
+                string ErTongJia = ormodel.JiaoYiET.ToString("f2");
+                //if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.周边短线)
+                //{
+                //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
+                //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
+                //}
+                //else if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.国内长线)
+                //{
+                //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
+                //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
+                //}
+                //else if(ormodel.RouteType == EyouSoft.Model.Enum.AreaType.出境线路)
+                //{
+                //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, ormodel.JSJCR, ormodel.SCJCR, ormodel.UserType).ToString("f2");
+                //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, ormodel.JSJER, ormodel.SCJET, ormodel.UserType).ToString("f2");
+                //}
                 
                 xianluhtml = "<div style='padding-top:20px; font-weight:bolder;'>订单信息</div>";
                 xianluhtml += "<table width='100%' border='0' class='tableList margin_T10'>"

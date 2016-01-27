@@ -1715,6 +1715,48 @@ namespace EyouSoft.Common
         }
 
         /// <summary>
+        /// ajax response,json:{"result":"","msg":"","obj":{}}
+        /// </summary>
+        /// <param name="result">result</param>
+        public static void RCWE_AJAX(string result)
+        {
+            RCWE_AJAX(result, string.Empty, null);
+        }
+
+        /// <summary>
+        /// ajax response,json:{"result":"","msg":"","obj":{}}
+        /// </summary>
+        /// <param name="result">result</param>
+        /// <param name="msg">msg</param>
+        public static void RCWE_AJAX(string result, string msg)
+        {
+            RCWE_AJAX(result, msg, null);
+        }
+
+        /// <summary>
+        /// ajax response,json:{"result":"","msg":"","obj":{}}
+        /// </summary>
+        /// <param name="result">result</param>
+        /// <param name="msg">msg</param>
+        /// <param name="obj">obj</param>
+        public static void RCWE_AJAX(string result, string msg, object obj)
+        {
+            /*
+            string output = "{}";
+
+            if (obj != null)
+            {
+                output = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            }
+
+            RCWE(string.Format("{{\"result\":\"{0}\",\"msg\":\"{1}\",\"obj\":{2}}}", result, msg, output));*/
+
+            if (obj == null) obj = new object();
+            var temp = new { result = result, msg = msg, obj = obj };
+            RCWE(Newtonsoft.Json.JsonConvert.SerializeObject(temp));
+        }
+
+        /// <summary>
         /// json datetime format
         /// </summary>
         /// <param name="s">json datetime:/Date(1384358400000+0800)/</param>
@@ -1837,6 +1879,20 @@ namespace EyouSoft.Common
             }
         }
         /// <summary>
+        /// Json序列化实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="s"></param>
+        /// <param name="cod"></param>
+        /// <returns></returns>
+        public static IList<T> JsonDeserialize<T>(string s)
+        {
+            System.Web.Script.Serialization.JavaScriptSerializer mySerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return mySerializer.Deserialize<IList<T>>(s);
+            // return System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<IList<T>>(s);
+        }
+
+        /// <summary>
         /// 写日志
         /// </summary>
         /// <param name="s">内容</param>
@@ -1953,6 +2009,30 @@ namespace EyouSoft.Common
             }
         }
 
+        /// <summary>
+        /// 取得客户的IP数据
+        /// </summary>
+        /// <returns>客户的IP</returns>
+        public static string GetRemoteIP()
+        {
+            string Remote_IP = "";
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_VIA"] != null)
+                {
+                    Remote_IP = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else
+                {
+                    Remote_IP = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString();
+                }
+            }
+            catch
+            {
+            }
+            return Remote_IP;
+        }
+
 
         #region  微信相关
 
@@ -2039,6 +2119,7 @@ namespace EyouSoft.Common
             info.jsApiList = jsApiList;
 
             string _url = HttpContext.Current.Request.Url.ToString();
+            _url = Uri.EscapeUriString(_url);
             int _index = _url.IndexOf('#');
             if (_index > -1)
             {
@@ -2063,6 +2144,34 @@ namespace EyouSoft.Common
             info.signature = str_sha1_out.ToString();
 
             //info.signature=BitConverter.ToString(bytes_sha1_out).Replace("-", "");
+
+            return info;
+        }
+
+
+        /// <summary>
+        /// get weixin oauth2 access_token info
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static weixin_oauth2_access_token_info get_weixin_oauth2_access_token_info(string code)
+        {
+
+            string weixin_appid = Utils.GetConfigString("slejAppId");
+            string weixin_secret = Utils.GetConfigString("slejAppSecret");
+
+            string url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code";
+            url = string.Format(url, weixin_appid, weixin_secret, code);
+
+            string cookies = string.Empty;
+            var weixin_oauth2_access_token_json = EyouSoft.Toolkit.request.create(url, "", EyouSoft.Toolkit.Method.GET, "", ref cookies, false);
+            if (string.IsNullOrEmpty(weixin_oauth2_access_token_json)) return null;
+
+            var error = Newtonsoft.Json.JsonConvert.DeserializeObject<weixin_oauth2_error_info>(weixin_oauth2_access_token_json);
+
+            if (error.errcode != 0) return null;
+
+            var info = Newtonsoft.Json.JsonConvert.DeserializeObject<weixin_oauth2_access_token_info>(weixin_oauth2_access_token_json);
 
             return info;
         }
@@ -2118,6 +2227,126 @@ namespace EyouSoft.Common
             public IList<string> jsApiList { get; set; }
         }
         #endregion
+
+        #region weixin oauth2 access_token info
+        /// <summary>
+        /// weixin oauth2 access_token info
+        /// </summary>
+        public class weixin_oauth2_access_token_info
+        {
+            public string access_token { get; set; }
+            public int expires_in { get; set; }
+            public string refresh_token { get; set; }
+            public string openid { get; set; }
+            public string scope { get; set; }
+        }
+        #endregion
+
+        #region weixin oauth2 snsapi_userinfo
+        /// <summary>
+        /// weixin oauth2 snsapi_userinfo
+        /// </summary>
+        public class weixin_oauth2_snsapi_userinfo
+        {
+            public string openid { get; set; }
+            public string nickname { get; set; }
+            public string sex { get; set; }
+            public string province { get; set; }
+            public string city { get; set; }
+            public string country { get; set; }
+            public string headimgurl { get; set; }
+            public string privilege { get; set; }
+            public string unionid { get; set; }
+        }
+        #endregion
+
+        #region weixin oauth2 error info
+        /// <summary>
+        /// weixin oauth2 error info
+        /// </summary>
+        public class weixin_oauth2_error_info
+        {
+            public int errcode { get; set; }
+            public string errmsg { get; set; }
+        }
+        #endregion
+        #endregion
+
+
+        #region 设置、获取openid
+        /// <summary>
+        /// 取得客户的IP数据
+        /// </summary>
+        /// <returns>客户的IP</returns>
+        public static void setOpenidCookie(string openid)
+        {
+            var Request = HttpContext.Current.Request;
+            var Response = HttpContext.Current.Response;
+
+            HttpCookie cookie = Request.Cookies["openid"];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Set(cookie);
+
+            }
+
+
+            Response.Cookies["openid"].Value = openid;
+            Response.Cookies["openid"].Expires = DateTime.MaxValue;
+        }
+
+        /// <summary>
+        /// 取得客户的IP数据
+        /// </summary>
+        /// <returns>客户的IP</returns>
+        public static string getOpenidCookie()
+        {
+            if (HttpContext.Current.Request.Cookies["openid"] != null)
+            {
+                return HttpContext.Current.Request.Cookies["openid"].Value;
+            }
+
+            return string.Empty;
+        }
+
+        #endregion
+
+
+        #region 返回授权链接
+        /// <summary>
+        /// 返回授权链接
+        /// </summary>
+        /// <param name="url">分享的链接</param>
+        /// <returns></returns>
+        public static string redirectUrl(string url)
+        {
+            string Token = System.Configuration.ConfigurationManager.AppSettings["slejToken"].Trim();
+            string appId = System.Configuration.ConfigurationManager.AppSettings["slejAppId"].Trim();
+            string appSecret = System.Configuration.ConfigurationManager.AppSettings["slejAppSecret"].Trim();
+
+
+            return "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://m.slej.cn/AutoRedirect.aspx&response_type=code&scope=snsapi_base&state=" + HttpContext.Current.Server.UrlEncode(url) + "#wechat_redirect";
+
+        }
+
+        #endregion
+
+        #region 返回电脑版的域名
+        /// <summary>
+        /// 返回电脑版的域名
+        /// </summary>
+        /// <param name="host">域名、m.0211.slej.cn</param>
+        /// <returns></returns>
+        public static string getPCDomainUrl(string host)
+        {
+            string retStr = host.ToLower();
+
+            if (retStr.StartsWith("p.")) retStr = retStr.Replace("p.", "");
+            if (retStr.StartsWith("m.")) retStr = retStr.Replace("m.", "");
+
+            return retStr;
+        }
         #endregion
 
 

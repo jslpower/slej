@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MainDefault.ascx.cs"
     Inherits="EyouSoft.Web.UserControl.MainDefault" %>
-
 <script type="text/javascript">
     function nTabs(tabObj, obj) {
         var tabList = document.getElementById(tabObj).getElementsByTagName("li");
@@ -373,7 +372,7 @@
                                 <li><div class="list"><a href="/ShangChengXiangQing.aspx?ID=<%#  Eval("ProductID") %>" class="cx_img">
                                     <img src="<%# getImgs(Eval("ProductImgs")) %>" />
                                     <div class="tuijian">
-                                        会员价</div>
+                                        优惠价</div>
                                 </a>
                                     <p class="cx_title">
                                         <a href="/ShangChengXiangQing.aspx?ID=<%#  Eval("ProductID") %>">

@@ -49,9 +49,9 @@ namespace EyouSoft.WAP
             FenXiangMiaoShu = "客车包租";
             if (list[0].ZucheInfoImg != null && list[0].ZucheInfoImg.Count > 0)
             {
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].ZucheInfoImg[0], 320, 240);
+                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].ZucheInfoImg[0].FilePath, 320, 240);
             }
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
         }
         protected string IMGhtml(object obj, object CarName)
         {
@@ -59,7 +59,7 @@ namespace EyouSoft.WAP
             StringBuilder sb = new StringBuilder();
             if (list != null && list.Count > 0)
             {
-                sb.AppendFormat("<img src='{0}' alt='{1}'>", TuPian.F1(list[0].FilePath,320,240), CarName.ToString());
+                sb.AppendFormat("<img src='{0}' alt='{1}'>", TuPian.F1(list[0].FilePath, 320, 240), CarName.ToString());
             }
             return sb.ToString();
         }

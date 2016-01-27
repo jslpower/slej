@@ -8,7 +8,7 @@ using EyouSoft.Common;
 
 namespace EyouSoft.Web.WebMaster
 {
-    public partial class PaiXu : System.Web.UI.Page
+    public partial class PaiXu : EyouSoft.Common.Page.WebmasterPageBase
     {
         protected int xuhao = 0;
         protected void Page_Load(object sender, EventArgs e)
@@ -19,12 +19,16 @@ namespace EyouSoft.Web.WebMaster
             //}
             string type = Utils.GetQueryStringValue("type");
             string id = Utils.GetQueryStringValue("id");
-            xuhao = new EyouSoft.BLL.OtherStructure.BTuanGou().GetProductSort(type, id);
+            if (type == "shangcheng")
+            {
+                xuhao = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetProductSort(UserInfo.GysId, id);
+            }
+            else
+            {
+                xuhao = new EyouSoft.BLL.OtherStructure.BTuanGou().GetProductSort(type, id);
+            }
             if (Utils.GetQueryStringValue("dotype") == "save")
             {
-                
-                
-
                 Response.Clear();
                 Response.Write(Update(type, id));
                 Response.End();
@@ -36,7 +40,16 @@ namespace EyouSoft.Web.WebMaster
         {
             string msg = "";
             int sort = Utils.GetInt(Utils.GetFormValue("XuHao"));
-            int Code = new EyouSoft.BLL.OtherStructure.BTuanGou().UpdateProductSort(type, id, sort);
+            int Code =0;
+            if (type == "shangcheng")
+            {
+                Code = new EyouSoft.BLL.MallStructure.BShangChengShangPin().UpdateProductSort(UserInfo.GysId, id, sort);
+            }
+            else
+            {
+                Code = new EyouSoft.BLL.OtherStructure.BTuanGou().UpdateProductSort(type, id, sort);
+
+            }
             if (Code == 1)
             {
                 msg = Utils.AjaxReturnJson("1", "保存成功!");

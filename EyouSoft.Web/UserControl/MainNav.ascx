@@ -32,7 +32,7 @@
             <li><a class="menu_has" data-index='8' href="/ZuChe.aspx"><span>客车包租</span></a></li>
             <li class="line"></li>
             <li><a id="link_menu" class="menu_has menu_icon" data-index='9' href="/ShangCheng.aspx">
-                <span>商城联盟</span><em></em></a> </li>
+                <span>e家商城</span><em></em></a> </li>
             <li class="line"></li>
             <li><a class="menu_has" data-index='10' href="/Ebao.aspx"><span>E额宝</span></a></li>
             <li class="line"></li>

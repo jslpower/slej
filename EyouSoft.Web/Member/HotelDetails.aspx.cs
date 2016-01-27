@@ -18,6 +18,7 @@ namespace EyouSoft.Web.Member
         public string hotelhtml = "";//酒店
         public string youkehtml = "";//客人
         public string lianxihtml = ""; //联系人
+        public string Jiagehtml = "";//酒店价格
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HuiYuanInfo.UserId == "Guest" || HuiYuanInfo.UserId == "")
@@ -67,7 +68,30 @@ namespace EyouSoft.Web.Member
                   + "<td class='doti' style='width:16%'>联系人手机：</td>"
                   + "<td style='width:34%'>" + ormodel.ContactMobile + "</td>"
                   + "</tr></table>";
-
+                if (ormodel.HotelXC != null)
+                {
+                    IList<HotelXingCheng> xcmodel = Utils.JsonDeserialize<HotelXingCheng>(ormodel.HotelXC);
+                    if (xcmodel != null && xcmodel.Count > 0)
+                    {
+                        Jiagehtml += "<div style='padding-top:20px; font-weight:bolder;'>酒店价格列表</div>";
+                        Jiagehtml+= "<table width='100%' border='0' class='tableList margin_T10'><tr>"
+                 + "<td class='doti' style='width:30%;text-align:center'>日期</td>"
+                  + "<td style='width:35%;text-align:center'>金额</td>"
+                  + "<td style='width:35%;text-align:center'>分销金额</td>"
+                  + "</tr>";
+                        for (int m = 0; m < xcmodel.Count; m++)
+                        {
+                            string CBJia = xcmodel[m].ChengBenJia == 0 ? "总站交易" : xcmodel[m].ChengBenJia.ToString("f2") + "元/间/天  *  " + ormodel.RoomCount + "间 = " + (xcmodel[m].ChengBenJia * ormodel.RoomCount).ToString("f2") + "元/天";
+                            Jiagehtml += "<tr>"
+                  + "<td class='doti' style='width:30%;text-align:center'>" + xcmodel[m].ChenkInDate.ToShortDateString() + "</td>"
+                   + "<td style='width:35%;text-align:center'>" + xcmodel[m].MenShiJia.ToString("f2") + "元/间/天  *  " + ormodel.RoomCount + "间 = " + (xcmodel[m].MenShiJia * ormodel.RoomCount).ToString("f2") + "元/天</td>"
+                   + "<td style='width:35%;text-align:center'>" + CBJia + "</td>"
+                   + "</tr>";
+                            //XC.Text += "<table width='100%' border='0' class='tableList margin_T10'><tr><th width=\"146\" height=\"28\" style=\"text-align:center\">" + xcmodel[m].ChenkInDate.ToShortDateString() + "</th><td height=\"28\" width=\"300\"  bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + xcmodel[m].MenShiJia.ToString("f2") + "元/间/天</td><td height=\"28\" width=\"307\"   bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + CBJia + "</td></tr>";
+                        }
+                         Jiagehtml +="</table>";
+                    }
+                }
 
             }
             else

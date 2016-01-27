@@ -104,46 +104,45 @@
             <input type="submit" value="搜索>>" class="line-s-btn" />
             </form>
         </div>
+        <div class="mainbox" style="margin-top: 4px;">
+            <div class="mall_piclist">
+                <ul>
+                    <asp:Repeater ID="rptlist" runat="server">
+                        <ItemTemplate>
+                            <li><a href="ShangChengXiangQing.aspx?ID=<%# Eval("ProductID")%>">
+                                <img src="<%# retuImgUrl(Eval("ProductImgs"))%>" /></a>
+                                <div class="m_title">
+                                    <%#Eval("ProductName")%></div>
+                                <div class="m_cont">
+                                    <%# EyouSoft.Common.Utils.GetText2(Eval("Remark").ToString(), 40, true)%>
+                                </div>
+                                <div class="m_price">
+                                    <div class="rain-price">
+                                        <p>
+                                            优惠价：<font class="font14 font_yellow">¥</font> <font class="font20 font_yellow">
+                                                <%# GetJINE( Eval("SalePrice"),Eval("MarketPrice"))%></font>
+                                            <%#Eval("Unit")%></p>
+                                        <p class="font_95">
+                                            门市价:¥
+                                            <%#Eval("MarketPrice", "{0:F0}")%><%#Eval("Unit")%></p>
+                                    </div>
+                                    <div class="rain-btn">
+                                        <a href="ShangChengXiangQing.aspx?ID=<%# Eval("ProductID")%>" class="chakan_btn">查看
+                                            >></a></div>
+                                </div>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="page" id="page">
+            </div>
+        </div>
     </div>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Adv" runat="server">
-    <div class="mainbox" style="margin-top: 0;">
-        <div class="mall_piclist">
-            <ul>
-                <asp:Repeater ID="rptlist" runat="server">
-                    <ItemTemplate>
-                        <li><a href="ShangChengXiangQing.aspx?ID=<%# Eval("ProductID")%>">
-                            <img src="<%# retuImgUrl(Eval("ProductImgs"))%>" /></a>
-                            <div class="m_title">
-                                <%#Eval("ProductName")%></div>
-                            <div class="m_cont">
-                                <%# EyouSoft.Common.Utils.GetText2(Eval("Remark").ToString(), 40, true)%>
-                            </div>
-                            <div class="m_price">
-                                <div class="rain-price">
-                                    <p>
-                                        会员价：<font class="font14 font_yellow">¥</font> <font class="font24 font_yellow">
-                                            <%# GetJINE( Eval("SalePrice"),Eval("MarketPrice"))%></font>
-                                        <%#Eval("Unit")%></p>
-                                    <p class="font_95">
-                                        门市价:¥
-                                        <%#Eval("MarketPrice", "{0:F0}")%><%#Eval("Unit")%></p>
-                                </div>
-                                <div class="rain-btn">
-                                    <a href="ShangChengXiangQing.aspx?ID=<%# Eval("ProductID")%>" class="chakan_btn">查看
-                                        >></a></div>
-                            </div>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </ul>
-            <div class="clear">
-            </div>
-        </div>
-   
-    <div class="page" id="page">
-    </div>
- </div>
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Foot">
     <!------foot-------->

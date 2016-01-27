@@ -34,6 +34,7 @@ font-size: 12px;}
           <%= youkehtml%>
           
           <%= lianxihtml%>
+          <%= Jiagehtml%>
           <div style="float:right; padding-top:30px; padding-right:60px;"><a href="javascript:history.go(-1);" style="color:Blue">返回订单列表</a></div>
  </div>
 </form>

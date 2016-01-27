@@ -102,7 +102,8 @@
                                 <%#Eval("JiaoYiLeiBie")%>
                             </td>
                             <td align="center">
-                                <%#Eval("JiaoYiJinE","{0:F2}") %>
+                            <%# GetJinE(Eval("JiaoYiJinE"),Eval("JiaoYiLeiBie"))%>
+                                <%--<%#Eval("JiaoYiJinE","{0:F4}") %>--%>
                             </td>
                             <%--<td align="center">
                                 <%#GetMemberNameByID(Eval("TranUserId"))%>

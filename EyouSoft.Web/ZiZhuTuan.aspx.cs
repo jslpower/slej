@@ -10,6 +10,7 @@ using Newtonsoft.Json.Converters;
 using EyouSoft.Model.SystemStructure;
 using EyouSoft.BLL.SystemStructure;
 using EyouSoft.IDAL.AccountStructure;
+using EyouSoft.Model.Enum;
 
 namespace EyouSoft.Web
 {
@@ -148,7 +149,7 @@ namespace EyouSoft.Web
                 JiageDengji += "<tr><th align=\"right\" width=\"33%\">"
                     + "门市价：成人价<input type=\"text\" data-name=\"MenShiMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + model.SCJCR.ToString("F0") + "\" />元/人"
                     + "</th><th align=\"right\" width=\"33%\">"
-                    + "会员价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJCR, model.SCJCR, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
+                    + "优惠价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJCR, model.SCJCR, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
                     +"</th>";
                 crjiage =model.SCJCR;
                 etjiage = model.SCJET;
@@ -159,6 +160,10 @@ namespace EyouSoft.Web
                     if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                     {
                         JiageDengji += "<th align=\"right\" width=\"33%\">贵宾价：成人价<input type=\"text\" data-name=\"GuiBingMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJCR, model.SCJCR, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
+                    }
+                    else if (userInfo.UserType == MemberTypes.免费代理)
+                    {
+                        JiageDengji += "<th align=\"right\" width=\"33%\">代销价：成人价<input type=\"text\" data-name=\"DaiXiaoMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJCR, model.SCJCR, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
                     }
                     else
                     {
@@ -179,6 +184,10 @@ namespace EyouSoft.Web
                         {
                             JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"GuiBingMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJET, model.SCJET, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
                         }
+                        else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                        {
+                            JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"DaiXiaoMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, model.JSJET, model.SCJET, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
+                        }
                         else
                         {
                             JiageDengji += "<th align=\"right\" width=\"33%\">&nbsp;</th>";
@@ -196,6 +205,10 @@ namespace EyouSoft.Web
                     if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                     {
                         JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongGuiBingMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
+                    }
+                    else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                    {
+                        JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongDaiXiaoMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
                     }
                     else
                     {
@@ -257,7 +270,7 @@ namespace EyouSoft.Web
                             JiageDengji = "<tr><th align=\"right\" width=\"33%\">"
                    + "门市价：成人价<input type=\"text\" data-name=\"MenShiMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + item.CRSCJ.ToString("F0") + "\" />元/人"
                    + "</th><th align=\"right\" width=\"33%\">"
-                   + "会员价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
+                   + "优惠价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
                    + "</th>";
                             crjiage =item.CRSCJ;
                             etjiage = item.ETSCJ;
@@ -268,6 +281,11 @@ namespace EyouSoft.Web
                                 if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">贵宾价：成人价<input type=\"text\" data-name=\"GuiBingMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
+
+                                }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\" width=\"33%\">代销价：成人价<input type=\"text\" data-name=\"DaiXiaoMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
 
                                 }
                                 else
@@ -289,6 +307,10 @@ namespace EyouSoft.Web
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"GuiBingMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
                                 }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"DaiXiaoMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
+                                }
                                 else
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">&nbsp;</th>";
@@ -306,6 +328,10 @@ namespace EyouSoft.Web
                                 if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                 {
                                     JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongGuiBingMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
+                                }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongDaiXiaoMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
                                 }
                                 else
                                 {
@@ -346,7 +372,7 @@ namespace EyouSoft.Web
                             JiageDengji = "<tr><th align=\"right\" width=\"33%\">"
                    + "门市价：成人价<input type=\"text\" data-name=\"MenShiMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + item.CRSCJ.ToString("F0") + "\" />元/人"
                    + "</th><th align=\"right\" width=\"33%\">"
-                   + "会员价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
+                   + "优惠价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
                    + "</th>";
                             crjiage = item.CRSCJ;
                             crjiesuan = item.JSJCR;
@@ -357,6 +383,11 @@ namespace EyouSoft.Web
                                 if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">贵宾价：成人价<input type=\"text\" data-name=\"GuiBingMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
+
+                                }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\" width=\"33%\">代销价：成人价<input type=\"text\" data-name=\"DaiXiaoMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
 
                                 }
                                 else
@@ -378,6 +409,10 @@ namespace EyouSoft.Web
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"GuiBingMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
                                 }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"DaiXiaoMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
+                                }
                                 else
                                 {
                                     JiageDengji += "<th align=\"right\" width=\"33%\">&nbsp;</th>";
@@ -395,6 +430,10 @@ namespace EyouSoft.Web
                                 if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                 {
                                     JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongGuiBingMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
+                                }
+                                else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                {
+                                    JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongDaiXiaoMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
                                 }
                                 else
                                 {
@@ -465,7 +504,7 @@ namespace EyouSoft.Web
                                     JiageDengji = "<tr><th align=\"right\" width=\"33%\">"
                                + "门市价：成人价<input type=\"text\" data-name=\"MenShiMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + item.CRSCJ.ToString("F0") + "\" />元/人"
                                + "</th><th align=\"right\" width=\"33%\">"
-                               + "会员价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
+                               + "优惠价：成人价<input type=\"text\" data-name=\"HuiYuanMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.普通会员).ToString("F0") + "\" />元/人"
                                + "</th>";
                                     crjiage = item.CRSCJ;
                                     etjiage = item.ETSCJ;
@@ -476,6 +515,11 @@ namespace EyouSoft.Web
                                         if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                         {
                                             JiageDengji += "<th align=\"right\" width=\"33%\">贵宾价：成人价<input type=\"text\" data-name=\"GuiBingMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
+
+                                        }
+                                        else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                        {
+                                            JiageDengji += "<th align=\"right\" width=\"33%\">代销价：成人价<input type=\"text\" data-name=\"DaiXiaoMoney\"  class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJCR, item.CRSCJ, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
 
                                         }
                                         else
@@ -497,6 +541,10 @@ namespace EyouSoft.Web
                                         {
                                             JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"GuiBingMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.贵宾会员).ToString("F0") + "\" />元/人</th>";
                                         }
+                                        else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                        {
+                                            JiageDengji += "<th align=\"right\" width=\"33%\">儿童价<input type=\"text\"  data-name=\"DaiXiaoMoney\" class=\"bj_input formsize80 fontred16\" value=\"" + UtilsCommons.GetGYStijia(FeeType, item.JSJET, item.ETSCJ, EyouSoft.Model.Enum.MemberTypes.免费代理).ToString("F0") + "\" />元/人</th>";
+                                        }
                                         else
                                         {
                                             JiageDengji += "<th align=\"right\" width=\"33%\">&nbsp;</th>";
@@ -514,6 +562,10 @@ namespace EyouSoft.Web
                                         if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
                                         {
                                             JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongGuiBingMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
+                                        }
+                                        else if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                                        {
+                                            JiageDengji += "<th align=\"right\">总　价<input type=\"text\" data-name=\"ZongDaiXiaoMoney\" class=\"bj_input formsize100 fontred16\" value=\"0\" />元</th>";
                                         }
                                         else
                                         {
@@ -834,11 +886,48 @@ namespace EyouSoft.Web
             decimal etjs = Utils.GetDecimal(Utils.GetFormValue(ErTongJieSuan.UniqueID));//儿童结算价
             MFeeSettings feeSettings = new BFeeSettings().GetByType(EyouSoft.Model.Enum.FeeTypes.组团);
             EyouSoft.Model.Enum.FeeTypes FeeType = EyouSoft.Model.Enum.FeeTypes.组团;
-            decimal crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.代理);
-            decimal etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.代理);
+
+            string url = HttpContext.Current.Request.Url.Host;
+            BSellers bsells = new BSellers();
+            EyouSoft.Model.AccountStructure.MSellers seller = new EyouSoft.Model.AccountStructure.MSellers();
+            seller = bsells.GetMSellersByWebSite(url);
             decimal zjzms = Utils.GetDecimal(Utils.GetFormValue(ZongMoney.UniqueID));//增加总门市价
             decimal zjzcb = Utils.GetDecimal(Utils.GetFormValue("ZongMoneyCB"));//增加总成本价
-            decimal zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.FenXiaoJia / 100;
+            decimal crfx, etfx, zjzfx;
+            if (seller != null)
+            {
+                ZuTuanModel.AgencyId = seller.ID;
+                if (seller.DengJi == MemberTypes.代理)
+                {
+                    crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.代理);
+                    etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.代理);
+                    zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.FenXiaoJia / 100;
+                }
+                else if (seller.DengJi == MemberTypes.免费代理)
+                {
+                    crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                    etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                    zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.FreeFenXiaoJia / 100;
+                }
+                else if (seller.DengJi == MemberTypes.员工)
+                {
+                    crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.员工);
+                    etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.员工);
+                    zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.YuanGongJia / 100;
+                }
+                else
+                {
+                    crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.代理);
+                    etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.代理);
+                    zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.FenXiaoJia / 100;
+                }
+            }
+            else
+            {
+                crfx = UtilsCommons.GetGYStijia(FeeType, crjs, crms, EyouSoft.Model.Enum.MemberTypes.代理);
+                etfx = UtilsCommons.GetGYStijia(FeeType, etjs, etms, EyouSoft.Model.Enum.MemberTypes.代理);
+                zjzfx = zjzcb + (zjzms - zjzcb) * feeSettings.FenXiaoJia / 100;
+            }
 
             var userType = userInfo.UserType;
             decimal discount = 0;
@@ -875,14 +964,6 @@ namespace EyouSoft.Web
             if (ZuTuanModel.ETAgencyJinE > ZuTuanModel.ETJiage)
             {
                 ZuTuanModel.ETAgencyJinE = ZuTuanModel.ETJiage;
-            }
-            string url = HttpContext.Current.Request.Url.Host;
-            BSellers bsells = new BSellers();
-            EyouSoft.Model.AccountStructure.MSellers seller = new EyouSoft.Model.AccountStructure.MSellers();
-            seller = bsells.GetMSellersByWebSite(url);
-            if (seller != null)
-            {
-                    ZuTuanModel.AgencyId = seller.ID;
             }
 
             int success = new EyouSoft.BLL.XianLuStructure.BZiZuTuan().Add(ZuTuanModel);

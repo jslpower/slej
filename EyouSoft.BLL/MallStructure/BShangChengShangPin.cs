@@ -60,7 +60,7 @@ namespace EyouSoft.BLL.MallStructure
         public int UpDateUp(string ShangPinID, EyouSoft.Model.Enum.XianLuStructure.XianLuZT isup)
         {
             if (string.IsNullOrEmpty(ShangPinID)) return 0;
-            return dal.UpDateUp(ShangPinID,isup);
+            return dal.UpDateUp(ShangPinID, isup);
 
         }
         /// <summary>
@@ -106,8 +106,21 @@ namespace EyouSoft.BLL.MallStructure
         public int UpDateDaiLiUp(string ShangPinID, ProductZT isup, string MemberId)
         {
             if (string.IsNullOrEmpty(ShangPinID) || string.IsNullOrEmpty(MemberId)) return 0;
-            return dal.UpDateDaiLiUp(ShangPinID, isup,MemberId);
+            return dal.UpDateDaiLiUp(ShangPinID, isup, MemberId);
         }
+        /// <summary>
+        /// 更新商品上下架
+        /// </summary>
+        /// <param name="ShangPinID">商品id</param>
+        /// <param name="isup">上架or下架（0-上架，1-下架）</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <returns></returns>
+        public int UpDateDaiLiUp(string[] ShangPinID, ProductZT isup, string MemberId)
+        {
+            if (ShangPinID.Length == 0 || string.IsNullOrEmpty(MemberId)) return 0;
+            return dal.UpDateDaiLiUp(ShangPinID, isup, MemberId);
+        }
+
         /// <summary>
         /// 增加代理商产品
         /// </summary>
@@ -118,8 +131,9 @@ namespace EyouSoft.BLL.MallStructure
         public int AddDaiLiPro(string MemberId, string ProductId, int state)
         {
             if (string.IsNullOrEmpty(ProductId) || string.IsNullOrEmpty(MemberId)) return 0;
-           return dal.AddDaiLiPro(MemberId, ProductId, state);
+            return dal.AddDaiLiPro(MemberId, ProductId, state);
         }
+
         /// <summary>
         /// 删除代理商产品
         /// </summary>
@@ -130,7 +144,7 @@ namespace EyouSoft.BLL.MallStructure
             if (string.IsNullOrEmpty(ProductId)) return 0;
             return dal.DelDaiLiPro(ProductId);
         }
-         /// <summary>
+        /// <summary>
         /// 获取代理商商品集合
         /// </summary>
         /// <param name="pageSize">每页记录数</param>
@@ -141,6 +155,41 @@ namespace EyouSoft.BLL.MallStructure
         public IList<MShangChengShangPin> GetDaiLiList(int pageSize, int pageIndex, ref int recordCount, MDaiLiShangChanPinSer chaXun)
         {
             return dal.GetDaiLiList(pageSize, pageIndex, ref recordCount, chaXun);
+        }
+        /// <summary>
+        /// 更新产品排序
+        /// </summary>
+        /// <param name="DaiLiId">代理id</param>
+        /// <param name="id">产品主id</param>
+        /// <param name="xuhao">序号</param>
+        /// <returns></returns>
+        public int UpdateProductSort(string DaiLiId, string id, int xuhao)
+        {
+            if (string.IsNullOrEmpty(DaiLiId) || string.IsNullOrEmpty(id) || xuhao < 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return dal.UpdateProductSort(DaiLiId, id, xuhao);
+            }
+        }
+        /// <summary>
+        /// 根据表获取产品的排序
+        /// </summary>
+        /// <param name="dailiid"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int GetProductSort(string dailiid, string id)
+        {
+            if (string.IsNullOrEmpty(dailiid) || string.IsNullOrEmpty(id) )
+            {
+                return 0;
+            }
+            else
+            {
+                return dal.GetProductSort(dailiid, id);
+            }
         }
     }
 }

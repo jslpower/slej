@@ -423,13 +423,15 @@
                     <th width="10%" height="30" align="right">
                         公司简称：
                     </th>
-                    <td width="15%" bgcolor="#E3F1FC" colspan="5">
+                    <td width="15%" bgcolor="#E3F1FC">
                         <asp:TextBox ID="CompanyJC" runat="server" CssClass="inputtext"></asp:TextBox>
                     </td>
-                    <th width="10%" height="30" align="right"></th>
-                    <td width="15%" bgcolor="#E3F1FC" colspan="5"></td>
-                    <th width="10%" height="30" align="right"></th>
-                    <td width="15%" bgcolor="#E3F1FC" colspan="5"></td>
+                    <th width="10%" height="30" align="right">
+                    开启特约代理：
+                    </th>
+                    <td width="15%" bgcolor="#E3F1FC" colspan="3">
+                        <asp:CheckBox ID="IsGYS" runat="server" />
+                    </td>
                 </tr>
                 <tr id="isbool7" style="display: none" class="odd">
                     <th height="30" align="right"width="10%">

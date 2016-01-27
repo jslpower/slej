@@ -120,6 +120,9 @@ namespace EyouSoft.DAL.JPStructure
                     info.XiangApiFuKuanStatus = (EyouSoft.Model.JPStructure.XiangApiFuKuanStatus)rdr.GetInt32(rdr.GetOrdinal("XiangApiFuKuanStatus"));
                     info.JiaoYiHao = rdr["JiaoYiHao"].ToString();
                     info.ErTongDingDanId = rdr["ErTongDingDanId"].ToString();
+
+                    info.GouMaiCangWei = rdr.IsDBNull(rdr.GetOrdinal("CangWeiInfo")) ? null : ObjectConverter.DeserializeJsonToObject<MCangWeiInfo>(rdr.GetString(rdr.GetOrdinal("CangWeiInfo")));
+
                 }
             }
 
@@ -133,7 +136,7 @@ namespace EyouSoft.DAL.JPStructure
         IList<EyouSoft.Model.JPStructure.MChengKeInfo> ReadDingDanCKs(DbCommand cmd)
         {
             IList<MChengKeInfo> list = new List<MChengKeInfo>();
-           
+
             using (var rdr = DbHelper.ExecuteReader(cmd, _db))
             {
                 while (rdr.Read())
@@ -194,13 +197,16 @@ namespace EyouSoft.DAL.JPStructure
             _db.AddInParameter(cmd, "@ChengRenDingDanId", DbType.AnsiStringFixedLength, info.ChengRenDingDanId);
             _db.AddInParameter(cmd, "@ErTongDingDanId", DbType.AnsiStringFixedLength, info.ErTongDingDanId);
             _db.AddInParameter(cmd, "@HuiYuanId", DbType.AnsiStringFixedLength, info.HuiYuanId);
-            _db.AddInParameter(cmd, "@ChengKeXml", DbType.String,CreateChengKeXml(info.ChengKes));
+            _db.AddInParameter(cmd, "@ChengKeXml", DbType.String, CreateChengKeXml(info.ChengKes));
             _db.AddInParameter(cmd, "@ChengKeLeiXing", DbType.Int32, info.ChengKeLeiXing);
             _db.AddInParameter(cmd, "@ApiJieShouFangShi", DbType.Int32, info.ApiJieShouFangShi);
             _db.AddInParameter(cmd, "@ShiFouYunXuGengHuanPnr", DbType.Int32, info.ShiFouYunXuGengHuanPnr);
             _db.AddInParameter(cmd, "@ShiFouZiDongDaiKou", DbType.Int32, info.ShiFouZiDongDaiKou);
             _db.AddInParameter(cmd, "@XiangApiFuKuanStatus", DbType.Int32, info.XiangApiFuKuanStatus);
             _db.AddInParameter(cmd, "@XiangApiFuKuanShiJian", DbType.DateTime, info.XiangApiFuKuanShiJian);
+            _db.AddInParameter(cmd, "@CangWeiInfo", DbType.String, ObjectConverter.SerializeObject(info.GouMaiCangWei));
+
+
 
             _db.AddOutParameter(cmd, "@RetCode", DbType.Int32, 4);
 
@@ -310,7 +316,7 @@ namespace EyouSoft.DAL.JPStructure
         /// <param name="fuKuanShiJian">付款时间</param>
         /// <param name="dingDanStatus">订单状态 null时订单状态原值不变</param>
         /// <returns></returns>
-        public int SheZhiDingDanFuKuanStatus(string dingDanId,string huiYuanId,EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus fuKuanStatus,DateTime fuKuanShiJian,EyouSoft.Model.JPStructure.DingDanStatus? dingDanStatus)
+        public int SheZhiDingDanFuKuanStatus(string dingDanId, string huiYuanId, EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus fuKuanStatus, DateTime fuKuanShiJian, EyouSoft.Model.JPStructure.DingDanStatus? dingDanStatus)
         {
             var cmd = _db.GetStoredProcCommand("proc_JiPiaoDingDan_SheZhiFuKuanStatus");
 

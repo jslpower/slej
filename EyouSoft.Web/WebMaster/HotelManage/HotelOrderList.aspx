@@ -31,6 +31,9 @@
     <link href="/Css/webmaster/boxy.css" rel="stylesheet" type="text/css" />
 
     <script src="/JS/bt.min.js" type="text/javascript"></script>
+    <style type="text/css">
+    .pnone{display:none;}
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -110,7 +113,10 @@
                     下单时间
                 </th>
                 <th width="60" align="center" nowrap="nowrap">
-                    付款方式
+                    订单付款方式
+                </th>
+                <th width="60" align="center" nowrap="nowrap">
+                    客户付款方式
                 </th>
                 <th width="60" align="center" nowrap="nowrap">
                     操作
@@ -144,21 +150,27 @@
                      <%# Eval("OperatorMobile")%>
                         </td>
                         <td height="30" align="left" nowrap="nowrap">
+                            <span style="display: none;"><%# GetJinEList(Eval("HotelXC"), Eval("RoomCount"))%></span>
                             房间数：<%# Eval("RoomCount")%> 间<br />
                      单价：<%#  (Convert.ToDouble(Eval("TotalAmount"))/Convert.ToDouble(Eval("RoomCount"))).ToString("f2")%> 元/间<br />
-                     金额：<%#  Convert.ToDouble(Eval("TotalAmount")).ToString("f2")%> 元
+                     <tm class="jymoney">金额：<%#  Convert.ToDouble(Eval("TotalAmount")).ToString("f2")%> 元
+                          </tm>
                         </td>
-                        <td height="30" align="left" nowrap="nowrap">
-                            房间数：<%# Eval("RoomCount")%> 人<br />
+                        <td align="left" nowrap="nowrap" class="<%#Eval("SellerID").ToString().Trim().Length > 20?"":"pnone"%>">
+                            房间数：<%# Eval("RoomCount")%> 间<br />
                      单价：<%#  (Convert.ToDouble(Eval("AgencyJinE")) / Convert.ToDouble(Eval("RoomCount"))).ToString("f2")%> 元/间<br />
                      金额：<%# Eval("SellerID").ToString().Trim().Length > 20 ? Convert.ToDouble(Eval("AgencyJinE")).ToString("f2") : "0"%> 元
                         </td>
+                        <td align="left" nowrap="nowrap" class="<%#Eval("SellerID").ToString().Trim().Length > 20?"pnone":""%>">
+                            总站交易
+                        </td>
                         <td height="30" align="center" nowrap="nowrap" class="red">
-                            <%# Eval("SellerID").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("TotalAmount")) - Convert.ToDouble(Eval("AgencyJinE"))).ToString("f2") : "0"%>元
+                            <%# Eval("SellerID").ToString().Trim().Length > 20 ? (Convert.ToDouble(Eval("TotalAmount")) - (Convert.ToDouble(Eval("AgencyJinE")))).ToString("f2") : "0"%>元
                         </td>
                         <td height="30" align="center" nowrap="nowrap">
                             <%# Convert.ToDateTime(Eval("IssueTime")).ToString("yyyy-MM-dd")%>
                         </td>
+                        <td><%# Eval("PaymentType")%></td>
                         <td height="30" align="center" nowrap="nowrap"><%# GetFuKuangCate(Eval("OrderId"), Eval("OrderState"))%></td>
                         <td height="30" align="center" nowrap="nowrap">
                         <%# setOptClick(Eval("OrderId").ToString(), Eval("OrderState"), Eval("SellerID"))%><br />
@@ -180,7 +192,7 @@
                 <td align="center">￥<%=SumMoney.ToString("f2") %></td>
                 <td align="center">￥<%=SumAMoney.ToString("f2")%></td>
                 <td align="center">￥<%=SumLiRun.ToString("f2")%></td>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <th width="30" height="30" nowrap="nowrap">
@@ -217,7 +229,10 @@
                     下单时间
                 </th>
                 <th width="60" align="center" nowrap="nowrap">
-                    付款方式
+                    订单付款方式
+                </th>
+                <th width="60" align="center" nowrap="nowrap">
+                    客户付款方式
                 </th>
                 <th width="60" align="center" nowrap="nowrap">
                     操作
@@ -238,6 +253,32 @@
     </form>
 
     <script type="text/javascript">
+    
+    $(function() {
+        $('.jymoney').bt({
+            contentSelector: function() {
+                return $(this).parent().find("span").html();
+            },
+            positions: ['bottom'],
+            fill: '#effaff',
+            strokeStyle: '#2a9cd4',
+            noShadowOpts: { strokeStyle: "#2a9cd4" },
+            spikeLength: 5,
+            spikeGirth: 15,
+            width: 860,
+            overlap: 0,
+            centerPointY: 4,
+            cornerRadius: 4,
+            shadow: true,
+            shadowColor: 'rgba(0,0,0,.5)',
+            cssStyles: { color: '#1351a0', 'line-height': '200%' }
+        });
+        });
+    
+    
+    
+    
+    
         function test(oid, state)
         { alert(oid + state) }
         var OrderList = {

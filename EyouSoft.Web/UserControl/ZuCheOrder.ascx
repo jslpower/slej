@@ -118,7 +118,7 @@
         </tr>
         <tr>
             <td id="tr_JinE" colspan="4" align="left" class="padd2">
-                <strong>门市价：<font class="font14 fontblue">0</font> 元/台； 会员价：<font class="font14 fontblue">0</font>
+                <strong>门市价：<font class="font14 fontblue">0</font> 元/台； 优惠价：<font class="font14 fontblue">0</font>
                     元/台； 贵宾价 ：<font class="font14 fontblue">0</font>元/台； 代理价：<font class="font14 fontblue">0</font>
                     元/台； 员工价：<font class="font14 fontblue">0</font> 元/台；</strong>
             </td>
@@ -306,14 +306,14 @@
         },
         Html: function() {
             if ($("input[name=radioSelect]:checked").val() == "1") {
-                var html = "<strong>门市价：<font class=\"font14 fontblue\">" + jsonJE.Qjc + "</font> 元/台； 会员价：<font class=\"font14 fontblue\">" + jsonTJ.Qhy + "</font>";
+                var html = "<strong>门市价：<font class=\"font14 fontblue\">" + jsonJE.Qjc + "</font> 元/台； 优惠价：<font class=\"font14 fontblue\">" + jsonTJ.Qhy + "</font>";
                 html += "元/台； 贵宾价 ：<font class=\"font14 fontblue\">" + jsonTJ.Qgb + "</font>元/台； 代理价：<font class=\"font14 fontblue\">" + jsonTJ.Qfx + "</font>"
                 html += "元/台； 员工价：<font class=\"font14 fontblue\">" + jsonTJ.Qyg + "</font> 元/台；</strong>";
                 $("#tr_JinE").html(html);
 
             }
             else {
-                var html = "<strong>门市价：<font class=\"font14 fontblue\">" + jsonJE.Djc + "</font> 元/台； 会员价：<font class=\"font14 fontblue\">" + jsonTJ.Dhy + "</font>";
+                var html = "<strong>门市价：<font class=\"font14 fontblue\">" + jsonJE.Djc + "</font> 元/台； 优惠价：<font class=\"font14 fontblue\">" + jsonTJ.Dhy + "</font>";
                 html += "元/台； 贵宾价 ：<font class=\"font14 fontblue\">" + jsonTJ.Dgb + "</font>元/台； 代理价：<font class=\"font14 fontblue\">" + jsonTJ.Dfx + "</font>"
                 html += "元/台； 员工价：<font class=\"font14 fontblue\">" + jsonTJ.Dyg + "</font> 元/台；</strong>";
                 $("#tr_JinE").html(html);

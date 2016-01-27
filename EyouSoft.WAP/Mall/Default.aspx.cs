@@ -15,14 +15,14 @@ namespace EyouSoft.WAP.Mall
         #region 分页参数
         protected int pageIndex = 1;
         protected int recordCount;
-        protected int pageSize = 1000;
+        protected int pageSize = 10000;
         protected string toplist = string.Empty;
         protected string dianlist = string.Empty;//确认个数
         #endregion
         #region 微信分享
         protected string weixin_jsapi_config = string.Empty
-                                    , FenXiangBiaoTi = string.Empty
-                                    , FenXiangMiaoShu = string.Empty
+                                    , FenXiangBiaoTi = "e家商城"
+                                    , FenXiangMiaoShu = "e家商城"
                                     , FenXiangTuPianFilepath = string.Empty
                                     , FenXiangLianJie = string.Empty;
         #endregion
@@ -44,55 +44,112 @@ namespace EyouSoft.WAP.Mall
         void initPage()
         {
 
-
+            string cName = Utils.GetQueryStringValue("cName");
+            int leibie = Utils.GetInt(Utils.GetQueryStringValue("lid"));
             pageIndex = UtilsCommons.GetPagingIndex();
 
-            var list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐 } });
+            string website = HttpContext.Current.Request.Url.Host.ToLower().Replace("m.", "");
+            //string website ="m.6479.slej.cn".ToLower().Replace("m.", "");
+            string DaiLiId = "";
+            IList<MShangChengShangPin> list = new List<MShangChengShangPin>();
+            if (website.IndexOf("slej.cn") > -1 && website.IndexOf("www") < 0)
+            {
 
+                BSellers bsells = new BSellers();
+                var Daimodel = bsells.GetMSellersByWebSite(website);
+                if (Daimodel != null) DaiLiId = Daimodel.ID;
+                string sqlwhere = DaiLiId;
+                if (Daimodel != null && Daimodel.NavNum == EyouSoft.Model.Enum.NavNum.代理商导航)
+                {
+
+
+                    list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetDaiLiList(pageSize, pageIndex, ref recordCount, new MDaiLiShangChanPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), ProductStatus = new[] { EyouSoft.Model.Enum.ProductZT.首页推荐 }, MemberId = DaiLiId });
+                    #region 设置微信分享链接
+                    //设置图片链接
+                    if (list.Count > 0)
+                    {
+                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                        FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+
+                        if (leibie != 0)
+                        {
+                            var leibieModel = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetModel(leibie);
+                            if (leibieModel != null)
+                            {
+
+                                FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                            }
+                        }
+                        FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                    }
+                    #endregion
+
+                }
+                else
+                {
+
+                    list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐 }, GYSName = Utils.GetQueryStringValue("g") });
+
+                    #region 设置微信分享链接
+                    //设置图片链接
+                    if (list.Count > 0)
+                    {
+                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                        FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+
+                        if (leibie != 0)
+                        {
+                            var leibieModel = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetModel(leibie);
+                            if (leibieModel != null)
+                            {
+
+                                FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                            }
+                        }
+                        FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                    }
+                    #endregion
+
+                }
+            }
+            else
+            {
+
+                list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐 }, GYSName = Utils.GetQueryStringValue("g") });
+
+                #region 设置微信分享链接
+                //设置图片链接
+                if (list.Count > 0)
+                {
+                    FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                    FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+
+                    if (leibie != 0)
+                    {
+                        var leibieModel = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetModel(leibie);
+                        if (leibieModel != null)
+                        {
+
+                            FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                        }
+                    }
+                    FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                }
+                #endregion
+
+            }
 
 
             if (list != null && list.Count > 0)
             {
-                #region 设置微信分享链接
-                //设置图片链接
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
-                FenXiangBiaoTi = list[0].ProductName;
-                FenXiangMiaoShu = list[0].Remark;
-                #endregion
 
                 rptlist.DataSource = list;
                 rptlist.DataBind();
 
             }
-            var menus = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetList(new EyouSoft.Model.MallStructure.MShangChengLeiBieSer() { }, false);
-            var menuList = menus.Where(i => i.ParentID == 0).ToList();
-            if (menuList != null && menuList.Count > 0)
-            {
-                rptMenu.DataSource = menuList;
-                rptMenu.DataBind();
-            }
 
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
-        }
-        /// <summary>
-        /// 获取二级目录
-        /// </summary>
-        /// <param name="id">父节点</param>
-        /// <returns></returns>
-        protected string getMenu(object id)
-        {
-            int pid = Utils.GetInt(id.ToString());
-            System.Text.StringBuilder strbu = new System.Text.StringBuilder();
-            var list = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetList(new EyouSoft.Model.MallStructure.MShangChengLeiBieSer() { ParentID = pid }, false);
-            if (list != null && list.Count > 0)
-            {
-                foreach (var item in list)
-                {
-                    strbu.AppendFormat(" <a href=\"ShangCheng.aspx?lid={0}\">{1}</a>", item.TypeID, item.TypeName);
-                }
-            }
 
-            return strbu.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
         }
         /// 绑定页面广告
         /// </summary>

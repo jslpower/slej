@@ -166,7 +166,7 @@
                                         <% if (IsShowHuiYuan())
                                            { %>
                                         <th width="90" align="center" class="nojiacu">
-                                            会员价
+                                            优惠价
                                         </th>
                                         <%} %>
                                     </tr>

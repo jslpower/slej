@@ -47,9 +47,9 @@ namespace EyouSoft.WAP
             FenXiangMiaoShu = "酒店预订";
             if (imgList != null && imgList.Count > 0)
             {
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(TuPian.F1(imgList[0].ImgPath[0], 640, 200), 320, 240);
+                FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imgList[0].ImgPath, 640, 200);
             }
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
             #region 图片处理
             List<string> files = new List<string>();
@@ -129,7 +129,7 @@ namespace EyouSoft.WAP
             }
             else
             {
-                return string.Format("<li class=\"riqi_day_select\" data-date=\"{1}\" data-week=\"{2}\">{0}</li>", dt.Day, dt.ToString("yyyy-MM-dd"),dt.DayOfWeek);
+                return string.Format("<li class=\"riqi_day_select\" data-date=\"{1}\" data-week=\"{2}\">{0}</li>", dt.Day, dt.ToString("yyyy-MM-dd"), dt.DayOfWeek);
             }
         }
     }

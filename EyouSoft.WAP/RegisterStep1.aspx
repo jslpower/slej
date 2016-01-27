@@ -8,7 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
     <script src="/js/jq.mobi.min.js" type="text/javascript"></script>
 
     <script src="/js/iscroll.js" type="text/javascript"></script>
@@ -73,6 +72,15 @@
             恭喜！注册成功</div>
         <div class="mt10 cent font16">
             <span id="second">5</span>秒后跳转</div>
+    </div>
+    <div class="cent code_box">
+        <p>
+            <img src="/ErWeiMa.aspx?codeurl=<%=HttpContext.Current.Request.Url.AbsoluteUri.ToLower() %>" />
+        </p>
+          <p>
+                长按上方二维码</p>
+            <p>
+                分享给朋友~~</p>
     </div>
     </form>
     <input type="hidden" id="mark" value="0" />

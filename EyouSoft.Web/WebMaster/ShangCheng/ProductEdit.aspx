@@ -37,10 +37,10 @@
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtChanPinMingCheng" MaxLength="40" name="txtChanPinMingCheng" runat="server"
-                        class="inputtext formsize180" valid="required" errmsg="请输入产品名称!"></asp:TextBox>
+                        class="inputtext formsize180" valid="required" errmsg="请输入产品名称!"></asp:TextBox>(<span class="fred">最多20个字</span>)
                 </td>
-                <th width="90" height="30" align="center">
-                    <span class="fred">*</span>生产日期:
+                <th width="110" height="30" align="center">
+                    <span class="fred">*</span>产品生产日期:
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtShengChanRiQi" name="txtShengChanRiQi" runat="server" class="inputtext formsize180"
@@ -48,22 +48,22 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
-                    <span class="fred">*</span>有效期:
+                <th width="110" height="30" align="center">
+                    <span class="fred">*</span>上架到期时间:
                 </th>
                 <td bgcolor="#E3F1FC">
                     <asp:TextBox ID="txtYouXiaoQi" name="txtYouXiaoQi" runat="server" class="inputtext formsize180"
                         valid="required" errmsg="请输入有效期!" OnClick="javascript:;WdatePicker()"></asp:TextBox>
                 </td>
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     <span class="fred">*</span>保质期:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtBaoZhiQi" name="txtBaoZhiQi" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入保质期!"></asp:TextBox>
+                    <asp:TextBox ID="txtBaoZhiQi" name="txtBaoZhiQi" runat="server" class="inputtext formsize180" valid="required|isNumber" errmsg="请输入保质期!|请输入正确的保质期!"></asp:TextBox>天
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     <span class="fred">*</span>类别:
                 </th>
                 <td bgcolor="#E3F1FC">
@@ -75,7 +75,7 @@
                         <option value="-1">请选择</option>
                     </select>
                 </td>
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     款式:
                 </th>
                 <td bgcolor="#E3F1FC">
@@ -84,14 +84,14 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
-                    <span class="fred">*</span>型号:
+                <th width="110" height="30" align="center">
+                   型号:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtXingHao" name="txtYouXiaoQi" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入型号!"></asp:TextBox><br />
+                    <asp:TextBox ID="txtXingHao" name="txtYouXiaoQi" runat="server" class="inputtext formsize180" ></asp:TextBox><br />
                     [型号中间用逗号分隔,例如:型号1,型号2]
                 </td>
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     颜色:
                 </th>
                 <td bgcolor="#E3F1FC">
@@ -100,56 +100,56 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     <span class="fred">*</span>门市价:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtMenShiJia" name="txtMenShiJia" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入门市价!"></asp:TextBox>
+                    <asp:TextBox ID="txtMenShiJia" name="txtMenShiJia" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入门市价!"></asp:TextBox>元（如：<span class="fred">12或者12.5或者12.56</span>）
                     <br />
                    <%-- [会员价:<span id="hyj">0</span> &nbsp;贵宾价:<span id="gbj">0</span> &nbsp;代理价:<span id="dlj">0</span>]--%>
                 </td>
-                <th width="90" height="30" align="center">
-                    <span class="fred">*</span>成本价:
+                <th width="110" height="30" align="center">
+                    <span class="fred">*</span>供应价:
                 </th>
                 <td bgcolor="#E3F1FC">
-                    <asp:TextBox ID="txtYouHuiJia" name="txtYouHuiJia" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入成本价!"></asp:TextBox>
+                    <asp:TextBox ID="txtYouHuiJia" name="txtYouHuiJia" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入成本价!"></asp:TextBox>元（如：<span class="fred">12或者12.5或者12.56，注：给平台供应的结算价</span>）
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     <span class="fred">*</span>数量:
                 </th>
                 <td bgcolor="#E3F1FC"  >
-                    <asp:TextBox ID="txtShuLiang" name="txtMenShiJia" runat="server" class="inputtext formsize180" valid="required" errmsg="请输入数量!"></asp:TextBox>
+                    <asp:TextBox ID="txtShuLiang" name="txtMenShiJia" runat="server" class="inputtext formsize180" valid="required|isNumber" errmsg="请输入数量!|请输入正确的数量！"></asp:TextBox>件(个,吨等单位)
                 </td>
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     单位:
                 </th>
                 <td bgcolor="#E3F1FC"  >
-                    <asp:TextBox ID="txtDanWei" name="txtDanWei" runat="server" class="inputtext formsize180"></asp:TextBox>
+                    <asp:TextBox ID="txtDanWei" name="txtDanWei" runat="server" class="inputtext formsize180"></asp:TextBox>（如：<span class="fred">件</span>或<span class="fred">个</span>或<span class="fred">吨</span>等）
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     <span class="fred">*</span>产品图片:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
                     <uc2:UploadControl ID="UploadControl1" FileTypes="*.jpg;*.gif;*.jpeg;*.png" IsUploadSelf="true"
-                        IsUploadMore="true" runat="server"  valid="required" errmsg="请上传图片!"/>
+                        IsUploadMore="true" runat="server"  valid="required" errmsg="请上传图片!"/>（<span class="fred">可上传多张</span>）
                     <asp:Literal ID="lbUploadInfo" runat="server"></asp:Literal>
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
-                    产品介绍:
+                <th width="110" height="30" align="center">
+                    产品简介:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
                     <asp:TextBox TextMode="MultiLine" ID="txtChanPinJieShao" Height="60" name="txtChanPinJieShao"
-                        runat="server" CssClass="inputtext formsize600 kingbox"></asp:TextBox>
+                        runat="server" CssClass="inputtext formsize600 kingbox" MaxLength="100"></asp:TextBox>(<span class="fred">请使用40-60字简要描述</span>)
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     包括服务内容:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
@@ -158,7 +158,7 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     不包括服务内容:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
@@ -167,7 +167,7 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     使用方法:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
@@ -176,7 +176,7 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     注意事项:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">
@@ -185,7 +185,7 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th width="90" height="30" align="center">
+                <th width="110" height="30" align="center">
                     邮寄办法:
                 </th>
                 <td colspan="3" bgcolor="#E3F1FC">

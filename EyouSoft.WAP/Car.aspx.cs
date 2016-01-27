@@ -65,10 +65,10 @@ namespace EyouSoft.WAP
             var model = bll.GetModel(carid);
             if (model == null) Utils.RCWE("异常请求");
             ZuChe = model;
-            CarName = FenXiangBiaoTi = model.CarName;
-            FenXiangMiaoShu = Utils.GetText2(model.Remark, 30, true);
+            CarName = FenXiangBiaoTi = model.CarName.Trim();
+            FenXiangMiaoShu = Utils.GetText2(model.Remark, 30, true).Trim();
             FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(model.ZucheInfoImg[0].FilePath, 640, 400);
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
             CarImg = "<img width='390' height='220' src='" + TuPian.F1(model.ZucheInfoImg[0].FilePath, 640, 400) + "' alt='" + model.CarName + "'>";
             //IMGHTML(model.ZucheInfoImg, model.CarName); 照片
         }
@@ -368,7 +368,7 @@ namespace EyouSoft.WAP
                     }
                     model.EPlace = txtlastPlace[i];
                     model.GongLiShu = Utils.GetDecimal(txtGongli[i]);
-                    if (!string.IsNullOrEmpty(txtlastPlace[i]) && model.EPlace != "请详细正确填写市县区和道路名称" && model.LPlace != "请详细正确填写市县区和道路名称" && model.GongLiShu > 0)
+                    if (!string.IsNullOrEmpty(txtlastPlace[i]) && model.EPlace != "请填写具体地址" && model.LPlace != "请填写具体地址" && model.GongLiShu > 0)
                     {
                         gongli.Add(model);
                     }

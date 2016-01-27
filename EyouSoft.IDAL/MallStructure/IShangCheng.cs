@@ -67,6 +67,15 @@ namespace EyouSoft.IDAL.MallStructure
         /// <param name="MemberId">代理商id</param>
         /// <returns></returns>
         int UpDateDaiLiUp(string ShangPinID, ProductZT isup, string MemberId);
+
+        /// <summary>
+        /// 更新商品上下架
+        /// </summary>
+        /// <param name="ShangPinID">商品[]id</param>
+        /// <param name="isup">上架or下架（0-上架，1-下架）</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <returns></returns>
+        int UpDateDaiLiUp(string[] ShangPinID, ProductZT isup, string MemberId);
         /// <summary>
         /// 增加代理商产品
         /// </summary>
@@ -90,5 +99,20 @@ namespace EyouSoft.IDAL.MallStructure
         /// <param name="chaXun">查询</param>
         /// <returns></returns>
         IList<MShangChengShangPin> GetDaiLiList(int pageSize, int pageIndex, ref int recordCount, MDaiLiShangChanPinSer chaXun);
+        /// <summary>
+        /// 更新产品排序
+        /// </summary>
+        /// <param name="DaiLiId">代理id</param>
+        /// <param name="id">产品主id</param>
+        /// <param name="xuhao">序号</param>
+        /// <returns></returns>
+        int UpdateProductSort(string DaiLiId, string id, int xuhao);
+        /// <summary>
+        /// 根据表获取产品的排序
+        /// </summary>
+        /// <param name="dailiid"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetProductSort(string dailiid, string id);
     }
 }

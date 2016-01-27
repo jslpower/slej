@@ -153,7 +153,7 @@ namespace EyouSoft.DAL.OtherStructure
             IList<EyouSoft.Model.OtherStructure.MTuanGouDingDan> list = new List<EyouSoft.Model.OtherStructure.MTuanGouDingDan>();
 
             string tableName = "View_TuanGouOrder";
-            string fileds = " ProductName, OrderID, ProductID, ProductNum, OrderCode, OrderPrice, OrderState, PayState, PeopleID, PeopleName, PeopleMobile, IssueTime, SupplierID,Peopleaddress ";
+            string fileds = " ProductName, OrderID, ProductID, ProductNum, OrderCode, OrderPrice, OrderState, PayState, PeopleID, PeopleName, PeopleMobile, IssueTime, SupplierID,Peopleaddress,JiaoYiLv ";
             string orderByString = "IssueTime desc";
             StringBuilder query = new StringBuilder();
             query.Append(" 1=1 ");
@@ -168,7 +168,21 @@ namespace EyouSoft.DAL.OtherStructure
                 {
                     query.AppendFormat(" and  OrderCode like '%{0}%' ", serModel.OrderCode);
                 }
-
+                if (!string.IsNullOrEmpty(serModel.GYSId))
+                {
+                    query.AppendFormat(" and  ProductGYSId='{0}' ", serModel.GYSId);
+                }
+                if (!string.IsNullOrEmpty(serModel.IsTeYue))
+                {
+                    if (serModel.IsTeYue == "1")//表示是查询特约订单，但是没有指定某个特约商户
+                    {
+                        query.Append(" and  IsTeYue<>'0' ");
+                    }
+                    else 
+                    {
+                        query.AppendFormat(" and  IsTeYue='" + serModel.IsTeYue + "' ", serModel.IsTeYue);
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(serModel.SupplierID) && !string.IsNullOrEmpty(serModel.PeopleID))
                 {
@@ -177,6 +191,10 @@ namespace EyouSoft.DAL.OtherStructure
                 else if (!string.IsNullOrEmpty(serModel.PeopleID))
                 {
                     query.AppendFormat(" and  PeopleID = '{0}' ", serModel.PeopleID);
+                }
+                else if (!string.IsNullOrEmpty(serModel.SupplierID))
+                {
+                    query.AppendFormat(" and  SupplierID = '{0}' ", serModel.SupplierID);
                 }
             }
             using (IDataReader dr = DbHelper.ExecuteReader1(this._db, PageSize, PageIndex, ref RecordCount, tableName, fileds, query.ToString(), orderByString, null))
@@ -197,6 +215,7 @@ namespace EyouSoft.DAL.OtherStructure
                     model.PeopleMobile = dr.GetString(dr.GetOrdinal("PeopleMobile"));
                     model.IssueTime = dr.GetDateTime(dr.GetOrdinal("IssueTime"));
                     model.SupplierID = dr.GetString(dr.GetOrdinal("SupplierID"));
+                    model.JiaoYiLv = dr.GetDecimal(dr.GetOrdinal("JiaoYiLv"));
                     object ojb = dr["Peopleaddress"];
                     if (ojb != null && ojb != DBNull.Value)
                     {
@@ -270,6 +289,34 @@ namespace EyouSoft.DAL.OtherStructure
 
             object num = DbHelper.GetSingle(cmd, _db);
             return Convert.ToInt32(num);
+        }
+
+        /// <summary>
+        /// 订单分润
+        /// </summary>
+        public int FenRun(string orderid,EyouSoft.Model.Enum.DingDanLeiBie OrderLeiBie)
+        {
+            DbCommand cmd = this._db.GetStoredProcCommand("proc_FenRun");
+
+            this._db.AddInParameter(cmd, "OrderId", System.Data.DbType.String, orderid);
+            this._db.AddInParameter(cmd, "OrderLeiBie", System.Data.DbType.Int32, (int)OrderLeiBie);
+
+            _db.AddOutParameter(cmd, "@RetCode", DbType.Int32, 4);
+
+            int sqlExceptionCode = 0;
+
+            try
+            {
+                DbHelper.RunProcedure(cmd, _db);
+            }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                sqlExceptionCode = 0 - e.Number;
+            }
+
+            if (sqlExceptionCode < 0) return sqlExceptionCode;
+            return Convert.ToInt32(_db.GetParameterValue(cmd, "RetCode"));
+
         }
 
     }

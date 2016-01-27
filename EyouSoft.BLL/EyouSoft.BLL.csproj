@@ -245,6 +245,7 @@
     <Compile Include="OtherStructure\BWeiXin.cs" />
     <Compile Include="OtherStructure\BXiaJiFenXiaoTiCheng.cs" />
     <Compile Include="OtherStructure\BYanZhengMa.cs" />
+    <Compile Include="OtherStructure\BYouJi.cs" />
     <Compile Include="OtherStructure\BYuMing.cs" />
     <Compile Include="OtherStructure\BZuTuan.cs" />
     <Compile Include="ScenicStructure\BScenicArea2.cs" />

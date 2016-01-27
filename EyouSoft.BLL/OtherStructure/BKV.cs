@@ -91,6 +91,13 @@ namespace EyouSoft.BLL.OtherStructure
             return info;
         }
 
+        public int SheZhiJiaoYiFeiLv(decimal FeiLv)
+        {
+            if (FeiLv <= 0) return 0;
+            int dalRetCode = dal.SheZhiJiaoYiFeiLv(FeiLv);
+            return dalRetCode;
+        }
+
         #endregion
 
 

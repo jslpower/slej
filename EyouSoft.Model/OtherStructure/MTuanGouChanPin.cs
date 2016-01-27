@@ -87,6 +87,14 @@ namespace EyouSoft.Model.OtherStructure
         /// 排序
         /// </summary>
         public int ProductSort { get; set; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        public string SupplierName { get; set; }
+        /// <summary>
+        /// 库存
+        /// </summary>
+        public int StockNum { get; set; }
     }
     public class MTuanGouChanPinSer
     {
@@ -122,5 +130,44 @@ namespace EyouSoft.Model.OtherStructure
         /// 排序
         /// </summary>
         public int? ProductSort { get; set; }
+        /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName { get; set; }
+        /// <summary>
+        /// sql条件
+        /// </summary>
+        public string sqlWhere { get; set; }
+        public bool IsWebmaster { get; set; }
     }
+    #region 代理商团购产品表查询
+    public class MDaiLiTuanGouSer
+    {
+        /// <summary>
+        /// 代理商id
+        /// </summary>
+        public string MemberId { get; set; }
+        /// <summary>
+        /// 产品状态
+        /// </summary>
+        public EyouSoft.Model.Enum.ProductZT[] ProductStatus { get; set; }
+        /// <summary>
+        /// 产品名称
+        /// </summary>
+        public string ProductName { get; set; }
+        /// <summary>
+        /// <summary>
+        /// 促销类型
+        /// </summary>
+        public EyouSoft.Model.Enum.CuXiaoLeiXing? SaleType { get; set; }
+        /// <summary>
+        /// 产品类型
+        /// </summary>
+        public EyouSoft.Model.Enum.ChanPinLeiXing? ProductType { get; set; }
+        /// <summary>
+        /// 是否不显示过期产品
+        /// </summary>
+        public bool isGetTrue { get; set; }
+    }
+    #endregion
 }

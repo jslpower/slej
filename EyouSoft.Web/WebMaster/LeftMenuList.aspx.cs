@@ -18,6 +18,7 @@ namespace EyouSoft.Web.WebMaster
 {
     public partial class LeftMenuList : EyouSoft.Common.Page.WebmasterPageBase
     {
+        protected bool IsXianShi = false;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -80,8 +81,8 @@ namespace EyouSoft.Web.WebMaster
                         PlaceHolder23.Visible = false;
                     if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.后台用户管理_后台用户管理))
                         PlaceHolder24.Visible = false;
-                    if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.后台用户管理_供应商管理))
-                        trMasterProviders.Visible = false;
+                    //if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.后台用户管理_供应商管理))
+                    //    trMasterProviders.Visible = false;
                     if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.团购产品))
                         PlaceHolder6.Visible = false;
                     //if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.团购订单))
@@ -103,6 +104,14 @@ namespace EyouSoft.Web.WebMaster
                 }
                 else
                 {
+                    var item = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(UserInfo.GysId);
+                    if (item != null)
+                    {
+                        if (item.IsZDaiLi == IsZDaiLi.开启总代理配置)
+                        {
+                            IsXianShi = true;
+                        }
+                    }
                     PlaceHolder7.Visible = false;
                     PlaceHolder27.Visible = false;
                     PlaceHolder47.Visible = false;

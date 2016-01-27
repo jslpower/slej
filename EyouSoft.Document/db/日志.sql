@@ -13689,3 +13689,3611 @@ GO
 SET QUOTED_IDENTIFIER OFF
 GO
 
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[tbl_Seller_TuanGou](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemberId] [char](36) COLLATE Chinese_PRC_CI_AS NULL,
+	[ProductId] [char](36) COLLATE Chinese_PRC_CI_AS NULL,
+	[ProductStatus] [int] NULL,
+ CONSTRAINT [PK_tbl_Seller_TuanGou] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[View_DaiLiTuanGou]
+AS
+SELECT     a.Id, 
+           a.MemberId,
+           a.ProductId, 
+           a.ProductStatus,
+           b.SaleType, 
+           b.ProductName,
+           b.ProductType,
+           b.SimpleInfo, 
+           b.DetailInfo,
+           b.MarketPrice,
+           b.GroupPrice, 
+           b.ProductNum,
+           b.ValiDate,
+           b.IssueTime, 
+           b.OperatorID,
+           b.OperatorName,
+           b.SupplierID, 
+           b.ProductImg,
+           b.XianShiWeiZhi,
+           b.IsIndex, 
+           b.ProductSort,
+           (SELECT SupplierName  FROM [tbl_Supplier] where ID=b.SupplierID ) as SupplierName,
+           (b.ProductNum- (SELECT ISNULL(sum(ProductNum),0) FROM tbl_TuanGouDingDan AS c WHERE c.ProductID=b.ID)) AS StockNum
+FROM         dbo.tbl_Seller_TuanGou as a LEFT OUTER JOIN
+                      dbo.tbl_TuanGouChanPin as b ON a.ProductId = b.ID
+
+GO
+
+CREATE TABLE [tbl_HuiYouYouJi](
+	[YouJiId] [char](36)  NOT NULL PRIMARY KEY,
+	[HuiYuanId] [char](36)  NULL,
+	[YouJiTitle] [nvarchar](50) NULL,
+	[YouJiContent] [nvarchar](max)  NULL,
+	[IssueTime] [datetime] NULL,
+	[YouJiLeiXing] [tinyint]  DEFAULT ((0)),
+	[ShiPinLink] [nvarchar](200)  NULL,
+	[WeiXinMa] [varchar](6)  NULL
+) 
+GO
+ 
+CREATE VIEW view_YouJi
+AS
+SELECT a.*,b.MemberName AS HuiYuanName FROM tbl_HuiYouYouJi AS a LEFT JOIN dbo.tbl_Member AS b ON a.HuiYuanId =b.MemberID
+
+GO
+
+ALTER VIEW [dbo].[view_YouJi]
+AS
+SELECT a.*,b.MemberName AS HuiYuanName FROM tbl_HuiYouYouJi AS a 
+
+LEFT JOIN ( 
+
+SELECT c.MemberName AS  MemberName,c.MemberID  FROM tbl_Member c
+ 
+ UNION
+ 
+ SELECT d.Username,CONVERT(CHAR(36),d.Id) FROM dbo.tbl_Webmaster  d) AS b
+ 
+ ON a.HuiYuanId =b.MemberID
+GO
+
+
+
+
+
+
+
+alter table [tbl_JA_Sellers] add SupplierType tinyint default 0 not null 
+go 
+alter table [tbl_JA_Sellers] add CardPath nvarchar(255)
+go 
+alter table [tbl_JA_Sellers] add AccountPaht nvarchar(255)
+go 
+alter table [tbl_JA_Sellers] add VisitPath nvarchar(255)
+go 
+alter table [tbl_JA_Sellers] add OtherPath nvarchar(255)
+go 
+alter table [tbl_JA_Sellers] add FormPath nvarchar(255)
+go 
+alter table [tbl_JA_Sellers] add Qualifications nvarchar(50)
+go 
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER view [dbo].[view_ShangCheng]
+as
+SELECT a.ProductID 
+      ,a.TypeID 
+      ,a.GYSid
+      ,(SELECT MemberName FROM tbl_Member WHERE tbl_Member.MemberID =(SELECT tbl_JA_Sellers.MemberID FROM tbl_JA_Sellers where ID=a.GYSid) ) as SupplierName
+      ,(SELECT b.ParentID FROM dbo.tbl_ShangChengLeiBie AS b WHERE b.TypeID=a.TypeID ) AS ParentID
+      ,(SELECT b.TypeName FROM tbl_ShangChengLeiBie AS b WHERE b.TypeID=a.TypeID  )AS TypeName
+      ,a.ProductName 
+      ,a.ProductNum 
+      ,a.MarketPrice 
+      ,a.SalePrice 
+      ,a.ContentService 
+      ,a.UnContentService 
+      ,a.UseRule 
+      ,a.NoticeKnow 
+      ,a.ProductionDate 
+      ,a.EffectDate 
+      ,a.ShelfDate 
+      ,a.IssueTime 
+      ,a.Remark 
+      ,a.ModelDesc 
+      ,a.ColorDesc 
+      ,a.StylesDesc 
+      ,a.MailWay 
+      ,(a.ProductNum- (SELECT ISNULL(sum(ProductNum),0) FROM tbl_ShangChengDingDan AS c WHERE c.ProductID=a.ProductID)) AS StockNum
+      ,(SELECT * FROM tbl_ShangChengTuPian AS b WHERE b.ProductID=a.ProductID FOR XML RAW, ROOT('Root'))AS ProductImgs
+       ,a.Unit,a.IsTrue,a.ProductSort
+  FROM tbl_ShangChengChanPin as a
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_DaiLiTuanGou]
+AS
+SELECT     a.Id, 
+           a.MemberId,
+           a.ProductId, 
+           a.ProductStatus,
+           b.SaleType, 
+           b.ProductName,
+           b.ProductType,
+           b.SimpleInfo, 
+           b.DetailInfo,
+           b.MarketPrice,
+           b.GroupPrice, 
+           b.ProductNum,
+           b.ValiDate,
+           b.IssueTime, 
+           b.OperatorID,
+           b.OperatorName,
+           b.SupplierID, 
+           b.ProductImg,
+           b.XianShiWeiZhi,
+           b.IsIndex, 
+           b.ProductSort,
+(SELECT MemberName FROM tbl_Member WHERE tbl_Member.MemberID =(SELECT tbl_JA_Sellers.MemberID FROM tbl_JA_Sellers where ID=b.SupplierID ) ) as SupplierName,
+           (b.ProductNum- (SELECT ISNULL(sum(ProductNum),0) FROM tbl_TuanGouDingDan AS c WHERE c.ProductID=b.ID)) AS StockNum
+FROM         dbo.tbl_Seller_TuanGou as a LEFT OUTER JOIN
+                      dbo.tbl_TuanGouChanPin as b ON a.ProductId = b.ID
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_DaiLiChanPin]
+AS
+SELECT     a.Id, 
+           a.MemberId,
+           a.ProductId, 
+           a.ProductStatus,
+           b.TypeID, 
+           b.ProductName,
+           b.ProductNum,
+           b.MarketPrice, 
+           b.SalePrice,
+           b.ContentService,
+           b.UnContentService, 
+           b.UseRule,
+           b.NoticeKnow,
+           b.ProductionDate, 
+           b.EffectDate,
+           b.ShelfDate,
+           b.IssueTime, 
+           b.Remark,
+           b.ModelDesc,
+           b.ColorDesc, 
+           b.StylesDesc,
+           b.MailWay,
+           b.GYSid, 
+           b.Unit,
+           b.IsTrue,
+          (SELECT MemberName FROM tbl_Member WHERE tbl_Member.MemberID =(SELECT tbl_JA_Sellers.MemberID FROM tbl_JA_Sellers where ID=b.GYSid ) ) as SupplierName,
+           (SELECT c.ParentID FROM dbo.tbl_ShangChengLeiBie AS c WHERE c.TypeID=b.TypeID ) AS ParentID,
+           (SELECT c.TypeName FROM tbl_ShangChengLeiBie AS c WHERE c.TypeID=b.TypeID  )AS TypeName,
+           (b.ProductNum- (SELECT ISNULL(sum(ProductNum),0) FROM tbl_ShangChengDingDan AS c WHERE c.ProductID=b.ProductID)) AS StockNum,
+           (SELECT * FROM tbl_ShangChengTuPian AS c WHERE c.ProductID=b.ProductID FOR XML RAW, ROOT('Root'))AS ProductImgs
+FROM         dbo.tbl_Seller_ShangCheng as a LEFT OUTER JOIN
+                      dbo.tbl_ShangChengChanPin as b ON a.ProductId = b.ProductID
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+/*增加两个字段*/
+alter table tbl_Supplier add MemberId char(36)
+go 
+alter table tbl_Supplier add DaiLiId char(36)
+go 
+
+/*同步供应商在原系统中的会员id和代理商id*/
+UPDATE tbl_Supplier SET MemberId=m.MemberID,DaiLiId=m.seid from tbl_Supplier as n,(SELECT c.ID,c.MemberID,d.ID as seid FROM (SELECT a.ID,b.MemberID FROM tbl_Supplier as a,tbl_Member as b where a.SuppName='G'+b.Account) as c, tbl_JA_Sellers as d WHERE c.MemberID=d.MemberID)as m WHERE m.ID=n.ID
+go
+/*同步产生的电话号码，后需用到
+15895587753,18768119111,15657127907,13913529954,13588833915,15888888888,15899556622,13112345678,13588166404,13232661818,13958066139,18736036040,15268625398
+*/
+
+/*增加了会员和代理商之后执行*/
+UPDATE tbl_Supplier SET MemberId=m.MemberID,DaiLiId=m.seid from tbl_Supplier as n,(SELECT c.ID,c.MemberID,d.ID as seid FROM (SELECT a.ID,b.MemberID FROM tbl_Supplier as a,tbl_Member as b where a.ContactMobile=b.Account) as c, tbl_JA_Sellers as d WHERE c.MemberID=d.MemberID)as m WHERE m.ID=n.ID
+go
+
+/*更新由供应商生成的会员信息*/
+UPDATE tbl_Member SET Address=b.SuppAddress,Contact=b.ContactPhone,qq=b.ContactQQ,Email=b.ContactMail from tbl_Member as a, tbl_Supplier as b WHERE a.Account= b.ContactMobile and b.ContactMobile IN('15895587753','18768119111','15657127907','13913529954','13588833915','15888888888','15899556622','13112345678','13588166404','13232661818','13958066139','18736036040','15268625398')
+go
+/*更新由供应商生成的代理信息*/
+UPDATE tbl_JA_Sellers SET MapX=b.MapX,MapY=b.MapY,SupplierType=b.SupplierType,CardPath=b.CardPath,AccountPaht=b.AccountPaht,VisitPath=b.VisitPath,OtherPath=b.OtherPath,FormPath=b.FormPath, tbl_JA_Sellers.WebsiteName=b.SupplierName,Qualifications=b.Qualifications from tbl_JA_Sellers as a,tbl_Supplier as b, tbl_Member as c WHERE a.MemberID=c.MemberID AND c.Mobile=b.ContactMobile AND b.ContactMobile IN ('15895587753','18768119111','15657127907','13913529954','13588833915','15888888888','15899556622','13112345678','13588166404','13232661818','13958066139','18736036040','15268625398')
+go
+/*更新商城产品表的供应商id*/
+UPDATE tbl_ShangChengChanPin SET GYSid=b.DaiLiId from tbl_ShangChengChanPin as a, tbl_Supplier as b WHERE a.GYSid=b.ID
+go
+/*更新团购产品表的供应商id*/
+UPDATE tbl_TuanGouChanPin SET SupplierID=b.DaiLiId from tbl_TuanGouChanPin as a, tbl_Supplier as b WHERE a.SupplierID=b.DaiLiId
+go
+/*删除供应商表*/
+DROP TABLE tbl_Supplier
+go
+/*处理几条有问题数据,需要对照数据库确认*/
+update tbl_TuanGouChanPin set SupplierID='617b4f08-4dc3-4dd0-8c1a-5c6b9d1a9619' where SupplierID='7c2331c7-e702-4297-a64e-532372d32646'
+update tbl_TuanGouChanPin set SupplierID='8a4845b8-693d-4ac1-a70e-63475a2810b4' where SupplierID='45d770d4-1ce7-4cda-b3c3-0668aa02deae'
+GO
+
+
+
+--增加两个字段记录原发团日期的市场价格  保证更新接口价格之后 原订单的市场价格不受影响
+
+GO
+ALTER TABLE dbo.tbl_XianLuTourOrder ADD
+	SCJCR money NOT NULL CONSTRAINT DF_tbl_XianLuTourOrder_SCJCR DEFAULT 0,
+	SCJET money NOT NULL CONSTRAINT DF_tbl_XianLuTourOrder_SCJET DEFAULT 0
+GO
+
+
+--更新视图 从新获取市场价格
+ALTER VIEW [dbo].[view_XianLuTourOrder]
+AS
+SELECT     A.OrderId,A.SCJCR,A.SCJET,A.JSJCR,A.JSJER AS JSJET,
+                           (SELECT     UserType
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS UserType,
+						   (SELECT     MemberName
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS MemberName,
+                          (SELECT     Mobile
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS Mobile,
+                          (SELECT     RouteType
+                            FROM          dbo.tbl_SysArea AS p
+                            WHERE      (ID = B.AreaId)) AS RouteType, A.XianLuId, A.TourId, A.OrderCode, A.Status, A.ChengRenShu, A.ErTongShu, A.JinE, A.FuKuanStatus, 
+                      A.LDate, A.QiTaBeiZhu, A.XiaDanBeiZhu, A.LxrName, A.LxrTelephone, A.LxrGender, A.LxrZhengJianType, A.LxrZhengJianCode, A.OperatorId, 
+                      A.IssueTime, A.TuanGouId, A.AdpStatus, A.AgencyId, A.AgencyJinE, A.ApiOrderId, B.RouteName, B.Line_Source,
+                      A.Traffice,A.OrderSite
+FROM         dbo.tbl_XianLuTourOrder AS A INNER JOIN
+                      dbo.tbl_XianLu AS B ON A.XianLuId = B.XianLuId
+GO
+
+--更新新增字段市场价
+
+update dbo.tbl_XianLuTourOrder  
+set  tbl_XianLuTourOrder.SCJCR=tbl_XianLuTour.CRSCJ,tbl_XianLuTourOrder.SCJET=tbl_XianLuTour.ETSCJ
+from tbl_XianLuTourOrder
+inner join dbo.tbl_XianLuTour on tbl_XianLuTour.tourid = tbl_XianLuTourOrder.tourid
+
+--更新存储过程
+GO
+
+-- =============================================
+-- Author:		汪奇志
+-- Create date: 2013-03-15
+-- Description:	写入订单信息
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_XianLuOrder_Insert]
+	 @OrderId CHAR(36)--订单编号
+	,@XianLuId CHAR(36)--线路编号
+	,@TourId CHAR(36)--团队编号
+	,@OrderCode NVARCHAR(50) OUTPUT--OUTPUT 订单号
+	,@Status TINYINT--订单状态
+	,@ChengRenShu INT--成人数
+	,@ErTongShu INT--儿童数
+	,@JSJCR MONEY--成人价
+	,@JSJER MONEY--儿童价
+	,@JinE MONEY--合同金额
+	,@FuKuanStatus TINYINT--付款状态
+	,@LDate DATETIME--出发日期
+	,@QiTaBeiZhu NVARCHAR(MAX)--其它要求
+	,@XiaDanBeiZhu NVARCHAR(MAX)--下单备注
+	,@LxrXml NVARCHAR(MAX)--联系人MXL:<root><info LxrName="" LxrTelephone="" LxrGender="" LxrZhengJianType="" LxrZhengJianCode="" /></root>
+	,@OperatorId CHAR(36)--下单人
+	,@IssueTime DATETIME--下单时间
+	,@YouKeXml NVARCHAR(MAX)--游客XML:<root><info YouKeId="" Name="" Telephone="" Mobile="" Gender="" LeiXing="" IdCode="" ZhengJianType="" ZhengJianCode="" BeiZhu="" /></root>
+	,@TuanGouId CHAR(36)--团购编号
+	,@AgencyId CHAR(36)
+	,@AgencyJinE MONEY
+	,@Traffice NVARCHAR(50)
+    ,@OrderSite TINYINT
+    ,@SCJCR MONEY
+    ,@SCJET MONEY
+	,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	DECLARE @YiShouRenShu INT--已收人数
+	DECLARE @JiHuaRenShu INT--计划人数
+	DECLARE @ShouKeZhuangTai TINYINT--收客状态
+	DECLARE @LiuShuiHiao INT--流水号
+
+	SET @errorcount=0
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTour] WHERE [XianLuId]=@XianLuId AND [TourId]=@TourId)
+	BEGIN
+		SET @RetCode=-98
+		RETURN @RetCode
+	END
+
+	SELECT @LDate=[LDate],@ShouKeZhuangTai=[Status],@YiShouRenShu=SYRS FROM [tbl_XianLuTour] WHERE TourId=@TourId 
+	
+	SET @YiShouRenShu=ISNULL(@YiShouRenShu,0)
+
+	SELECT @JiHuaRenShu=[JiHuaRenShu] FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId
+
+	IF(@YiShouRenShu<@ChengRenShu+@ErTongShu)
+	BEGIN
+		SET @RetCode=-97
+		RETURn @RetCode
+	END
+
+	IF(@ShouKeZhuangTai<>0)
+	BEGIN
+		SET @RetCode=-96
+		RETURn @RetCode
+	END
+
+	IF(@TuanGouId IS NOT NULL AND LEN(@TuanGouId)>0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTuanGou] WHERE [TuanGouId]=@TuanGouId AND [XianLuId]=@XianLuId)
+		BEGIN
+			SET @RetCode=-94
+			RETURN @RetCode
+		END
+	END
+
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM [tbl_XianLuTourOrder]
+	SET @OrderCode='XL'+CONVERT(VARCHAR(8),GETDATE(),112)+'8'+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	BEGIN TRAN
+
+	EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@LxrXml
+	INSERT INTO [tbl_XianLuTourOrder]([OrderId],[XianLuId],[TourId]
+		,[OrderCode],[Status],[ChengRenShu]
+		,[ErTongShu],[JSJCR],[JSJER]
+		,[JinE],[FuKuanStatus],[LDate]
+		,[QiTaBeiZhu],[XiaDanBeiZhu],[LxrName]
+		,[LxrTelephone],[LxrGender],[LxrZhengJianType]
+		,[LxrZhengJianCode],[OperatorId],[IssueTime]
+		,[TuanGouId],[AgencyId],[AgencyJinE],Traffice,[OrderSite],SCJCR,SCJET)
+	SELECT @OrderId,@XianLuId,@TourId
+		,@OrderCode,@Status,@ChengRenShu
+		,@ErTongShu,@JSJCR,@JSJER
+		,@JinE,@FuKuanStatus,@LDate
+		,@QiTaBeiZhu,@XiaDanBeiZhu,A.LxrName
+		,A.LxrTelephone,A.LxrGender,A.LxrZhengJianType
+		,A.LxrZhengJianCode,@OperatorId,@IssueTime
+		,@TuanGouId,@AgencyId,@AgencyJinE,@Traffice,@OrderSite,@SCJCR,@SCJET
+	FROM OPENXML(@hdoc,'/root/info')
+	WITH(LxrName NVARCHAR(255),LxrTelephone NVARCHAR(255),LxrGender TINYINT,LxrZhengJianType TINYINT,LxrZhengJianCode NVARCHAR(255)) AS A
+	SET @errorcount=@errorcount+@@ERROR
+	EXECUTE sp_xml_removedocument @hdoc
+	
+	IF(@errorcount=0)
+		BEGIN
+			UPDATE dbo.tbl_XianLuTour SET SYRS=SYRS-@ChengRenShu-@ErTongShu WHERE TourId=@TourId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	
+	IF(@errorcount=0 AND @YouKeXml IS NOT NULL AND LEN(@YouKeXml)>0)
+	BEGIN
+		EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@YouKeXml
+		INSERT INTO [tbl_XianLuTourOrderYouKe]([OrderId],[YouKeId],[Name]
+			,[Telephone],[Mobile],[Gender]
+			,[LeiXing],[IdCode],[ZhengJianType]
+			,[ZhengJianCode],[BeiZhu])
+		SELECT @OrderId,A.[YouKeId],A.[Name]
+			,A.[Telephone],A.[Mobile],A.[Gender]
+			,A.[LeiXing],A.[IdCode],A.[ZhengJianType]
+			,A.[ZhengJianCode],A.[BeiZhu]
+		FROM OPENXML(@hdoc,'/root/info')
+		WITH([YouKeId] CHAR(36),[Name] NVARCHAR(255),[Telephone] NVARCHAR(255),[Mobile] NVARCHAR(255),[Gender] TINYINT,[LeiXing] TINYINT,[IdCode] NVARCHAR(255),[ZhengJianType] TINYINT,[ZhengJianCode] NVARCHAR(255),[BeiZhu] NVARCHAR(255)) AS A
+		SET @errorcount=@errorcount+@@ERROR
+		EXECUTE sp_xml_removedocument @hdoc
+	END
+
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+--线路订单来源结束
+GO
+
+
+
+--增加线下收款记录
+alter table tbl_YuE add XianXia money default 0
+go 
+
+
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+-- =============================================
+-- Author:		汪奇志
+-- Create date: 2014-11-06
+-- Description:	交易明细写入
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_JiaoYiMingXi_C]
+	@MingXiId CHAR(36)
+	,@HuiYuanId CHAR(36)
+	,@JiaoYiHao NVARCHAR(255)
+	,@JiaoYiJinE MONEY
+	,@JiaoYiShiJian DATETIME
+	,@ZhiFuFangShi TINYINT
+	,@JiaoYiLeiBie TINYINT
+	,@JiaoYiStatus TINYINT
+	,@JiaoYiMiaoShu NVARCHAR(255)
+	,@DingDanId CHAR(36)
+	,@DingDanLeiXing TINYINT
+	,@ApiJiaoYiHao NVARCHAR(255)
+	,@RetCode INT OUTPUT
+AS
+BEGIN
+	SET @RetCode=0
+	DECLARE @YongHuYuE MONEY
+	DECLARE @errorcount INT
+	SET @errorcount=0
+	
+	IF NOT EXISTS(SELECT 1 FROM tbl_Member WHERE MemberId=@HuiYuanId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+	
+	BEGIN TRAN	
+	
+	IF(@ZhiFuFangShi=0 AND @JiaoYiStatus=1)--快钱
+	BEGIN
+		IF(@JiaoYiLeiBie IN(0))--充值
+		BEGIN
+			UPDATE tbl_Member SET TotalMoney=TotalMoney+@JiaoYiJinE WHERE MemberID=@HuiYuanId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	END
+	
+	IF(@ZhiFuFangShi=1 AND @JiaoYiStatus=1)--E额宝
+	BEGIN
+		IF(@JiaoYiLeiBie IN(0,3,4,5,6))
+		BEGIN
+			UPDATE tbl_Member SET TotalMoney=TotalMoney+@JiaoYiJinE WHERE MemberID=@HuiYuanId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+		
+		IF(@JiaoYiLeiBie IN(1,2)) 
+		BEGIN
+			UPDATE tbl_Member SET TotalMoney=TotalMoney-@JiaoYiJinE WHERE MemberID=@HuiYuanId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	END
+	
+	IF(@ZhiFuFangShi=1 AND @JiaoYiStatus=2)
+	BEGIN
+		IF(@JiaoYiLeiBie IN(1)) 
+		BEGIN
+			UPDATE tbl_Member SET TotalMoney=TotalMoney-@JiaoYiJinE WHERE MemberID=@HuiYuanId
+			SET @errorcount=@errorcount+@@ERROR		
+		END
+	END
+	
+	SELECT @YongHuYuE=ISNULL(TotalMoney,0) FROM tbl_Member WHERE MemberID=@HuiYuanId
+	
+	IF(@errorcount=0)
+	BEGIN
+		INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		VALUES(@HuiYuanId,@JiaoYiHao,@JiaoYiJinE
+			,@YongHuYuE,@JiaoYiShiJian,@ZhiFuFangShi
+			,@JiaoYiLeiBie,@JiaoYiStatus,@JiaoYiMiaoShu
+			,@DingDanId,@DingDanLeiXIng,''
+			,@MingXiId,@ApiJiaoYiHao)
+		SET @errorcount=@errorcount+@@ERROR
+	END
+	
+	IF(@errorcount=0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM tbl_YuE)
+		BEGIN
+			INSERT INTO tbl_YuE(EEBaoYuE,KuaiQianYuE,YuE,XianXia)VALUES(0,0,0,0)
+			SET @errorcount=@errorcount+@@ERROR
+		END
+		
+		IF(@ZhiFuFangShi=0 AND @JiaoYiStatus=1)--快钱
+		BEGIN
+			IF(@JiaoYiLeiBie IN(0,2))
+			BEGIN
+				UPDATE tbl_YuE SET KuaiQianYuE=KuaiQianYuE+@JiaoYiJinE
+				SET @errorcount=@errorcount+@@ERROR
+				UPDATE tbl_YuE SET YuE=KuaiQianYuE+EEBaoYuE+XianXia
+				SET @errorcount=@errorcount+@@ERROR
+			END
+		END
+       
+        IF(@ZhiFuFangShi=2 and @JiaoYiStatus=1)--线下付款		
+         BEGIN 
+            IF(@JiaoYiLeiBie IN(2))
+			BEGIN
+				UPDATE tbl_YuE SET XianXia=XianXia+@JiaoYiJinE
+				SET @errorcount=@errorcount+@@ERROR
+                UPDATE tbl_YuE SET YuE=KuaiQianYuE+EEBaoYuE+XianXia
+				SET @errorcount=@errorcount+@@ERROR
+			END
+         END 
+
+		IF(@ZhiFuFangSHi=1 AND @JiaoYiStatus=1)--E额宝
+		BEGIN
+			IF(@JiaoYiLeiBie IN(2))
+			BEGIN
+				UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE+@JiaoYiJinE
+				SET @errorcount=@errorcount+@@ERROR
+				UPDATE tbl_YuE SET YuE=KuaiQianYuE+EEBaoYuE+XianXia
+				SET @errorcount=@errorcount+@@ERROR
+			END
+			
+			IF(@JiaoYiLeiBie IN(1,3,4,5,6))
+			BEGIN
+				UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@JiaoYiJinE
+				SET @errorcount=@errorcount+@@ERROR
+				UPDATE tbl_YuE SET YuE=KuaiQianYuE+EEBaoYuE+XianXia
+				SET @errorcount=@errorcount+@@ERROR
+			END
+		END
+	END
+	
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+/****** 对象:  Table [dbo].[tbl_GYS_Seller]    脚本日期: 09/16/2015 15:52:39 ******/
+CREATE TABLE [dbo].[tbl_GYS_Seller](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[GYSId] [varchar](36) COLLATE Chinese_PRC_CI_AS NULL,
+	[DaiLiId] [varchar](36) COLLATE Chinese_PRC_CI_AS NULL,
+ CONSTRAINT [PK_tbl_GYS_Seller] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+
+/****** 对象:  StoredProcedure [dbo].[proc_FenRun]    脚本日期: 09/18/2015 15:10:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       SELECT @JiaoYiLi = CONVERT(decimal(10,4),V)/100 from tbl_KV WHERE K='JiaoYiLv'
+       if(len(@GYSId)>10)
+       BEGIN
+         if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId)--判断代理商是否为供应商活着代理商为供应商的二级代理
+         BEGIN--如果是，则返润
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+         ELSE--如果不是
+         BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+       SELECT @JiaoYiLi = CONVERT(decimal(10,4),V)/100 from tbl_KV WHERE K='JiaoYiLv'
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId)--判断代理商是否为供应商活着代理商为供应商的二级代理
+       BEGIN--如果是，则返润
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-@JiaoYiJinE+@FenXiaoJinE
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+
+
+alter table tbl_GYS_Seller add LeiXing int default 0
+go 
+
+ 
+ALTER PROCEDURE [dbo].[proc_XianLuOrder_Insert]
+	 @OrderId CHAR(36)--订单编号
+	,@XianLuId CHAR(36)--线路编号
+	,@TourId CHAR(36)--团队编号
+	,@OrderCode NVARCHAR(50) OUTPUT--OUTPUT 订单号
+	,@Status TINYINT--订单状态
+	,@ChengRenShu INT--成人数
+	,@ErTongShu INT--儿童数
+	,@JSJCR MONEY--成人价
+	,@JSJER MONEY--儿童价
+	,@JinE MONEY--合同金额
+	,@FuKuanStatus TINYINT--付款状态
+	,@LDate DATETIME--出发日期
+	,@QiTaBeiZhu NVARCHAR(MAX)--其它要求
+	,@XiaDanBeiZhu NVARCHAR(MAX)--下单备注
+	,@LxrXml NVARCHAR(MAX)--联系人MXL:<root><info LxrName="" LxrTelephone="" LxrGender="" LxrZhengJianType="" LxrZhengJianCode="" /></root>
+	,@OperatorId CHAR(36)--下单人
+	,@IssueTime DATETIME--下单时间
+	,@YouKeXml NVARCHAR(MAX)--游客XML:<root><info YouKeId="" Name="" Telephone="" Mobile="" Gender="" LeiXing="" IdCode="" ZhengJianType="" ZhengJianCode="" BeiZhu="" /></root>
+	,@TuanGouId CHAR(36)--团购编号
+	,@AgencyId CHAR(36)
+	,@AgencyJinE MONEY
+	,@Traffice NVARCHAR(50)
+    ,@OrderSite tinyint
+	,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	DECLARE @YiShouRenShu INT--已收人数
+	DECLARE @JiHuaRenShu INT--计划人数
+	DECLARE @ShouKeZhuangTai TINYINT--收客状态
+	DECLARE @LiuShuiHiao INT--流水号
+	DECLARE @SCJCR MONEY
+	DECLARE @SCJET MONEY
+	
+	SET @errorcount=0
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTour] WHERE [XianLuId]=@XianLuId AND [TourId]=@TourId)
+	BEGIN
+		SET @RetCode=-98
+		RETURN @RetCode
+	END
+
+	SELECT @LDate=[LDate],@ShouKeZhuangTai=[Status],@SCJCR=CRSCJ,@SCJET=ETSCJ FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+	SELECT @YiShouRenShu=SUM([ChengRenShu]+[ErTongShu]) FROM [tbl_XianLuTourOrder] WHERE [TourId]=@TourId AND [Status] IN(0,3,4,5)
+	SET @YiShouRenShu=ISNULL(@YiShouRenShu,0)
+
+	SELECT @JiHuaRenShu=SYRS FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+
+	IF(@JiHuaRenShu<@YiShouRenShu+@ChengRenShu+@ErTongShu)
+	BEGIN
+		SET @RetCode=-97
+		RETURn @RetCode
+	END
+
+	IF(@ShouKeZhuangTai<>0)
+	BEGIN
+		SET @RetCode=-96
+		RETURn @RetCode
+	END
+
+	IF(@TuanGouId IS NOT NULL AND LEN(@TuanGouId)>0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTuanGou] WHERE [TuanGouId]=@TuanGouId AND [XianLuId]=@XianLuId)
+		BEGIN
+			SET @RetCode=-94
+			RETURN @RetCode
+		END
+	END
+
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM [tbl_XianLuTourOrder]
+	SET @OrderCode='XL'+CONVERT(VARCHAR(8),GETDATE(),112)+'8'+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	BEGIN TRAN
+
+	EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@LxrXml
+	INSERT INTO [tbl_XianLuTourOrder]([OrderId],[XianLuId],[TourId]
+		,[OrderCode],[Status],[ChengRenShu]
+		,[ErTongShu],[JSJCR],[JSJER]
+		,[JinE],[FuKuanStatus],[LDate]
+		,[QiTaBeiZhu],[XiaDanBeiZhu],[LxrName]
+		,[LxrTelephone],[LxrGender],[LxrZhengJianType]
+		,[LxrZhengJianCode],[OperatorId],[IssueTime]
+		,[TuanGouId],[AgencyId],[AgencyJinE],Traffice,[OrderSite],[SCJCR],[SCJET])
+	SELECT @OrderId,@XianLuId,@TourId
+		,@OrderCode,@Status,@ChengRenShu
+		,@ErTongShu,@JSJCR,@JSJER
+		,@JinE,@FuKuanStatus,@LDate
+		,@QiTaBeiZhu,@XiaDanBeiZhu,A.LxrName
+		,A.LxrTelephone,A.LxrGender,A.LxrZhengJianType
+		,A.LxrZhengJianCode,@OperatorId,@IssueTime
+		,@TuanGouId,@AgencyId,@AgencyJinE,@Traffice,@OrderSite,@SCJCR,@SCJET
+	FROM OPENXML(@hdoc,'/root/info')
+	WITH(LxrName NVARCHAR(255),LxrTelephone NVARCHAR(255),LxrGender TINYINT,LxrZhengJianType TINYINT,LxrZhengJianCode NVARCHAR(255)) AS A
+	SET @errorcount=@errorcount+@@ERROR
+	EXECUTE sp_xml_removedocument @hdoc
+	
+	IF(@errorcount=0)
+		BEGIN
+			UPDATE dbo.tbl_XianLuTour SET SYRS=SYRS-@ChengRenShu-@ErTongShu WHERE TourId=@TourId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	
+	IF(@errorcount=0 AND @YouKeXml IS NOT NULL AND LEN(@YouKeXml)>0)
+	BEGIN
+		EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@YouKeXml
+		INSERT INTO [tbl_XianLuTourOrderYouKe]([OrderId],[YouKeId],[Name]
+			,[Telephone],[Mobile],[Gender]
+			,[LeiXing],[IdCode],[ZhengJianType]
+			,[ZhengJianCode],[BeiZhu])
+		SELECT @OrderId,A.[YouKeId],A.[Name]
+			,A.[Telephone],A.[Mobile],A.[Gender]
+			,A.[LeiXing],A.[IdCode],A.[ZhengJianType]
+			,A.[ZhengJianCode],A.[BeiZhu]
+		FROM OPENXML(@hdoc,'/root/info')
+		WITH([YouKeId] CHAR(36),[Name] NVARCHAR(255),[Telephone] NVARCHAR(255),[Mobile] NVARCHAR(255),[Gender] TINYINT,[LeiXing] TINYINT,[IdCode] NVARCHAR(255),[ZhengJianType] TINYINT,[ZhengJianCode] NVARCHAR(255),[BeiZhu] NVARCHAR(255)) AS A
+		SET @errorcount=@errorcount+@@ERROR
+		EXECUTE sp_xml_removedocument @hdoc
+	END
+
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+--线路订单来源结束
+
+--增加字段 记录交易时候订单的单价
+ GO
+ALTER TABLE dbo.tbl_XianLuTourOrder ADD
+	JiaoYiCR money NOT NULL CONSTRAINT DF_tbl_XianLuTourOrder_JiaoYiCR DEFAULT 0,
+	JiaoYiET money NOT NULL CONSTRAINT DF_tbl_XianLuTourOrder_JiaoYiET DEFAULT 0
+GO
+
+
+ ALTER PROCEDURE [dbo].[proc_XianLuOrder_Insert]
+	 @OrderId CHAR(36)--订单编号
+	,@XianLuId CHAR(36)--线路编号
+	,@TourId CHAR(36)--团队编号
+	,@OrderCode NVARCHAR(50) OUTPUT--OUTPUT 订单号
+	,@Status TINYINT--订单状态
+	,@ChengRenShu INT--成人数
+	,@ErTongShu INT--儿童数
+	,@JSJCR MONEY--成人价
+	,@JSJER MONEY--儿童价
+	,@JinE MONEY--合同金额
+	,@FuKuanStatus TINYINT--付款状态
+	,@LDate DATETIME--出发日期
+	,@QiTaBeiZhu NVARCHAR(MAX)--其它要求
+	,@XiaDanBeiZhu NVARCHAR(MAX)--下单备注
+	,@LxrXml NVARCHAR(MAX)--联系人MXL:<root><info LxrName="" LxrTelephone="" LxrGender="" LxrZhengJianType="" LxrZhengJianCode="" /></root>
+	,@OperatorId CHAR(36)--下单人
+	,@IssueTime DATETIME--下单时间
+	,@YouKeXml NVARCHAR(MAX)--游客XML:<root><info YouKeId="" Name="" Telephone="" Mobile="" Gender="" LeiXing="" IdCode="" ZhengJianType="" ZhengJianCode="" BeiZhu="" /></root>
+	,@TuanGouId CHAR(36)--团购编号
+	,@AgencyId CHAR(36)
+	,@AgencyJinE MONEY
+	,@Traffice NVARCHAR(50)
+    ,@OrderSite TINYINT
+    ,@JiaoYiCR	MONEY
+    ,@JiaoYiET	MONEY
+	,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	DECLARE @YiShouRenShu INT--已收人数
+	DECLARE @JiHuaRenShu INT--计划人数
+	DECLARE @ShouKeZhuangTai TINYINT--收客状态
+	DECLARE @LiuShuiHiao INT--流水号
+	DECLARE @SCJCR MONEY
+	DECLARE @SCJET MONEY
+	
+	SET @errorcount=0
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTour] WHERE [XianLuId]=@XianLuId AND [TourId]=@TourId)
+	BEGIN
+		SET @RetCode=-98
+		RETURN @RetCode
+	END
+
+	SELECT @LDate=[LDate],@ShouKeZhuangTai=[Status],@SCJCR=CRSCJ,@SCJET=ETSCJ FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+	SELECT @YiShouRenShu=SUM([ChengRenShu]+[ErTongShu]) FROM [tbl_XianLuTourOrder] WHERE [TourId]=@TourId AND [Status] IN(0,3,4,5)
+	SET @YiShouRenShu=ISNULL(@YiShouRenShu,0)
+
+	SELECT @JiHuaRenShu=SYRS FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+
+	IF(@JiHuaRenShu<@YiShouRenShu+@ChengRenShu+@ErTongShu)
+	BEGIN
+		SET @RetCode=-97
+		RETURn @RetCode
+	END
+
+	IF(@ShouKeZhuangTai<>0)
+	BEGIN
+		SET @RetCode=-96
+		RETURn @RetCode
+	END
+
+	IF(@TuanGouId IS NOT NULL AND LEN(@TuanGouId)>0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTuanGou] WHERE [TuanGouId]=@TuanGouId AND [XianLuId]=@XianLuId)
+		BEGIN
+			SET @RetCode=-94
+			RETURN @RetCode
+		END
+	END
+
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM [tbl_XianLuTourOrder]
+	SET @OrderCode='XL'+CONVERT(VARCHAR(8),GETDATE(),112)+'8'+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	BEGIN TRAN
+
+	EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@LxrXml
+	INSERT INTO [tbl_XianLuTourOrder]([OrderId],[XianLuId],[TourId]
+		,[OrderCode],[Status],[ChengRenShu]
+		,[ErTongShu],[JSJCR],[JSJER]
+		,[JinE],[FuKuanStatus],[LDate]
+		,[QiTaBeiZhu],[XiaDanBeiZhu],[LxrName]
+		,[LxrTelephone],[LxrGender],[LxrZhengJianType]
+		,[LxrZhengJianCode],[OperatorId],[IssueTime]
+		,[TuanGouId],[AgencyId],[AgencyJinE],Traffice,[OrderSite],[SCJCR],[SCJET],[JiaoYiCR],[JiaoYiET])
+	SELECT @OrderId,@XianLuId,@TourId
+		,@OrderCode,@Status,@ChengRenShu
+		,@ErTongShu,@JSJCR,@JSJER
+		,@JinE,@FuKuanStatus,@LDate
+		,@QiTaBeiZhu,@XiaDanBeiZhu,A.LxrName
+		,A.LxrTelephone,A.LxrGender,A.LxrZhengJianType
+		,A.LxrZhengJianCode,@OperatorId,@IssueTime
+		,@TuanGouId,@AgencyId,@AgencyJinE,@Traffice,@OrderSite,@SCJCR,@SCJET,@JiaoYiCR,@JiaoYiET
+	FROM OPENXML(@hdoc,'/root/info')
+	WITH(LxrName NVARCHAR(255),LxrTelephone NVARCHAR(255),LxrGender TINYINT,LxrZhengJianType TINYINT,LxrZhengJianCode NVARCHAR(255)) AS A
+	SET @errorcount=@errorcount+@@ERROR
+	EXECUTE sp_xml_removedocument @hdoc
+	
+	IF(@errorcount=0)
+		BEGIN
+			UPDATE dbo.tbl_XianLuTour SET SYRS=SYRS-@ChengRenShu-@ErTongShu WHERE TourId=@TourId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	
+	IF(@errorcount=0 AND @YouKeXml IS NOT NULL AND LEN(@YouKeXml)>0)
+	BEGIN
+		EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@YouKeXml
+		INSERT INTO [tbl_XianLuTourOrderYouKe]([OrderId],[YouKeId],[Name]
+			,[Telephone],[Mobile],[Gender]
+			,[LeiXing],[IdCode],[ZhengJianType]
+			,[ZhengJianCode],[BeiZhu])
+		SELECT @OrderId,A.[YouKeId],A.[Name]
+			,A.[Telephone],A.[Mobile],A.[Gender]
+			,A.[LeiXing],A.[IdCode],A.[ZhengJianType]
+			,A.[ZhengJianCode],A.[BeiZhu]
+		FROM OPENXML(@hdoc,'/root/info')
+		WITH([YouKeId] CHAR(36),[Name] NVARCHAR(255),[Telephone] NVARCHAR(255),[Mobile] NVARCHAR(255),[Gender] TINYINT,[LeiXing] TINYINT,[IdCode] NVARCHAR(255),[ZhengJianType] TINYINT,[ZhengJianCode] NVARCHAR(255),[BeiZhu] NVARCHAR(255)) AS A
+		SET @errorcount=@errorcount+@@ERROR
+		EXECUTE sp_xml_removedocument @hdoc
+	END
+
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+--线路订单来源结束
+GO
+ALTER VIEW [dbo].[view_XianLuTourOrder]
+AS
+SELECT     A.OrderId,A.SCJCR,A.SCJET,A.JSJCR,A.JSJER AS JSJET,
+                           (SELECT     UserType
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS UserType,
+						   (SELECT     MemberName
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS MemberName,
+                          (SELECT     Mobile
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS Mobile,
+                          (SELECT     RouteType
+                            FROM          dbo.tbl_SysArea AS p
+                            WHERE      (ID = B.AreaId)) AS RouteType, A.XianLuId, A.TourId, A.OrderCode, A.Status, A.ChengRenShu, A.ErTongShu, A.JinE, A.FuKuanStatus, 
+                      A.LDate, A.QiTaBeiZhu, A.XiaDanBeiZhu, A.LxrName, A.LxrTelephone, A.LxrGender, A.LxrZhengJianType, A.LxrZhengJianCode, A.OperatorId, 
+                      A.IssueTime, A.TuanGouId, A.AdpStatus, A.AgencyId, A.AgencyJinE, A.ApiOrderId, B.RouteName, B.Line_Source,
+                      A.Traffice,A.OrderSite,a.JiaoYiCR,a.JiaoYiET
+FROM         dbo.tbl_XianLuTourOrder AS A INNER JOIN
+                      dbo.tbl_XianLu AS B ON A.XianLuId = B.XianLuId
+                      
+                      
+GO
+
+
+ALTER TABLE dbo.tbl_XianLuTourOrder ADD
+	WebSiteCR money NOT NULL  DEFAULT 0,
+	WebSiteET money NOT NULL  DEFAULT 0
+
+
+GO
+ALTER VIEW [dbo].[view_XianLuTourOrder]
+AS
+SELECT     A.OrderId,A.SCJCR,A.SCJET,A.JSJCR,A.JSJER AS JSJET,
+                           (SELECT     UserType
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS UserType,
+						   (SELECT     MemberName
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS MemberName,
+                          (SELECT     Mobile
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS Mobile,
+                          (SELECT     RouteType
+                            FROM          dbo.tbl_SysArea AS p
+                            WHERE      (ID = B.AreaId)) AS RouteType, A.XianLuId, A.TourId, A.OrderCode, A.Status, A.ChengRenShu, A.ErTongShu, A.JinE, A.FuKuanStatus, 
+                      A.LDate, A.QiTaBeiZhu, A.XiaDanBeiZhu, A.LxrName, A.LxrTelephone, A.LxrGender, A.LxrZhengJianType, A.LxrZhengJianCode, A.OperatorId, 
+                      A.IssueTime, A.TuanGouId, A.AdpStatus, A.AgencyId, A.AgencyJinE, A.ApiOrderId, B.RouteName, B.Line_Source,
+                      A.Traffice,A.OrderSite,a.JiaoYiCR,a.JiaoYiET,a.WebSiteCR,a.WebSiteET
+FROM         dbo.tbl_XianLuTourOrder AS A INNER JOIN
+                      dbo.tbl_XianLu AS B ON A.XianLuId = B.XianLuId
+GO
+                      
+                      
+ALTER PROCEDURE [dbo].[proc_XianLuOrder_Insert]
+	 @OrderId CHAR(36)--订单编号
+	,@XianLuId CHAR(36)--线路编号
+	,@TourId CHAR(36)--团队编号
+	,@OrderCode NVARCHAR(50) OUTPUT--OUTPUT 订单号
+	,@Status TINYINT--订单状态
+	,@ChengRenShu INT--成人数
+	,@ErTongShu INT--儿童数
+	,@JSJCR MONEY--成人价
+	,@JSJER MONEY--儿童价
+	,@JinE MONEY--合同金额
+	,@FuKuanStatus TINYINT--付款状态
+	,@LDate DATETIME--出发日期
+	,@QiTaBeiZhu NVARCHAR(MAX)--其它要求
+	,@XiaDanBeiZhu NVARCHAR(MAX)--下单备注
+	,@LxrXml NVARCHAR(MAX)--联系人MXL:<root><info LxrName="" LxrTelephone="" LxrGender="" LxrZhengJianType="" LxrZhengJianCode="" /></root>
+	,@OperatorId CHAR(36)--下单人
+	,@IssueTime DATETIME--下单时间
+	,@YouKeXml NVARCHAR(MAX)--游客XML:<root><info YouKeId="" Name="" Telephone="" Mobile="" Gender="" LeiXing="" IdCode="" ZhengJianType="" ZhengJianCode="" BeiZhu="" /></root>
+	,@TuanGouId CHAR(36)--团购编号
+	,@AgencyId CHAR(36)
+	,@AgencyJinE MONEY
+	,@Traffice NVARCHAR(50)
+    ,@OrderSite TINYINT
+    ,@JiaoYiCR	MONEY
+    ,@JiaoYiET	MONEY
+    ,@WebSiteCR	MONEY
+    ,@WebSiteET	MONEY
+	,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	DECLARE @YiShouRenShu INT--已收人数
+	DECLARE @JiHuaRenShu INT--计划人数
+	DECLARE @ShouKeZhuangTai TINYINT--收客状态
+	DECLARE @LiuShuiHiao INT--流水号
+	DECLARE @SCJCR MONEY
+	DECLARE @SCJET MONEY
+	
+	SET @errorcount=0
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTour] WHERE [XianLuId]=@XianLuId AND [TourId]=@TourId)
+	BEGIN
+		SET @RetCode=-98
+		RETURN @RetCode
+	END
+
+	SELECT @LDate=[LDate],@ShouKeZhuangTai=[Status],@SCJCR=CRSCJ,@SCJET=ETSCJ FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+	SELECT @YiShouRenShu=SUM([ChengRenShu]+[ErTongShu]) FROM [tbl_XianLuTourOrder] WHERE [TourId]=@TourId AND [Status] IN(0,3,4,5)
+	SET @YiShouRenShu=ISNULL(@YiShouRenShu,0)
+
+	SELECT @JiHuaRenShu=SYRS FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+
+	IF(@JiHuaRenShu<@YiShouRenShu+@ChengRenShu+@ErTongShu)
+	BEGIN
+		SET @RetCode=-97
+		RETURn @RetCode
+	END
+
+	IF(@ShouKeZhuangTai<>0)
+	BEGIN
+		SET @RetCode=-96
+		RETURn @RetCode
+	END
+
+	IF(@TuanGouId IS NOT NULL AND LEN(@TuanGouId)>0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTuanGou] WHERE [TuanGouId]=@TuanGouId AND [XianLuId]=@XianLuId)
+		BEGIN
+			SET @RetCode=-94
+			RETURN @RetCode
+		END
+	END
+
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM [tbl_XianLuTourOrder]
+	SET @OrderCode='XL'+CONVERT(VARCHAR(8),GETDATE(),112)+'8'+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	BEGIN TRAN
+
+	EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@LxrXml
+	INSERT INTO [tbl_XianLuTourOrder]([OrderId],[XianLuId],[TourId]
+		,[OrderCode],[Status],[ChengRenShu]
+		,[ErTongShu],[JSJCR],[JSJER]
+		,[JinE],[FuKuanStatus],[LDate]
+		,[QiTaBeiZhu],[XiaDanBeiZhu],[LxrName]
+		,[LxrTelephone],[LxrGender],[LxrZhengJianType]
+		,[LxrZhengJianCode],[OperatorId],[IssueTime]
+		,[TuanGouId],[AgencyId],[AgencyJinE],Traffice,[OrderSite],[SCJCR],[SCJET],[JiaoYiCR],[JiaoYiET],WebSiteCR
+		,WebSiteET)
+	SELECT @OrderId,@XianLuId,@TourId
+		,@OrderCode,@Status,@ChengRenShu
+		,@ErTongShu,@JSJCR,@JSJER
+		,@JinE,@FuKuanStatus,@LDate
+		,@QiTaBeiZhu,@XiaDanBeiZhu,A.LxrName
+		,A.LxrTelephone,A.LxrGender,A.LxrZhengJianType
+		,A.LxrZhengJianCode,@OperatorId,@IssueTime
+		,@TuanGouId,@AgencyId,@AgencyJinE,@Traffice,@OrderSite,@SCJCR,@SCJET,@JiaoYiCR,@JiaoYiET,@WebSiteCR,@WebSiteET
+	FROM OPENXML(@hdoc,'/root/info')
+	WITH(LxrName NVARCHAR(255),LxrTelephone NVARCHAR(255),LxrGender TINYINT,LxrZhengJianType TINYINT,LxrZhengJianCode NVARCHAR(255)) AS A
+	SET @errorcount=@errorcount+@@ERROR
+	EXECUTE sp_xml_removedocument @hdoc
+	
+	IF(@errorcount=0)
+		BEGIN
+			UPDATE dbo.tbl_XianLuTour SET SYRS=SYRS-@ChengRenShu-@ErTongShu WHERE TourId=@TourId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	
+	IF(@errorcount=0 AND @YouKeXml IS NOT NULL AND LEN(@YouKeXml)>0)
+	BEGIN
+		EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@YouKeXml
+		INSERT INTO [tbl_XianLuTourOrderYouKe]([OrderId],[YouKeId],[Name]
+			,[Telephone],[Mobile],[Gender]
+			,[LeiXing],[IdCode],[ZhengJianType]
+			,[ZhengJianCode],[BeiZhu])
+		SELECT @OrderId,A.[YouKeId],A.[Name]
+			,A.[Telephone],A.[Mobile],A.[Gender]
+			,A.[LeiXing],A.[IdCode],A.[ZhengJianType]
+			,A.[ZhengJianCode],A.[BeiZhu]
+		FROM OPENXML(@hdoc,'/root/info')
+		WITH([YouKeId] CHAR(36),[Name] NVARCHAR(255),[Telephone] NVARCHAR(255),[Mobile] NVARCHAR(255),[Gender] TINYINT,[LeiXing] TINYINT,[IdCode] NVARCHAR(255),[ZhengJianType] TINYINT,[ZhengJianCode] NVARCHAR(255),[BeiZhu] NVARCHAR(255)) AS A
+		SET @errorcount=@errorcount+@@ERROR
+		EXECUTE sp_xml_removedocument @hdoc
+	END
+
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+GO
+
+ALTER PROCEDURE [dbo].[proc_XianLuOrder_Insert]
+	 @OrderId CHAR(36)--订单编号
+	,@XianLuId CHAR(36)--线路编号
+	,@TourId CHAR(36)--团队编号
+	,@OrderCode NVARCHAR(50) OUTPUT--OUTPUT 订单号
+	,@Status TINYINT--订单状态
+	,@ChengRenShu INT--成人数
+	,@ErTongShu INT--儿童数
+	,@JinE MONEY--合同金额
+	,@FuKuanStatus TINYINT--付款状态
+	,@LDate DATETIME--出发日期
+	,@QiTaBeiZhu NVARCHAR(MAX)--其它要求
+	,@XiaDanBeiZhu NVARCHAR(MAX)--下单备注
+	,@LxrXml NVARCHAR(MAX)--联系人MXL:<root><info LxrName="" LxrTelephone="" LxrGender="" LxrZhengJianType="" LxrZhengJianCode="" /></root>
+	,@OperatorId CHAR(36)--下单人
+	,@IssueTime DATETIME--下单时间
+	,@YouKeXml NVARCHAR(MAX)--游客XML:<root><info YouKeId="" Name="" Telephone="" Mobile="" Gender="" LeiXing="" IdCode="" ZhengJianType="" ZhengJianCode="" BeiZhu="" /></root>
+	,@TuanGouId CHAR(36)--团购编号
+	,@AgencyId CHAR(36)
+	,@AgencyJinE MONEY
+	,@Traffice NVARCHAR(50)
+    ,@OrderSite TINYINT
+    ,@JiaoYiCR	MONEY
+    ,@JiaoYiET	MONEY
+    ,@WebSiteCR	MONEY
+    ,@WebSiteET	MONEY
+	,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	DECLARE @YiShouRenShu INT--已收人数
+	DECLARE @JiHuaRenShu INT--计划人数
+	DECLARE @ShouKeZhuangTai TINYINT--收客状态
+	DECLARE @LiuShuiHiao INT--流水号
+	
+	SET @errorcount=0
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLu] WHERE [XianLuId]=@XianLuId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+
+	IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTour] WHERE [XianLuId]=@XianLuId AND [TourId]=@TourId)
+	BEGIN
+		SET @RetCode=-98
+		RETURN @RetCode
+	END
+
+	SELECT @LDate=[LDate],@ShouKeZhuangTai=[Status] FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+	SELECT @YiShouRenShu=SUM([ChengRenShu]+[ErTongShu]) FROM [tbl_XianLuTourOrder] WHERE [TourId]=@TourId AND [Status] IN(0,3,4,5)
+	SET @YiShouRenShu=ISNULL(@YiShouRenShu,0)
+
+	SELECT @JiHuaRenShu=SYRS FROM [tbl_XianLuTour] WHERE [TourId]=@TourId
+
+	IF(@JiHuaRenShu<@YiShouRenShu+@ChengRenShu+@ErTongShu)
+	BEGIN
+		SET @RetCode=-97
+		RETURn @RetCode
+	END
+
+	IF(@ShouKeZhuangTai<>0)
+	BEGIN
+		SET @RetCode=-96
+		RETURn @RetCode
+	END
+
+	IF(@TuanGouId IS NOT NULL AND LEN(@TuanGouId)>0)
+	BEGIN
+		IF NOT EXISTS(SELECT 1 FROM [tbl_XianLuTuanGou] WHERE [TuanGouId]=@TuanGouId AND [XianLuId]=@XianLuId)
+		BEGIN
+			SET @RetCode=-94
+			RETURN @RetCode
+		END
+	END
+
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM [tbl_XianLuTourOrder]
+	SET @OrderCode='XL'+CONVERT(VARCHAR(8),GETDATE(),112)+'8'+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	BEGIN TRAN
+
+	EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@LxrXml
+	INSERT INTO [tbl_XianLuTourOrder]([OrderId],[XianLuId],[TourId]
+		,[OrderCode],[Status],[ChengRenShu]
+		,[ErTongShu],[JinE],[FuKuanStatus],[LDate]
+		,[QiTaBeiZhu],[XiaDanBeiZhu],[LxrName]
+		,[LxrTelephone],[LxrGender],[LxrZhengJianType]
+		,[LxrZhengJianCode],[OperatorId],[IssueTime]
+		,[TuanGouId],[AgencyId],[AgencyJinE],Traffice,[OrderSite],[JiaoYiCR],[JiaoYiET],WebSiteCR
+		,WebSiteET)
+	SELECT @OrderId,@XianLuId,@TourId
+		,@OrderCode,@Status,@ChengRenShu
+		,@ErTongShu,@JinE,@FuKuanStatus,@LDate
+		,@QiTaBeiZhu,@XiaDanBeiZhu,A.LxrName
+		,A.LxrTelephone,A.LxrGender,A.LxrZhengJianType
+		,A.LxrZhengJianCode,@OperatorId,@IssueTime
+		,@TuanGouId,@AgencyId,@AgencyJinE,@Traffice,@OrderSite,@JiaoYiCR,@JiaoYiET,@WebSiteCR,@WebSiteET
+	FROM OPENXML(@hdoc,'/root/info')
+	WITH(LxrName NVARCHAR(255),LxrTelephone NVARCHAR(255),LxrGender TINYINT,LxrZhengJianType TINYINT,LxrZhengJianCode NVARCHAR(255)) AS A
+	SET @errorcount=@errorcount+@@ERROR
+	EXECUTE sp_xml_removedocument @hdoc
+	
+	IF(@errorcount=0)
+		BEGIN
+			UPDATE dbo.tbl_XianLuTour SET SYRS=SYRS-@ChengRenShu-@ErTongShu WHERE TourId=@TourId
+			SET @errorcount=@errorcount+@@ERROR
+		END
+	
+	IF(@errorcount=0 AND @YouKeXml IS NOT NULL AND LEN(@YouKeXml)>0)
+	BEGIN
+		EXECUTE sp_xml_preparedocument @hdoc OUTPUT,@YouKeXml
+		INSERT INTO [tbl_XianLuTourOrderYouKe]([OrderId],[YouKeId],[Name]
+			,[Telephone],[Mobile],[Gender]
+			,[LeiXing],[IdCode],[ZhengJianType]
+			,[ZhengJianCode],[BeiZhu])
+		SELECT @OrderId,A.[YouKeId],A.[Name]
+			,A.[Telephone],A.[Mobile],A.[Gender]
+			,A.[LeiXing],A.[IdCode],A.[ZhengJianType]
+			,A.[ZhengJianCode],A.[BeiZhu]
+		FROM OPENXML(@hdoc,'/root/info')
+		WITH([YouKeId] CHAR(36),[Name] NVARCHAR(255),[Telephone] NVARCHAR(255),[Mobile] NVARCHAR(255),[Gender] TINYINT,[LeiXing] TINYINT,[IdCode] NVARCHAR(255),[ZhengJianType] TINYINT,[ZhengJianCode] NVARCHAR(255),[BeiZhu] NVARCHAR(255)) AS A
+		SET @errorcount=@errorcount+@@ERROR
+		EXECUTE sp_xml_removedocument @hdoc
+	END
+
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+--线路订单来源结束
+GO
+
+ALTER VIEW [dbo].[view_XianLuTourOrder]
+AS
+SELECT     A.OrderId,
+						   (SELECT     UserType
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS UserType,
+						   (SELECT     MemberName
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS MemberName,
+                           (SELECT     Mobile
+                            FROM          dbo.tbl_Member AS p
+                            WHERE      (MemberID = A.OperatorId)) AS Mobile,
+                           (SELECT     RouteType
+                            FROM          dbo.tbl_SysArea AS p
+                            WHERE      (ID = B.AreaId)) AS RouteType, A.XianLuId, A.TourId, A.OrderCode, A.Status, A.ChengRenShu, A.ErTongShu, A.JinE, A.FuKuanStatus, 
+                      A.LDate, A.QiTaBeiZhu, A.XiaDanBeiZhu, A.LxrName, A.LxrTelephone, A.LxrGender, A.LxrZhengJianType, A.LxrZhengJianCode, A.OperatorId, 
+                      A.IssueTime, A.TuanGouId, A.AdpStatus, A.AgencyId, A.AgencyJinE, A.ApiOrderId, B.RouteName, B.Line_Source,
+                      A.Traffice,A.OrderSite,a.JiaoYiCR,a.JiaoYiET,a.WebSiteCR,a.WebSiteET
+FROM         dbo.tbl_XianLuTourOrder AS A INNER JOIN
+                      dbo.tbl_XianLu AS B ON A.XianLuId = B.XianLuId
+GO
+
+ 
+ALTER TABLE dbo.tbl_XianLuTourOrder
+	DROP COLUMN JSJCR, JSJER, SCJCR, SCJET
+GO
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_DingDan]
+AS
+SELECT   CAST(a.OrderId AS varchar(36)) as OrderId,  a.ZuJin AS JinE, a.Status AS OrderStatus, a.OrderCode AS OrderCode, a.OperatorId AS XDRId, a.FuKuanStatus AS FuKuanStatus, 
+                      a.XiaDanBeiZhu AS BeiZhu, a.LxrName AS LXRName, a.LxrTelephone AS LXRMoblie, a.IssueTime AS IssueTime,
+                          (SELECT     p.CarName
+                            FROM          dbo.tbl_JA_ZuCheInfo AS p
+                            WHERE      p.ZuCheID = a.ZuCheID) + ' —— ' + CASE a.ZuCheType WHEN 1 THEN '同城往返 ' ELSE '单接单送' END AS OrderName, 
+                      CAST(a.Number AS varchar(30)) + '辆' AS OrderNum, a.AgencyJinE AS AgencyJinE, a.AgencyId AS AgencyId, 8 AS OrderType,CAST(a.ZuCheID AS varchar(36)) as ProductID,a.LDate as ChuFaShiJian,a.EDate as HuiGuiShiJian,(CASE WHEN a.Status=1 THEN 1 WHEN a.Status=2 THEN 2 WHEN a.Status=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_JA_ZuCheOrder AS a
+UNION ALL
+SELECT   CAST(b.DingDanId AS varchar(36)) as OrderId,  b.JinE AS JinE, b.DingDanStatus AS OrderStatus, b.DingDanHao AS OrderCode, b.XiaDanRenId AS XDRId, b.FuKuanStatus AS FuKuanStatus, 
+                      b.BeiZhu AS BeiZhu, b.LxrXingMing AS LXRName, b.LxrDianHua AS LXRMoblie, b.IssueTime AS IssueTime,
+                          (SELECT     p.[Name]
+                            FROM          dbo.tbl_QianZheng AS p
+                            WHERE      p.QianZhengId = b.QianZhengId) AS OrderName, CAST(b.YuDingShuLiang AS varchar(30)) + '张' AS OrderNum, 
+                      b.AgencyJinE AS AgencyJinE, b.AgencyId AS AgencyId, 6 AS OrderType,CAST(b.QianZhengId AS varchar(36)) as ProductID,b.YuDingShiJian as ChuFaShiJian,b.YuDingShiJian as HuiGuiShiJian,(CASE WHEN b.DingDanStatus=1 THEN 1 WHEN b.DingDanStatus=2 THEN 2 WHEN b.DingDanStatus=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_QianZhengDingDan AS b
+UNION ALL
+SELECT  CAST(c.OrderID AS varchar(36)) as OrderId,   c.OrderPrice AS JinE, c.OrderState AS OrderStatus, c.OrderCode AS OrderCode, c.PeopleID AS XDRId, c.PayState AS FuKuanStatus, '' AS BeiZhu, 
+                      c.PeopleName AS LXRName, c.PeopleMobile AS LXRMoblie, c.IssueTime AS IssueTime,
+                          (SELECT     p.ProductName
+                            FROM          tbl_TuanGouChanPin AS p
+                            WHERE      p.ID = c.ProductID) AS OrderName, CAST(c.ProductNum AS varchar(30)) + '份' AS OrderNum, 0 AS AgencyJinE, c.SupplierID AS AgencyId, 
+                      7 AS OrderType,CAST(c.ProductID AS varchar(36)) as ProductID,c.IssueTime as ChuFaShiJian,c.IssueTime as HuiGuiShiJian,(CASE WHEN c.OrderState=1 THEN 1 WHEN c.OrderState=2 THEN 2 WHEN c.OrderState=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_TuanGouDingDan AS c
+UNION ALL
+SELECT   CAST(d.OrderId AS varchar(36)) as OrderId,  d .JinE AS JinE, d .Status AS OrderStatus, d .OrderCode AS OrderCode, d .OperatorId AS XDRId, d .FuKuanStatus AS FuKuanStatus, 
+                      d .XiaDanBeiZhu AS BeiZhu, d .LxrName AS LXRName, d .LxrTelephone AS LXRMoblie, d .IssueTime AS IssueTime,
+                          (SELECT     p.RouteName
+                            FROM          tbl_XianLu AS p
+                            WHERE      p.XianLuId = d .XianLuId) AS OrderName, CAST(d .ChengRenShu AS varchar(10)) + '成人' + CAST(d .ErTongShu AS varchar(10)) 
+                      + '儿童' AS OrderNum, d .AgencyJinE AS AgencyJinE, d .AgencyId AS AgencyId, CASE
+                          (SELECT     RouteType
+                            FROM          dbo.tbl_SysArea AS p, dbo.tbl_XianLu AS t
+                            WHERE      t .AreaId = p.ID AND t .XianLuId = d .XianLuId) 
+                      WHEN 1 THEN 0 WHEN 2 THEN 2 ELSE 1 END AS OrderType,CAST(d.XianLuId AS varchar(36)) as ProductID,d.LDate as ChuFaShiJian,d.LDate as HuiGuiShiJian,(CASE WHEN d .Status=1 THEN 1 WHEN d .Status=2 THEN 2 WHEN d .Status=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_XianLuTourOrder AS d
+UNION ALL
+SELECT   CAST(e.OrderId AS varchar(36)) as OrderId,  e.TotalAmount AS JinE, e.OrderState AS OrderStatus, e.OrderCode AS OrderCode, e.OperatorId AS XDRId, e.PaymentState AS FuKuanStatus, 
+                      e.Remark AS BeiZhu, e.ContactName AS LXRName, e.ContactMobile AS LXRMoblie, e.IssueTime AS IssueTime,
+                          (SELECT     p.HotelName
+                            FROM          tbl_Hotel AS p
+                            WHERE      p.HotelId = e.HotelId) + ' —— ' +
+                          (SELECT     p.RoomName
+                            FROM          dbo.tbl_HotelRoomType AS p
+                            WHERE      p.RoomTypeId = e.RoomTypeId) AS OrderName, CAST(e.RoomCount AS varchar(30)) + '间' AS OrderNum, e.AgencyJinE AS AgencyJinE, 
+                      e.SellerID AS AgencyId, 5 AS OrderType,CAST(e.HotelId AS varchar(36)) as ProductID,e.CheckInDate as ChuFaShiJian,e.CheckOutDate as HuiGuiShiJian,(CASE WHEN e.OrderState=1 THEN 1 WHEN e.OrderState=2 THEN 2 WHEN e.OrderState=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_HotelOrder AS e
+UNION ALL
+SELECT  CAST(f.OrderId AS varchar(36)) as OrderId,   f.Price AS JinE, f.Status AS OrderStatus, f.OrderCode AS OrderCode, f.OperatorId AS XDRId, f.FuKuanStatus AS FuKuanStatus, f.Remark AS BeiZhu, 
+                      f.ContactName AS LXRName, f.ContactTel AS LXRMoblie, f.IssueTime AS IssueTime,
+                          (SELECT     p.ScenicName
+                            FROM          tbl_ScenicArea AS p
+                            WHERE      p.ScenicId = f.ScenicId) + ' —— ' +
+                          (SELECT     p.EnName
+                            FROM          dbo.tbl_ScenicTickets AS p
+                            WHERE      p.TicketsId = f.TicketsId) AS OrderName, CAST(f.Num AS varchar(30)) + '份' AS OrderNum, f.AgencyJinE AS AgencyJinE, 
+                      f.SellerID AS AgencyId, 4 AS OrderType,CAST(f.ScenicId AS varchar(36)) as ProductID,f.ChuFaRiQi as ChuFaShiJian,f.ChuFaRiQi as HuiGuiShiJian,(CASE WHEN f.Status=1 THEN 1 WHEN f.Status=2 THEN 2 WHEN f.Status=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_ScenicAreaOrder AS f
+UNION ALL
+SELECT  CAST(g.OrderID AS varchar(36)) as OrderId,   g.OrderPrice AS JinE, g.OrderState AS OrderStatus, g.OrderCode AS OrderCode, g.ContactID AS XDRId, g.PayState AS FuKuanStatus, 
+                      g.Remark AS BeiZhu, g.ContactName AS LXRName, g.ContactPhone AS LXRMoblie, g.IssueTime AS IssueTime,
+                          (SELECT     p.ProductName
+                            FROM          tbl_ShangChengChanPin AS p
+                            WHERE      p.ProductID = g.ProductID) AS OrderName, CAST(g.ProductNum AS varchar(30)) + '份' AS OrderNum, g.SupplierMoney AS AgencyJinE, 
+                      g.SupplierID AS AgencyId, 3 AS OrderType,CAST(g.ProductID AS varchar(36)) as ProductID,g.IssueTime as ChuFaShiJian,g.IssueTime as HuiGuiShiJian,(CASE WHEN g.OrderState=1 THEN 1 WHEN g.OrderState=2 THEN 2 WHEN g.OrderState=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_ShangChengDingDan AS g
+UNION ALL
+SELECT  CAST(h.ZuTuanId AS varchar(36)) as OrderId,   h.ZongJinE AS JinE, h.OrderState AS OrderStatus, h.OrderCode AS OrderCode, h.XDRId AS XDRId, h.FuKuanStatus AS FuKuanStatus, 
+                      '' AS BeiZhu, (SELECT m.MemberName
+ from tbl_Member as m where m.MemberID = h.XDRId ) AS LXRName,
+ (SELECT m.Mobile
+ from tbl_Member as m where m.MemberID = h.XDRId ) AS LXRMoblie, h.IssueTime AS IssueTime,
+                          h.XianLuName AS OrderName, '成人:'+CAST(h.ChengTuanNum AS varchar(30)) + '人，儿童:'+CAST(h.ErTongNum AS varchar(30))+'人' AS OrderNum, h.AgencyJinE AS AgencyJinE, 
+                      h.AgencyId AS AgencyId, 9 AS OrderType,CAST(h.XianLuId AS varchar(36)) as ProductID,h.ChuFaTime as ChuFaShiJian,h.ChuFaTime as HuiGuiShiJian,(CASE WHEN h.OrderState=1 THEN 1 WHEN h.OrderState=2 THEN 2 WHEN h.OrderState=3 THEN 3 ELSE 0 END) as ChuLiZT
+FROM         tbl_ZiZuTuan AS h
+UNION ALL
+SELECT  CAST(j.DingDanId AS varchar(36)) as OrderId,   j.JinE AS JinE, j.DingDanStatus AS OrderStatus, j.ApiDingDanId AS OrderCode, j.HuiYuanId AS XDRId, j.FuKuanStatus AS FuKuanStatus, 
+                      '' AS BeiZhu, (SELECT m.MemberName
+ from tbl_Member as m where m.MemberID = j.HuiYuanId ) AS LXRName,
+ (SELECT m.Mobile
+ from tbl_Member as m where m.MemberID = j.HuiYuanId ) AS LXRMoblie, j.XiaDanShiJian AS IssueTime,
+                          j.ChuFaChengShiSanZiMa +' - ' + j.DaoDaChengShiSanZiMa AS OrderName, CAST(j.DingPiaoRenShu AS varchar(30)) AS OrderNum, 0 AS AgencyJinE, 
+                      '' AS AgencyId, 10 AS OrderType,'' as ProductID,j.QiFeiShiJian as ChuFaShiJian,j.DaoDaShiJian as HuiGuiShiJian,(CASE WHEN j.DingDanStatus=0 THEN 1 ELSE 0 END) as ChuLiZT
+FROM         tbl_JiPiaoDingDan AS j
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+/*增加是否开启总代理配置*/
+alter table tbl_JA_Sellers add IsZDaiLi int  default 0 not null
+go 
+
+
+/*特约的id，默认为0, 当时的平台交易率*/
+alter table tbl_TuanGouDingDan add ISTeYue VARCHAR(36)  default 0 not null
+go 
+alter table tbl_TuanGouDingDan add JiaoYiLv DECIMAL(10,4)  default 1 not null
+go 
+
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		邹磊
+-- Create date: 2015-01-09
+-- Description:	写入团购订单
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_TuanGouDingDan_Insert]
+	 @ProductID INT
+	,@OrderCode NVARCHAR(50) OUTPUT
+	,@ProductNum INT
+	,@OrderPrice MONEY
+	,@PeopleID CHAR(36)
+	,@PeopleName NVARCHAR(50)
+	,@PeopleMobile NVARCHAR(50)
+	,@IssueTime DATETIME
+	,@OrderState TINYINT
+	,@PayState TINYINT
+    ,@Peopleaddress nvarchar(255)
+	,@SupplierID CHAR(36)
+    ,@OrderSite tinyint
+	,@RetCode INT OUTPUT--OUTPUT CODE
+	,@OrderID INT OUTPUT
+AS
+BEGIN
+	DECLARE @errorcount INT
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    declare @gysid char(36)--供应商id
+    declare @isTeyue CHAR(36) --如果是特约代理商则填写代理商id，如不是则填写0
+    SELECT @JiaoYiLi = CONVERT(decimal(10,4),V) from tbl_KV WHERE K='JiaoYiLv'
+    SELECT @gysid= SupplierID from tbl_TuanGouChanPin where ID=@ProductID
+    IF EXISTS(select 1 from tbl_GYS_Seller where GYSId=@gysid and DaiLiId=@SupplierID and LeiXing=1)
+    BEGIN
+      SET @isTeyue = @SupplierID
+    END
+    ELSE
+    BEGIN
+       SET @isTeyue = '0'
+    END    
+
+
+
+	SET @errorcount=0
+ 
+ BEGIN TRAN
+	declare @LiuShuiHiao int
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM tbl_TuanGouDingDan
+	SET @OrderCode='TG'+CONVERT(VARCHAR(8),GETDATE(),112)+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+
+  --写入订单信息
+  IF(@errorcount=0)
+	begin
+ 		INSERT INTO tbl_TuanGouDingDan (ProductID ,OrderCode ,ProductNum ,OrderPrice ,PeopleID ,PeopleName ,PeopleMobile ,IssueTime ,OrderState ,PayState ,SupplierID ,Peopleaddress,OrderSite,ISTeYue,JiaoYiLv)     VALUES (@ProductID ,@OrderCode ,@ProductNum ,@OrderPrice ,@PeopleID ,@PeopleName ,@PeopleMobile ,@IssueTime ,@OrderState ,@PayState ,@SupplierID ,@Peopleaddress,@OrderSite,@isTeyue,@JiaoYiLi)
+	SET @OrderID=@@IDENTITY
+	END
+	
+     
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_TuanGouOrder]
+AS
+SELECT
+	  (SELECT ProductName  FROM  tbl_TuanGouChanPin AS p WHERE p.ID=s.ProductID ) as ProductName
+      ,(SELECT p.SupplierID  FROM  tbl_TuanGouChanPin AS p WHERE p.ID=s.ProductID ) as ProductGYSId
+	  ,OrderID
+      ,ProductID
+      ,ProductNum
+      ,OrderCode
+      ,OrderPrice
+      ,OrderState
+      ,PayState
+      ,PeopleID
+      ,PeopleName
+      ,PeopleMobile
+      ,IssueTime
+      ,SupplierID
+      ,Peopleaddress,
+OrderSite,s.ISTeYue
+  FROM tbl_TuanGouDingDan AS s
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+/*特约的id，默认为0, 当时的平台交易率*/
+alter table tbl_ShangChengDingDan add ISTeYue VARCHAR(36)  default 0 not null
+go 
+alter table tbl_ShangChengDingDan add JiaoYiLv DECIMAL(10,4)  default 1 not null
+go 
+
+
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		刘树超
+-- Create date: 2014-07-09
+-- Description:	写入商城订单
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_ShangChengDingDan_Insert]
+		@OrderID  CHAR(36)
+	   ,@ProductID CHAR(36)
+	   ,@ProductNum INT
+	   ,@OrderCode NVARCHAR(50) OUTPUT
+	   ,@OrderPrice  MONEY
+	   ,@OrderState TINYINT
+	   ,@PayState TINYINT
+	   ,@ContactID CHAR(36)
+	   ,@ContactName NVARCHAR(50)
+	   ,@ContactPhone NVARCHAR(50)
+	   ,@IssueTime DATETIME
+	   ,@Remark NVARCHAR(MAX)
+	   ,@AddressID INT
+	   ,@ProvinceID INT
+	   ,@CityID INT
+	   ,@DistrictID INT
+	   ,@AddressInfo NVARCHAR(255)
+	   ,@UserID CHAR(36)
+	   ,@UserName NVARCHAR(50)
+	   ,@IsDefault CHAR(1)
+	   ,@SupplierID CHAR(36)
+       ,@OrderSite tinyint
+	   ,@SupplierMoney MONEY
+	   ,@RetCode INT OUTPUT--OUTPUT CODE
+AS
+BEGIN
+    DECLARE @Address INT
+	DECLARE @errorcount INT
+	DECLARE @hdoc INT
+	SET @errorcount=0
+	SET @Address=@AddressID
+ 	DECLARE @ShengYu INT
+	declare @LiuShuiHiao int
+	SELECT @LiuShuiHiao=COUNT(*)+1 FROM tbl_ShangChengDingDan
+	SET @OrderCode='SC'+CONVERT(VARCHAR(8),GETDATE(),112)+dbo.fn_PadLeft(@LiuShuiHiao,'0',4)
+	SELECT @ShengYu=stocknum FROM dbo.view_ShangCheng WHERE ProductID=@ProductID
+
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    declare @gysid char(36)--供应商id
+    declare @isTeyue CHAR(36) --如果是特约代理商则填写代理商id，如不是则填写0
+    SELECT @JiaoYiLi = CONVERT(decimal(10,4),V) from tbl_KV WHERE K='JiaoYiLv'
+    SELECT @gysid= GYSid from tbl_ShangChengChanPin where ProductID =@ProductID
+    IF EXISTS(select 1 from tbl_GYS_Seller where GYSId=@gysid and DaiLiId=@SupplierID and LeiXing=0)
+    BEGIN
+      SET @isTeyue = @SupplierID
+    END
+    ELSE
+    BEGIN
+       SET @isTeyue = '0'
+    END    
+
+    
+
+ IF(@shengyu<@ProductNum)
+ BEGIN
+	SET @RetCode=-99
+	RETURN @RetCode
+ END
+ BEGIN TRAN
+ IF(@AddressID=0)
+ BEGIN
+	 --写入地址信息
+	 IF(@IsDefault=0)
+		 BEGIN
+			INSERT INTO  tbl_DiZhi (ProvinceID,CityID,DistrictID,AddressInfo,UserID,UserName,IssueTime,IsDelete,IsDefault)
+			 VALUES(@ProvinceID,@CityID,@DistrictID,@AddressInfo,@UserID,@UserName,GETDATE(),0,@IsDefault)
+			 SET @errorcount=@errorcount+@@ERROR
+		  END
+	  ELSE
+		  BEGIN
+		  UPDATE tbl_DiZhi SET IsDefault=0 WHERE UserID=@UserID
+		  INSERT INTO  tbl_DiZhi (ProvinceID,CityID,DistrictID,AddressInfo,UserID,UserName,IssueTime,IsDelete,IsDefault)
+			 VALUES(@ProvinceID,@CityID,@DistrictID,@AddressInfo,@UserID,@UserName,GETDATE(),0,@IsDefault)
+			 SET @errorcount=@errorcount+@@ERROR
+		  END
+		  SET @Address=@@IDENTITY
+ END
+ ELSE
+ BEGIN
+		UPDATE tbl_DiZhi SET ProvinceID=@ProvinceID,CityID=@CityID,DistrictID=@DistrictID,AddressInfo=@AddressInfo WHERE AddressID=@AddressID
+ END
+  --写入订单信息
+  IF(@errorcount=0)
+	begin
+ 		INSERT INTO tbl_ShangChengDingDan (OrderID ,ProductID ,ProductNum ,OrderCode ,OrderPrice ,OrderState ,PayState ,ContactID ,ContactName ,ContactPhone ,IssueTime ,Remark,ProvinceID,CityID,DistrictID,AddressInfo,SupplierID,SupplierMoney,OrderSite,ISTeYue,JiaoYiLv)
+		 VALUES (@OrderID ,@ProductID ,@ProductNum ,@OrderCode ,@OrderPrice ,@OrderState ,@PayState ,@ContactID ,@ContactName ,@ContactPhone ,@IssueTime ,@Remark,@ProvinceID,@CityID,@DistrictID,@AddressInfo,@SupplierID,@SupplierMoney,@OrderSite,@isTeyue,@JiaoYiLi)
+		 
+ 
+	   
+	   
+	END
+	
+     
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+GO
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_ShangChengOrder]
+AS
+SELECT
+	  (SELECT ProductName  FROM  tbl_ShangChengChanPin AS p WHERE p.ProductID=s.ProductID ) as ProductName
+	  ,OrderID
+      ,ProductID
+      ,ProductNum
+      ,OrderCode
+      ,OrderPrice
+      ,OrderState
+      ,PayState
+      ,ContactID
+      ,ContactName
+      ,ContactPhone
+,(SELECT UserType  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as UserType
+,(SELECT MemberName  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as OperatorName
+,(SELECT Mobile  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as OperatorMobile
+      ,IssueTime
+      ,Remark
+      ,ProvinceID
+      ,(SELECT [GYSid] FROM tbl_ShangChengChanPin chanpin WHERE chanpin.ProductID=s.ProductID )AS  GYSid
+      ,(SELECT [Name] FROM tbl_SysProvince prov WHERE prov.ID=s.ProvinceID )AS  ProvinceName
+      ,CityID
+      ,(SELECT [Name] FROM tbl_SysCity city WHERE city.ID=s.CityID ) as CityName 
+      ,DistrictID
+      ,(SELECT [Name] FROM tbl_SysDistrict dist WHERE dist.ID=s.DistrictID) AS DistrictName
+      ,Addressinfo
+      ,SupplierID
+      ,SupplierMoney
+      ,OrderSite,
+      s.ISTeYue
+  FROM tbl_ShangChengDingDan AS s
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_ShangChengOrder]
+AS
+SELECT
+	  (SELECT ProductName  FROM  tbl_ShangChengChanPin AS p WHERE p.ProductID=s.ProductID ) as ProductName
+	  ,OrderID
+      ,ProductID
+      ,ProductNum
+      ,OrderCode
+      ,OrderPrice
+      ,OrderState
+      ,PayState
+      ,ContactID
+      ,ContactName
+      ,ContactPhone
+,(SELECT UserType  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as UserType
+,(SELECT MemberName  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as OperatorName
+,(SELECT Mobile  FROM  dbo.tbl_Member AS p WHERE p.MemberID=s.ContactID ) as OperatorMobile
+      ,IssueTime
+      ,Remark
+      ,ProvinceID
+      ,(SELECT [GYSid] FROM tbl_ShangChengChanPin chanpin WHERE chanpin.ProductID=s.ProductID )AS  GYSid
+      ,(SELECT SalePrice FROM tbl_ShangChengChanPin chanpin WHERE chanpin.ProductID=s.ProductID )AS  SalePrice
+      ,(SELECT [Name] FROM tbl_SysProvince prov WHERE prov.ID=s.ProvinceID )AS  ProvinceName
+      ,CityID
+      ,(SELECT [Name] FROM tbl_SysCity city WHERE city.ID=s.CityID ) as CityName 
+      ,DistrictID
+      ,(SELECT [Name] FROM tbl_SysDistrict dist WHERE dist.ID=s.DistrictID) AS DistrictName
+      ,Addressinfo
+      ,SupplierID
+      ,SupplierMoney
+      ,OrderSite,
+      s.ISTeYue,s.JiaoYiLv
+  FROM tbl_ShangChengDingDan AS s
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_TuanGouOrder]
+AS
+SELECT
+	  (SELECT ProductName  FROM  tbl_TuanGouChanPin AS p WHERE p.ID=s.ProductID ) as ProductName
+      ,(SELECT p.SupplierID  FROM  tbl_TuanGouChanPin AS p WHERE p.ID=s.ProductID ) as ProductGYSId
+	  ,OrderID
+      ,ProductID
+      ,ProductNum
+      ,OrderCode
+      ,OrderPrice
+      ,OrderState
+      ,PayState
+      ,PeopleID
+      ,PeopleName
+      ,PeopleMobile
+      ,IssueTime
+      ,SupplierID
+      ,Peopleaddress,
+OrderSite,s.ISTeYue,s.JiaoYiLv
+  FROM tbl_TuanGouDingDan AS s
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+
+/*商城排序*/
+alter table [tbl_Seller_ShangCheng] add PSort int  default 1 not null
+go 
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[View_DaiLiChanPin]
+AS
+SELECT     a.Id, 
+           a.MemberId,
+           a.ProductId, 
+           a.ProductStatus,
+           a.PSort,
+           b.TypeID, 
+           b.ProductName,
+           b.ProductNum,
+           b.MarketPrice, 
+           b.SalePrice,
+           b.ContentService,
+           b.UnContentService, 
+           b.UseRule,
+           b.NoticeKnow,
+           b.ProductionDate, 
+           b.EffectDate,
+           b.ShelfDate,
+           b.IssueTime, 
+           b.Remark,
+           b.ModelDesc,
+           b.ColorDesc, 
+           b.StylesDesc,
+           b.MailWay,
+           b.GYSid, 
+           b.Unit,
+           b.IsTrue,
+          (SELECT MemberName FROM tbl_Member WHERE tbl_Member.MemberID =(SELECT tbl_JA_Sellers.MemberID FROM tbl_JA_Sellers where ID=b.GYSid ) ) as SupplierName,
+           (SELECT c.ParentID FROM dbo.tbl_ShangChengLeiBie AS c WHERE c.TypeID=b.TypeID ) AS ParentID,
+           (SELECT c.TypeName FROM tbl_ShangChengLeiBie AS c WHERE c.TypeID=b.TypeID  )AS TypeName,
+           (b.ProductNum- (SELECT ISNULL(sum(ProductNum),0) FROM tbl_ShangChengDingDan AS c WHERE c.ProductID=b.ProductID)) AS StockNum,
+           (SELECT * FROM tbl_ShangChengTuPian AS c WHERE c.ProductID=b.ProductID FOR XML RAW, ROOT('Root'))AS ProductImgs
+FROM         dbo.tbl_Seller_ShangCheng as a LEFT OUTER JOIN
+                      dbo.tbl_ShangChengChanPin as b ON a.ProductId = b.ProductID
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+UPDATE tbl_TuanGouChanPin set SupplierID='dc99f4fe-6690-4b65-8e9d-c9336077cdf7' where SupplierID='-1'
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+         if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId)--判断代理商是否为供应商活着代理商为供应商的二级代理
+         BEGIN--如果是，则返润
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+         ELSE--如果不是
+         BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId)--判断代理商是否为供应商活着代理商为供应商的二级代理
+       BEGIN--如果是，则返润
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-@JiaoYiJinE+@FenXiaoJinE
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+/*酒店入住日程*/
+alter table tbl_HotelOrder add HotelXC varchar(max)
+go 
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/* 新增订单所属单位*/
+ALTER VIEW [dbo].[view_HotelOrder]
+AS
+SELECT     OrderId, HotelId,
+                          (SELECT     HotelName
+                            FROM          dbo.tbl_Hotel
+                            WHERE      (HotelId = dbo.tbl_HotelOrder.HotelId)) AS HotelName,
+(SELECT     Star
+                            FROM          dbo.tbl_Hotel
+                            WHERE      (HotelId = dbo.tbl_HotelOrder.HotelId)) AS Star, RoomTypeId,
+                          (SELECT     RoomName
+                            FROM          dbo.tbl_HotelRoomType
+                            WHERE      (RoomTypeId = dbo.tbl_HotelOrder.RoomTypeId)) AS RoomName, OrderCode, RoomCount, CheckInDate, CheckOutDate, TotalAmount, 
+                      ContactName, ContactMobile, Remark, PaymentType, PaymentState, OrderState, Source, OperatorId,
+                          (SELECT     MemberName
+                            FROM          dbo.tbl_Member
+                            WHERE      (MemberID = dbo.tbl_HotelOrder.OperatorId)) AS OperatorName,
+(SELECT UserType  FROM  dbo.tbl_Member AS p WHERE p.MemberID=dbo.tbl_HotelOrder.OperatorId ) as UserType,
+(SELECT Mobile  FROM  dbo.tbl_Member AS p WHERE p.MemberID=dbo.tbl_HotelOrder.OperatorId ) as OperatorMobile,
+ IssueTime, JiaGeId, DanJia, BuyCompanyName, SellerID, 
+                      AgencyJinE,OrderSite,HotelXC
+FROM         dbo.tbl_HotelOrder
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+         if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=1)--判断代理商是否为供应商活着代理商为供应商的二级代理
+         BEGIN--如果是，则返润
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+         ELSE--如果不是
+         BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的二级代理
+       BEGIN--如果是，则返润
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-@JiaoYiJinE+@FenXiaoJinE
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+         if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=1)--判断代理商是否为供应商活着代理商为供应商的二级代理
+         BEGIN--如果是，则返润
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+         ELSE--如果不是
+         BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的二级代理
+       BEGIN--如果是，则返润
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润 
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         
+         if(@DaiLiId<>-1)
+          BEGIN
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           END
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-@JiaoYiJinE+@FenXiaoJinE
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+         if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=1)--判断代理商是否为供应商活着代理商为供应商的二级代理
+         BEGIN--如果是，则返润
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+         ELSE--如果不是
+         BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         END
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的二级代理
+       BEGIN--如果是，则返润
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润 
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         
+         if(@DaiLiId<>'-1')
+          BEGIN
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           END
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-@JiaoYiJinE+@FenXiaoJinE
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的特约代理
+       BEGIN--如果是，则返润给供应商
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给代理商发放分销利润 
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE)
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         
+         if(@DaiLiId<>'-1')
+          BEGIN
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           END
+       END
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-(@JiaoYiJinE-@FenXiaoJinE)
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的特约代理
+       BEGIN--如果是，则返润给供应商
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给供应商发放交易金额
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE)
+			,@YongHuYuE+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE),GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@ChengBen
+			,@YongHuYuE+@ChengBen,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+   
+         if(@DaiLiId<>'-1')
+          BEGIN
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           END
+       END
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)-(@JiaoYiJinE-@FenXiaoJinE)
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@ChengBen-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:邹磊		<Author,,Name>
+-- Create date:2015-9-17 <Create Date,,>
+-- Description:交易完成，交易金额分成	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_FenRun]
+	 @OrderId CHAR(36)
+	,@OrderLeiBie int
+    ,@RetCode INT OUTPUT
+AS
+BEGIN
+    SET @RetCode=0
+	DECLARE @GYSId char(36)--供应商id
+    DECLARE @DaiLiId char(36)--代理商id
+	DECLARE @JiaoYiJinE MONEY--交易金额
+    DECLARE @ChengBen MONEY--成本价
+	DECLARE @errorcount INT
+    DECLARE @ProductId char(36)--产品id
+    DECLARE @JiaoYiLi DECIMAL(10,4)--平台交易费
+    DECLARE @MemberId CHAR(36)--会员id
+    DECLARE @DaiLiMemberId char(36) --代理商会员id 只用户商城订单
+    DECLARE @DaiLiYongHuYuE char(36) --代理商会员余额 只用户商城订单
+    DECLARE @OrderCode NVARCHAR(50) --订单交易号
+    DECLARE @YongHuYuE MONEY --用户余额
+    DECLARE @FenXiaoJinE MONEY --分销金额
+    DECLARE @ProductNum int --交易数量
+	SET @errorcount=0
+	BEGIN TRAN
+    if(@OrderLeiBie=6)
+    BEGIN
+       IF NOT EXISTS(SELECT 1 FROM tbl_TuanGouDingDan WHERE OrderID=@OrderId)--判断是否存在该团购订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@ProductNum=ProductNum,@OrderCode=OrderCode,@JiaoYiLi=CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_TuanGouDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_TuanGouDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=SupplierID,@ChengBen=GroupPrice from tbl_TuanGouChanPin WHERE ID=@ProductId
+       if(len(@GYSId)>10)
+       BEGIN
+           SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+           SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+           --更新供应商的E额宝余额
+           UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId
+        
+           --更新总账户余额
+           UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-@ChengBen+(@JiaoYiLi*@JiaoYiJinE)
+           update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+           --给供应商发放货款
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           --扣除供应商的平台交易费
+           INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		   VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+@JiaoYiJinE-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+       END
+    END
+    if(@OrderLeiBie=1)--商城订单
+    BEGIN
+      IF NOT EXISTS(SELECT 1 FROM tbl_ShangChengDingDan WHERE OrderID=@OrderId)--判断是否存在该商城订单
+       BEGIN 
+        SET @RetCode=-99--不存在返回-99
+        RETURN @RetCode
+       END
+
+       SELECT @DaiLiId=SupplierID,@ProductId=ProductID,@JiaoYiJinE=OrderPrice,@ProductNum=ProductNum, @OrderCode=OrderCode,@FenXiaoJinE=SupplierMoney,@JiaoYiLi= CONVERT(decimal(10,4),JiaoYiLv)/100 from tbl_ShangChengDingDan WHERE OrderID=@OrderId
+       UPDATE tbl_ShangChengDingDan SET OrderState=5 WHERE OrderID=@OrderId
+       SELECT @GYSId=GYSid,@ChengBen= SalePrice from tbl_ShangChengChanPin WHERE  ProductID =@ProductId
+     
+      if(len(@GYSId)>10)
+       BEGIN
+
+       if(@DaiLiId=@GYSId) or EXISTS(SELECT 1 FROM tbl_GYS_Seller WHERE GYSId=@GYSId and DaiLiId=@DaiLiId and LeiXing=0)--判断代理商是否为供应商活着代理商为供应商的特约代理
+       BEGIN--如果是，则返润给供应商
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE) where MemberID=@MemberId      
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         
+         --给供应商发放交易金额
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE)
+			,@YongHuYuE+@JiaoYiJinE-(@JiaoYiLi*@JiaoYiJinE),GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+
+         --给代理商发放分销利润 
+         --INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+		--	,[balance],[TransactionTime],[TransactionWay]
+		--	,[TransactionCate],[TransactionState],[TransactionDesc]
+		--	,[OrderID],[OrderType],[TranUserId]
+	--		,[MingXiId],[ApiJiaoYiHao])
+	--	 VALUES(@MemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+	--		,@YongHuYuE,GETDATE(),1
+	--		,7,1,''
+	--		,@OrderId,@OrderLeiBie,''
+	--		,newid(),'')
+       END
+       ELSE--如果不是
+       BEGIN
+         --供应商信息
+         SELECT @MemberId=MemberID from tbl_JA_Sellers where ID=@GYSId
+         SELECT @YongHuYuE=TotalMoney from tbl_Member where MemberID=@MemberId
+         --更新供应商的E额宝余额
+         UPDATE tbl_Member set TotalMoney=TotalMoney+(@ChengBen*@ProductNum)-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         --代理商信息
+         SELECT @DaiLiMemberId=MemberID from tbl_JA_Sellers where ID=@DaiLiId
+         UPDATE tbl_Member set TotalMoney=TotalMoney+@JiaoYiJinE-@FenXiaoJinE where MemberID=@DaiLiMemberId           SELECT @DaiLiYongHuYuE=TotalMoney from tbl_Member where MemberID=@DaiLiMemberId
+         
+         --给供应商发放货款
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,(@ChengBen*@ProductNum)-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+(@ChengBen*@ProductNum)-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,7,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+   
+         if(len(@DaiLiId)>10 and @JiaoYiJinE-@FenXiaoJinE>0)
+          BEGIN
+         --给代理商发放分销利润
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@DaiLiMemberId,@OrderCode,@JiaoYiJinE-@FenXiaoJinE
+			,@YongHuYuE,GETDATE(),1
+			,9,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+           END
+       END
+         --更新供应商的E额宝余额
+         --UPDATE tbl_Member set TotalMoney=TotalMoney+@ChengBen-@JiaoYiLi*@JiaoYiJinE where MemberID=@MemberId
+         
+         --更新总账户余额
+         UPDATE tbl_YuE SET EEBaoYuE=EEBaoYuE-(@ChengBen*@ProductNum)+(@JiaoYiLi*@JiaoYiJinE)-(@JiaoYiJinE-@FenXiaoJinE)
+         update tbl_YuE set YuE= EEBaoYuE+KuaiQianYuE+XianXia
+
+         
+         --扣除供应商的平台交易费
+         INSERT INTO [tbl_JA_Account]([UserId],[TransactionID],[Amounts]
+			,[balance],[TransactionTime],[TransactionWay]
+			,[TransactionCate],[TransactionState],[TransactionDesc]
+			,[OrderID],[OrderType],[TranUserId]
+			,[MingXiId],[ApiJiaoYiHao])
+		 VALUES(@MemberId,@OrderCode,-@JiaoYiLi*@JiaoYiJinE
+			,@YongHuYuE+(@ChengBen*@ProductNum)-@JiaoYiLi*@JiaoYiJinE,GETDATE(),1
+			,8,1,''
+			,@OrderId,@OrderLeiBie,''
+			,newid(),'')
+    END
+   END
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+
+
+---------------------------------------------2015-11-17记录购买时候舱位信息------------------------------------------------
+
+ALTER TABLE dbo.tbl_JiPiaoDingDan ADD
+	CangWeiInfo nvarchar(2000) NULL
+	
+GO
+
+ALTER PROCEDURE [dbo].[proc_JiPiaoDingDan_C]
+	@DingDanId CHAR(36)
+	,@ApiDingDanId CHAR(36)
+	,@GongPiaoShangId NVARCHAR(50)
+	,@ZhengCeId NVARCHAR(50)
+	,@CangWei NVARCHAR(50)
+	,@HangBanHao NVARCHAR(50)
+	,@ChuFaChengShiSanZiMa NVARCHAR(50)
+	,@DaoDaChengShiSanZiMa NVARCHAR(50)
+	,@ChuFaRiQi DATETIME
+	,@CaiGouFanDian MONEY
+	,@ShiFuDaYinXingChengDan INT
+	,@ZhengCeLeiXing INT
+	,@HangXianLeiXing INT
+	,@XiaDanShiJian DATETIME
+	,@DingDanStatus INT
+	,@FuKuanStatus INT
+	,@FuKuanShiJian DATETIME
+	,@PNR NVARCHAR(50)
+	,@KeHuYouHuiDian MONEY
+	,@JingXiaoShangLiRunDian MONEY
+	,@JinE MONEY
+	,@JingXiaoShangLiRun MONEY
+	,@QiFeiShiJian NVARCHAR(50)
+	,@DaoDaShiJian NVARCHAR(50)
+	,@PiaoMianJiaGe MONEY
+	,@ShuiFeiJinE MONEY
+	,@DingPiaoRenShu INT
+	,@ChengRenDingDanId CHAR(36)
+	,@ErTongDingDanId CHAR(36)
+	,@HuiYuanId CHAR(36)
+	,@ChengKeXml NVARCHAR(MAX)
+	,@ChengKeLeiXing INT
+	,@ApiJieShouFangShi INT
+	,@ShiFouYunXuGengHuanPnr INT
+	,@ShiFouZiDongDaiKou INT
+	,@XiangApiFuKuanStatus INT
+	,@XiangApiFuKuanShiJian DATETIME
+	,@CangWeiInfo NVARCHAR(max)
+	,@RetCode INT OUTPUT
+AS
+BEGIN
+	SET @RetCode=0
+	DECLARE @hdoc INT
+	DECLARE @errorcount INT
+	DECLARE @IdentityId INT
+	DECLARE @JiaoYiHao NVARCHAR(255)
+	
+	SET @errorcount=0
+	
+	IF NOT EXISTS(SELECT 1 FROM tbl_Member WHERE MemberID=@HuiYuanId)
+	BEGIN
+		SET @RetCode=-99
+		RETURN @RetCode
+	END
+	
+	BEGIN TRAN
+	
+	INSERT INTO [tbl_JiPiaoDingDan]([DingDanId],[ApiDingDanId],[GongPiaoShangId]
+		,[ZhengCeId],[CangWei],[HangBanHao]
+		,[ChuFaChengShiSanZiMa],[DaoDaChengShiSanZiMa],[ChuFaRiQi]
+		,[CaiGouFanDian],[ShiFuDaYinXingChengDan],[ZhengCeLeiXing]
+		,[HangXianLeiXing],[XiaDanShiJian],[DingDanStatus]
+		,[FuKuanStatus],[FuKuanShiJian],[PNR],[KeHuYouHuiDian]
+		,[JingXiaoShangLiRunDian],[JinE],[JingXiaoShangLiRun]
+		,[QiFeiShiJian],[DaoDaShiJian],[PiaoMianJiaGe]
+		,[ShuiFeiJinE],[DingPiaoRenShu],[ChengRenDingDanId],[ErTongDingDanId]
+		,[HuiYuanId],[ShiFouShanChu],[JiaoYiHao]
+		,[ChengKeLeiXing],[ApiJieShouFangShi],[ShiFouYunXuGengHuanPnr]
+		,[ShiFouZiDongDaiKou],[XiangApiFuKuanStatus],[XiangApiFuKuanShiJian],[CangWeiInfo])
+	VALUES(@DingDanId,@ApiDingDanId,@GongPiaoShangId
+		,@ZhengCeId,@CangWei,@HangBanHao
+		,@ChuFaChengShiSanZiMa,@DaoDaChengShiSanZiMa,@ChuFaRiQi
+		,@CaiGouFanDian,@ShiFuDaYinXingChengDan,@ZhengCeLeiXing
+		,@HangXianLeiXing,@XiaDanShiJian,@DingDanStatus
+		,@FuKuanStatus,@FuKuanShiJian,@PNR,@KeHuYouHuiDian
+		,@JingXiaoShangLiRunDian,@JinE,@JingXiaoShangLiRun
+		,@QiFeiShiJian,@DaoDaShiJian,@PiaoMianJiaGe
+		,@ShuiFeiJinE,@DingPiaoRenShu,@ChengRenDingDanId,@ErTongDingDanId
+		,@HuiYuanId,'0',''
+		,@ChengKeLeiXing,@ApiJieShouFangShi,@ShiFouYunXuGengHuanPnr
+		,@ShiFouZiDongDaiKou,@XiangApiFuKuanStatus,@XiangApiFuKuanShiJian,@CangWeiInfo)
+	SET @errorcount=@errorcount+@@ERROR
+	SET @IdentityId=SCOPE_IDENTITY()
+	
+	SET @JiaoYiHao='JP'+CONVERT(VARCHAR(8),GETDATE(),112)+dbo.fn_PadLeft(@IdentityId,'0',5)
+	
+	UPDATE [tbl_JiPiaoDingDan] SET [JiaoYiHao]=@JiaoYiHao WHERE DingDanId=@DingDanId
+	SET @errorcount=@errorcount+@@ERROR
+		
+	IF(@errorcount=0 AND @ChengKeXml IS NOT NULL AND LEN(@ChengKeXml)>0)
+	BEGIN
+		EXEC sp_xml_preparedocument @hdoc OUTPUT,@ChengKeXml	
+		INSERT INTO [tbl_JiPiaoDingDanChengKe]([ChengKeId],[XingMing],[ZhengJianHao]
+			,[ZhengJianLeiXing],[ChengKeLeiXing],[ChuShengRiQi]
+			,[DingDanId])
+		SELECT [ChengKeId],[XingMing],[ZhengJianHao]
+			,[ZhengJianLeiXing],[ChengKeLeiXing],[ChuShengRiQi]
+			,@DingDanId
+		FROM OPENXML(@hdoc,'/root/info',3)
+			WITH([ChengKeId] CHAR(36),[XingMing] NVARCHAR(50),[ZhengJianHao] NVARCHAR(50)
+			,[ZhengJianLeiXing] INT,[ChengKeLeiXing] INT,[ChuShengRiQi] DATETIME)	
+		SET @errorcount=@errorcount+@@ERROR
+		EXEC sp_xml_removedocument @hdoc
+	END
+	
+	IF(@errorcount<>0)
+	BEGIN
+		ROLLBACK TRAN
+		SET @RetCode=-100
+		RETURN @RetCode
+	END
+	
+	COMMIT TRAN	
+	
+	SET @RetCode=1
+	RETURN @RetCode	
+END
+GO
+
+
+
+-----------2015-11-26 16:00原版（把tbl_XianLuTour_ZuiJinFaBan换做view_XianLuTour_ZuiJinFaBan）------------------------
+ALTER VIEW [dbo].[view_XianLu]
+AS
+--SELECT   A.XianLuId, A.AreaId, A.RouteName, A.TianShu, A.DepProvinceId, A.DepCityId, A.ArrProvinceId, A.ArrCityId, A.JiHuaRenShu, A.SCJCR, A.SCJET, A.JSJCR, 
+--                      A.JSJET, A.TingTianShu, A.ChuFaJiaoTong, A.FanChengJiaoTong, A.JiHeFangShi, A.TeSe, A.TeSeFilePath, A.TuJing, A.QianZheng, A.QianZhengFilePath, 
+--                      A.GuanZhuShu, A.LxrName, A.LxrTelephone, A.LxrQQ, A.LxrMobile, A.Description, A.Keywords, A.OperatorId, A.IssueTime, A.LatestId, A.LatestTime, 
+--                      A.Line_Source, A.LineType, A.IdentityId, A.AreaName, A.InterfaceID, B.TourId, B.LDate, B.RDate, B.Status,
+--                          (SELECT     AVG(ManYiDu) AS ManYiDu
+--                            FROM          dbo.tbl_XianLuDianPing
+--                            WHERE      (XianLuId = A.XianLuId)) AS ManYiDu,
+--                          (SELECT     COUNT(1) AS Expr1
+--                            FROM          dbo.tbl_XianLuDianPing AS tbl_XianLuDianPing_1
+--                            WHERE      (XianLuId = A.XianLuId)) AS DianPingShu, B.JSJCR AS JSJCR1, B.JSJET AS JSJET1, A.CFCS,A.xianluzt,A.ProductSort
+--FROM         dbo.tbl_XianLu AS A LEFT OUTER JOIN
+--                      dbo.view_XianLuTour_ZuiJinFaBan AS B ON A.XianLuId = B.XianLuId
+
+
+SELECT   A.XianLuId, A.AreaId, A.RouteName, A.TianShu, A.DepProvinceId, A.DepCityId, A.ArrProvinceId, A.ArrCityId, A.JiHuaRenShu, A.SCJCR, A.SCJET, A.JSJCR, 
+                      A.JSJET, A.TingTianShu, A.ChuFaJiaoTong, A.FanChengJiaoTong, A.JiHeFangShi, A.TeSe, A.TeSeFilePath, A.TuJing, A.QianZheng, A.QianZhengFilePath, 
+                      A.GuanZhuShu, A.LxrName, A.LxrTelephone, A.LxrQQ, A.LxrMobile, A.Description, A.Keywords, A.OperatorId, A.IssueTime, A.LatestId, A.LatestTime, 
+                      A.Line_Source, A.LineType, A.IdentityId, A.AreaName, A.InterfaceID, B.TourId, B.LDate, B.RDate, B.Status,
+                          0.0 AS ManYiDu,
+                          0 AS DianPingShu, B.JSJCR AS JSJCR1, B.JSJET AS JSJET1, A.CFCS,A.xianluzt,A.ProductSort
+FROM         dbo.tbl_XianLu AS A LEFT OUTER JOIN
+                      dbo.tbl_XianLuTour_ZuiJinFaBan AS B ON A.XianLuId = B.XianLuId
+GO
+
+
+alter TABLE [dbo].[tbl_Sysarea]
+	
+	add [ImgPath] [nvarchar](250) NULL,
+	 [AdvLink] [nvarchar](250) NULL,
+	  [AdvTitle] [nvarchar](250) NULL
+GO

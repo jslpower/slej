@@ -5,6 +5,7 @@
 <html>
 <head id="Head1" runat="server">
     <meta charset="utf-8">
+    <title>订单填写</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/css/flight.css" rel="stylesheet" type="text/css" />
 
@@ -42,6 +43,7 @@
                             <asp:Literal ID="litDaoDaShiJian" runat="server">10:33</asp:Literal></strong></p>
                 </li>
             </ul>
+            <div class="paddL">经停：<asp:Literal ID="litJingTing" runat=server></asp:Literal></div>
             <div class="paddL">
                 <asp:Literal ID="litHangban" runat="server">南方航空CZ6412</asp:Literal></div>
             <div class="paddL">
@@ -60,8 +62,18 @@
                     <asp:Literal ID="ltrTui" runat="server"></asp:Literal></li>
             </ul>
         </div>
-        <div class="f_tip">
-            乘机人信息</div>
+        <div class="car_tab" style="display: none">
+            <div class="user_form gray_lineB">
+                <ul>
+                    <li class="wid"><span class="label_name">机票</span> <span class="number"><i class="num-minus">
+                    </i>
+                        <input readonly="readonly" id="JiPiaoNum" name="JiPiaoNum" type="text" value="1"><i
+                            class="num-add"></i></span> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt10 padd10" style="border-bottom: #E9E9E9 solid 1px; background: #fff;">
+            <em class="font18" style="color: #999;">乘机人</em> <em class="font16" id="em_rs">1成人&nbsp;儿童0人</em></div>
         <div class="add_box temp">
             <span class="del_icon" style="display: block;"></span>
             <ul>
@@ -74,7 +86,7 @@
                     <input name="u-Name" type="text" class="u-input" value="" placeholder="证件人姓名" />
                 </li>
                 <li><span class="label_name">身份证</span>
-                    <input name="u-CardNo" type="text" class="u-input" value="" placeholder="成人填写身份证号码/儿童填写出生日期" />
+                    <input name="u-CardNo" type="text" class="u-input" value="" placeholder="身份证号码/儿童出生日期(19900101)" />
                 </li>
                 <li><span class="label_name">手机号</span>
                     <input name="u-Mobile" type="text" class="u-input" value="" placeholder="用于接短信通知" />
@@ -86,16 +98,6 @@
         </div>
         <div class="paddT paddL paddB gray_line" style="background: #fff;">
             <a href="javascript:;" class="f_add_btn">添加更多乘机人</a></div>
-        <div class="car_tab">
-            <div class="user_form gray_lineB">
-                <ul>
-                    <li class="wid"><span class="label_name">机票</span> <span class="number"><i class="num-minus">
-                    </i>
-                        <input readonly="readonly" id="JiPiaoNum" name="JiPiaoNum" type="text" value="1"><i
-                            class="num-add"></i></span> </li>
-                </ul>
-            </div>
-        </div>
     </div>
     <div id="showinfo">
     </div>
@@ -121,8 +123,39 @@
 
     <script type="text/javascript">
         var pageOpt = {
+            CheckForm: function() {
+
+
+            },
             BaoCun: function() {
                 $(".step_btn").click(function() {
+                    var msg = '';
+                    var count = 1;
+                    $(".temp").each(function() {
+                        var isName = /^[\u4e00-\u9fa5]{2,4}$/;
+                        var isIdCard = /(^\d{15}$)|(^\d{17}[0-9Xx]$)/;
+                        var isDate = /^\d{4}\d{1,2}\d{1,2}$/;
+                        var $NameVal = $(this).find("input[name=u-Name]").val();
+                        var $CardVal = $(this).find("input[name=u-CardNo]").val();
+                        if ($NameVal == "" || $NameVal == "undefined") {
+                            msg += "第" + count + "位游客姓名不可为空 \n";
+                        }
+                        else {
+                            if (!isName.test($NameVal)) {
+                                msg += "第" + count + "个游客请填写中文姓名 \n";
+                            }
+                        }
+                        if ($CardVal == "" || $CardVal == "undefined") {
+                            msg += "第" + count + "证件号码或出生日期不可为空 \n";
+                        } else {
+
+                            if (!isIdCard.test($CardVal) && !isDate.test($CardVal)) {
+                                msg += "第" + count + "证件号码或出生日期格式错误 \n";
+                            }
+                        }
+                        count++
+                    })
+                    if (msg != '') { alert(msg); return false; }
                     var $that = this;
                     $(this).unbind("click");
                     $("#i-Model").val($("#m-Span").html());
@@ -169,37 +202,44 @@
                         alert("最少保留一位乘客信息");
                     }
                     pageOpt.sumPrice();
+                    pageOpt.chageCK();
 
                 })
 
+            },
+            chageCK: function() {
+
+                var $crs = 0, $ets = 0;
+                $("[name=u-Type]").each(function() {
+                    if ($(this).val() == "1") { $ets++; }
+                    else { $crs++; }
+                })
+                $("#em_rs").html("" + $crs + "成人&nbsp;儿童" + $ets + "人")
             },
             addLinkMan: function() {
                 $(".f_add_btn").click(function() {
                     var strHTML = $(".temp").eq(0).clone(true);
                     strHTML.find("input").val("");
                     $("#box").append(strHTML);
-                    strHTML.find(".del_icon").bind("click", function() {
-                        if ($(".temp").length > 1) {
-                            $(this).closest(".temp").remove();
-                            $("#JiPiaoNum").val($(".del_icon").length);
-                        }
-                        else {
-                            alert("最少保留一位乘客信息");
-                            $("#JiPiaoNum").val(1);
-                        }
-                    });
+
+                    pageOpt.chageCK();
                     $("#JiPiaoNum").val($(".del_icon").length);
                     pageOpt.sumPrice();
+
+
                 })
 
             }
         }
 
         $(function() {
+
             pageOpt.removeLinkMan();
             pageOpt.addLinkMan();
             pageOpt.BaoCun();
-
+            $("[name=u-Type]").change(function() {
+                pageOpt.chageCK();
+            })
 
 
 
@@ -208,22 +248,7 @@
     </script>
 
     <script type="text/javascript">
-        $(".num-minus").click(function() {
-            var getNum = $(this).parent().find("input").eq(0);
-            if (tableToolbar.getInt(getNum.val()) > 1) {//成人数量不能低于2人
-                getNum.val(tableToolbar.getInt(getNum.val()) - 1);
-            } else {
-                getNum.val(1);
-            }
-            pageOpt.sumPrice();
 
-        });
-        $(".num-add").click(function() {
-            var getNum = $(this).parent().find("input").eq(0);
-            getNum.val(tableToolbar.getInt(getNum.val()) + 1);
-            $(".f_add_btn").click();
-            pageOpt.sumPrice();
-        });
         $("#span_t").click(function() {
             var $that = $(this);
             var $ul = $("#ul_t");

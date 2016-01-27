@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using EyouSoft.Common;
 using EyouSoft.IDAL.AccountStructure;
+using System.Text;
+using EyouSoft.Model.AccountStructure;
 
 namespace EyouSoft.Web.WebMaster.TuanGou
 {
@@ -17,11 +19,80 @@ namespace EyouSoft.Web.WebMaster.TuanGou
         protected int pageSize = 20;
         protected decimal SumMoney = 0;//销售金额
         #endregion
+        protected decimal JiaoYiLv = 0M;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Utils.GetQueryStringValue("setState") == "1") setOrderState();
+            if (Utils.GetQueryStringValue("setState") == "2") SetFanQian();
+            var model = new EyouSoft.BLL.OtherStructure.BKV().GetCompanySetting();
+            JiaoYiLv = model.JiaoYiLv;
             initList();
 
+        }
+        /// <summary>
+        /// 获取代理商下拉列表
+        /// </summary>
+        /// <param name="selectItem"></param>
+        /// <returns></returns>
+        protected string GetSellersHtml(string selectItem)
+        {
+            StringBuilder strHtml = new StringBuilder();
+            IList<MTeYue> list = new List<MTeYue>();
+            IList<MSellers> dllist = new List<MSellers>();
+            if (Utils.GetQueryStringValue("type") == "s")
+            {
+                list = new EyouSoft.BLL.MemberStructure.BMember().GetMyTY(UserInfo.GysId, 1);
+            }
+            else if (Utils.GetQueryStringValue("type") == "g")
+            {
+                MTeYueSer searchmo = new MTeYueSer();
+                list = new EyouSoft.BLL.MemberStructure.BMember().GetMyTGDaiLi(UserInfo.GysId, 1, 10000, searchmo);
+            }
+            else
+            {
+                dllist = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSite();
+            }
+            if (selectItem == "0")
+            {
+                strHtml.Append("<option value=\"0\" selected=\"selected\">金奥总站</option>");
+            }
+            else
+            {
+                strHtml.Append("<option value=\"0\" >金奥总站</option>");
+            }
+            if (list != null && list.Count > 0)
+            {
+                foreach (var item in list)
+                {
+                    if (item.ID.ToString().Equals(selectItem))
+                    {
+                        strHtml.AppendFormat("<option value=\"{0}\"  selected=\"selected\">{1}</option>",
+                            item.ID, item.WebsiteName);
+                    }
+                    else
+                    {
+                        strHtml.AppendFormat("<option value=\"{0}\" >{1}</option>",
+                            item.ID, item.WebsiteName);
+                    }
+                }
+            }
+            else if (dllist != null && dllist.Count > 0)
+            {
+                foreach (var item in dllist)
+                {
+                    if (item.ID.ToString().Equals(selectItem))
+                    {
+                        strHtml.AppendFormat("<option value=\"{0}\"  selected=\"selected\">{1}</option>",
+                            item.ID, item.WebsiteName);
+                    }
+                    else
+                    {
+                        strHtml.AppendFormat("<option value=\"{0}\" >{1}</option>",
+                            item.ID, item.WebsiteName);
+                    }
+                }
+            }
+            return strHtml.ToString();
         }
         /// <summary>
         /// 初始化列表
@@ -32,6 +103,29 @@ namespace EyouSoft.Web.WebMaster.TuanGou
             //serchModel.SupplierID = UserInfo.GysId;
             serchModel.ProductName = Utils.GetQueryStringValue("CpName");
             serchModel.OrderCode = Utils.GetQueryStringValue("OrderCode");
+            serchModel.SupplierID = Utils.GetQueryStringValue("qudaolist");
+            if (serchModel.SupplierID == "-1")
+            {
+                serchModel.SupplierID = null;
+            }
+
+            if (Utils.GetQueryStringValue("type") == "g")
+            {
+                serchModel.GYSId = UserInfo.GysId;
+            }
+            if (Utils.GetQueryStringValue("type") == "s")
+            {
+                serchModel.GYSId = UserInfo.GysId;
+                if (!string.IsNullOrEmpty(serchModel.SupplierID) && serchModel.SupplierID != "-1" && serchModel.SupplierID != "0")
+                {
+                    serchModel.IsTeYue = serchModel.SupplierID;
+                }
+                else
+                {
+                    serchModel.IsTeYue = "1";
+                }
+                //serchModel.DaiLiId 
+            }
 
             pageIndex = UtilsCommons.GetPagingIndex();
             var list = new EyouSoft.BLL.OtherStructure.BTuanGouDingDan().GetList(pageSize, pageIndex, ref recordCount, serchModel);
@@ -94,6 +188,29 @@ namespace EyouSoft.Web.WebMaster.TuanGou
 
         }
 
+        /// <summary>
+        /// 返回供应商网点名称
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
+        protected string GetGongYingByID(object ProductId)
+        {
+            string id = "";
+            if (ProductId != null)
+            {
+                id = Utils.GetString(ProductId.ToString(), "");
+            }
+            if (id == "" || id == null) return "金奥";
+            var promodel = new EyouSoft.BLL.OtherStructure.BTuanGou().GetModel(Convert.ToInt32(id));
+            if (promodel == null) return "金奥";
+            BSellers bsells = new BSellers();
+            EyouSoft.Model.AccountStructure.MSellers mseller = new EyouSoft.Model.AccountStructure.MSellers();
+            mseller = bsells.GetWebSiteName(promodel.SupplierID);
+            if (mseller == null) return "金奥";
+            return "供应商：<a href ='/webmaster/Supplier/SupplierD.aspx?dlsid=" + mseller.ID + "'>" + mseller.WebsiteName + "</a>";
+
+        }
+
         ///// <summary>
         ///// 删除分类
         ///// </summary>
@@ -128,6 +245,7 @@ namespace EyouSoft.Web.WebMaster.TuanGou
             if (result == 1 && state == EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货)
             {
                 insertDetial(orderid);
+
                 new EyouSoft.BLL.OtherStructure.BTuanGouDingDan().SheZhiZhiFus(new EyouSoft.Model.OtherStructure.MTuanGouDingDan() { PayState = EyouSoft.Model.Enum.PaymentState.已支付, OrderState = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderID = int.Parse(orderid) });
             }
             if (result == 1 && state == EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待付款)
@@ -142,7 +260,7 @@ namespace EyouSoft.Web.WebMaster.TuanGou
         /// <param name="orderid"></param>
         /// <param name="setState"></param>
         /// <returns></returns>
-        protected string setOptClick(string orderid, object setState)
+        protected string setOptClick(string orderid, object setState, object GYSid)
         {
             EyouSoft.Model.Enum.XianLuStructure.OrderStatus state = (EyouSoft.Model.Enum.XianLuStructure.OrderStatus)setState;
             switch (state)
@@ -159,6 +277,18 @@ namespace EyouSoft.Web.WebMaster.TuanGou
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货:
                     return string.Format("  <span  style='background-color:#F08C0C;color:#FFF;'>等待收货</span>");
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待返利:
+                    if (UserInfo.LeiXing == EyouSoft.Model.Enum.WebmasterUserType.后台用户)
+                    {
+                        return string.Format("  <a href='javascript:;' onclick=\"javascript:pageData.FanQian('{0}','{1}');\"  ><span style='background-color:#060;color:#FFF;'>交易成功，<br />请发放货款!</span></a>", orderid, (byte)EyouSoft.Model.Enum.XianLuStructure.OrderStatus.交易完成);
+                    }
+                    else if (UserInfo.GysId == GYSid.ToString())
+                    {
+                        return string.Format("<span style='background-color:#23F111;color:#FFF;'>等待收款</span>");
+                    }
+                    else
+                    {
+                        return string.Format("<span style='background-color:#23F111;color:#FFF;'>交易完成</span>");
+                    }
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.交易完成:
                     return string.Format("<span style='background-color:#23F111;color:#FFF;'>交易完成</span>");
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.取消订单:
@@ -245,6 +375,13 @@ namespace EyouSoft.Web.WebMaster.TuanGou
             }
 
             return new EyouSoft.BLL.OtherStructure.BJiaoYiMingXi().JiaoYiMingXi_C(info) == 1;
+        }
+
+        void SetFanQian()
+        {
+            string orderid = Utils.GetQueryStringValue("id");
+            int result = new EyouSoft.BLL.OtherStructure.BTuanGouDingDan().FenRun(orderid, EyouSoft.Model.Enum.DingDanLeiBie.团购订单);
+            RCWE(UtilsCommons.AjaxReturnJson(result == 1 ? "1" : "0", result == 1 ? "操作成功" : "操作失败"));
         }
     }
 }

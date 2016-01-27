@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="BLL\BLLBase.cs" />
     <Compile Include="BrowserInfo.cs" />
+    <Compile Include="CacheUtility.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="ConfigurationSectionHandler\SmsSettingHandler.cs" />
     <Compile Include="DAL\DALBase.cs" />

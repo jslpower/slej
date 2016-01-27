@@ -1981,6 +1981,7 @@ namespace EyouSoft.DAL.XianLuStructure
             StringBuilder StrSql = new StringBuilder();
             StrSql.Append("select * from  tbl_SysCity ");
             StrSql.Append("where id in(select depcityid from tbl_xianlu where depcityid<>0)");
+            StrSql.Append("order by name");
             DbCommand dc = this._db.GetSqlStringCommand(StrSql.ToString());
             using (IDataReader dr = EyouSoft.Toolkit.DAL.DbHelper.ExecuteReader(dc, this._db))
             {
@@ -2005,6 +2006,72 @@ namespace EyouSoft.DAL.XianLuStructure
             }
             return ResultList;
         }
+        /// <summary>
+        /// 获取出发地列表
+        /// </summary>
+        /// <returns></returns>
+        public IList<EyouSoft.Model.MSysCity> getChuFaCitys(string CityName)
+        {
+            IList<EyouSoft.Model.MSysCity> ResultList = null;
+            StringBuilder StrSql = new StringBuilder();
+            StrSql.Append("select * from  tbl_SysCity ");
+            StrSql.AppendFormat("where Name like '%{0}%' and id in(select depcityid from tbl_xianlu where depcityid<>0)", CityName);
+            StrSql.Append("order by name");
+            DbCommand dc = this._db.GetSqlStringCommand(StrSql.ToString());
+            using (IDataReader dr = EyouSoft.Toolkit.DAL.DbHelper.ExecuteReader(dc, this._db))
+            {
+                ResultList = new List<EyouSoft.Model.MSysCity>();
+                while (dr.Read())
+                {
+                    EyouSoft.Model.MSysCity model = new EyouSoft.Model.MSysCity()
+                    {
+                        Id = dr.GetInt32(dr.GetOrdinal("Id")),
+                        ProvinceId = dr.GetInt32(dr.GetOrdinal("ProvinceId")),
+                        Name = dr.IsDBNull(dr.GetOrdinal("Name")) ? "" : dr.GetString(dr.GetOrdinal("Name")),
+                        CenterCityId = dr.GetInt32(dr.GetOrdinal("CenterCityId")),
+                        HeaderLetter = dr.IsDBNull(dr.GetOrdinal("HeaderLetter")) ? "" : dr.GetString(dr.GetOrdinal("HeaderLetter")),
+                        IsSite = this.GetBoolean(dr.IsDBNull(dr.GetOrdinal("IsSite")) ? "" : dr.GetString(dr.GetOrdinal("IsSite"))),
+                        DomainName = dr.IsDBNull(dr.GetOrdinal("DomainName")) ? "" : dr.GetString(dr.GetOrdinal("DomainName")),
+                        IsEnabled = this.GetBoolean(dr.IsDBNull(dr.GetOrdinal("IsEnabled")) ? "" : dr.GetString(dr.GetOrdinal("IsEnabled")))
+                    };
+                    ResultList.Add(model);
+                    model = null;
+                }
+                return ResultList;
+            }
+        }
+             /// <summary>
+        /// 获取出发地列表
+        /// </summary>
+        /// <returns></returns>
+        public EyouSoft.Model.MSysCity getChuFaCityModel(int CityId)
+        {
+            EyouSoft.Model.MSysCity ResultList = null;
+            StringBuilder StrSql = new StringBuilder();
+            StrSql.Append("select * from  tbl_SysCity ");
+            StrSql.AppendFormat("where id={0} and id in(select depcityid from tbl_xianlu where depcityid<>0)",CityId);
+            DbCommand dc = this._db.GetSqlStringCommand(StrSql.ToString());
+            using (IDataReader dr = EyouSoft.Toolkit.DAL.DbHelper.ExecuteReader(dc, this._db))
+            {
+               
+                if (dr.Read())
+                {
+                    ResultList = new EyouSoft.Model.MSysCity()
+                    {
+                        Id = dr.GetInt32(dr.GetOrdinal("Id")),
+                        ProvinceId = dr.GetInt32(dr.GetOrdinal("ProvinceId")),
+                        Name = dr.IsDBNull(dr.GetOrdinal("Name")) ? "" : dr.GetString(dr.GetOrdinal("Name")),
+                        CenterCityId = dr.GetInt32(dr.GetOrdinal("CenterCityId")),
+                        HeaderLetter = dr.IsDBNull(dr.GetOrdinal("HeaderLetter")) ? "" : dr.GetString(dr.GetOrdinal("HeaderLetter")),
+                        IsSite = this.GetBoolean(dr.IsDBNull(dr.GetOrdinal("IsSite")) ? "" : dr.GetString(dr.GetOrdinal("IsSite"))),
+                        DomainName = dr.IsDBNull(dr.GetOrdinal("DomainName")) ? "" : dr.GetString(dr.GetOrdinal("DomainName")),
+                        IsEnabled = this.GetBoolean(dr.IsDBNull(dr.GetOrdinal("IsEnabled")) ? "" : dr.GetString(dr.GetOrdinal("IsEnabled")))
+                    };
+                
+                }
 
+            }
+            return ResultList;
+        }
     }
 }

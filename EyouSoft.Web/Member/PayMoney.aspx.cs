@@ -57,15 +57,15 @@ namespace EyouSoft.Web.Member
             var item = new EyouSoft.IDAL.MemberStructure.BMember2().GetByAccount(list.OperatorId);
             if (list.RouteType == EyouSoft.Model.Enum.AreaType.出境线路)
             {
-                TradeMoney.Text = list.ChengRenShu + "成人 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, Convert.ToDecimal(list.JSJCR), Convert.ToDecimal(list.SCJCR), list.UserType).ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, Convert.ToDecimal(list.JSJER), Convert.ToDecimal(list.SCJET), list.UserType).ToString("f2") + "元/人 = " + Convert.ToDouble(list.JinE).ToString("f2") + "元";
+                TradeMoney.Text = list.ChengRenShu + "成人 * " + list.JiaoYiCR.ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + list.JiaoYiET.ToString("f2") + "元/人 = " + list.JinE.ToString("f2") + "元";
             }
             else if (list.RouteType == EyouSoft.Model.Enum.AreaType.国内长线)
             {
-                TradeMoney.Text = list.ChengRenShu + "成人 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, Convert.ToDecimal(list.JSJCR), Convert.ToDecimal(list.SCJCR), list.UserType).ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, Convert.ToDecimal(list.JSJER), Convert.ToDecimal(list.SCJET), list.UserType).ToString("f2") + "元/人 = " + Convert.ToDouble(list.JinE).ToString("f2") + "元";
+                TradeMoney.Text = list.ChengRenShu + "成人 * " + list.JiaoYiCR.ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + list.JiaoYiET.ToString("f2") + "元/人 = " + list.JinE.ToString("f2") + "元";
             }
             else if (list.RouteType == EyouSoft.Model.Enum.AreaType.周边短线)
             {
-                TradeMoney.Text = list.ChengRenShu + "成人 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, Convert.ToDecimal(list.JSJCR), Convert.ToDecimal(list.SCJCR), list.UserType).ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, Convert.ToDecimal(list.JSJER), Convert.ToDecimal(list.SCJET), list.UserType).ToString("f2") + "元/人 = " + Convert.ToDouble(list.JinE).ToString("f2") + "元";
+                TradeMoney.Text = list.ChengRenShu + "成人 * " + list.JiaoYiCR.ToString("f2") + "元/人 + " + list.ErTongShu + "儿童 * " + list.JiaoYiET.ToString("f2") + "元/人 = " + list.JinE.ToString("f2") + "元";
             }
             //TradeMoney.Text =  Convert.ToDouble(list.JinE).ToString("f2");
             lblchanpinmingcheng.Text = list.XianLuName;
@@ -103,7 +103,7 @@ namespace EyouSoft.Web.Member
             TradeMoney.Text = list.Number + "辆 * " + Convert.ToDouble(list.ZuJin / list.Number) + "元/辆 =" + Convert.ToDouble(list.ZuJin).ToString("f2") + "元";
             //TradeMoney.Text = Convert.ToDouble(list.ZuJin).ToString("f2");
             lblchanpinmingcheng.Text = list.CarName;
-            
+
             if (list.ZuJin.HasValue)
                 ZhiFuJinE = list.ZuJin.Value.ToString("F2");
             return list;

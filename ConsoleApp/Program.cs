@@ -20,17 +20,17 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine("boktour begin");
-            bokLine bk = new bokLine();
-            int i = bk.GetLine();
-            int i1 = bk.GetShortLine();
+            //Console.WriteLine("boktour begin");
+            //bokLine bk = new bokLine();
+            //int i = bk.GetLine();
+            //int i1 = bk.GetShortLine();
 
-            Console.WriteLine("boktour 合计:" + (i + i1));
+            //Console.WriteLine("boktour 合计:" + (i + i1));
 
 
-            ////中旅旅业线路
-            Console.WriteLine("中旅旅业线路导入-------------------------开始---------------");
-            Console.WriteLine("中旅旅业线路导入合计：{0}----------------结束---------------", new CL_ZL().GetLine());
+            //////中旅旅业线路
+            //Console.WriteLine("中旅旅业线路导入-------------------------开始---------------");
+            //Console.WriteLine("中旅旅业线路导入合计：{0}----------------结束---------------", new CL_ZL().GetLine());
 
 
             ////广大微信线路

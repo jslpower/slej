@@ -1294,11 +1294,12 @@ namespace EyouSoft.BLL.OtherStructure
 
             if (pinfo != null)
             {
-                var sup = new EyouSoft.BLL.SystemStructure.BSupplier().GetModel(pinfo.GYSid);
+                var sup = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(pinfo.GYSid);
                 if (sup != null)
                 {
-                    shangcheng_chanping_jidiao_xingming = sup.SuppName;
-                    shangcheng_chanping_jidiao_shouji = sup.ContactMobile;
+                    var memodel = new EyouSoft.IDAL.MemberStructure.BMember2().Get(sup.MemberID);
+                    shangcheng_chanping_jidiao_xingming = memodel.MemberName;
+                    shangcheng_chanping_jidiao_shouji = memodel.Mobile;
                 }
             }
 
@@ -1539,7 +1540,7 @@ namespace EyouSoft.BLL.OtherStructure
                             duanXinInfo.JieShouShouJi = xiaDanRenInfo.Mobile;
                             neiRong = new StringBuilder();
                             neiRong.AppendFormat("{0}：您好！", xiaDanRenInfo.MemberName);
-                            neiRong.AppendFormat("您提交的编号为{0}的门票商城已成功付款。", info.OrderCode);
+                            neiRong.AppendFormat("您提交的编号为{0}的商城订单已成功付款。", info.OrderCode);
                             //neiRong.AppendFormat("请关注客户出行。");
                             neiRong.AppendFormat("客服：{0}，{1}。", fenXiaoShangInfo.JinAoLXR, fenXiaoShangInfo.JinAoMobile);
                             neiRong.AppendFormat("总机：400-6588-180。");

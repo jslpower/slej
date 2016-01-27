@@ -33,4 +33,12 @@ namespace EyouSoft.Model.Enum
        主站导航 =0,
        代理商导航 =1,
    }
+   /// <summary>
+   /// 是否开启总代理配置
+   /// </summary>
+   public enum IsZDaiLi
+   {
+       不开启总代理配置=0,
+       开启总代理配置=1,
+   }
 }

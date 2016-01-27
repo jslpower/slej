@@ -1145,6 +1145,8 @@ namespace EyouSoft.BLL.HotelStructure
         /// <returns></returns>
         public bool SubmitHotelOrder(MHotelOrderXiangQing submitModel, MemberTypes memberType, out string msg)
         {
+            string JiaGeList = "";//销售价格
+            string FenXiaoJiaGeList = "";//分销价格
             msg = "";
             if (string.IsNullOrEmpty(submitModel.HotelId)
                || submitModel.RoomRateIds == null || submitModel.RoomRateIds.Length == 0
@@ -1226,7 +1228,14 @@ namespace EyouSoft.BLL.HotelStructure
                     var _orderRoomRateInfo = GetOrderRoomRateInfo(searchModel, out msg);
 
                     orderForSubmit.RoomRates = _orderRoomRateInfo.RoomRates;
-                    if (orderForSubmit.RoomRates == null || orderForSubmit.RoomRates.Count == 0 || orderForSubmit.RoomRates.Count != (submitModel.CheckOutDate - submitModel.CheckInDate).Days)
+                    
+                    int hotelday = 0;
+                    //for (int htime = 0; htime < orderForSubmit.RoomRates.Count; htime++)
+                    //{
+                    //    hotelday = hotelday + orderForSubmit.RoomRates[htime].Time.Count();
+                    //}
+                    hotelday = orderForSubmit.RoomRates.Count;
+                    if (orderForSubmit.RoomRates == null || orderForSubmit.RoomRates.Count == 0 || hotelday != (submitModel.CheckOutDate - submitModel.CheckInDate).Days)
                     {
                         msg = "物价信息未发现！";
                         return false;
@@ -1237,9 +1246,15 @@ namespace EyouSoft.BLL.HotelStructure
                     {
                         return orderForSubmit.RoomCount * CalculateFee(x.SettlementPrice, x.PreferentialPrice, memberType, feeSetting, FeeTypes.酒店);
                     });
+
                     orderForSubmit.TotalAmount = totalMoney;
 
-                    string url = HttpContext.Current.Request.Url.Host;
+                    for (int mday = 0; mday < orderForSubmit.RoomRates.Count; mday++)
+                    {
+                        JiaGeList += CalculateFee(orderForSubmit.RoomRates[mday].SettlementPrice, orderForSubmit.RoomRates[mday].PreferentialPrice, memberType, feeSetting, FeeTypes.酒店) + ",";
+                    }
+
+                    string url = HttpContext.Current.Request.Url.Host.Replace("m.","");
                     bool hasPower = new BSellers().JudgeAuthor(url, FeeTypes.酒店);
                     if (hasPower)
                     {
@@ -1250,6 +1265,7 @@ namespace EyouSoft.BLL.HotelStructure
                             orderForSubmit.SellerID = currentSellerInfo.ID;
                         }
 
+                        #region  计算总分销价格
                         //分销金额
                         if (!string.IsNullOrEmpty(orderForSubmit.SellerID))
                         {
@@ -1258,19 +1274,18 @@ namespace EyouSoft.BLL.HotelStructure
                                 bool flag = false;
                                 if (currentSellerInfo.DengJi == MemberTypes.代理)
                                 {
-                                    if (memberType == MemberTypes.员工 || memberType == MemberTypes.代理)
-                                    {
                                         orderForSubmit.AgencyJinE = orderForSubmit.RoomRates.Sum(item => CalculateFee(item.SettlementPrice, item.PreferentialPrice, MemberTypes.代理, item.FeeSetting, FeeTypes.酒店));
                                         flag = true;
-                                    }
                                 }
                                 else if (currentSellerInfo.DengJi == MemberTypes.免费代理)
                                 {
-                                    if (memberType == MemberTypes.员工 || memberType == MemberTypes.代理 || memberType == MemberTypes.免费代理)
-                                    {
                                         orderForSubmit.AgencyJinE = orderForSubmit.RoomRates.Sum(item => CalculateFee(item.SettlementPrice, item.PreferentialPrice, MemberTypes.免费代理, item.FeeSetting, FeeTypes.酒店));
                                         flag = true;
-                                    }
+                                }
+                                else if (currentSellerInfo.DengJi == MemberTypes.员工)
+                                {
+                                    orderForSubmit.AgencyJinE = orderForSubmit.RoomRates.Sum(item => CalculateFee(item.SettlementPrice, item.PreferentialPrice, MemberTypes.员工, item.FeeSetting, FeeTypes.酒店));
+                                    flag = true;
                                 }
                                 if (flag == false)
                                 {
@@ -1286,11 +1301,62 @@ namespace EyouSoft.BLL.HotelStructure
                                     }
                                 }
                             }
+                            orderForSubmit.AgencyJinE = orderForSubmit.AgencyJinE * orderForSubmit.RoomCount;
                         }
                         else
                         {
                             orderForSubmit.AgencyJinE = orderForSubmit.RoomRates.Sum(x => x.SettlementPrice * orderForSubmit.RoomCount);
                         }
+                        #endregion
+
+                        #region 计算每一天的分销金额
+                        if (!string.IsNullOrEmpty(orderForSubmit.SellerID))
+                        {
+                            if (currentSellerInfo != null)
+                            {
+                                bool flag = false;
+                                if (currentSellerInfo.DengJi == MemberTypes.代理)
+                                {
+                                    for (int fmday = 0; fmday < orderForSubmit.RoomRates.Count; fmday++)
+                                    {
+                                        FenXiaoJiaGeList += CalculateFee(orderForSubmit.RoomRates[fmday].SettlementPrice, orderForSubmit.RoomRates[fmday].PreferentialPrice, MemberTypes.代理, orderForSubmit.RoomRates[fmday].FeeSetting, FeeTypes.酒店) + ",";
+                                    }
+                                    flag = true;
+                                }
+                                else if (currentSellerInfo.DengJi == MemberTypes.免费代理)
+                                {
+                                    for (int fmday = 0; fmday < orderForSubmit.RoomRates.Count; fmday++)
+                                    {
+                                        FenXiaoJiaGeList += CalculateFee(orderForSubmit.RoomRates[fmday].SettlementPrice, orderForSubmit.RoomRates[fmday].PreferentialPrice, MemberTypes.免费代理, orderForSubmit.RoomRates[fmday].FeeSetting, FeeTypes.酒店) + ",";
+                                    }
+                                    flag = true;
+                                }
+                                else if (currentSellerInfo.DengJi == MemberTypes.员工)
+                                {
+                                    for (int fmday = 0; fmday < orderForSubmit.RoomRates.Count; fmday++)
+                                    {
+                                        FenXiaoJiaGeList += CalculateFee(orderForSubmit.RoomRates[fmday].SettlementPrice, orderForSubmit.RoomRates[fmday].PreferentialPrice, MemberTypes.员工, orderForSubmit.RoomRates[fmday].FeeSetting, FeeTypes.酒店) + ",";
+                                    }
+                                    flag = true;
+                                }
+                                if (flag == false)
+                                {
+                                    MFeeSettings fee = bllFeeSetting.GetByType(FeeTypes.酒店);
+                                    if (currentSellerInfo.DengJi == MemberTypes.代理 || currentSellerInfo.DengJi == MemberTypes.免费代理)
+                                    {
+                                        foreach (var item in orderForSubmit.RoomRates)
+                                        {
+                                            FenXiaoJiaGeList += CalculateFee(item.SettlementPrice, item.PreferentialPrice, currentSellerInfo.DengJi, fee, FeeTypes.酒店)+",";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            FenXiaoJiaGeList = "";
+                        }
+                        #endregion
                     }
                     else
                     {
@@ -1341,6 +1407,38 @@ namespace EyouSoft.BLL.HotelStructure
                             orderForSubmit.InterfaceID = orderId;
                         }
                     }
+                    //orderForSubmit.TotalAmount = orderForSubmit.TotalAmount * hotelday;
+                    //orderForSubmit.AgencyJinE = orderForSubmit.AgencyJinE * hotelday;
+
+                    #region 将每一天的价格记录到表
+
+                    IList<HotelXingCheng> items = new List<HotelXingCheng>();
+                    if (JiaGeList.Length > 0)
+                    {
+                        int RuZhuDay = (orderForSubmit.CheckOutDate - orderForSubmit.CheckInDate).Days;
+                        string[] JiaGeItem = JiaGeList.Trim().TrimEnd(',').Split(',');
+                        string[] FenJiaGeItem = FenXiaoJiaGeList.Trim().TrimEnd(',').Split(',');
+                        for (int i = 0; i < RuZhuDay; i++)
+                        {
+                            var XCModel = new HotelXingCheng();
+                            XCModel.ChenkInDate = orderForSubmit.CheckInDate.AddDays(i);
+                            XCModel.MenShiJia = Convert.ToDecimal(JiaGeItem[i]);
+                            if (FenXiaoJiaGeList.Trim().Length > 0)
+                            {
+                                XCModel.ChengBenJia = Convert.ToDecimal(FenJiaGeItem[i]);
+                            }
+                            else
+                            {
+                                XCModel.ChengBenJia = 0;
+                            }
+                            items.Add(XCModel);
+                        }
+                    }
+                    orderForSubmit.HotelXC = EyouSoft.DAL.HotelStructure.DHotelOrder.getJsonStr(items);
+                    #endregion
+
+
+
                     if (dalHotelOrder.Insert(orderForSubmit) != 1)
                     {
                         msg = "数据更新出错";
@@ -1370,6 +1468,8 @@ namespace EyouSoft.BLL.HotelStructure
 
                     dalHotelOrder.Complete();
                     msg = "订单已成功提交";
+
+
 
                     BDuanXin b = new BDuanXin();
                     if (b.FaSongDingDanDuanXin(orderForSubmit.OrderId, DingDanLeiBie.酒店订单, DuanXinFaSongLeiXing.下单) != 10000)
@@ -1720,5 +1820,6 @@ namespace EyouSoft.BLL.HotelStructure
             }
             return model;
         }
+
     }
 }

@@ -1,10 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Front2.Master" AutoEventWireup="true" CodeBehind="TuanGou.aspx.cs" Inherits="EyouSoft.Web.TuanGou" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Front2.Master" AutoEventWireup="true"
+    CodeBehind="TuanGou.aspx.cs" Inherits="EyouSoft.Web.TuanGou" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script src="/JS/ajaxpagecontrols.js" type="text/javascript"></script>
+
+    <script src="/JS/ajaxpagecontrols.js" type="text/javascript"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-<form runat="server">
-<%--<div class="mainbox fixed">
+    <form runat="server">
+    <%--<div class="mainbox fixed">
     
        <div class="leftbox">
        
@@ -57,42 +61,48 @@
        
        
     </div>--%>
-    
     <div class="tg_paixu fixed">
-        <div class="floatL paixu-list"><span>默认排序：</span><a id="rexiao" href="/TuanGou.aspx?classid=1&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>" class="on">销量</a><a id="zuixin" href="/TuanGou.aspx?classid=2&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>">最新</a></div>
+        <div class="floatL paixu-list">
+            <span>默认排序：</span><a id="rexiao" href="/TuanGou.aspx?classid=1&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>"
+                class="on">销量</a><a id="zuixin" href="/TuanGou.aspx?classid=2&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>">最新</a></div>
         <div class="tg_searchbar">
-           <input type="text" class="search_input" runat="server" value="" id="CpName" name="CpName"/> 
-            <asp:Button ID="Button1" runat="server" CssClass="search_btn" 
-                onclick="Button1_Click" /><%--<input type="submit" class="search_btn" value="" />--%>
+            <input type="text" class="search_input" runat="server" value="" id="CpName" name="CpName" />
+            <asp:Button ID="Button1" runat="server" CssClass="search_btn" OnClick="Button1_Click" /><%--<input type="submit" class="search_btn" value="" />--%>
         </div>
     </div>
-  
     <div class="tg_piclist">
-           <ul>
-               <asp:Repeater ID="rptList" runat="server">
-               <ItemTemplate>
-               <li>
-                    <a href="/TuanGouXX.aspx?id=<%# Eval("ID")%>"><img src="<%# Eval("ProductImg")%>" /></a>
-                    <div class="cont">
-                        <div class="tg_listT"><a href="/TuanGouXX.aspx?id=<%# Eval("ID")%>"><%# Eval("ProductName")%></a></div>
-                        <div class="tg_price">
-                           <span class="tg_num"><strong class="fontblue"><%# Eval("Salevolume")%></strong>人已购买</span>
-                           <span class="rain-price"><s>¥ <%# Convert.ToInt32(Eval("MarketPrice"))%></s> <em><i>¥</i><%# Convert.ToInt32(Eval("GroupPrice"))%></em> </span>
+        <ul>
+            <asp:Repeater ID="rptList" runat="server">
+                <ItemTemplate>
+                    <li><a href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
+                        <img src="<%# Eval("ProductImg")%>" /></a>
+                        <div class="cont">
+                            <div class="tg_listT">
+                                <a href="/TuanGouXX.aspx?id=<%# Eval("ID")%>">
+                                    <%# Eval("ProductName")%></a></div>
+                            <div class="tg_price">
+                                <span class="tg_num"><strong class="fontblue">
+                                    <%# Eval("Salevolume")%></strong>人已购买</span> <span class="rain-price"><s>¥
+                                        <%# Convert.ToInt32(Eval("MarketPrice"))%></s> <em><i>¥</i><%# Convert.ToInt32(Eval("GroupPrice"))%></em>
+                                    </span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-               </ItemTemplate>
-               </asp:Repeater>
-                <asp:Literal ID="litNoMsg" runat="server"></asp:Literal>
-           </ul>
-           <div class="clear"></div>
+                    </li>
+                </ItemTemplate>
+            </asp:Repeater>
+            <asp:Literal ID="litNoMsg" runat="server"></asp:Literal>
+        </ul>
+        <div class="clear">
+        </div>
     </div>
- </form>
-    <div class="page" id="page"></div>  
+    </form>
+    <div class="page" id="page">
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Adv" runat="server">
-<script type="text/javascript">
-var classid = <%=EyouSoft.Common.Utils.GetQueryStringValue("classid") %>;
+
+    <script type="text/javascript">
+var classid = '<%= classid %>';
 if(classid !=1)
 {
 $('#rexiao').removeClass();
@@ -102,7 +112,8 @@ $('#zuixin').addClass("on");
         $(function() {
             if (pagingConfig.recordCount > 0) AjaxPageControls.replace("page", pagingConfig);
         });
-</script>
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Foot" runat="server">
 </asp:Content>

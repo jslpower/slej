@@ -51,28 +51,33 @@ namespace EyouSoft.WAP.Flight
                 litChuFaRiQi.Text = string.Format("{0} {1}", queryJpModel.HangBanRiQi.ToString("MM-dd"), Utils.ConvertWeekDayToChinese(queryJpModel.HangBanRiQi));
                 litChuFaShiJian.Text = string.Format("{0}", queryJpModel.QiFeiShiJian);
 
-                DateTime kaishi = Utils.GetDateTime(queryJpModel.QiFeiShiJian);
-                DateTime jieshu = Utils.GetDateTime(queryJpModel.DaoDaShiJian);
-                TimeSpan tspan = (jieshu - kaishi);
-                litShiChang.Text = string.Format("{0}小时{1}分", tspan.Hours, tspan.Minutes);
-
-
+                DateTime kaishi = Utils.GetDateTime(queryJpModel.HangBanRiQi.ToString("yyyy-MM-dd") + " " + queryJpModel.QiFeiShiJian);
+                DateTime jieshu = Utils.GetDateTime(queryJpModel.HangBanRiQi.ToString("yyyy-MM-dd") + " " + queryJpModel.DaoDaShiJian);
                 DateTime daoda = new DateTime();
                 if (kaishi > jieshu)
                 {
                     daoda = queryJpModel.HangBanRiQi.AddDays(1);
+                    jieshu = Utils.GetDateTime(queryJpModel.HangBanRiQi.AddDays(1).ToString("yyyy-MM-dd") + " " + queryJpModel.DaoDaShiJian);
                 }
                 else
                 {
                     daoda = queryJpModel.HangBanRiQi;
                 }
+
+                TimeSpan tspan = (jieshu - kaishi);
+                litShiChang.Text = string.Format("{0}小时{1}分", tspan.Hours, tspan.Minutes);
+
+
+
                 litDaoDaRiQi.Text = string.Format("{0} {1}", daoda.ToString("MM-dd"), Utils.ConvertWeekDayToChinese(daoda));
                 litDaoDaShiJian.Text = string.Format("{0}", queryJpModel.DaoDaShiJian);
                 litHangban.Text = "(" + EyouSoft.Common.Utils.getCompanyName(queryJpModel.HangKongGongSiErZiMa) + ")" + queryJpModel.HangBanHao;
                 decimal piaomian = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.机票, cangwei.XiaoShouJiaGe, cangwei.PiaoMianJiaGe);
                 decimal sumRJ = queryJpModel.JiJianJinE + queryJpModel.RanYouJinE;
                 sumByOne = (piaomian + sumRJ).ToString("F0");
-                litHangBanXX.Text = string.Format(" 舱位：{0}，<span class=\"font_red\">¥{1}</span> 机/油：<span class=\"font_red\">¥{2}</span> 总计：<span class=\"font_red\">¥<i class=\"font18\" id=\"i_dr\">{3}</i></span>", cangwei.CangWei, piaomian.ToString("F0"), sumRJ.ToString("F0"), sumByOne);
+                litHangBanXX.Text = string.Format(" {4}{0}，<span class=\"font_red\">¥{1}</span> 机/油：<span class=\"font_red\">¥{2}</span> 总计：<span class=\"font_red\">¥<i class=\"font18\" id=\"i_dr\">{3}</i></span>", cangwei.CangWei, piaomian.ToString("F0"), sumRJ.ToString("F0"), sumByOne, cangwei.CangWeiTitle);
+
+                litJingTing.Text = queryJpModel.ShiFouJingTing == "0" ? "否" : queryJpModel.ShiFouJingTing;
 
                 //}
 
@@ -134,7 +139,7 @@ namespace EyouSoft.WAP.Flight
             info.ShiFouYunXuGengHuanPnr = EyouSoft.Model.JPStructure.ShiFouYunXuGengHuanPnr.允许;
             info.ShiFouZiDongDaiKou = EyouSoft.Model.JPStructure.ShiFouZiDongDaiKou.否;
             info.ShiFuDaYinXingChengDan = EyouSoft.Model.JPStructure.ShiFuDaYinXingChengDan.是;
-            info.ZhengCeId = zhengCe.ZhengCeId; //"Mso5CDQ5Z2UJyipBEib7gg==";
+            info.ZhengCeId = cangwei.ZhengCeId; //"Mso5CDQ5Z2UJyipBEib7gg==";
             info.ZhengCeLeiXing = (ZhengCeLeiXing)cangwei.ZhengCeLeiXing;// EyouSoft.Model.JPStructure.ZhengCeLeiXing.普通政策;
             info.QiFeiShiJian = getModel.HangBanRiQi.ToString("yyyy-MM-dd") + " " + getModel.QiFeiShiJian;
 
@@ -183,6 +188,14 @@ namespace EyouSoft.WAP.Flight
 
             info.JiLuJiaGe = onePrice * info.ChengKes.Count;
             if (info.JiLuJiaGe == 0) Utils.RCWE(UtilsCommons.AjaxReturnJson("0", "信息丢失，请从新操作"));
+
+            #region 添加购票人
+            info.AirChangedContact = m.Username;
+            #endregion
+
+            info.GouMaiCangWei = cangwei;
+
+
 
 
             int result = new EyouSoft.BLL.JPStructure.BDingDan().DingDan_C(info);

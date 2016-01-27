@@ -80,10 +80,13 @@ namespace EyouSoft.DAL
       /// </summary>
       public bool AddSysArea(EyouSoft.Model.MSysArea model)
       {
-         string StrSql = "INSERT INTO tbl_SysArea(AreaName,RouteType) VALUES(@AreaName,@RouteType)";
+          string StrSql = "INSERT INTO tbl_SysArea(AreaName,RouteType,ImgPath,AdvLink,AdvTitle) VALUES(@AreaName,@RouteType,@ImgPath,@AdvLink,@AdvTitle)";
          DbCommand dc = this._db.GetSqlStringCommand(StrSql);
          this._db.AddInParameter(dc, "AreaName", DbType.String, model.AreaName);
          this._db.AddInParameter(dc, "RouteType", DbType.Int32, (int)model.RouteType);
+         this._db.AddInParameter(dc, "ImgPath", DbType.String, model.ImgPath);
+         this._db.AddInParameter(dc, "AdvLink", DbType.String, model.AdvLink);
+         this._db.AddInParameter(dc, "AdvTitle", DbType.String, model.AdvTitle);
          return DbHelper.ExecuteSql(dc, this._db) > 0 ? true : false;
       }
 
@@ -92,11 +95,14 @@ namespace EyouSoft.DAL
       /// </summary>
       public bool UpdateSysArea(EyouSoft.Model.MSysArea model)
       {
-         string StrSql = "UPDATE tbl_SysArea SET AreaName = @AreaName,RouteType = @RouteType WHERE ID=@ID";
+         string StrSql = "UPDATE tbl_SysArea SET AreaName = @AreaName,RouteType = @RouteType,ImgPath = @ImgPath,AdvLink = @AdvLink , AdvTitle = @AdvTitle WHERE ID=@ID";
          DbCommand dc = this._db.GetSqlStringCommand(StrSql);
          this._db.AddInParameter(dc, "AreaName", DbType.String, model.AreaName);
          this._db.AddInParameter(dc, "RouteType", DbType.Int32, (int)model.RouteType);
          this._db.AddInParameter(dc, "ID", DbType.Int32, model.ID);
+         this._db.AddInParameter(dc, "ImgPath", DbType.String, model.ImgPath);
+         this._db.AddInParameter(dc, "AdvLink", DbType.String, model.AdvLink);
+         this._db.AddInParameter(dc, "AdvTitle", DbType.String, model.AdvTitle);
          return EyouSoft.Toolkit.DAL.DbHelper.ExecuteSql(dc, this._db) > 0 ? true : false;
       }
 
@@ -117,7 +123,7 @@ namespace EyouSoft.DAL
       public EyouSoft.Model.MSysArea GetSysAreaModel(int ID)
       {
          EyouSoft.Model.MSysArea model = null;
-         string StrSql = "SELECT ID, AreaName, RouteType FROM tbl_SysArea WHERE ID=@ID";
+         string StrSql = "SELECT ID, AreaName, RouteType, ImgPath, AdvLink, AdvTitle FROM tbl_SysArea WHERE ID=@ID";
          DbCommand dc = this._db.GetSqlStringCommand(StrSql.ToString());
          this._db.AddInParameter(dc, "ID", DbType.Int32, ID);
          using (IDataReader dr = EyouSoft.Toolkit.DAL.DbHelper.ExecuteReader(dc, this._db))
@@ -128,7 +134,10 @@ namespace EyouSoft.DAL
                {
                   ID = dr.GetInt32(dr.GetOrdinal("ID")),
                   AreaName = dr.IsDBNull(dr.GetOrdinal("AreaName")) ? "" : dr.GetString(dr.GetOrdinal("AreaName")),
-                  RouteType = (EyouSoft.Model.Enum.AreaType)dr.GetByte(dr.GetOrdinal("RouteType"))
+                  RouteType = (EyouSoft.Model.Enum.AreaType)dr.GetByte(dr.GetOrdinal("RouteType")),
+                  ImgPath = !dr.IsDBNull(dr.GetOrdinal("ImgPath")) ? dr.GetString(dr.GetOrdinal("ImgPath")) : null,
+                  AdvLink = !dr.IsDBNull(dr.GetOrdinal("AdvLink")) ? dr.GetString(dr.GetOrdinal("AdvLink")) : null,
+                  AdvTitle = !dr.IsDBNull(dr.GetOrdinal("AdvTitle")) ? dr.GetString(dr.GetOrdinal("AdvTitle")) : null
                };
             }
          };

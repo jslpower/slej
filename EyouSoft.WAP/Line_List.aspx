@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta charset="utf-8">
+    <title>
+        <%=FenXiangBiaoTi %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script src="/js/jq.mobi.min.js" type="text/javascript"></script>
@@ -176,8 +178,7 @@
                                             <a href="/Line_Info.aspx?id=<%# Eval("XianLuId") %>&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>">
                                                 <img src="<%# getImgSrc(Eval("TeSeFilePath"),Eval("XianLuId").ToString())%>"></a>
                                             <div class="line_txt">
-                                                <%# getCityName(Eval("DepCityId"))%>
-                                                <span class="gys_code">
+                                                <%# getCityName(Eval("DepCityId"))%>出发 <span class="gys_code">
                                                     <%# getSourceJP( Eval("Line_Source"))%></span>
                                             </div>
                                         </div>
@@ -194,8 +195,8 @@
                                                     <%# getHYJ("门市",EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%></i></dd>
                                             <dd class="wid R">
                                                 <span class="font_yellow">
-                                                    <%# getHYJ("会员", EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%>
-                                                </span>
+                                                    <%# getHYJ("优惠", EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%>
+                                                </span>起
                                             </dd>
                                         </dl>
                                     </li>
@@ -276,7 +277,7 @@
                            , epri: '<%=EyouSoft.Common. Utils.GetQueryStringValue("eprice") %>'
                            , days: '<%=EyouSoft.Common. Utils.GetQueryStringValue("days") %>'
                            , area: '<%=EyouSoft.Common. Utils.GetQueryStringValue("area") %>'
-                           , lineName: '<%=EyouSoft.Common. Utils.GetQueryStringValue("keyword") %>'
+                           , keyword: '<%=EyouSoft.Common. Utils.GetQueryStringValue("keyword") %>'
                            , type: '<%=EyouSoft.Common. Utils.GetQueryStringValue("type") %>'
                            , cityid: '<%=EyouSoft.Common. Utils.GetQueryStringValue("cityid") %>'
                            , source: '<%=EyouSoft.Common. Utils.GetQueryStringValue("source") %>'
@@ -347,13 +348,13 @@
                 }
             })
             $(".areali").click(function() {
-                window.location.href = "/Line_List.aspx?area=" + $(this).attr("id") + "&type=" + pageOpt.serPar.type;
+                window.location.href = "/Line_List.aspx?" + $.param({ sprice: pageOpt.serPar.spri, eprice: pageOpt.serPar.epri, days: pageOpt.serPar.days, type: pageOpt.serPar.type, cityid: pageOpt.serPar.cityid, source: pageOpt.serPar.source, keyword: pageOpt.serPar.keyword, area: $(this).attr("id") });
             })
             $("#serchBtn").click(function() {
-                window.location.href = "/Line_List.aspx?keyword=" + $("#routeName").val() + "&type=" + pageOpt.serPar.type;
+                window.location.href = "/Line_List.aspx?" + $.param({ sprice: pageOpt.serPar.spri, eprice: pageOpt.serPar.epri, days: pageOpt.serPar.days, type: pageOpt.serPar.type, cityid: pageOpt.serPar.cityid, source: pageOpt.serPar.source, area: pageOpt.serPar.area, keyword: $("#routeName").val() });
             })
             $("#search_a").click(function() {
-                window.location.href = "/Line_List.aspx?" + $.param({ sprice: pageOpt.serPar.spri, eprice: pageOpt.serPar.epri, days: pageOpt.serPar.days, type: pageOpt.serPar.type, cityid: pageOpt.serPar.cityid, source: pageOpt.serPar.source });
+                window.location.href = "/Line_List.aspx?" + $.param({ sprice: pageOpt.serPar.spri, eprice: pageOpt.serPar.epri, days: pageOpt.serPar.days, type: pageOpt.serPar.type, cityid: pageOpt.serPar.cityid, source: pageOpt.serPar.source, area: pageOpt.serPar.area, keyword: pageOpt.serPar.keyword });
             })
         })
     </script>

@@ -28,6 +28,7 @@ namespace EyouSoft.WAP
         protected decimal HuiYuanDanJia = 0;
         protected decimal GuiBingDanJia = 0;
         protected decimal DaiLiDanJia = 0;
+        protected decimal DaiXiaoDanJia = 0;
         protected int usercate = 0;//会员级别0-未登录及未注册用户
         protected bool isShow = true;
         protected void Page_Load(object sender, EventArgs e)
@@ -88,6 +89,7 @@ namespace EyouSoft.WAP
                     HuiYuanDanJia = Model.CurrentPrice = Math.Round(BHotel2.CalculateFee(Model.TicketInfo.DistributionPrice, Model.TicketInfo.WebsitePrices, MemberTypes.普通会员, Model.FeeSetting, FeeTypes.门票));
                     GuiBingDanJia = Model.CurrentPrice = Math.Round(BHotel2.CalculateFee(Model.TicketInfo.DistributionPrice, Model.TicketInfo.WebsitePrices, MemberTypes.贵宾会员, Model.FeeSetting, FeeTypes.门票));
                     DaiLiDanJia = Model.CurrentPrice = Math.Round(BHotel2.CalculateFee(Model.TicketInfo.DistributionPrice, Model.TicketInfo.WebsitePrices, MemberTypes.代理, Model.FeeSetting, FeeTypes.门票));
+                    DaiXiaoDanJia = Model.CurrentPrice = Math.Round(BHotel2.CalculateFee(Model.TicketInfo.DistributionPrice, Model.TicketInfo.WebsitePrices, MemberTypes.免费代理, Model.FeeSetting, FeeTypes.门票));
                     Model.IsShowFenXiaoShenQing = (bseller.WebSiteShowOrHidden(Request.Url.Host) == ShowHidden.显示);
                     if (bseller.WebSiteShowOrHidden(Request.Url.Host.ToLower().Replace("m.", "")) == ShowHidden.隐藏)
                     {

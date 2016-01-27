@@ -69,5 +69,13 @@ namespace EyouSoft.Model
         /// 代理商Id
         /// </summary>
         public string AgencyId { get; set; }
+        /// <summary>
+        /// 公司简称
+        /// </summary>
+        public string CompanyJC { get; set; }
+        /// <summary>
+        /// 网点名称
+        /// </summary>
+        public string WebSiteName { get; set; }
     }
 }

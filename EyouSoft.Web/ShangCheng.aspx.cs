@@ -16,7 +16,7 @@ namespace EyouSoft.Web
         #region 分页参数
         protected int pageIndex = 1;
         protected int recordCount;
-        protected int pageSize = 16;
+        protected int pageSize = 9;
         protected string toplist = string.Empty;
         protected string dianlist = string.Empty;//确认个数
         #endregion
@@ -34,17 +34,18 @@ namespace EyouSoft.Web
             var menus = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetList(new EyouSoft.Model.MallStructure.MShangChengLeiBieSer() { }, true);
             if (menus != null && menus.Count > 0)
             {
+                //if (menus.Count > 8) menus = menus.Take(8).ToList();
                 rptMenu.DataSource = menus;
                 rptMenu.DataBind();
             }
             string website = HttpContext.Current.Request.Url.Host.ToLower();
-          
-            string DaiLiId="";
+
+            string DaiLiId = "";
             pageIndex = UtilsCommons.GetPagingIndex();
             IList<MShangChengShangPin> list = new List<MShangChengShangPin>();
             if (website.IndexOf("slej.cn") > -1 && website.IndexOf("www") < 0)
             {
-                
+
                 BSellers bsells = new BSellers();
                 var Daimodel = bsells.GetMSellersByWebSite(website);
                 DaiLiId = Daimodel.ID;
@@ -58,17 +59,17 @@ namespace EyouSoft.Web
                         list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetDaiLiList(pageSize, pageIndex, ref recordCount, model);
                     }
                     else
-                        list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, sqlWhere = sqlwhere, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSName = Utils.GetQueryStringValue("g") });
+                        list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, sqlWhere = sqlwhere, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSid  = Utils.GetQueryStringValue("gid") });
                 //list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetDaiLiList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MDaiLiShangChanPinSer() { isGetTrue = true, sqlWhere=sqlwhere, MemberId=DaiLiId, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), ProductStatus = new[] { EyouSoft.Model.Enum.ProductZT.首页推荐, EyouSoft.Model.Enum.ProductZT.上架 } });
                 else
-                    list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSName = Utils.GetQueryStringValue("g") });
-               
+                    list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSid = Utils.GetQueryStringValue("gid") });
+
 
             }
             else
             {
-                list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSName = Utils.GetQueryStringValue("g") });
-                
+                list = new EyouSoft.BLL.MallStructure.BShangChengShangPin().GetList(pageSize, pageIndex, ref recordCount, new EyouSoft.Model.MallStructure.MShangChengShangPinSer() { isGetTrue = true, ProductName = Utils.GetQueryStringValue("cName"), TypeID = Utils.GetInt(Utils.GetQueryStringValue("lid")), isTrue = new[] { EyouSoft.Model.Enum.XianLuStructure.XianLuZT.首页推荐, EyouSoft.Model.Enum.XianLuStructure.XianLuZT.默认状态 }, GYSid = Utils.GetQueryStringValue("gid") });
+
             }
 
             if (list != null && list.Count > 0)
@@ -80,7 +81,7 @@ namespace EyouSoft.Web
 
             UtilsCommons.Paging(pageSize, ref pageIndex, recordCount);
             string pagingScript = "pagingConfig.pageSize={0};pagingConfig.pageIndex={1};pagingConfig.recordCount={2};";
-            
+
             RegisterScript(string.Format(pagingScript, pageSize, pageIndex, recordCount));
         }
         /// <summary>

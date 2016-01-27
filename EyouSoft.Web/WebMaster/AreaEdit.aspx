@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AreaEdit.aspx.cs" Inherits="EyouSoft.Web.WebMaster.AreaEdit" %>
-
+<%@ Register Src="../UserControl/UploadControl.ascx" TagName="UploadControl" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -10,7 +10,7 @@
     
     <script type="text/javascript" src="/js/jquery.blockUI.js"></script>
     <script type="text/javascript" src="/js/table-toolbar.js"></script>
-
+  <script src="../JS/swfupload/swfupload.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -32,6 +32,35 @@
                 <td width="84%" bgcolor="#E3F1FC" class="pandl3">
                     <asp:DropDownList runat="server" ID="ddlType">
                     </asp:DropDownList>
+                </td>
+            </tr>
+              <tr class="odd">
+                <th width="16%" height="30" align="right">
+                    营销链接：
+                </th>
+                <td width="84%" bgcolor="#E3F1FC" class="pandl3">
+                    <asp:TextBox CssClass="inputtext formsize100" ID="txtYinXiaoLJ" runat="server"></asp:TextBox>
+           
+                </td>
+            </tr>
+              <tr class="odd">
+                <th width="16%" height="30" align="right">
+                    营销文字：
+                </th>
+                <td width="84%" bgcolor="#E3F1FC" class="pandl3">
+                    <asp:TextBox CssClass="inputtext formsize180" ID="txtYinXiaoWZ" runat="server"></asp:TextBox>
+                    
+                </td>
+            </tr>
+              <tr class="odd">
+                <th width="16%" height="30" align="right">
+                    营销图片：
+                </th>
+                <td width="84%" bgcolor="#E3F1FC" class="pandl3">
+                        <uc2:UploadControl ID="UploadControl1" FileTypes="*.jpg;*.gif;*.jpeg;*.png" IsUploadSelf="true"
+                        IsUploadMore="false" runat="server" />
+                    <asp:Literal ID="lbUploadInfo" runat="server"></asp:Literal>
+                 
                 </td>
             </tr>
             <tr class="odd">
@@ -100,8 +129,11 @@
                     $("#tip").hide();
                 })
                 $("#<%=btn.ClientID %>").html("保存").css({ "color": "" });
+            },
+            DelImg: function(obj) {
+                $(obj).parent().prev("img").remove();
+                $(obj).parent().remove();
             }
-
         }
 
         $(function() {

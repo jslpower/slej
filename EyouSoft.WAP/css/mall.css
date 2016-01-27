@@ -1,0 +1,21 @@
+﻿body{ background:#fff;}
+.mall_head{height:50px; position:fixed; top:0; left:0;width:100%; z-index:999; background:#f5f5f5; border-bottom:#d5d5d5 solid 1px;}
+.mall_headbox{padding:0 15px 0 50px;}
+.icon_fanhui:before,.icon_menu:before{ background:url(../images/mall_type_icon.png) no-repeat; background-size:40px 58px; display:inline-block;}
+
+.icon_fanhui,.icon_menu{width:50px; height:44px; cursor:pointer;position:absolute;top:0; z-index:2;}
+.icon_fanhui{left:0;}
+.icon_menu{ right:0;}
+.icon_fanhui:before{background-position:-2px 0;width:24px;height:24px;position:absolute;left:13px;top:13px;content:"";}
+.icon_menu:before{background-position:-4px -34px;width:32px;height:22px;position:absolute;right:9px;top:14px;content:"";}
+
+.mall_head .search{margin-top:7px;}
+
+.mall_type{ padding:15px; overflow:hidden;}
+.mall_type dl{ padding-bottom:15px; color:#6c6c6c;overflow:hidden;}
+.mall_type dt{ border-left:#6c6c6c solid 5px; font-size:18px; color:#6c6c6c; height:20px; line-height:20px;padding-left:5px;margin-bottom:6px; font-weight:600;}
+.mall_type dt a{color:#6c6c6c;}
+
+.mall_type dd{ display:inline-block; float:left; padding-right:15px;}
+.mall_type dd a{ display:inline-block;color:#6c6c6c; white-space:nowrap;}
+.mall_type dd a:hover{ color:#f77408;}

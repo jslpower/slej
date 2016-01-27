@@ -229,7 +229,7 @@ namespace EyouSoft.Web.Member
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货:
                     return "<span style='color:rgb(0, 128, 0)'>支付成功<br />等待平台出票</span>";
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货:
-                    return "<span style='color:rgb(0, 128, 0)'>出票成功<br />请按短信要求取票</span>";
+                    return "<span style='color:rgb(0, 128, 0)'>出单成功<br />请按通知要求出行</span>";
                 case EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待返利:
                     if (isAgency == 1)
                     {

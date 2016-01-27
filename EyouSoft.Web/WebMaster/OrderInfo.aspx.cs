@@ -40,23 +40,23 @@ namespace EyouSoft.Web.WebMaster
             model = bll.GetInfo(id);
             if (model == null) return;
 
-            string ChengRenJia = "0.00";
-            string ErTongJia = "0.00";
-            if (model.RouteType == EyouSoft.Model.Enum.AreaType.周边短线)
-            {
-                ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
-                ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
-            }
-            else if (model.RouteType == EyouSoft.Model.Enum.AreaType.国内长线)
-            {
-                ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
-                ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
-            }
-            else if (model.RouteType == EyouSoft.Model.Enum.AreaType.出境线路)
-            {
-                ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
-                ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
-            }
+            string ChengRenJia = model.JiaoYiCR.ToString("f2");
+            string ErTongJia = model.JiaoYiET.ToString("f2");
+            //if (model.RouteType == EyouSoft.Model.Enum.AreaType.周边短线)
+            //{
+            //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
+            //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.周边线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
+            //}
+            //else if (model.RouteType == EyouSoft.Model.Enum.AreaType.国内长线)
+            //{
+            //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
+            //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国内线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
+            //}
+            //else if (model.RouteType == EyouSoft.Model.Enum.AreaType.出境线路)
+            //{
+            //    ChengRenJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, model.JSJCR, model.SCJCR, model.UserType).ToString("f2");
+            //    ErTongJia = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.国际线路, model.JSJER, model.SCJET, model.UserType).ToString("f2");
+            //}
 
             lbordercode.Text = model.OrderCode;
             lborderdate.Text = model.IssueTime.ToString("yyyy-MM-dd");

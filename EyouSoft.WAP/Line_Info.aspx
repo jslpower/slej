@@ -5,8 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head id="Head1" runat="server">
+    <title>
+        <%=FenXiangBiaoTi %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
 
     <script src="/js/jq.mobi.min.js" type="text/javascript"></script>
 
@@ -41,18 +44,13 @@
     <div class="warp">
         <div class="car_banner">
             <asp:Label ID="lblImg" runat="server" Text=""></asp:Label>
-            <div class="line_txt">
-                <asp:Label ID="cfd" runat="server" Text=""></asp:Label>
-            </div>
         </div>
         <div class="jq_cont gray_lineB">
             <h2>
-                <span class="font_blue">
-                    <asp:Label ID="lbl_routeType" runat="server" Text=""></asp:Label></span><asp:Label
-                        ID="lbl_routeName" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lbl_routeName" runat="server" Text=""></asp:Label>
             </h2>
             <p class="paddT font12">
-                出发地：<%=cfd.Text %></p>
+                出发地：<asp:Label ID="cfd" runat="server" Text=""></asp:Label></p>
             <p class="font12">
                 送团人：<asp:Label ID="lblSongTuanRen" runat="server" Text="Label"></asp:Label></p>
             <p class="font12">
@@ -65,6 +63,7 @@
                     <span class="radius4">独立组团价格</span></a></li>
             </ul>
         </div>
+        <uc2:PriceInfo ID="PriceInfo1" runat="server" />
         <div class="paddL paddT paddB gray_lineB" style="background: #fff;">
             <p>
                 人数：</p>
@@ -74,7 +73,12 @@
                 <span class="number"><i class="num-minus"></i>
                     <input type="tel" value="0" name="ets" id="ets" class="inputrs" /><i class="num-add"></i></span></p>
         </div>
-        <uc2:PriceInfo ID="PriceInfo1" runat="server" />
+        <asp:PlaceHolder runat=server ID="phLineAdv" Visible=false>
+        <div class="clearfix font16 padd10 mt10" style="background:#fff;">
+            <img class="floatL" style="width:50px; height:44px; padding-right:5px;" id="imgLineAdv" runat=server>
+            <p style="height:24px; overflow:hidden; text-indent:5px; background:#00feff; border:#3fe4e8 solid 1px;padding:9px 0;"><asp:HyperLink CssClass="font_red" runat=server id="hrfLineAdv"></asp:HyperLink></p>
+         </div>      
+         </asp:PlaceHolder>
         <asp:PlaceHolder ID="isNoFlight" runat="server" Visible="false">
             <div class="xx_hangban mt10">
                 <h3 id="moreHB" style="position: relative;" class="paddL R_jiantou">
@@ -92,7 +96,7 @@
                 <asp:Repeater ID="rptTours" runat="server">
                     <ItemTemplate>
                         <li>
-                            <%# Eval("LDate","{0:MM/dd}")%></li>
+                            <%# Eval("LDate","{0:MM/dd}").ToString()%></li>
                     </ItemTemplate>
                 </asp:Repeater>
             </ul>
@@ -101,82 +105,82 @@
             <div class="jq_TabTitle">
                 <ul class="clearfix">
                     <li id="n4Tab_Title0" onclick="nTabs('n4Tab',this);" class="active"><a href="javascript:void(0);">
-                        服务说明</a></li>
-                    <li id="n4Tab_Title1" onclick="nTabs('n4Tab',this);"><a href="javascript:void(0);">详细行程</a></li>
+                        详细行程</a></li>
+                    <li id="n4Tab_Title1" onclick="nTabs('n4Tab',this);"><a href="javascript:void(0);">服务说明</a></li>
                 </ul>
             </div>
             <div class="jq_TabContent">
-                <div id="n4Tab_Content0">
+                <div id="n4Tab_Content1" class="none">
                     <div class="line_cont">
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_shuoming">
                             <h3>
                                 产品说明</h3>
                             <p>
                                 <asp:Literal ID="litMiaoShu" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_baoming">
                             <h3>
                                 报名须知</h3>
                             <p>
                                 <asp:Literal ID="litBaoMing" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_zifei">
                             <h3>
                                 自费项目</h3>
                             <p>
                                 <asp:Literal ID="litZiFei" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_baohan">
                             <h3>
                                 费用包含</h3>
                             <p>
                                 <asp:Literal ID="litBaoHan" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_buhan">
                             <h3>
                                 费用不含</h3>
                             <p>
                                 <asp:Literal ID="litBuHan" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_ertong">
                             <h3>
                                 儿童安排</h3>
                             <p>
                                 <asp:Literal ID="litErTong" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_gouwu">
                             <h3>
                                 购物站信息</h3>
                             <p>
                                 <asp:Literal ID="litGouWu" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_tishi">
                             <h3>
                                 温馨提示</h3>
                             <p>
                                 <asp:Literal ID="litTiShi" runat="server"></asp:Literal>
                             </p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_zhuyi">
                             <h3>
                                 注意事项</h3>
                             <p>
                                 <asp:Literal ID="litZhuYi" runat="server"></asp:Literal></p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_zengsong">
                             <h3>
                                 赠送项目</h3>
                             <p>
                                 <asp:Literal ID="litZengSong" runat="server"></asp:Literal></p>
                         </div>
-                        <div class="line_xx_cont gray_lineB">
+                        <div class="line_xx_cont gray_lineB" runat="server" id="div_qita">
                             <h3>
                                 其他事项</h3>
                             <p>
@@ -184,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="n4Tab_Content1" class="none">
+                <div id="n4Tab_Content0">
                     <div class="line_cont">
                         <asp:Repeater ID="rptJourneies" runat="server">
                             <ItemTemplate>
@@ -275,17 +279,13 @@
 
     <script type="text/javascript">
         var pageOptData = {
-            parm: { xianluid: '<%= EyouSoft.Common. Utils.GetQueryStringValue("id") %>', type: '<%= EyouSoft.Common. Utils.GetQueryStringValue("type") %>', tid: '<%=tid %>', hangban: '<%=  defaultHBID %>', crs: $("#crs").val(), ets: $("#ets").val() },
+            parm: { xianluid: '<%= EyouSoft.Common. Utils.GetQueryStringValue("id") %>', type: '<%= EyouSoft.Common. Utils.GetQueryStringValue("type") %>', tid: '<%=tid %>', hangban: '<%=  defaultHBID %>', crs: "", ets: "" },
             setURL: function() {
-
-
+                pageOptData.parm.crs = $("#crs").val()
+                pageOptData.parm.ets = $("#ets").val()
                 var url = "/Line_LXRXX.aspx?" + $.param(pageOptData.parm);
-                if (iLogin.getM().isLogin) {
-                    return url;
-                }
-                else {
-                    return "/Login.aspx?rurl=" + encodeURIComponent(url);
-                }
+                return url;
+
             },
             initClick: function() {
                 $(".num-minus").click(function() {

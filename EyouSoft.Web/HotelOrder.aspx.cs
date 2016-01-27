@@ -49,10 +49,11 @@ namespace EyouSoft.Web
                Response.End();
             }
             int hotelday = 0;
-            for (int htime = 0; htime < hotelOrder.RoomRates.Count; htime++)
-            {
-                hotelday = hotelday + hotelOrder.RoomRates[htime].Time.Count();
-            }
+            //for (int htime = 0; htime < hotelOrder.RoomRates.Count; htime++)
+            //{
+            //    hotelday = hotelday + hotelOrder.RoomRates[htime].Time.Count();
+            //}
+            hotelday = hotelOrder.RoomRates.Count;
             if (hotelOrder.RoomRates == null || hotelOrder.RoomRates.Count == 0 || hotelday != (Model.CheckOutDate - Model.CheckInDate).Days)
             {
                 Response.Write("<div class=\"font16 fontred\" style=\"padding-top:20px;text-align:center;\">物价信息未发现！</div>");

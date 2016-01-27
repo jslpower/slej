@@ -70,6 +70,9 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -82,6 +85,7 @@
   <ItemGroup>
     <Compile Include="CityNameBySZM.cs" />
     <Compile Include="Enum\EnumObj.cs" />
+    <Compile Include="Function\CacheUtility.cs" />
     <Compile Include="Function\ChineseSpell.cs" />
     <Compile Include="Function\FileDirectory.cs" />
     <Compile Include="Function\MakeThumbnail.cs" />

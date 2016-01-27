@@ -25,6 +25,7 @@ namespace EyouSoft.WAP
         protected decimal JieSuanJia = 0;
         protected decimal HuiYuanDanJia = 0;
         protected decimal GuiBingDanJia = 0;
+        protected decimal DaiXiaoDanJia = 0;
         protected decimal DaiLiDanJia = 0;
         protected decimal YuanGongDanJia = 0;
         protected int DaysNum = 0;
@@ -63,10 +64,11 @@ namespace EyouSoft.WAP
                     Response.End();
                 }
                 int hotelday = 0;
-                for (int htime = 0; htime < hotelOrder.RoomRates.Count; htime++)
-                {
-                    hotelday = hotelday + hotelOrder.RoomRates[htime].Time.Count();
-                }
+                //for (int htime = 0; htime < hotelOrder.RoomRates.Count; htime++)
+                //{
+                //    hotelday = hotelday + hotelOrder.RoomRates[htime].Time.Count();
+                //}
+                hotelday = hotelOrder.RoomRates.Count;
                 if (hotelOrder.RoomRates == null || hotelOrder.RoomRates.Count == 0 || hotelday != (Utils.GetDateTime(Utils.GetQueryStringValue("CheckOutDate")) - Utils.GetDateTime(Utils.GetQueryStringValue("CheckInDate"))).Days)
                 {
                     Response.Write("<div class=\"font16 fontred\" style=\"padding-top:20px;text-align:center;\">物价信息未发现！</div>");
@@ -98,20 +100,24 @@ namespace EyouSoft.WAP
                         hotelOrder.ContactMobile = "&nbsp;";
                     }
                     var feeSetting = bllFeeSetting.GetByType(FeeTypes.酒店);
+                    int rday = 0;
                     foreach (MHotelRoomRateBindModel roomRate in hotelOrder.RoomRates)
                     {
-                        for (int rday = 0; rday < roomRate.Time.Count; rday++)
+                        
+                        if (isLogin)
                         {
-                            if (isLogin)
-                            {
-                                roomRate.DanJia = BHotel2.CalculateFee(roomRate.SettlementPrice, roomRate.PreferentialPrice, m.UserType, feeSetting, FeeTypes.酒店);
-                            }
-                            else
-                            {
-                                roomRate.DanJia = BHotel2.CalculateFee(roomRate.SettlementPrice, roomRate.PreferentialPrice, EyouSoft.Model.Enum.MemberTypes.普通会员, feeSetting, FeeTypes.酒店);
-                            }
-                            MingXi += "<li><span class=\"font_yellow floatR\">¥" + roomRate.DanJia + " × <em class=\"roomNum\">1</em> </span> " + roomRate.Time[rday] + "      " + hotelOrder.RommType.RoomName + "      " + hotelOrder.RoomRates[0].Breakfast + "</li>";
-                            hotelOrder.TotalAmount += Math.Round(hotelOrder.RoomCount * roomRate.DanJia);
+                            roomRate.DanJia = BHotel2.CalculateFee(roomRate.SettlementPrice, roomRate.PreferentialPrice, m.UserType, feeSetting, FeeTypes.酒店);
+                        }
+                        else
+                        {
+                            roomRate.DanJia = BHotel2.CalculateFee(roomRate.SettlementPrice, roomRate.PreferentialPrice, EyouSoft.Model.Enum.MemberTypes.普通会员, feeSetting, FeeTypes.酒店);
+                        }
+                        MingXi += "<li><span class=\"font_yellow floatR\">¥" + roomRate.DanJia + " × <em class=\"roomNum\">1</em> </span> " + (roomRate.Time[rday]).ToShortDateString() + "      " + hotelOrder.RommType.RoomName + "      " + hotelOrder.RoomRates[0].Breakfast + "</li>";
+                        hotelOrder.TotalAmount += Math.Round(hotelOrder.RoomCount * roomRate.DanJia);
+                        rday++;
+                        if (rday >= roomRate.Time.Count)
+                        {
+                            rday = 0;
                         }
                     }
                     ZongJia = hotelOrder.TotalAmount;
@@ -141,6 +147,7 @@ namespace EyouSoft.WAP
                     ConMoblie.Text = hotelOrder.ContactMobile;
                     HotelRoomName = hotelOrder.RommType.RoomName;
                     HuiYuanDanJia = EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(JieSuanJia, JieSuanJia, EyouSoft.Model.Enum.MemberTypes.普通会员, (EyouSoft.Model.SystemStructure.MFeeSettings)hotelOrder.FeeSetting, EyouSoft.Model.Enum.FeeTypes.酒店);
+                    DaiXiaoDanJia = EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(JieSuanJia, JieSuanJia, EyouSoft.Model.Enum.MemberTypes.免费代理, (EyouSoft.Model.SystemStructure.MFeeSettings)hotelOrder.FeeSetting, EyouSoft.Model.Enum.FeeTypes.酒店);
                     GuiBingDanJia = EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(JieSuanJia, JieSuanJia, EyouSoft.Model.Enum.MemberTypes.贵宾会员, (EyouSoft.Model.SystemStructure.MFeeSettings)hotelOrder.FeeSetting, EyouSoft.Model.Enum.FeeTypes.酒店);
                     DaiLiDanJia = EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(JieSuanJia, JieSuanJia, EyouSoft.Model.Enum.MemberTypes.代理, (EyouSoft.Model.SystemStructure.MFeeSettings)hotelOrder.FeeSetting, EyouSoft.Model.Enum.FeeTypes.酒店);
                     YuanGongDanJia = EyouSoft.BLL.HotelStructure.BHotel2.CalculateFee(JieSuanJia, JieSuanJia, EyouSoft.Model.Enum.MemberTypes.员工, (EyouSoft.Model.SystemStructure.MFeeSettings)hotelOrder.FeeSetting, EyouSoft.Model.Enum.FeeTypes.酒店);
@@ -194,7 +201,13 @@ namespace EyouSoft.WAP
                 Response.Write(msg);
                 Response.End();
             }
-            if (hotelOrder.RoomRates == null || hotelOrder.RoomRates.Count == 0 || hotelOrder.RoomRates.Count != (Utils.GetDateTime(Utils.GetQueryStringValue("CheckOutDate")) - Utils.GetDateTime(Utils.GetQueryStringValue("CheckInDate"))).Days)
+            int hotelday = 0;
+            //for (int htime = 0; htime < hotelOrder.RoomRates.Count; htime++)
+            //{
+            //    hotelday = hotelday + hotelOrder.RoomRates[htime].Time.Count();
+            //}
+            hotelday = hotelOrder.RoomRates.Count;
+            if (hotelOrder.RoomRates == null || hotelOrder.RoomRates.Count == 0 || hotelday != (Utils.GetDateTime(Utils.GetQueryStringValue("CheckOutDate")) - Utils.GetDateTime(Utils.GetQueryStringValue("CheckInDate"))).Days)
             {
                 msg = "物价信息未发现！";
             }

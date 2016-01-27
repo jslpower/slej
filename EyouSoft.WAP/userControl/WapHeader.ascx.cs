@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EyouSoft.Model.SSOStructure;
 
 namespace EyouSoft.WAP.userControl
 {
@@ -19,6 +20,19 @@ namespace EyouSoft.WAP.userControl
             get { return _headText; }
             set { _headText = value; }
         }
+        /// <summary>
+        /// 是否登录，登录则不显示注册登录按钮
+        /// </summary>
+        public bool isLogin
+        {
+            get
+            {
+                MUserInfo m = null;
+                bool isLogin = EyouSoft.Security.Membership.UserProvider.IsLogin(out m);
+                return !isLogin;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string requesturl = System.Web.HttpContext.Current.Request.Url.Host.ToLower();

@@ -29,27 +29,11 @@ namespace EyouSoft.Web.WebMaster
 
                 if (isLogin)
                 {
+                    if (!string.IsNullOrEmpty(Request.QueryString["url"]))
 
-
-                    EyouSoft.Model.CompanyStructure.PassWord pwd = new EyouSoft.Model.CompanyStructure.PassWord();
-                    string username = m.Username;
-                    if (Utils.GetQueryStringValue("type") == "g")
-                        username = "G" + m.Username;
-                    pwd.NoEncryptPassword = new EyouSoft.BLL.OtherStructure.BMember().GetModel(m.UserId).PassWord.NoEncryptPassword;
-
-                    EyouSoft.Model.SSOStructure.MWebmasterInfo webmasterInfo = null;
-                    EyouSoft.Security.Membership.WebmasterProvider.Login(username, pwd, out webmasterInfo);
-
-                    if (webmasterInfo != null)
-                    {
-                        if (!string.IsNullOrEmpty(Request.QueryString["url"]))
-
-                            Response.Redirect(Request.QueryString["url"]);
-                        else
-                            Response.Redirect("default.aspx");
-                    }
-
-                    this.RegisterAlertScript("账号或密码错误！");
+                        Response.Redirect(Request.QueryString["url"]);
+                    else
+                        Response.Redirect("default.aspx");
                 }
                 else
                 {

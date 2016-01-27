@@ -72,10 +72,19 @@ namespace EyouSoft.WAP
             {
                 searchmodel.LineSource = (LineSource)Utils.GetInt(source);
             }
-            string cityid = Utils.GetQueryStringValue("cityid");
-            if (!string.IsNullOrEmpty(cityid))
+            int cityid = Utils.GetInt(Utils.GetQueryStringValue("cityid"));
+            if (cityid > 0)
             {
-                searchmodel.DepCityIds = new int[] { Utils.GetInt(cityid) };
+                searchmodel.DepCityIds = new int[] { cityid };
+            }
+            else
+            {
+                var citymodel = EyouSoft.Security.Membership.UserProvider.GetCityInfo();
+                if (citymodel != null && citymodel.Id > 0)
+                {
+           
+                    searchmodel.DepCityIds = new int[] { citymodel.Id };
+                }
             }
             int areatype = Utils.GetInt(Utils.GetQueryStringValue("type"));
             int areaid = Utils.GetInt(Utils.GetQueryStringValue("area"));
@@ -97,6 +106,29 @@ namespace EyouSoft.WAP
             pageIndex = Utils.GetInt(Utils.GetQueryStringValue("Page"), 1);
 
 
+
+            #region 设置分享标题
+            StringBuilder strFenXiangStr = new StringBuilder();
+            if (!string.IsNullOrEmpty(searchmodel.RouteName)) strFenXiangStr.AppendFormat("{0}旅游专线", searchmodel.RouteName);//设置专线名称
+            if (searchmodel.TianShu > 0) strFenXiangStr.AppendFormat("_{0}天", searchmodel.TianShu);//设置天数
+            if (cityid > 0)//设置出发地
+            {
+                var cityModel = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysCityModel(cityid);
+                if (cityModel != null) strFenXiangStr.AppendFormat("_{0}出发", cityModel.Name);
+            }
+            if (areaid > 0)//设置线路区域
+            {
+                var areaModel = new BLL.OtherStructure.BSysAreaInfo().GetSysAreaModel(areaid);
+                if (areaModel != null) strFenXiangStr.AppendFormat("_{0}", areaModel.AreaName);
+            }
+            string _wxTitle = strFenXiangStr.ToString().Trim('_');
+            #endregion
+
+
+
+
+
+
             var arealist = new BLL.OtherStructure.BSysAreaInfo().GetSysAreaList(10000, new EyouSoft.Model.MSysArea() { RouteType = (AreaType)areatype });
             System.Text.StringBuilder strbu = new System.Text.StringBuilder();
             if (arealist != null && arealist.Count > 0)
@@ -110,11 +142,16 @@ namespace EyouSoft.WAP
 
             IList<MXianLuInfo> list = bll.GetXianLus(pageSize, pageIndex, ref recordCount, searchmodel);
 
+
+
+
+
+
             if (list != null && list.Count > 0)
             {
                 #region 设置微信分享链接
-                FenXiangBiaoTi = list[0].RouteName;
-                FenXiangMiaoShu = list[0].Description;
+                FenXiangBiaoTi = !string.IsNullOrEmpty(_wxTitle) ? _wxTitle : WapHeader1.HeadText;
+                FenXiangMiaoShu = Utils.InputText(list[0].Description);
                 FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].TeSeFilePath, 640, 400, list[0].XianLuId);
                 #endregion
 
@@ -122,7 +159,7 @@ namespace EyouSoft.WAP
                 rptlist.DataBind();
 
             }
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
 
 
@@ -135,9 +172,9 @@ namespace EyouSoft.WAP
         protected string getCityName(object obj)
         {
             int cid = Utils.GetInt(obj.ToString());
-            if (cid == 0) return "待定";
+            if (cid == 0) return "杭州";
             var model = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysCityModel(cid);
-            if (model == null) return "待定";
+            if (model == null) return "杭州";
             return model.Name;
         }
         /// <summary>

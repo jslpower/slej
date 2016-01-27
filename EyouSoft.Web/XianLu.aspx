@@ -201,7 +201,7 @@
                             门市价<span class="nojiacu font12">（元/人）</span>
                         </th>
                         <th width="97" align="center">
-                            会员价<span class="nojiacu font12">（元/人）</span>
+                            优惠价<span class="nojiacu font12">（元/人）</span>
                         </th>
                         <th width="65">
                             操作
@@ -231,7 +231,7 @@
                                     <%# getHYJ("门市",EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%>起
                                 </td>
                                 <td align="center" class="font_yellow">
-                                    <%# getHYJ("会员", EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%>起
+                                    <%# getHYJ("优惠", EyouSoft.Common.Utils.GetQueryStringValue("type"), Eval("Tours"))%>起
                                 </td>
                                 <td align="center">
                                     <a href="/XianLuYuDing.aspx?id=<%# Eval("XianLuId") %>&type=<%=EyouSoft.Common.Utils.GetQueryStringValue("type") %>"

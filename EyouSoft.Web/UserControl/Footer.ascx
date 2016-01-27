@@ -10,7 +10,14 @@
                                    { %><a href="/Visa.aspx">出国签证</a><%} %> | <a href="/JiPiao.aspx">机票预定</a>
         | <a href="/YouHuiMenPiao.aspx">优惠门票</a> | <a href="/Hotel.aspx">酒店预定</a> | <a href="/ZuChe.aspx">
             汽车包租</a> | <a href="/ShangCheng.aspx">会员商城</a> | <a href="/baoming.aspx">报名网点</a>
-        | <a href="/about.aspx">关于商旅e家</a> | <a href="/webmaster">后台管理</a></div>
+        | <a href="/about.aspx">关于商旅e家</a> | <a href="/webmaster">后台管理</a>
+<!-- slej.cn Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F7d194f78b6b719498f06d9d70e76ba62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
     <div class="foot_txt">
         <% if (isfenxiao != 1)
                                    {%>版权所有 杭州金奥国际旅行社有限公司<%} %> 浙ICP备14023376号-1 许可证号：<%= Xuke%></div>

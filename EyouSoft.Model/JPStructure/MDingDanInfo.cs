@@ -318,6 +318,10 @@ namespace EyouSoft.Model.JPStructure
         /// pnr信息
         /// </summary>
         public string PnrInfo { get; set; }
+        /// <summary>
+        /// 购票人手机
+        /// </summary>
+        public string AirChangedContact { get; set; }
     }
     #endregion
 
@@ -372,6 +376,8 @@ namespace EyouSoft.Model.JPStructure
             obj.FuKuanShiJian = this.FuKuanShiJian;
             obj.JiaoYiHao = this.JiaoYiHao;
             obj.JiLuJiaGe = this.JiLuJiaGe;
+            obj.AirChangedContact = this.AirChangedContact;
+            obj.GouMaiCangWei = this.GouMaiCangWei;
             return obj;
         }
 
@@ -545,6 +551,14 @@ namespace EyouSoft.Model.JPStructure
         /// 记录订单价格
         /// </summary>
         public decimal JiLuJiaGe { get; set; }
+        /// <summary>
+        /// 购票
+        /// </summary>
+        public string AirChangedContact { get; set; }
+        /// <summary>
+        /// 购买的舱位
+        /// </summary>
+        public MCangWeiInfo GouMaiCangWei { get; set; }
         #endregion
     }
     #endregion

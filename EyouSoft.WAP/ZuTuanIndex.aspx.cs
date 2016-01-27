@@ -29,7 +29,7 @@ namespace EyouSoft.WAP
             FenXiangBiaoTi = "单独组团";
             FenXiangMiaoShu = "单独组团";
             FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/zt_img.jpg";
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
         }
     }
 }

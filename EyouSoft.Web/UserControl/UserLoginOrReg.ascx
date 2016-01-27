@@ -36,19 +36,24 @@
         <div class="userbox">
             <h5>
                 已经是会员/贵宾/代理，马上登陆</h5>
-                <ul>
-                     <li class="font_yellow" style="padding-right:10px;">
-                         <label><input name="dlfs" type="radio" value="2" checked="checked" />　验证码登录</label>
-                         <label class="floatR"><input name="dlfs" type="radio" value="1" />　密码登录</label>
-                         <input id="dlfs" type="hidden" value="2" />
-                     </li>
-                 </ul>
+            <ul>
+                <li class="font_yellow" style="padding-right: 10px;">
+                    <label>
+                        <input name="dlfs" type="radio" value="2" checked="checked" />
+                        验证码登录</label>
+                    <label class="floatR">
+                        <input name="dlfs" type="radio" value="1" />
+                        密码登录</label>
+                    <input id="dlfs" type="hidden" value="2" />
+                </li>
+            </ul>
             <ul style="display: block;" id="shouji">
-                <li><span class="user-txt">手机号码：</span><input id="txt_denglu_shouji" type="text" class="inputbk formsize140" /></li>
+                <li><span class="user-txt">手机号码：</span><input id="txt_denglu_shouji" type="text"
+                    class="inputbk formsize140" /></li>
                 <li><span class="user-txt">验证码：</span><input id="txt_denglu_yzm" type="text" class="inputbk formsize60" />
                     <a class="font_yellow" href="javascript:void(0)" id="l_huoquyzm">获取验证码</a></li>
             </ul>
-            <ul  id="zhanghao" style="display: none;">
+            <ul id="zhanghao" style="display: none;">
                 <li><span class="user-txt">账户：</span><input id="u" type="text" value="请输入手机号" onfocus="javascript:if(this.value=='请输入手机号')this.value='';"
                     onblur="javascript:if(this.value=='')this.value='请输入手机号';" class="inputbk formsize140"></li>
                 <li><span class="user-txt">密码：</span><input id="p" type="password" value="请输入密码"
@@ -134,6 +139,7 @@
                         <% if (isfenxiao == 1)
                            { %>
                         <li><a href="/webmaster/login.aspx?type=s" target="_blank">网站设置</a></li>
+                        <li><a href="/Member/FenXiang.aspx">E家分享</a></li>
                         <%} %>
                     </ul>
                 </li>
@@ -233,10 +239,17 @@
         blogin5({ u: u, p: p, vc: ckcode }
                 , function(h) {//login success callback
                     tableToolbar._showMsg("登录成功，正进入系统....");
+                    if(h==1)
+                    {
                     var s = '<%=Request.QueryString["rurl"] %>';
                     if (s.length > 0)
                     { window.location.href = s; }
                     else { window.location.reload(); }
+                    }
+                    else if(h==10001)
+                    {
+                      window.location ="/WebMaster/Default.aspx";
+                    }
                 }
                 , function(m) {//login error callbackfffffff
                     tableToolbar._showMsg(m);

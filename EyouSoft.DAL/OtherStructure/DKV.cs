@@ -86,7 +86,9 @@ namespace EyouSoft.DAL.OtherStructure
             strSql.AppendFormat(SqlBcthSetSeting, "BaoJiaXieYi", model.BaoJiaXieYi);
             strSql.AppendFormat(SqlBcthSetSeting, "SLEJText", model.SLEJText);
             strSql.AppendFormat(SqlBcthSetSeting, "MoblieSLEJText", model.MoblieSLEJText);
+            strSql.AppendFormat(SqlBcthSetSeting, "DaiLiTiaoKuan", model.DaiLiTiaoKuan);
             strSql.AppendFormat(SqlBcthSetSeting, "MoblieEBao", model.MoblieEBao);
+            strSql.AppendFormat(SqlBcthSetSeting, "WapSet", model.WapSet);
 
             strSql.AppendFormat(SqlBcthSetSeting, "EBaoSSM", model.EBaoSSM);
             strSql.AppendFormat(SqlBcthSetSeting, "EBaoYEGL", model.EBaoYEGL);
@@ -98,6 +100,12 @@ namespace EyouSoft.DAL.OtherStructure
             strSql.AppendFormat(SqlBcthSetSeting, "EBaoZHMX", model.EBaoZHMX);
             strSql.AppendFormat(SqlBcthSetSeting, "EBaoZMX", model.EBaoZMX);
             strSql.AppendFormat(SqlBcthSetSeting, "EBaoJFZZ", model.EBaoJFZZ);
+
+            strSql.AppendFormat(SqlBcthSetSeting, "WapMakeFenXiao", model.WapMakeFenXiao);
+            strSql.AppendFormat(SqlBcthSetSeting, "WapMakeGuiBin", model.WapMakeGuiBin);
+            strSql.AppendFormat(SqlBcthSetSeting, "WapMakePuTong", model.WapMakePuTong);
+            strSql.AppendFormat(SqlBcthSetSeting, "WapMakeYingPing", model.WapMakeYingPing);
+            strSql.AppendFormat(SqlBcthSetSeting, "WapMakeGongYing", model.WapMakeGongYing);
 
 
             DbCommand cmd = this._db.GetSqlStringCommand(strSql.ToString());
@@ -200,6 +208,9 @@ namespace EyouSoft.DAL.OtherStructure
                         case "SLEJText": model.SLEJText = _v; break;
                         case "MoblieEBao": model.MoblieEBao = _v; break;
                         case "MoblieSLEJText": model.MoblieSLEJText = _v; break;
+                        case "DaiLiTiaoKuan": model.DaiLiTiaoKuan = _v; break;
+                        case "WapSet": model.WapSet = _v; break;
+                        case "JiaoYiLv": model.JiaoYiLv = Utils.GetDecimal(_v); break;
 
                         case "EBaoSSM": model.EBaoSSM = _v; break;
                         case "EBaoYEGL": model.EBaoYEGL = _v; break;
@@ -211,6 +222,12 @@ namespace EyouSoft.DAL.OtherStructure
                         case "EBaoZHMX": model.EBaoZHMX = _v; break;
                         case "EBaoZMX": model.EBaoZMX = _v; break;
                         case "EBaoJFZZ": model.EBaoJFZZ = _v; break;
+
+                        case "WapMakeFenXiao": model.WapMakeFenXiao = _v; break;
+                        case "WapMakeGuiBin": model.WapMakeGuiBin = _v; break;
+                        case "WapMakePuTong": model.WapMakePuTong = _v; break;
+                        case "WapMakeYingPing": model.WapMakeYingPing = _v; break;
+                        case "WapMakeGongYing": model.WapMakeGongYing = _v; break;
 
                         default: break;
                     }
@@ -309,6 +326,24 @@ namespace EyouSoft.DAL.OtherStructure
 
             return info;
         }
+
+
+        /// <summary>
+        /// 设置交易费率，返回1成功，其它失败
+        /// </summary>
+        /// <param name="info">实体</param>
+        /// <returns></returns>
+        public int SheZhiJiaoYiFeiLv(decimal FeiLv)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendFormat(SqlBcthSetSeting, "JiaoYiLv", FeiLv);
+
+            var cmd = _db.GetSqlStringCommand(sql.ToString());
+            DbHelper.ExecuteSql(cmd, _db);
+            return 1;
+        }
+
+
         #endregion
     }
 }

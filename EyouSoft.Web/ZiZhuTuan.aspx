@@ -1648,6 +1648,21 @@
                $("input[data-name=ZongGuiBingMoney]").val(tableToolbar.getFloat(tableToolbar.getFloat(ChengRenJia)*tableToolbar.getInt(ChengRenNum) + tableToolbar.getFloat(ErTongJia)*tableToolbar.getInt(ErTongNum)));
                 }
              
+             if(tableToolbar.getInt(usercate) >= 3)
+            {    
+            //免费代理
+            var zhifucount = $("input[data-name=DaiXiaoMoney]").length;
+            for (var i = 0; i < zhifucount; i++) {
+                var zhifujiage = $("input[data-name=DaiXiaoMoney]").eq(i).val();
+                $("input[data-name=DaiXiaoMoney]").eq(i).val(tableToolbar.getFloat(tableToolbar.getFloat(GuiBingJia) - tableToolbar.getFloat(YGuiBingJia) + tableToolbar.getFloat(zhifujiage)));
+                }
+                ChengRenJia = $("input[data-name=DaiXiaoMoney]").eq(0).val();
+               ErTongJia = $("input[data-name=DaiXiaoMoney]").eq(1).val();
+               $("#UChengRenJia").val(ChengRenJia);
+               $("#UErTongJia").val(ErTongJia);
+               $("input[data-name=ZongDaiXiaoMoney]").val(tableToolbar.getFloat(tableToolbar.getFloat(ChengRenJia)*tableToolbar.getInt(ChengRenNum) + tableToolbar.getFloat(ErTongJia)*tableToolbar.getInt(ErTongNum)));
+                }
+             
              if(tableToolbar.getInt(usercate) >= 4)
             { 
             //代理
@@ -1727,7 +1742,7 @@
             }
             
             html2 = "<div class=\"car_price\" style=\"width:1030px;margin:10px auto;\">"
-               +"<ul><li class=\"mar5\"><div class=\"tixing\"><b>会员价总金额：</b><br />"
+               +"<ul><li class=\"mar5\"><div class=\"tixing\"><b>优惠价总金额：</b><br />"
                +"<font class=\"fontyellow\">成人（<b class=\"font14\">"+ $("input[data-name=HuiYuanMoney]").eq(0).val() +"</b>元/人 x <b class=\"font14\">"+ChengRenNum+"</b>人）+儿童(<b class=\"font14\">"+ $("input[data-name=HuiYuanMoney]").eq(1).val() +"</b>元/人 x <b class=\"font14\">"+ErTongNum+"</b>人) = </font> <font class=\"fontblue\"><b class=\"font14\">"+hyzj+"</b>元</font></div></li>"
                   +"<li class=\"mar5\"><div class=\"tixing\"><b>"+guibinname+"：</b><br />"
                   +"<font class=\"fontyellow\">成人（<b class=\"font14\">"+tableToolbar.getFloat(guibingcr)+"</b>元/人 x <b class=\"font14\">"+ChengRenNum+"</b>人）+儿童(<b class=\"font14\">"+tableToolbar.getFloat(guibinget)+"</b>元/人 x <b class=\"font14\">"+ErTongNum+"</b>人) = </font> <font class=\"fontblue\"><b class=\"font14\">"+ tableToolbar.getFloat(guibingzj) +"</b>元</font>"+guibinurl+"</div></li>"

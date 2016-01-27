@@ -7,6 +7,7 @@ using System.Data.Common;
 using EyouSoft.Toolkit;
 using EyouSoft.Toolkit.DAL;
 using System.Data;
+using EyouSoft.Model.Enum;
 
 namespace EyouSoft.DAL.OtherStructure
 {
@@ -34,7 +35,11 @@ namespace EyouSoft.DAL.OtherStructure
             StringBuilder strSql = new StringBuilder();
             strSql.Append("INSERT INTO  tbl_TuanGouChanPin (ProductName,SaleType,ProductType,SimpleInfo,DetailInfo,MarketPrice,GroupPrice,ProductNum,ValiDate,IssueTime,OperatorID,OperatorName,SupplierID,ProductImg,XianShiWeiZhi,ProductSort)     ");
             strSql.Append("VALUES            ");
-            strSql.Append("(@ProductName,@SaleType,@ProductType,@SimpleInfo,@DetailInfo,@MarketPrice,@GroupPrice,@ProductNum,@ValiDate,@IssueTime,@OperatorID,@OperatorName,@SupplierID,@ProductImg,@XianShiWeiZhi,@ProductSort) ");
+            strSql.Append("(@ProductName,@SaleType,@ProductType,@SimpleInfo,@DetailInfo,@MarketPrice,@GroupPrice,@ProductNum,@ValiDate,@IssueTime,@OperatorID,@OperatorName,@SupplierID,@ProductImg,@XianShiWeiZhi,@ProductSort)  DECLARE @PID int  select @PID=@@identity ");
+
+            strSql.Append(" INSERT INTO [tbl_Seller_TuanGou]([MemberId],[ProductId],[ProductStatus] ");
+            strSql.Append(") values (");
+            strSql.Append("@SupplierID,@PID ,@ProductStatus)	");
 
             DbCommand cmd = this._db.GetSqlStringCommand(strSql.ToString());
             this._db.AddInParameter(cmd, "ProductName", System.Data.DbType.String, model.ProductName);
@@ -53,6 +58,7 @@ namespace EyouSoft.DAL.OtherStructure
             this._db.AddInParameter(cmd, "ProductImg", System.Data.DbType.String, model.ProductImg);
             this._db.AddInParameter(cmd, "XianShiWeiZhi", System.Data.DbType.Byte, model.WeiZhi);
             this._db.AddInParameter(cmd, "ProductSort", System.Data.DbType.Int32, model.ProductSort);
+            this._db.AddInParameter(cmd, "ProductStatus", DbType.Int32, 0);
 
             return DbHelper.ExecuteSql(cmd, this._db);
 
@@ -198,8 +204,9 @@ namespace EyouSoft.DAL.OtherStructure
                     query.AppendFormat(" and  SupplierID = '{0}' ", serModel.SupplierID);
                 }
                 else
-                {
-                    query.Append(" and SupplierID ='-1' ");
+                {                   
+                    if (serModel.IsWebmaster==false)
+                        query.Append(" and SupplierID ='dc99f4fe-6690-4b65-8e9d-c9336077cdf7' ");
                 }
                 if (serModel.ValiDate.HasValue)
                 {
@@ -208,6 +215,14 @@ namespace EyouSoft.DAL.OtherStructure
                 if (serModel.IsIndex != null && serModel.IsIndex.Length > 0)
                 {
                     query.Append(" AND IsIndex IN(" + Utils.GetSqlIn(serModel.IsIndex) + ") ");
+                }
+                if(!string.IsNullOrEmpty(serModel.CompanyName))
+                {
+                    query.Append(" and SupplierID in (select ID from tbl_JA_Sellers where CompanyName like '%"+serModel.CompanyName+"%' )");
+                }
+                if (!string.IsNullOrEmpty(serModel.sqlWhere))
+                {
+                    query.AppendFormat(" and ID not in (SELECT ProductId from tbl_Seller_TuanGou where MemberId='{0}' and ProductStatus in(1,3))", serModel.sqlWhere);
                 }
             }
             using (IDataReader dr = DbHelper.ExecuteReader1(this._db, PageSize, PageIndex, ref RecordCount, tableName, fileds, query.ToString(), orderByString, null))
@@ -266,7 +281,7 @@ namespace EyouSoft.DAL.OtherStructure
                 }
                 else
                 {
-                    strSql.Append(" and SupplierID ='-1' ");
+                    strSql.Append(" and SupplierID ='dc99f4fe-6690-4b65-8e9d-c9336077cdf7' ");
                 }
                 
                 if (serModel.SaleType.HasValue)
@@ -376,10 +391,10 @@ namespace EyouSoft.DAL.OtherStructure
                     TableName = "tbl_ScenicArea";
                     strwhere = " ScenicId='" + id + "'";
                     break;
-                case "shangcheng":
-                    TableName = "tbl_ShangChengChanPin";
-                    strwhere = " ProductID='" + id + "'";
-                    break;
+                //case "shangcheng":
+                //    TableName = "tbl_ShangChengChanPin";
+                //    strwhere = " ProductID='" + id + "'";
+                //    break;
                 default:
                     TableName = "";
                     break;
@@ -448,6 +463,169 @@ namespace EyouSoft.DAL.OtherStructure
                 return 0;
             }
         }
+
+
+        /// <summary>
+        /// 更新商品上下架
+        /// </summary>
+        /// <param name="ShangPinID">商品id</param>
+        /// <param name="isup">上架or下架（0-上架，1-下架）</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <returns></returns>
+        public int UpDateDaiLiUp(string ShangPinID, ProductZT isup, string MemberId)
+        {
+            string SQL_UPDATE_Update = "UPDATE [tbl_Seller_TuanGou] SET [ProductStatus]=@ProductStatus WHERE [ProductId]=@ProductID and [MemberId]=@MemberId ";
+            DbCommand cmd = _db.GetSqlStringCommand(SQL_UPDATE_Update);
+
+            _db.AddInParameter(cmd, "ProductStatus", DbType.Int32, (int)isup);
+            _db.AddInParameter(cmd, "ProductID", DbType.String, ShangPinID);
+            _db.AddInParameter(cmd, "MemberId", DbType.String, MemberId);
+
+
+            return DbHelper.ExecuteSql(cmd, _db) == 1 ? 1 : -100;
+        }
+
+        /// <summary>
+        /// 根据代理商id和商品id获取该商品在代理商网站的状态
+        /// </summary>
+        /// <param name="ShangPinID">商品id</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <returns></returns>
+        public int GetDaiLiPro(string ShangPinID, string MemberId)
+        {
+            string SQL_Select = "Select ProductStatus from [tbl_Seller_TuanGou] WHERE [ProductId]=@ProductID and [MemberId]=@MemberId";
+            DbCommand cmd = _db.GetSqlStringCommand(SQL_Select);
+
+            _db.AddInParameter(cmd, "MemberId", DbType.String, MemberId);
+            _db.AddInParameter(cmd, "ProductID", DbType.String, ShangPinID);
+
+
+            object obj = DbHelper.GetSingle(cmd, _db);
+            if (obj != null)
+            {
+                return (int)obj;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 增加代理商产品
+        /// </summary>
+        /// <param name="ProductId">商品id</param>
+        /// <param name="MemberId">代理商id</param>
+        /// <param name="state">状态</param>
+        /// <returns></returns>
+        public int AddDaiLiPro(string MemberId, string ProductId, int state)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" INSERT INTO [tbl_Seller_TuanGou]([MemberId],[ProductId],[ProductStatus] ");
+            strSql.Append(") values (");
+            strSql.Append("@MemberId,@ProductId ,@ProductStatus)	");
+
+            DbCommand cmd = this._db.GetSqlStringCommand(strSql.ToString());
+            _db.AddInParameter(cmd, "ProductStatus", DbType.Int32, state);
+            _db.AddInParameter(cmd, "MemberId", DbType.String, MemberId);
+            _db.AddInParameter(cmd, "ProductId", DbType.String, ProductId);
+            return DbHelper.ExecuteSql(cmd, this._db);
+        }
+
+        /// <summary>
+        /// 删除代理商产品
+        /// </summary>
+        /// <param name="ProductId">商品id</param>
+        /// <returns></returns>
+        public int DelDaiLiPro(string ProductId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.AppendFormat(" DELETE tbl_Seller_TuanGou WHERE ProductId='{0}'", ProductId);
+
+            DbCommand cmd = this._db.GetSqlStringCommand(strSql.ToString());
+            return DbHelper.ExecuteSql(cmd, this._db);
+        }
+
+
+        /// <summary>
+        /// 获取代理商商品集合
+        /// </summary>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="pageIndex">页索引</param>
+        /// <param name="recordCount">总记录数</param>
+        /// <param name="chaXun">查询</param>
+        /// <returns></returns>
+        public IList<EyouSoft.Model.OtherStructure.MTuanGouChanPin> GetDaiLiList(int pageSize, int pageIndex, ref int recordCount, EyouSoft.Model.OtherStructure.MDaiLiTuanGouSer chaXun)
+        {
+            IList<EyouSoft.Model.OtherStructure.MTuanGouChanPin> list = new List<EyouSoft.Model.OtherStructure.MTuanGouChanPin>();
+
+
+            string tableName = "View_DaiLiTuanGou";
+            string fileds = "[Id],[MemberId],[ProductId],[SaleType],[ProductName],[ProductType],[SimpleInfo],[DetailInfo],[MarketPrice],[GroupPrice],[ProductNum],[ValiDate],[IssueTime],[OperatorID],[OperatorName],[SupplierID],[ProductImg],[SupplierName],[StockNum]";
+            string orderByString = "IssueTime desc";
+
+            StringBuilder query = new StringBuilder();
+            query.Append(" 1=1 ");
+
+            if (chaXun != null)
+            {
+                if (!string.IsNullOrEmpty(chaXun.ProductName))
+                {
+                    query.AppendFormat(" and  ProductName like '%{0}%' ", chaXun.ProductName);
+                }
+                if (chaXun.ProductType > 0)
+                {
+                    query.AppendFormat(" and  (ProductType = {0})", (int)chaXun.ProductType);
+                }
+                if (chaXun.SaleType > 0)
+                {
+                    query.AppendFormat(" and  (SaleType = {0})", (int)chaXun.SaleType);
+                }
+                if (chaXun.isGetTrue)
+                {
+                    query.AppendFormat(" and  ValiDate >= '{0}'", DateTime.Today);
+                }
+                if (chaXun.ProductStatus != null && chaXun.ProductStatus.Length > 0)
+                {
+                    query.Append(" AND ProductStatus IN(" + Utils.GetSqlIn(chaXun.ProductStatus) + ") ");
+                }
+                if (!string.IsNullOrEmpty(chaXun.MemberId))
+                {
+                    query.AppendFormat(" and  MemberId = '{0}'", chaXun.MemberId);
+                }
+            }
+
+
+            using (IDataReader dr = DbHelper.ExecuteReader1(this._db, pageSize, pageIndex, ref recordCount, tableName, fileds, query.ToString(), orderByString, null))
+            {
+                while (dr.Read())
+                {
+
+                    EyouSoft.Model.OtherStructure.MTuanGouChanPin info = new EyouSoft.Model.OtherStructure.MTuanGouChanPin();
+                    info.ID = Convert.ToInt32(dr.GetString(dr.GetOrdinal("ProductId")));
+                    info.SaleType = (CuXiaoLeiXing)dr.GetByte(dr.GetOrdinal("SaleType"));
+                    info.ProductType = (ChanPinLeiXing)dr.GetByte(dr.GetOrdinal("ProductType"));
+                    info.ProductName = dr.GetString(dr.GetOrdinal("ProductName"));
+                    info.ProductNum = dr.GetInt32(dr.GetOrdinal("ProductNum"));
+                    info.MarketPrice = dr.GetDecimal(dr.GetOrdinal("MarketPrice"));
+                    info.GroupPrice = dr.GetDecimal(dr.GetOrdinal("GroupPrice"));
+                    info.SimpleInfo = dr.GetString(dr.GetOrdinal("SimpleInfo"));
+                    info.DetailInfo = dr.GetString(dr.GetOrdinal("DetailInfo"));
+                    info.OperatorID = dr.GetString(dr.GetOrdinal("OperatorID"));
+                    info.OperatorName = dr.GetString(dr.GetOrdinal("OperatorName"));
+                    if (!dr.IsDBNull(dr.GetOrdinal("ValiDate"))) info.ValiDate = dr.GetDateTime(dr.GetOrdinal("ValiDate"));
+                    info.IssueTime = dr.GetDateTime(dr.GetOrdinal("IssueTime"));
+                    info.StockNum = dr.GetInt32(dr.GetOrdinal("StockNum"));
+                    info.ProductImg = dr.IsDBNull(dr.GetOrdinal("ProductImg")) ? null : dr.GetString(dr.GetOrdinal("ProductImg"));
+
+                    info.SupplierID = dr.IsDBNull(dr.GetOrdinal("SupplierID")) ? "" : dr.GetString(dr.GetOrdinal("SupplierID"));
+                    info.SupplierName = dr.IsDBNull(dr.GetOrdinal("SupplierName")) ? "" : dr.GetString(dr.GetOrdinal("SupplierName"));
+                    list.Add(info);
+                }
+            }
+            return list;
+        }
+
         #endregion
 
     }

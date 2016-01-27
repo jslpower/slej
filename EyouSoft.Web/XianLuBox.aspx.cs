@@ -48,7 +48,7 @@ namespace EyouSoft.Web
                 #region 表头
                 StringBuilder strHead = new StringBuilder();
                 strHead.AppendFormat("<tr><th class=\"Rline\"> &nbsp; </th> <th class=\"Rline\"> 门市价</th> ");
-                strHead.AppendFormat("  <th class=\"Rline\" {0}> 会员价 </th> ", (int)HuiYuanInfo.UserType >= (int)EyouSoft.Model.Enum.MemberTypes.普通会员 ? string.Empty : "style='display:none'");
+                strHead.AppendFormat("  <th class=\"Rline\" {0}> 优惠价 </th> ", (int)HuiYuanInfo.UserType >= (int)EyouSoft.Model.Enum.MemberTypes.普通会员 ? string.Empty : "style='display:none'");
                 strHead.AppendFormat("<th class=\"Rline\" {0}> 代销价 </th>", (int)HuiYuanInfo.UserType >= (int)EyouSoft.Model.Enum.MemberTypes.免费代理 || HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? string.Empty : "style='display:none'");
 
                 if (HuiYuanInfo.UserType != EyouSoft.Model.Enum.MemberTypes.免费代理)
@@ -178,20 +178,22 @@ namespace EyouSoft.Web
                 #region  计算代理价格
                 var crjsj = tourinfo.JSJCR;
                 var etjsj = tourinfo.JSJET;
-                decimal crj = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, EyouSoft.Model.Enum.MemberTypes.代理);
-                decimal etj = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, EyouSoft.Model.Enum.MemberTypes.代理);
-                decimal dingdanjine = ((crj * info.ChengRenShu) + (etj * info.ErTongShu));
-                info.AgencyJinE = dingdanjine;
-                if (info.JinE < dingdanjine)
-                {
-                    decimal crj1 = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, EyouSoft.Model.Enum.MemberTypes.员工);
-                    decimal etj1 = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, EyouSoft.Model.Enum.MemberTypes.员工);
-                    decimal dingdanjine1 = ((crj1 * info.ChengRenShu) + (etj1 * info.ErTongShu));
-                    info.AgencyJinE = UtilsCommons.GetGYStijia(fee, dingdanjine1, EyouSoft.Model.Enum.MemberTypes.员工);
-                }
+
+                decimal crj1 = UtilsCommons.GetGYStijia(fee, crjsj, tourinfo.CRSCJ, yuming.UserType);
+                decimal etj1 = UtilsCommons.GetGYStijia(fee, etjsj, tourinfo.ETSCJ, yuming.UserType);
+                decimal dingdanjine1 = ((crj1 * info.ChengRenShu) + (etj1 * info.ErTongShu));
+                info.AgencyJinE = dingdanjine1;
+
+                info.JiaoYiCR = UtilsCommons.GetGYStijia(fee, tourinfo.JSJCR, tourinfo.CRSCJ);
+                info.JiaoYiET = UtilsCommons.GetGYStijia(fee, tourinfo.JSJET, tourinfo.ETSCJ);
+                info.WebSiteCR = crj1;
+                info.WebSiteET = etj1;
 
                 #endregion
             }
+            //info.SCJCR = info.SCJCR;
+            //info.SCJET = info.SCJET;
+
 
             if (xianlu.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.系统 || xianlu.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
             {
@@ -227,9 +229,6 @@ namespace EyouSoft.Web
         /// <returns></returns>
         EyouSoft.Model.XianLuStructure.MOrderInfo GetYuDingInfo()
         {
-            EyouSoft.Model.SSOStructure.MUserInfo m = null;
-            bool isLogin = EyouSoft.Security.Membership.UserProvider.IsLogin(out m);
-
             var info = new EyouSoft.Model.XianLuStructure.MOrderInfo();
             info.RouteType = (EyouSoft.Model.Enum.AreaType)Utils.GetInt(Utils.GetFormValue("type"), 1);
             info.TrafficId = Utils.GetQueryStringValue("hangban");
@@ -238,22 +237,11 @@ namespace EyouSoft.Web
             info.TourId = Utils.GetFormValue("hidtourid");
             info.XiaDanBeiZhu = Utils.GetFormValue("txtarea");
             info.XianLuId = Utils.GetFormValue("hidxianlu");
-            info.JSJCR = Utils.GetDecimal(Utils.GetFormValue("jsjcr"));
-            info.JSJER = Utils.GetDecimal(Utils.GetFormValue("jsjet"));
             info.JinE = Utils.GetDecimal(Utils.GetFormValue("hidzj"));
             info.LxrName = Utils.GetFormValue("yklxr");
             info.LxrTelephone = Utils.GetFormValue("yksj");
             info.LDate = Utils.GetDateTime(Utils.GetFormValue("hidLDate"));
-            bool isHasPriv = new EyouSoft.IDAL.AccountStructure.BSellers().JudgeAuthor(Request.Url.Host.ToLower(), (EyouSoft.Model.Enum.FeeTypes)Utils.GetInt(Utils.GetQueryStringValue("type")));
-            if (isLogin)
-            {
-                info.OperatorId = m.UserId;
-            }
-            else
-            {
-                info.OperatorId = "-1";
-            }
-
+            info.OperatorId = m.UserId;
             info.YouKes = new List<EyouSoft.Model.XianLuStructure.MOrderYouKeInfo>();
 
             string[] txtYouKeName = Utils.GetFormValues("txtYouKeName");

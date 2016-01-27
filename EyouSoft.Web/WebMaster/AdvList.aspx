@@ -60,6 +60,10 @@
                         <select id="advType" name="advType" class="inputselect">
                             <%=EyouSoft.Common.UtilsCommons.GetEnumDDL(EyouSoft.Common.EnumObj.GetList(typeof(EyouSoft.Model.Enum.AdvArea)), EyouSoft.Common.Utils.GetQueryStringValue("advType"))%>
                         </select>
+                        <label>公司简称：</label> 
+                        <input type="text" class="inputtext" name="txtCJC" value="<%=EyouSoft.Common.Utils.GetQueryStringValue("txtCJC") %>" />
+                        <label>网店名称：</label> 
+                        <input type="text" class="inputtext" name="txtWebName" value="<%=EyouSoft.Common.Utils.GetQueryStringValue("txtWebName") %>" />
                         <input type="submit" class="search-btn" value="" />
                     </div>
                     
@@ -97,7 +101,7 @@
         <table width="100%" cellspacing="1" cellpadding="0" border="0" id="liststyle">
             <tbody>
                 <tr>
-                    <th height="30" align="center" width="10%">
+                    <th height="30" align="center" width="5%">
                         <input type="checkbox" id="checkbox3" name="checkbox3">全选
                     </th>
                     <th align="center" width="25%">
@@ -106,14 +110,17 @@
                     <th align="center" width="15%">
                         图片
                     </th>
-                    <th align="center" width="20%">
+                    <th align="center" width="15%">
                         广告位置
                     </th>
                     <th align="center" width="5%">
                         排序
                     </th>
-                    <th align="center" width="25%">
+                    <th align="center" width="15%">
                         链接地址
+                    </th>
+                    <th align="center" width="15%">
+                        发布人
                     </th>
                 </tr>
                 <asp:Repeater runat="server" ID="rptlist">
@@ -139,30 +146,37 @@
                                 <a target="_blank" href="<%#Eval("AdvLink")%>">
                                     <%#Eval("AdvLink")%></a>
                             </td>
+                            <td align="center">
+                               
+                                    <%# GetWangDianByID(Eval("AgencyId"))%>
+                            </td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
                 <asp:Literal ID="lbemptymsg" runat="server"></asp:Literal>
             </tbody>
             <tr>
-                <th height="30" align="center" width="10%">
+                <th height="30" align="center" width="5%">
                     <%--<input type="checkbox" id="checkbox3" name="checkbox3">全选--%>
                 </th>
                 <th align="center" width="25%">
-                    广告标题
-                </th>
-                <th align="center" width="15%">
-                    图片
-                </th>
-                <th align="center" width="20%">
-                    广告位置
-                </th>
-                <th align="center" width="5%">
-                    排序
-                </th>
-                <th align="center" width="25%">
-                    链接地址
-                </th>
+                        广告标题
+                    </th>
+                    <th align="center" width="15%">
+                        图片
+                    </th>
+                    <th align="center" width="15%">
+                        广告位置
+                    </th>
+                    <th align="center" width="5%">
+                        排序
+                    </th>
+                    <th align="center" width="15%">
+                        链接地址
+                    </th>
+                    <th align="center" width="15%">
+                        发布人
+                    </th>
             </tr>
         </table>
         <table width="100%" cellspacing="0" cellpadding="0" border="0">

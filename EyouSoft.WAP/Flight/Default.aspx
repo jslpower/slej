@@ -7,6 +7,8 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        <%=FenXiangBiaoTi %></title>
 
     <script src="/js/jq.mobi.min.js" type="text/javascript"></script>
 
@@ -15,10 +17,16 @@
     <script src="/js/foucs.js" type="text/javascript"></script>
 
     <link href="/css/flight.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .user_form li
+        {
+            padding-left: 80px;
+        }
+    </style>
 </head>
 <body>
     <form id="myform" name="myform" method="post">
-    <uc1:WapHeader runat="server" ID="WapHeader1"  HeadText="机票预订"  />
+    <uc1:WapHeader runat="server" ID="WapHeader1" HeadText="机票预订" />
     <div class="warp">
         <!--baner------------start-->
         <uc2:ScrollImg ID="ScrollImg1" runat="server" />
@@ -40,7 +48,8 @@
                 </ul>
             </div>
         </div>
-        <div class="user_form mt10">
+        <div class="flight_city mt10">
+        <div class="user_form">
             <ul>
                 <li class="R_jiantou"><span class="label_name">出发日期</span>
                     <input readonly="readonly" class="u-rili u-input" name="rili" type="text" id="rili"
@@ -49,10 +58,13 @@
                 </li>
             </ul>
         </div>
+        </div>
         <div class="padd cent">
             <input name="" type="button" class="y_btn" value="马 上 查 询" /></div>
         <div class="cent">
             <a href="XUZHI.ASPX" class="zd_btn">一分钟全知道</a></div>
+        <div class="cent paddT">
+            电脑版订机票，更流畅超快捷 <a href="http://www.slej.cn/JiPiao.aspx" class=" bg_blue">现在进入</a></div>
         <div class="padd flight_txt">
             <ul>
                 <li>

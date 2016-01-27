@@ -18,9 +18,28 @@ namespace EyouSoft.WAP
         protected string ruzhuriqi = "";
         protected string lidianriqi = "";
         protected string CitySanZiMa = "HGH";
+        #region 微信分享
+        protected string weixin_jsapi_config = string.Empty
+                                    , FenXiangBiaoTi = string.Empty
+                                    , FenXiangMiaoShu = string.Empty
+                                    , FenXiangTuPianFilepath = string.Empty
+                                    , FenXiangLianJie = string.Empty;
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             WapHeader1.HeadText = "酒店列表";
+
+            IList<string> weixin_jsApiList = new List<string>();
+            weixin_jsApiList.Add("onMenuShareTimeline");
+            weixin_jsApiList.Add("onMenuShareAppMessage");
+            weixin_jsApiList.Add("onMenuShareQQ");
+            var weixing_config_info = Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
+            weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
+
+            FenXiangBiaoTi = Utils.GetQueryStringValue("CityName") + "酒店预订";
+            FenXiangMiaoShu = Utils.GetQueryStringValue("CityName") + "酒店预订";
+            FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+
             if (string.IsNullOrEmpty(Utils.GetQueryStringValue("RuZhuRiQi")))
             {
                 Model.RuZhuRiQi = DateTime.Now.Date;
@@ -78,17 +97,25 @@ namespace EyouSoft.WAP
             {
                 var list = bll.GetHotelList(Model, true, EyouSoft.Model.Enum.MemberTypes.普通会员, false);
                 if (list == null || list.Count == 0) { XianShi.Text = "没房？房型不适合？调整日期试试看！"; }
-                Repeater1.DataSource = list;
-                Repeater1.DataBind();
+                else
+                {
+                    FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].FirstImageAddress, 320, 240);
+                    Repeater1.DataSource = list;
+                    Repeater1.DataBind();
+                }
             }
             else
             {
                 var list = bll.GetHotelList(Model, true, m.UserType, false);
                 if (list == null || list.Count == 0) { XianShi.Text = "没房？房型不适合？调整日期试试看！"; }
-                Repeater1.DataSource = list;
-                Repeater1.DataBind();
+                else
+                {
+                    FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].FirstImageAddress, 320, 240);
+                    Repeater1.DataSource = list;
+                    Repeater1.DataBind();
+                }
             }
-            
+
         }
 
         public string GetAddress(object hotelid)

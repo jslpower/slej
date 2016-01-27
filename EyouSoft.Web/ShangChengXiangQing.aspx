@@ -119,7 +119,7 @@
             </div>
             <input type="hidden" name="cname" value="<%=EyouSoft.Common.Utils.GetQueryStringValue("id") %>" />
             <div class="mall_xxR">
-                <div class="page_code" style="bottom: 290px; right: 10px;">
+                <div class="page_code" style="bottom: top:40px; right: 10px;">
                     <div class="code_box">
                         <div class="code_small">
                             <img src="/ErWeiMa.aspx?codeurl=<%=thisurl %>" /></div>
@@ -165,7 +165,7 @@
                         <img src="images/icon_h.gif" />
                         门市价：<asp:Label ID="lblMenShiJia" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;
                         <img src="/images/icon_y.gif" />
-                        <font class="fontred">会员价：<asp:Label ID="lblHuiYuanJia" runat="server" Text=""></asp:Label></font>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <font class="fontred">优惠价：<asp:Label ID="lblHuiYuanJia" runat="server" Text=""></asp:Label></font>&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:PlaceHolder ID="pla_ejdl" runat="server" Visible="false">
                             <img src="/images/icon_y.gif" />
                             <font class="fontred">代销价：<asp:Label ID="lblMFDL" runat="server" Text=""></asp:Label></font>&nbsp;&nbsp;&nbsp;&nbsp;<br />

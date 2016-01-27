@@ -545,7 +545,6 @@
     </Compile>
     <Compile Include="AliPay\Alipay_Notify.aspx.cs">
       <DependentUpon>Alipay_Notify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AliPay\Alipay_Notify.aspx.designer.cs">
       <DependentUpon>Alipay_Notify.aspx</DependentUpon>
@@ -631,6 +630,9 @@
     <Compile Include="CommonPage\uploadFile.aspx.designer.cs">
       <DependentUpon>uploadFile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CommonPage\upload_json.ashx.cs">
+      <DependentUpon>upload_json.ashx</DependentUpon>
+    </Compile>
     <Compile Include="CommonPage\ValidateCode.ashx.cs">
       <DependentUpon>ValidateCode.ashx</DependentUpon>
     </Compile>
@@ -681,6 +683,13 @@
     </Compile>
     <Compile Include="GetMiMa.aspx.designer.cs">
       <DependentUpon>GetMiMa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GongYingSetDaiLi.aspx.cs">
+      <DependentUpon>GongYingSetDaiLi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GongYingSetDaiLi.aspx.designer.cs">
+      <DependentUpon>GongYingSetDaiLi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hotel.aspx.cs">
       <DependentUpon>Hotel.aspx</DependentUpon>
@@ -770,6 +779,18 @@
     <Compile Include="Member\FenSiJiangLi.aspx.designer.cs">
       <DependentUpon>FenSiJiangLi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Member\FenXiang.aspx.cs">
+      <DependentUpon>FenXiang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenXiang.aspx.designer.cs">
+      <DependentUpon>FenXiang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenXiangEdit.aspx.cs">
+      <DependentUpon>FenXiangEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\FenXiangEdit.aspx.designer.cs">
+      <DependentUpon>FenXiangEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member\JiFenDuiHuan.aspx.cs">
       <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
     </Compile>
@@ -831,6 +852,13 @@
     <Compile Include="WebMaster\DaiLiCompany.aspx.designer.cs">
       <DependentUpon>DaiLiCompany.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebMaster\JiaoYiFeiLv.aspx.cs">
+      <DependentUpon>JiaoYiFeiLv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\JiaoYiFeiLv.aspx.designer.cs">
+      <DependentUpon>JiaoYiFeiLv.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebMaster\JiFenDuiHuan.aspx.cs">
       <DependentUpon>JiFenDuiHuan.aspx</DependentUpon>
     </Compile>
@@ -850,6 +878,37 @@
     <Compile Include="WebMaster\JiPiaoOrderXX.aspx.designer.cs">
       <DependentUpon>JiPiaoOrderXX.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebMaster\MyGYSList.aspx.cs">
+      <DependentUpon>MyGYSList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyGYSList.aspx.designer.cs">
+      <DependentUpon>MyGYSList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyShangChengGY.aspx.cs">
+      <DependentUpon>MyShangChengGY.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\MyShangChengGY.aspx.designer.cs">
+      <DependentUpon>MyShangChengGY.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTeYue.aspx.cs">
+      <DependentUpon>MyTeYue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTeYue.aspx.designer.cs">
+      <DependentUpon>MyTeYue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTGGysList.aspx.cs">
+      <DependentUpon>MyTGGysList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTGGysList.aspx.designer.cs">
+      <DependentUpon>MyTGGysList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTuanGouTeYue.aspx.cs">
+      <DependentUpon>MyTuanGouTeYue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\MyTuanGouTeYue.aspx.designer.cs">
+      <DependentUpon>MyTuanGouTeYue.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebMaster\NavNum.aspx.cs">
       <DependentUpon>NavNum.aspx</DependentUpon>
     </Compile>
@@ -858,7 +917,6 @@
     </Compile>
     <Compile Include="WebMaster\PaiXu.aspx.cs">
       <DependentUpon>PaiXu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebMaster\PaiXu.aspx.designer.cs">
       <DependentUpon>PaiXu.aspx</DependentUpon>
@@ -869,11 +927,44 @@
     <Compile Include="WebMaster\ShowHidden.aspx.designer.cs">
       <DependentUpon>ShowHidden.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierD.aspx.cs">
+      <DependentUpon>SupplierD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\Supplier\SupplierD.aspx.designer.cs">
+      <DependentUpon>SupplierD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\FenXiang.ascx.cs">
+      <DependentUpon>FenXiang.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\UserControl\FenXiang.ascx.designer.cs">
+      <DependentUpon>FenXiang.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebMaster\XieYi.aspx.cs">
       <DependentUpon>XieYi.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebMaster\XieYi.aspx.designer.cs">
       <DependentUpon>XieYi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\chakan.aspx.cs">
+      <DependentUpon>chakan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\chakan.aspx.designer.cs">
+      <DependentUpon>chakan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\YouJiEdit.aspx.cs">
+      <DependentUpon>YouJiEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\YouJiEdit.aspx.designer.cs">
+      <DependentUpon>YouJiEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\YouJiList.aspx.cs">
+      <DependentUpon>YouJiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMaster\YouJi\YouJiList.aspx.designer.cs">
+      <DependentUpon>YouJiList.aspx</DependentUpon>
     </Compile>
     <Compile Include="__JiPiaoCeShi.aspx.cs">
       <DependentUpon>__JiPiaoCeShi.aspx</DependentUpon>
@@ -898,7 +989,6 @@
     </Compile>
     <Compile Include="LogOut.aspx.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LogOut.aspx.designer.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
@@ -1771,7 +1861,6 @@
     </Compile>
     <Compile Include="WebMaster\MoneyManagement\JiaoYiList.aspx.cs">
       <DependentUpon>JiaoYiList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebMaster\MoneyManagement\JiaoYiList.aspx.designer.cs">
       <DependentUpon>JiaoYiList.aspx</DependentUpon>
@@ -2475,6 +2564,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Ebao.aspx" />
     <Content Include="ErWeiMa.aspx" />
+    <Content Include="GongYingSetDaiLi.aspx" />
     <Content Include="Images\baoji_step.gif" />
     <Content Include="Images\copy.gif" />
     <Content Include="Images\navon.png" />
@@ -2486,6 +2576,8 @@
     <Content Include="LoginOrReg.aspx" />
     <Content Include="Member\DuiHuanList.aspx" />
     <Content Include="Member\FenSiJiangLi.aspx" />
+    <Content Include="Member\FenXiang.aspx" />
+    <Content Include="Member\FenXiangEdit.aspx" />
     <Content Include="Member\JiFenDuiHuan.aspx" />
     <Content Include="UserCentent.aspx" />
     <Content Include="UserControl\DaiLiDefault.ascx" />
@@ -2495,13 +2587,24 @@
     <Content Include="UserControl\MainNav.ascx" />
     <Content Include="UserControl\UserNav.ascx" />
     <Content Include="WebMaster\DaiLiCompany.aspx" />
+    <Content Include="WebMaster\JiaoYiFeiLv.aspx" />
     <Content Include="WebMaster\JiFenDuiHuan.aspx" />
     <Content Include="WebMaster\JiPiaoOrderList.aspx" />
     <Content Include="WebMaster\JiPiaoOrderXX.aspx" />
+    <Content Include="WebMaster\MyGYSList.aspx" />
+    <Content Include="WebMaster\MyShangChengGY.aspx" />
+    <Content Include="WebMaster\MyTeYue.aspx" />
+    <Content Include="WebMaster\MyTGGysList.aspx" />
+    <Content Include="WebMaster\MyTuanGouTeYue.aspx" />
     <Content Include="WebMaster\NavNum.aspx" />
     <Content Include="WebMaster\PaiXu.aspx" />
     <Content Include="WebMaster\ShowHidden.aspx" />
+    <Content Include="WebMaster\Supplier\SupplierD.aspx" />
+    <Content Include="WebMaster\UserControl\FenXiang.ascx" />
     <Content Include="WebMaster\XieYi.aspx" />
+    <Content Include="WebMaster\YouJi\chakan.aspx" />
+    <Content Include="WebMaster\YouJi\YouJiEdit.aspx" />
+    <Content Include="WebMaster\YouJi\YouJiList.aspx" />
     <Content Include="__JiPiaoCeShi.aspx" />
     <Content Include="JS\jquery.form.js" />
     <Content Include="GetAddress.aspx" />
@@ -2967,17 +3070,14 @@
     <Content Include="MasterPage\Front2.Master" />
     <Content Include="MasterPage\FrontFixed.Master" />
     <Content Include="MasterPage\Front3.Master" />
-    <None Include="99bill\99bill-rsa-yl.pfx" />
     <None Include="99bill\99bill-rsa.pfx" />
-    <None Include="99bill\99bill.cert.rsa.20140728-yl.cer" />
     <None Include="99bill\99bill.cert.rsa.20340630.cer" />
     <None Include="99bill\99bill[1].cert.rsa.20140803.cer" />
-    <None Include="99bill\99bill[1].cert.rsa.20140803.yl.cer" />
-    <None Include="99bill\public-rsa-yl.cer" />
     <None Include="99bill\public-rsa.cer" />
     <None Include="99bill\tester-rsa.pfx" />
     <Content Include="MasterPage\Print.Master" />
     <Content Include="ashx\CityHandler.ashx" />
+    <Content Include="CommonPage\upload_json.ashx" />
     <None Include="ExcelDownTemp\default.dot" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

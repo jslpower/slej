@@ -13,7 +13,7 @@ namespace EyouSoft.Web.UserControl
         public int isquanxian = 0;
         public string address = "杭州市西湖区文三路569号康新商务大厦17楼1号厅";
         public string Tel = "400-6588-180";
-        public string Xuke = "L-ZJ01409";
+        public string Xuke = "杭州金奥：L-ZJ-01409";
         public int isfenxiao = 0;
         protected void Page_Load(object sender, EventArgs e)
         {

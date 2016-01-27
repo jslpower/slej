@@ -100,9 +100,17 @@ namespace EyouSoft.WAP
                         REWC(";" + callback + "({m:'代理商账号不能登录免费代理商网站！'});");
 
                     }
+                    else if (userInfo.UserType == MemberTypes.贵宾会员 && model.UserType == MemberTypes.免费代理)
+                    {
+
+                        EyouSoft.Security.Membership.UserProvider.Logout();
+
+                        REWC(";" + callback + "({m:'贵宾账号不能登录免费代理商网站！'});");
+
+                    }
                 }
 
-                if (userInfo.UserType == MemberTypes.代理)
+                if (userInfo.UserType == MemberTypes.代理 || userInfo.UserType == MemberTypes.免费代理)
                 {
                     #region  如果是代理商同时登录总后台                    
                     string username = u;

@@ -59,7 +59,6 @@ namespace EyouSoft.WAP
                 if (areaType != null)
                 {
                     routeType = (int)areaType.RouteType;
-                    lbl_routeType.Text = areaType.AreaName;
                     WapHeader1.HeadText = areaType.RouteType == EyouSoft.Model.Enum.AreaType.出境线路 ? "国际线路" : areaType.RouteType.ToString();
                 }
 
@@ -100,6 +99,8 @@ namespace EyouSoft.WAP
 
 
                 var chufadi = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysCityModel(model.DepCityId);
+
+
                 if (chufadi == null)//出发地
                 {
                     cfd.Text = "杭州出发";
@@ -108,35 +109,78 @@ namespace EyouSoft.WAP
                 {
                     cfd.Text = chufadi.Name + "出发";
                 }
+                cfd.Text += string.Format("<span class=\"gys_code\">{0}</span>", getSourceJP(model.Line_Source));
 
                 if (model.FuWu != null)//服务
                 {
-                    if (model.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.光大)
+                    if (model.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.光大 || model.Line_Source == EyouSoft.Model.XianLuStructure.LineSource.旅游圈)
                     {
+                        if (string.IsNullOrEmpty(model.FuWu.GouWuAnPai)) div_gouwu.Visible = false;
                         litGouWu.Text = Utils.ConverToHtml(model.FuWu.GouWuAnPai);
+
+                        if (string.IsNullOrEmpty(model.FuWu.FuWuBiaoZhun)) div_baohan.Visible = false;
                         litBaoHan.Text = Utils.ConverToHtml(model.FuWu.FuWuBiaoZhun);
+
+                        if (string.IsNullOrEmpty(model.FuWu.BuHanXiangMu)) div_buhan.Visible = false;
                         litBuHan.Text = Utils.ConverToHtml(model.FuWu.BuHanXiangMu);
+
+                        if (string.IsNullOrEmpty(model.FuWu.ErTongAnPai)) div_ertong.Visible = false;
                         litErTong.Text = Utils.ConverToHtml(model.FuWu.ErTongAnPai);
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZiFeiXiangMu)) div_zifei.Visible = false;
                         litZiFei.Text = Utils.ConverToHtml(model.FuWu.ZiFeiXiangMu);
+
+                        if (string.IsNullOrEmpty(model.FuWu.WenXinTiXing)) div_tishi.Visible = false;
                         litTiShi.Text = Utils.ConverToHtml(model.FuWu.WenXinTiXing);
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZhuYiShiXiang)) div_zhuyi.Visible = false;
                         litZhuYi.Text = Utils.ConverToHtml(model.FuWu.ZhuYiShiXiang);
+
+                        if (string.IsNullOrEmpty(model.FuWu.BaoMingXuZhi)) div_baoming.Visible = false;
                         litBaoMing.Text = Utils.ConverToHtml(model.FuWu.BaoMingXuZhi);
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZengSongXiangMu)) div_zengsong.Visible = false;
                         litZengSong.Text = Utils.ConverToHtml(model.FuWu.ZengSongXiangMu);
+
+                        if (string.IsNullOrEmpty(model.FuWu.QiTaShiXiang)) div_qita.Visible = false;
                         litQiTa.Text = Utils.ConverToHtml(model.FuWu.QiTaShiXiang);
+
+                        if (string.IsNullOrEmpty(model.TeSe)) div_shuoming.Visible = false;
                         litMiaoShu.Text = Utils.ConverToHtml(model.TeSe);
                     }
                     else
                     {
+                        if (string.IsNullOrEmpty(model.FuWu.GouWuAnPai)) div_gouwu.Visible = false;
                         litGouWu.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.GouWuAnPai));
+
+                        if (string.IsNullOrEmpty(model.FuWu.FuWuBiaoZhun)) div_baohan.Visible = false;
                         litBaoHan.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.FuWuBiaoZhun));
+
+                        if (string.IsNullOrEmpty(model.FuWu.BuHanXiangMu)) div_buhan.Visible = false;
                         litBuHan.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.BuHanXiangMu));
+
+                        if (string.IsNullOrEmpty(model.FuWu.ErTongAnPai)) div_ertong.Visible = false;
                         litErTong.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.ErTongAnPai));
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZiFeiXiangMu)) div_zifei.Visible = false;
                         litZiFei.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.ZiFeiXiangMu));
+
+                        if (string.IsNullOrEmpty(model.FuWu.WenXinTiXing)) div_tishi.Visible = false;
                         litTiShi.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.WenXinTiXing));
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZhuYiShiXiang)) div_zhuyi.Visible = false;
                         litZhuYi.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.ZhuYiShiXiang));
+
+                        if (string.IsNullOrEmpty(model.FuWu.BaoMingXuZhi)) div_baoming.Visible = false;
                         litBaoMing.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.BaoMingXuZhi));
+
+                        if (string.IsNullOrEmpty(model.FuWu.ZengSongXiangMu)) div_zengsong.Visible = false;
                         litZengSong.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.ZengSongXiangMu));
+
+                        if (string.IsNullOrEmpty(model.FuWu.QiTaShiXiang)) div_qita.Visible = false;
                         litQiTa.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.FuWu.QiTaShiXiang));
+
+                        if (string.IsNullOrEmpty(model.TeSe)) div_shuoming.Visible = false;
                         litMiaoShu.Text = Utils.ConverToHtml(EyouSoft.Common.Function.StringValidate.TextToHtml(model.TeSe));
                     }
                 }
@@ -149,6 +193,16 @@ namespace EyouSoft.WAP
                     isNoFlight.Visible = true;
                 }
 
+                //线路广告
+
+                var lineadv = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysAreaModel(model.AreaId);
+                if (!string.IsNullOrEmpty(lineadv.AdvLink))
+                {
+                    phLineAdv.Visible = true;
+                    hrfLineAdv.NavigateUrl = "m." + lineadv.AdvLink;
+                    hrfLineAdv.Text = lineadv.AdvTitle;
+                    imgLineAdv.Src = lineadv.ImgPath;
+                }
 
                 //初始化航班
                 initFlight(model);
@@ -167,11 +221,11 @@ namespace EyouSoft.WAP
                 //设置图片链接
                 FenXiangTuPianFilepath = string.IsNullOrEmpty(model.TeSeFilePath) ? "http://" + Request.Url.Host + " /images/line_xx001.jpg" : "http://" + Request.Url.Host + TuPian.F1(model.TeSeFilePath, 640, 400, model.XianLuId);
                 FenXiangBiaoTi = model.RouteName;
-                FenXiangMiaoShu = model.Description;
+                FenXiangMiaoShu = Utils.InputText(model.Description);
                 #endregion
 
             }
-            FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
         }
 
         #region 获取团期和航班信息
@@ -326,56 +380,56 @@ namespace EyouSoft.WAP
             string getPriceInfo = string.Format("<li>成人：<span class=\"floatR\">¥{0}x{1}人</span></li><li>儿童：<span class=\"floatR\">¥{2}x{3}人</span></li>",
                                                                              CRJ.ToString("F0"), peopleNum
                                                                              , ETJ.ToString("F0"), childNum);
-            decimal CRSCJ = tour.CRSCJ * peopleNum;
-            decimal ETSCJ = tour.ETSCJ * childNum;
-            decimal JSJCR = tour.JSJCR * peopleNum;
-            decimal JSJET = tour.JSJET * childNum;
+            //decimal CRSCJ = tour.CRSCJ * peopleNum;
+            //decimal ETSCJ = tour.ETSCJ * childNum;
+            //decimal JSJCR = tour.JSJCR * peopleNum;
+            //decimal JSJET = tour.JSJET * childNum;
             StringBuilder strbu = new StringBuilder();
-            {
+            //{
 
-                Model.SSOStructure.MUserInfo userInfo = null;
-                bool isLogin = Security.Membership.UserProvider.IsLogin(out userInfo);
-                if (isLogin)
-                {
+            //    Model.SSOStructure.MUserInfo userInfo = null;
+            //    bool isLogin = Security.Membership.UserProvider.IsLogin(out userInfo);
+            //    if (isLogin)
+            //    {
 
-                    if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.普通会员)
-                    {
-                        strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元  儿童{1}元 </li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
-                        strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
-                        strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
+            //        if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.普通会员)
+            //        {
+            //            strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元  儿童{1}元 </li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
+            //            strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
+            //            strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
 
-                    }
-                    if (isDisplay)
-                    {
-                        if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员)
-                        {
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
-                            strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
-                        }
-                        if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理)
-                        {
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
-                            strbu.AppendFormat("<li><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
-                        }
-                    }
-                }
-                else
-                {
+            //        }
+            //        if (isDisplay)
+            //        {
+            //            if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员)
+            //            {
+            //                strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
+            //                strbu.AppendFormat("<li><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
+            //                strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
+            //            }
+            //            if (userInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理)
+            //            {
+            //                strbu.AppendFormat("<li><span class=\"font_yellow\">会员：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
+            //                strbu.AppendFormat("<li><span class=\"font_yellow\">贵宾：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
+            //                strbu.AppendFormat("<li><span class=\"font_yellow\">代理：</span>成人{0}元 儿童{1}元</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
 
-                    strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">会员：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
-                    if (isDisplay)
-                    {
-                        strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
-                        strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
-                    }
-
-
-                }
+            //        strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">会员：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.普通会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.普通会员).ToString("F0"));
+            //        if (isDisplay)
+            //        {
+            //            strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.贵宾会员).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.贵宾会员).ToString("F0"));
+            //            strbu.AppendFormat("<li><a href=\"\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理：</span>成人{0}元/人 儿童{1}元/人</li>", UtilsCommons.GetGYStijia(FeeType, JSJCR, CRSCJ, MemberTypes.代理).ToString("F0"), UtilsCommons.GetGYStijia(FeeType, JSJET, ETSCJ, MemberTypes.代理).ToString("F0"));
+            //        }
 
 
-            }
+            //    }
+
+
+            //}
             var retObj = new retObj() { YH = strbu.ToString(), PRICE = getPriceInfo };
             RCWE(UtilsCommons.AjaxReturnJson("1", sum.ToString("F0"), retObj));
 
@@ -388,6 +442,23 @@ namespace EyouSoft.WAP
         {
             public string YH { get; set; }
             public string PRICE { get; set; }
+        }
+
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="lineType"></param>
+        /// <returns></returns>
+        string getSourceJP(object lineType)
+        {
+            LineSource source = (LineSource)lineType;
+            if (source == LineSource.系统) return "JA";
+            if (source == LineSource.博客) return "BK";
+            if (source == LineSource.光大) return "GD";
+            if (source == LineSource.欢途) return "HT";
+            if (source == LineSource.省中旅) return "SZL";
+            if (source == LineSource.旅游圈) return "LYQ";
+            return "JA";
         }
 
     }

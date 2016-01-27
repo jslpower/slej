@@ -63,12 +63,13 @@ namespace EyouSoft.WAP.Mall
                 //lblShengChanRiQi.Text = model.ProductionDate != null ? model.ProductionDate.Value.ToString("yyyy-MM-dd") : "";
                 // lblBaoZhiQi.Text = model.ShelfDate.ToString();
 
-                var gys = new EyouSoft.BLL.SystemStructure.BSupplier().GetModel(model.GYSid);
+                var gys = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(model.GYSid);
                 if (gys != null)
                 {
-                    lblSupplier.Text = gys.SupplierName;
-                    MemberName.Text = gys.ContactName;
-                    MemberMoblie.Text = gys.ContactMobile;
+                    var memodel = new EyouSoft.IDAL.MemberStructure.BMember2().Get(gys.MemberID);
+                    lblSupplier.Text = gys.CompanyName;
+                    MemberName.Text = memodel.MemberName;
+                    MemberMoblie.Text = memodel.Mobile;
                     gysid = gys.ID;
                 }
 
@@ -132,15 +133,15 @@ namespace EyouSoft.WAP.Mall
                 }
                 StringBuilder strInfoStr = new StringBuilder();
                 strInfoStr.AppendFormat("产品描述：<br/>{0}<br/>", model.Remark);
-                strInfoStr.AppendFormat("不含服务：<br/>{0}<br/>", model.UnContentService);
                 strInfoStr.AppendFormat("包含服务：<br/>{0}<br/>", model.ContentService);
+                strInfoStr.AppendFormat("不含服务：<br/>{0}<br/>", model.UnContentService);
                 strInfoStr.AppendFormat("使用方法：<br/>{0}<br/>", model.UseRule);
                 litInfo.Text = strInfoStr.ToString();
                 //lblLeiXing.Text = model.TypeName;
                 lblMarketPrice.Text = model.MarketPrice.ToString("F2") + model.Unit;
                 if (m == null)
                 {
-                    lblMemberType.Text = "会员：";
+                    lblMemberType.Text = "优惠：";
                 }
                 else
                 {
@@ -178,17 +179,34 @@ namespace EyouSoft.WAP.Mall
                 StringBuilder strHY = new StringBuilder();
                 if (m != null)
                 {
-                    strHY.AppendFormat("<li><span class=\"font_yellow\">会员价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元</li>", yhxxHYJ.ToString("F2"));
+                    strHY.AppendFormat("<li><span class=\"font_yellow\">优惠价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元</li>", yhxxHYJ.ToString("F2"));
                     if (isDisplay)
                     {
+
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                        {
+                            decimal yhxxDXJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">代销价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDXJ.ToString("F2"), (yhxxHYJ - yhxxDXJ).ToString("F2"));
+                        }
                         decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
                         strHY.AppendFormat("<li><a style=\"display:{2}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ - yhxxGBJ).ToString("F2"), (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? "" : "none");
 
                         decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
                         strHY.AppendFormat("<li><a style=\"display:{2}\"  href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ - yhxxDLJ).ToString("F2"), (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.代理 ? "" : "none");
+
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+                        {
+                            decimal yhxxYGJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.员工);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">员工价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxYGJ.ToString("F2"), (yhxxHYJ - yhxxYGJ).ToString("F2"));
+                        }
                     }
                     else
                     {
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                        {
+                            decimal yhxxDXJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">代销价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDXJ.ToString("F2"), (yhxxHYJ - yhxxDXJ).ToString("F2"));
+                        }
                         if (m.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员)
                         {
                             decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
@@ -200,12 +218,17 @@ namespace EyouSoft.WAP.Mall
                             decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
                             strHY.AppendFormat("<li><span class=\"font_yellow\">代理价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ - yhxxDLJ).ToString("F2"));
                         }
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+                        {
+                            decimal yhxxYGJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.员工);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">员工价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxYGJ.ToString("F2"), (yhxxHYJ - yhxxYGJ).ToString("F2"));
+                        }
 
                     }
                 }
                 else
                 {
-                    strHY.AppendFormat("<li><span class=\"font_yellow\">会员价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元</li>", yhxxHYJ.ToString("F2"));
+                    strHY.AppendFormat("<li><span class=\"font_yellow\">优惠价：</span>{0} x 1 = <span class=\"font_yellow\">{0}</span>元</li>", yhxxHYJ.ToString("F2"));
                     if (isDisplay)
                     {
                         decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
@@ -226,11 +249,11 @@ namespace EyouSoft.WAP.Mall
                 #region 设置微信分享链接
                 //设置图片链接
                 FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(model.ProductImgs);
-                FenXiangBiaoTi = model.ProductName;
-                FenXiangMiaoShu = model.Remark;
+                FenXiangBiaoTi = Utils.InputText(model.ProductName);
+                FenXiangMiaoShu = Utils.InputText(model.Remark);
                 #endregion
 
-                FenXiangLianJie = HttpContext.Current.Request.Url.ToString();
+                FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
             }
         }
         #region 私有方法
@@ -246,25 +269,60 @@ namespace EyouSoft.WAP.Mall
                 StringBuilder strHY = new StringBuilder();
                 if (m != null)
                 {
-                    strHY.AppendFormat("<li><span class=\"font_yellow\">会员价：</span>{0} x {1} = <span class=\"font_yellow\">{2}</span>元</li>", yhxxHYJ.ToString("F2"), sl, (yhxxHYJ * sl).ToString("F2"));
+                    strHY.AppendFormat("<li><span class=\"font_yellow\">优惠价：</span>{0} x {1} = <span class=\"font_yellow\">{2}</span>元</li>", yhxxHYJ.ToString("F2"), sl, (yhxxHYJ * sl).ToString("F2"));
+                    if (isDisplay)
+                    {
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                        {
+                            decimal yhxxDXJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">代销价：</span>{0} x {2} = <span class=\"font_yellow\">{3}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDXJ.ToString("F2"), (yhxxHYJ * sl - yhxxDXJ * sl).ToString("F2"), sl, (yhxxDXJ * sl).ToString("F2"));
+                        }
+                        decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
+                        strHY.AppendFormat("<li><a style=\"display:{3}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x {2} = <span class=\"font_yellow\">{4}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ * sl - yhxxGBJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? "" : "none", (yhxxGBJ * sl).ToString("F2"));
 
-                    decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
-                    strHY.AppendFormat("<li><a style=\"display:{3}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x {2} = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ * sl - yhxxGBJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? "" : "none");
-
-                    decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
-                    strHY.AppendFormat("<li><a style=\"display:{3}\"  href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x {2} = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ * sl - yhxxDLJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.代理 ? "" : "none");
+                        decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
+                        strHY.AppendFormat("<li><a style=\"display:{3}\"  href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x {2} = <span class=\"font_yellow\">{4}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ * sl - yhxxDLJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.代理 ? "" : "none", (yhxxDLJ * sl).ToString("F2"));
+                    }
+                    else
+                    {
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理)
+                        {
+                            decimal yhxxDXJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.免费代理);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">代销价：</span>{0} x {2} = <span class=\"font_yellow\">{3}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDXJ.ToString("F2"), (yhxxHYJ * sl - yhxxDXJ * sl).ToString("F2"), sl, (yhxxDXJ * sl).ToString("F2"));
+                        }
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.贵宾会员)
+                        {
+                            decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
+                            strHY.AppendFormat("<li><a style=\"display:{3}\" href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x {2} = <span class=\"font_yellow\">{4}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ * sl - yhxxGBJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.贵宾会员 ? "" : "none", (yhxxGBJ * sl).ToString("F2"));
+                        }
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.代理)
+                        {
+                            decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
+                            strHY.AppendFormat("<li><a style=\"display:{3}\"  href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x {2} = <span class=\"font_yellow\">{4}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ * sl - yhxxDLJ * sl).ToString("F2"), sl, (int)m.UserType < (int)EyouSoft.Model.Enum.MemberTypes.代理 ? "" : "none", (yhxxDLJ * sl).ToString("F2"));
+                        }
+                        if (m.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+                        {
+                            decimal yhxxYGJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.员工);
+                            strHY.AppendFormat("<li><span class=\"font_yellow\">员工价：</span>{0} x {2} = <span class=\"font_yellow\">{3}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxYGJ.ToString("F2"), (yhxxHYJ * sl - yhxxYGJ * sl).ToString("F2"), sl, (yhxxYGJ * sl).ToString("F2"));
+                        }
+                    }
                 }
                 else
                 {
-                    strHY.AppendFormat("<li> <span class=\"font_yellow\">会员价：</span>{0} x {1} = <span class=\"font_yellow\">{2}</span>元</li>", yhxxHYJ.ToString("F2"), sl, (yhxxHYJ * sl).ToString("F2"));
 
-                    decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
-                    strHY.AppendFormat("<li><a href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x {2} = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ * sl - yhxxGBJ * sl).ToString("F2"), sl);
+                    strHY.AppendFormat("<li> <span class=\"font_yellow\">优惠价：</span>{0} x {1} = <span class=\"font_yellow\">{2}</span>元</li>", yhxxHYJ.ToString("F2"), sl, (yhxxHYJ * sl).ToString("F2"));
+                    if (isDisplay)
+                    {
+                        decimal yhxxGBJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.贵宾会员);
+                        strHY.AppendFormat("<li><a href=\"/Mall/MoDetail.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">贵宾价：</span>{0} x {2} = <span class=\"font_yellow\">{3}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxGBJ.ToString("F2"), (yhxxHYJ * sl - yhxxGBJ * sl).ToString("F2"), sl, (yhxxGBJ * sl).ToString("F2"));
 
-                    decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
-                    strHY.AppendFormat("<li><a href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x {2} = <span class=\"font_yellow\">{0}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ * sl - yhxxDLJ * sl).ToString("F2"), sl);
+                        decimal yhxxDLJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.代理);
+                        strHY.AppendFormat("<li><a href=\"/Mall/MoDetail.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"yudin_btn\">申请</a><span class=\"font_yellow\">代理价：</span>{0} x {2} = <span class=\"font_yellow\">{3}</span>元 立省<span class=\"font_yellow\">{1}</span>元</li>", yhxxDLJ.ToString("F2"), (yhxxHYJ * sl - yhxxDLJ * sl).ToString("F2"), sl, (yhxxDLJ * sl).ToString("F2"));
+
+                    }
 
                 }
+
 
                 Utils.RCWE(UtilsCommons.AjaxReturnJson("1", "", strHY.ToString()));
                 #endregion
@@ -305,6 +363,7 @@ namespace EyouSoft.WAP.Mall
                 case EyouSoft.Model.Enum.MemberTypes.贵宾会员:
                     return "贵宾";
                 case EyouSoft.Model.Enum.MemberTypes.免费代理:
+                    return "代销";
                 case EyouSoft.Model.Enum.MemberTypes.代理:
                     return "代理";
                 case EyouSoft.Model.Enum.MemberTypes.员工:

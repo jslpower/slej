@@ -67,7 +67,7 @@ namespace EyouSoft.Common
             //string filepath1 = F2(filepath);
             if (filepath != null && !string.IsNullOrEmpty(filepath.ToString()))
             {
-                if (filepath.ToString().IndexOf(".com") <= 0 && filepath.ToString().IndexOf(".cn") <= 0)
+                if (filepath.ToString().IndexOf(".com") <= 0 && filepath.ToString().IndexOf(".cn") <= 0 && filepath.ToString().IndexOf("http") < 0)
                 {
                     filepath = GetImgFileXml() + filepath;
                 }
@@ -90,7 +90,7 @@ namespace EyouSoft.Common
             //string filepath1 = F2(filepath);
             if (filepath != null && !string.IsNullOrEmpty(filepath.ToString()))
             {
-                if (filepath.ToString().IndexOf(".com") <= 0 && filepath.ToString().IndexOf(".cn") <= 0)
+                if (filepath.ToString().IndexOf(".com") <= 0 && filepath.ToString().IndexOf(".cn") <= 0 && filepath.ToString().IndexOf("http") < 0)
                 {
                     filepath = GetImgFileXml() + filepath;
                 }
@@ -293,7 +293,7 @@ namespace EyouSoft.Common
             Graphics g = System.Drawing.Graphics.FromImage(bitmap);
 
             //设置高质量插值法
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
 
             //设置高质量,低速度呈现平滑程度 消除锯齿
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -435,7 +435,7 @@ namespace EyouSoft.Common
             Graphics g = System.Drawing.Graphics.FromImage(bitmap);
 
             //设置高质量插值法
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
 
             //设置高质量,低速度呈现平滑程度 消除锯齿
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;

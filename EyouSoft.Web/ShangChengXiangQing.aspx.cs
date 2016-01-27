@@ -49,12 +49,13 @@ namespace EyouSoft.Web
                 lblShengChanRiQi.Text = model.ProductionDate != null ? model.ProductionDate.Value.ToString("yyyy-MM-dd") : "";
                 lblBaoZhiQi.Text = model.ShelfDate.ToString();
 
-                var gys = new EyouSoft.BLL.SystemStructure.BSupplier().GetModel(model.GYSid);
+                var gys =  new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(model.GYSid);
                 if (gys != null)
                 {
-                    lblGYSNAME.Text = string.Format("<a href=\"/ShangCheng.aspx?g={0}\" class=fontblue>{0}</a>", gys.SupplierName);
-                    lblLXFS.Text = gys.ContactPhone + "&nbsp;&nbsp;" + gys.ContactMobile;
-                    if (!string.IsNullOrEmpty(gys.ContactQQ)) lblQQ.Text = string.Format("<a target=\"_blank\" href=\"tencent://message/?uin={0}&amp;Site=&amp;Menu=yes\"><img src=\"http://wpa.qq.com/pa?p=1:{0}:51\" alt=\"和我联系吧\" border=\"0\"></a>", gys.ContactQQ);
+                    var memodel = new EyouSoft.IDAL.MemberStructure.BMember2().Get(gys.MemberID);
+                    lblGYSNAME.Text = string.Format("<a href=\"/ShangCheng.aspx?gid={1}\" class=fontblue>{0}</a>", gys.CompanyName,model.GYSid);
+                    lblLXFS.Text = memodel.Contact + "&nbsp;&nbsp;" + memodel.Mobile;
+                    if (!string.IsNullOrEmpty(memodel.qq)) lblQQ.Text = string.Format("<a target=\"_blank\" href=\"tencent://message/?uin={0}&amp;Site=&amp;Menu=yes\"><img src=\"http://wpa.qq.com/pa?p=1:{0}:51\" alt=\"和我联系吧\" border=\"0\"></a>", memodel.qq);
                 }
 
 
@@ -166,7 +167,7 @@ namespace EyouSoft.Web
                 #region 优惠信息
                 decimal yhxxHYJ = UtilsCommons.GetGYStijia(EyouSoft.Model.Enum.FeeTypes.商城, model.SalePrice, model.MarketPrice, EyouSoft.Model.Enum.MemberTypes.普通会员);
                 StringBuilder strHY = new StringBuilder();
-                strHY.AppendFormat("<div class=\"tixing\"><b>会员价总金额：</b><br><font class=\"fontyellow\"><b class=\"font14\"><span id='hydj'>{0}</span></b>{1} x <b class=\"font14\"><span class='ts'>1</span></b> =</font><font class=\"fontblue\"><b class=\"font14\"><span id='hyzj'>{0}</span></b>元</font></div>"
+                strHY.AppendFormat("<div class=\"tixing\"><b>优惠价总金额：</b><br><font class=\"fontyellow\"><b class=\"font14\"><span id='hydj'>{0}</span></b>{1} x <b class=\"font14\"><span class='ts'>1</span></b> =</font><font class=\"fontblue\"><b class=\"font14\"><span id='hyzj'>{0}</span></b>元</font></div>"
                     , yhxxHYJ.ToString("F0")
                     , model.Unit);
                 if (isDisplay)

@@ -94,7 +94,7 @@
                 <ul>
                     <li class="mar5">
                         <div class="tixing">
-                            <b>会员价总金额：</b><br />
+                            <b>优惠价总金额：</b><br />
                             <font class="fontyellow"><b class="font14">
                                 <%= huiyjia%></b>元/人 x <b class="font14">1</b>人 = </font><font class="fontblue"><b
                                     class="font14">
@@ -300,7 +300,7 @@ var beizhuxinxi = null;
          $(function() {
         $("#visanum").blur(function() {
         var visacount = $("#visanum").val();
-            var html ="<ul><li class=\"mar5\"><div class=\"tixing\"><b>会员价总金额：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+ hyjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font> <font class=\"fontblue\"><b class=\"font14\">"+ (hyjia*visacount) +"</b>元</font></div> </li><li class=\"mar5\"><div class=\"tixing\"><b>申请贵宾身份：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+gbjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font><font class=\"fontblue\"><b class=\"font14\">"+ (gbjia*visacount) +"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://www.slej.cn/ShangChengXiangQing.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"btn001\"><span>马上申请</span></a><br /><b class=\"fontblue\">立省"+((hyjia-gbjia)*visacount)+"元</b> </div> </li><li><div class=\"tixing\"><b>申请代理身份：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+ fxjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font><font class=\"fontblue\"><b class=\"font14\">"+ (fxjia*visacount) +"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp; <a href=\"http://www.slej.cn/ShangChengXiangQing.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"btn001\"><span>马上申请</span></a><br /><b class=\"fontblue\">"+((hyjia-fxjia)*visacount)+"元</b></div> </li></ul>";
+            var html ="<ul><li class=\"mar5\"><div class=\"tixing\"><b>优惠价总金额：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+ hyjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font> <font class=\"fontblue\"><b class=\"font14\">"+ (hyjia*visacount) +"</b>元</font></div> </li><li class=\"mar5\"><div class=\"tixing\"><b>申请贵宾身份：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+gbjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font><font class=\"fontblue\"><b class=\"font14\">"+ (gbjia*visacount) +"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://www.slej.cn/ShangChengXiangQing.aspx?ID=84368172-bf82-4e79-b7ca-f0fdb22f6767\" class=\"btn001\"><span>马上申请</span></a><br /><b class=\"fontblue\">立省"+((hyjia-gbjia)*visacount)+"元</b> </div> </li><li><div class=\"tixing\"><b>申请代理身份：</b><br /><font class=\"fontyellow\"><b class=\"font14\">"+ fxjia+"</b>元/人 x <b class=\"font14\">"+visacount+"</b>人 = </font><font class=\"fontblue\"><b class=\"font14\">"+ (fxjia*visacount) +"</b>元</font>&nbsp;&nbsp;&nbsp;&nbsp; <a href=\"http://www.slej.cn/ShangChengXiangQing.aspx?ID=7cca0f34-977f-4f4e-8792-ae168c9c0652\" class=\"btn001\"><span>马上申请</span></a><br /><b class=\"fontblue\">"+((hyjia-fxjia)*visacount)+"元</b></div> </li></ul>";
             $("#visapricelist").html(html);
         });
     });

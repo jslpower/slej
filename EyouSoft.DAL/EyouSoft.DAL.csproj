@@ -49,6 +49,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -163,6 +166,7 @@
     <Compile Include="OtherStructure\DTuiGuang.cs" />
     <Compile Include="OtherStructure\DXiaJiFenXiaoTiCheng.cs" />
     <Compile Include="OtherStructure\DYanZhengMa.cs" />
+    <Compile Include="OtherStructure\DYouJi.cs" />
     <Compile Include="OtherStructure\DYuMing.cs" />
     <Compile Include="OtherStructure\DZuTuan.cs" />
     <Compile Include="ScenicStructure\DALBase.cs" />

@@ -56,7 +56,7 @@ namespace EyouSoft.DAL.OtherStructure
 
             return dbRetCode;
         }
-        
+
         /// <summary>
         /// 获取充值信息业务实体
         /// </summary>
@@ -93,6 +93,39 @@ namespace EyouSoft.DAL.OtherStructure
         }
 
         /// <summary>
+        /// 获取充值信息业务实体
+        /// </summary>
+        /// <param name="dingDanId">订单编号</param>
+        /// <returns></returns>
+        public EyouSoft.Model.OtherStructure.MChongZhi GetInfoByCode(string orderCode)
+        {
+            EyouSoft.Model.OtherStructure.MChongZhi info = null;
+            DbCommand cmd = this._db.GetSqlStringCommand("SELECT  *  FROM view_ChongZhi WHERE JiaoYiHao=@ordercode");
+            this._db.AddInParameter(cmd, "ordercode", DbType.String, orderCode);
+
+            using (IDataReader rdr = DbHelper.ExecuteReader(cmd, this._db))
+            {
+                if (rdr.Read())
+                {
+                    info = new EyouSoft.Model.OtherStructure.MChongZhi();
+
+                    info.DingDanId = rdr["DingDanId"].ToString();
+                    info.HuiYuanId = rdr.GetString(rdr.GetOrdinal("HuiYuanId"));
+                    info.JinE = rdr.GetDecimal(rdr.GetOrdinal("JinE"));
+                    info.Issuetime = rdr.GetDateTime(rdr.GetOrdinal("Issuetime"));
+                    info.JiaoYiHao = rdr.GetString(rdr.GetOrdinal("JiaoYiHao"));
+                    info.ZhiFuStatus = (EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus)rdr.GetByte(rdr.GetOrdinal("ZhiFuStatus"));
+
+                    int zhiFuFangShi = rdr.GetInt32(rdr.GetOrdinal("ZhiFuFangShi"));
+                    if (zhiFuFangShi > -1 && info.ZhiFuStatus == EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款) info.ZhiFuFangShi = (EyouSoft.Model.Enum.ZhiFuFangShi)zhiFuFangShi;
+
+                    info.HuiYuanName = rdr["HuiYuanName"].ToString();
+                    info.HuiYuanYongHuMing = rdr["HuiYuanYongHuMing"].ToString();
+                }
+            }
+
+            return info;
+        }     /// <summary>
         /// 设置支付状态，返回1成功，其它失败
         /// </summary>
         /// <param name="DingDanId">订单编号</param>

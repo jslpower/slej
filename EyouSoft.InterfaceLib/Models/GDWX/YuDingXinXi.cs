@@ -112,7 +112,7 @@ namespace EyouSoft.InterfaceLib.Models.GDWX
         /// <summary>
         /// 费用调整 
         /// </summary>
-        public int adjust_price;
+        public decimal adjust_price;
         /// <summary>
         /// 调整说明
         /// </summary>
@@ -120,11 +120,11 @@ namespace EyouSoft.InterfaceLib.Models.GDWX
         /// <summary>
         /// 总价格
         /// </summary>
-        public int total_adjust_price;
+        public decimal total_adjust_price;
         /// <summary>
         /// 己付金额 
         /// </summary>
-        public int yifu_price;
+        public decimal yifu_price;
 
         /// <summary>
         ///  状态  1 未处理，2 未确认，3 预留，4 审核通过，5 取消

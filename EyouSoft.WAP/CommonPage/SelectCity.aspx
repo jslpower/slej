@@ -16,14 +16,30 @@
 
 
 
+<script type="text/javascript">
+    $(function() {
+        $("#Umdli li").click(function() {
+            var idname = $(this).html();
+            if (idname != "热门") {
+                var top = $("#Div" + idname).offset().top;
+                $("html,body").animate({ scrollTop: (top - 100) }, 1000);
+            }
+            else {
+                var top = $("#DivTop").offset().top;
+                $("html,body").animate({ scrollTop: (top - 100) }, 1000);
+            }
+        });
 
+    });
+    
+</script>
 </head>
 <body>
     <form id="myform" method="post">
     <uc1:WapHeader ID="WapHeader1" runat="server" HeadText="选择城市" />
-   <%-- <div class="city_letter_fixed">
+   <div class="city_letter_fixed">
         <div class="city_letter_mt">
-            <ul class="city_letter">
+            <ul id="Umdli" class="city_letter">
                 <li>热门</li>
                 <li>A</li>
                 <li>B</li>
@@ -33,27 +49,26 @@
                 <li>F</li>
                 <li>G</li>
                 <li>H</li>
-                <li>I</li>
+                
                 <li>J</li>
                 <li>K</li>
                 <li>L</li>
                 <li>M</li>
                 <li>N</li>
-                <li>O</li>
+                
                 <li>P</li>
                 <li>Q</li>
                 <li>R</li>
                 <li>S</li>
                 <li>T</li>
-                <li>U</li>
-                <li>V</li>
+               
                 <li>W</li>
                 <li>S</li>
                 <li>Y</li>
                 <li>Z</li>
             </ul>
         </div>
-    </div>--%>
+    </div>
     <div class="warp">
         <div class="jq_search" style="background: #fff;">
             <div class="search ">
@@ -67,163 +82,158 @@
             <div class="slider-content">
                 <ul>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div class="city_group_title" id="DivTop">
                             热门城市</div>
                         <ul id="remen" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivA" class="city_group_title">
                             A</div>
                         <ul id="A" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivB" class="city_group_title">
                             B</div>
                         <ul id="B" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivC" class="city_group_title">
                             C</div>
                         <ul id="C" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivD" class="city_group_title">
                             D</div>
                         <ul id="D" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivE" class="city_group_title">
                             E</div>
                         <ul id="E" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivF" class="city_group_title">
                             F</div>
                         <ul id="F" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivG" class="city_group_title">
                             G</div>
                         <ul id="G" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivH" class="city_group_title">
                             H</div>
                         <ul id="H" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivI" class="city_group_title">
                             I</div>
                         <ul id="I" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivJ" class="city_group_title">
                             J</div>
                         <ul id="J" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivK" class="city_group_title">
                             K</div>
                         <ul id="K" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivL" class="city_group_title">
                             L</div>
                         <ul id="L" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivM" class="city_group_title">
                             M</div>
                         <ul id="M" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivN" class="city_group_title">
                             N</div>
                         <ul id="N" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivO" class="city_group_title">
                             O</div>
                         <ul id="O" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivP" class="city_group_title">
                             P</div>
                         <ul id="P" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivQ" class="city_group_title">
                             Q</div>
                         <ul id="Q" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivR" class="city_group_title">
                             R</div>
                         <ul id="R" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivS" class="city_group_title">
                             S</div>
                         <ul id="S" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivT" class="city_group_title">
                             T</div>
                         <ul id="T" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivU" class="city_group_title">
                             U</div>
                         <ul id="U" class="city_group_box">
                         </ul>
                     </li>
+                   
                     <li class="city_li">
-                        <div class="city_group_title">
-                            V</div>
-                        <ul id="V" class="city_group_box">
-                        </ul>
-                    </li>
-                    <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivW" class="city_group_title">
                             W</div>
                         <ul id="W" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivX" class="city_group_title">
                             X</div>
                         <ul id="X" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivY" class="city_group_title">
                             Y</div>
                         <ul id="Y" class="city_group_box">
                         </ul>
                     </li>
                     <li class="city_li">
-                        <div class="city_group_title">
+                        <div id="DivZ" class="city_group_title">
                             Z</div>
                         <ul id="Z" class="city_group_box">
                         </ul>

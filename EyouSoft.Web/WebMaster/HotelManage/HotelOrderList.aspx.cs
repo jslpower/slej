@@ -9,6 +9,7 @@ using EyouSoft.BLL.HotelStructure;
 using EyouSoft.Model.Enum;
 using EyouSoft.IDAL.AccountStructure;
 using System.Text;
+using EyouSoft.Model.HotelStructure;
 
 namespace EyouSoft.Web.WebMaster
 {
@@ -190,6 +191,35 @@ namespace EyouSoft.Web.WebMaster
           return "<span title=\""+mseller.CompanyName+"\">" + mseller.CompanyJC + "</span><br />" + mseller.WebsiteName;
 
       }
+
+
+      protected string GetJinEList(object HotelXC, object RoomCount)
+      {
+          string JiageList = "";
+          if (HotelXC !=null && RoomCount !=null && !string.IsNullOrEmpty(HotelXC.ToString()) && !string.IsNullOrEmpty(RoomCount.ToString()))
+          {
+              IList<HotelXingCheng> xcmodel = Utils.JsonDeserialize<HotelXingCheng>(HotelXC.ToString());
+              if (xcmodel != null && xcmodel.Count > 0)
+              {
+                  JiageList += "<table cellspacing='0' cellpadding='0' border='0' width='100%' class='pp-tableclass'>"
+                   + "<tr><td colspan=\"3\" style=\" font-size:16px; font-weight:bold; text-align:center\"> 酒店价格列表 </td></tr>"
+                   + "<tr sizcache=\"24\"><th style=\" font-size:13px; font-weight:bold; text-align:center\">日期</th>"
+                   + "<td style=\" font-size:13px; font-weight:bold; text-align:center\">金额</td>"
+                   + "<td  style=\" font-size:13px; font-weight:bold; text-align:center\">分销金额</td></tr>";
+                      
+                      ;
+                  for (int m = 0; m < xcmodel.Count; m++)
+                  {
+                      string CBJia = xcmodel[m].ChengBenJia == 0 ? "总站交易" : xcmodel[m].ChengBenJia.ToString("f2") + "元/间/天  *  " +  RoomCount.ToString() + "间 = " + (xcmodel[m].ChengBenJia * Convert.ToInt32(RoomCount)).ToString("f2") + "元/天";
+
+                      JiageList += "<tr><th width=\"146\" height=\"28\" style=\"text-align:center\">" + xcmodel[m].ChenkInDate.ToShortDateString() + "</th><td height=\"28\" width=\"300\"  bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + xcmodel[m].MenShiJia.ToString("f2") + "元/间/天  *  " +  RoomCount.ToString() + "间 = " + (xcmodel[m].MenShiJia *  Convert.ToInt32(RoomCount)).ToString("f2") + "元/天</td><td height=\"28\" width=\"307\"   bgcolor=\"#E3F1FC\" style=\"text-align:center\">" + CBJia + "</td></tr>";
+                  }
+                  JiageList += "</table>";
+              }
+          }
+          return JiageList;
+      }
+      
 
       #region 绑定分页控件
       /// <summary>

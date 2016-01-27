@@ -57,9 +57,13 @@ namespace EyouSoft.Model.OtherStructure
         /// </summary>
         public EyouSoft.Model.Enum.PaymentState PayState { get; set; }
         /// <summary>
-        /// 供应商编号
+        /// 分销商编号
         /// </summary>
         public string SupplierID { get; set; }
+        /// <summary>
+        /// 供应商id
+        /// </summary>
+        public string GYSId { get; set; }
         /// <summary>
         /// 收货人地址
         /// </summary>
@@ -68,11 +72,15 @@ namespace EyouSoft.Model.OtherStructure
         /// 订单来源
         /// </summary>
         public OrderSite OrderSite { get; set; }
+        /// <summary>
+        /// 平台交易率
+        /// </summary>
+        public decimal JiaoYiLv { get; set; }
     }
     public class MTuanGouDingDanSer
     {
         /// <summary>
-        /// 供应商编号
+        /// 分销商编号
         /// </summary>
         public string SupplierID { get; set; }
         /// <summary>
@@ -87,5 +95,13 @@ namespace EyouSoft.Model.OtherStructure
         /// 购买人编号
         /// </summary>
         public string PeopleID { get; set; }
+        /// <summary>
+        /// 供应商id
+        /// </summary>
+        public string GYSId { get; set; }
+        /// <summary>
+        /// 是否是特约供应商(特约供应商的id)
+        /// </summary>
+        public string IsTeYue { get; set; }
     }
 }

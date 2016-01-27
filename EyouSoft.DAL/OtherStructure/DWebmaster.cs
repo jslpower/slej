@@ -114,12 +114,7 @@ namespace EyouSoft.DAL
             }
 
             StrSql += " WHERE Id=@Id ";
-            if (!string.IsNullOrEmpty(model.Password))
-            {
-                StrSql += ";UPDATE tbl_Supplier SET SuppPwd=@SuppPwd WHERE ID=@ygsid";
-                this._db.AddInParameter(dc, "ygsid", DbType.String, model.GysId);
-                this._db.AddInParameter(dc, "SuppPwd", DbType.String, model.Password);
-            }
+           
             dc.CommandText = StrSql;
             this._db.AddInParameter(dc, "Realname", DbType.String, model.Realname);
             this._db.AddInParameter(dc, "Telephone", DbType.String, model.Telephone);

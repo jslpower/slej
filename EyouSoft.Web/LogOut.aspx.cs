@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace EyouSoft.Web
 {
-    public partial class LogOut : System.Web.UI.Page
+    public partial class LogOut : Common.Page.HuiYuanPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +21,15 @@ namespace EyouSoft.Web
 
         private void LoginOutWeb()
         {
-            EyouSoft.Security.Membership.UserProvider.Logout();
+            if (HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.代理 || HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.免费代理 || HuiYuanInfo.UserType == EyouSoft.Model.Enum.MemberTypes.员工)
+            {
+                EyouSoft.Security.Membership.UserProvider.Logout();
+                EyouSoft.Security.Membership.WebmasterProvider.Logout();
+            }
+            else
+            {
+                EyouSoft.Security.Membership.UserProvider.Logout();
+            }
         }
     }
 }

@@ -72,7 +72,7 @@ namespace EyouSoft.Web.UserControl
         {
             EyouSoft.BLL.OtherStructure.BSysAdv bll = new EyouSoft.BLL.OtherStructure.BSysAdv();
             //首页轮播图
-            var top = bll.GetList(5, EyouSoft.Model.Enum.AdvArea.首页轮换广告);
+            var top = bll.GetList(5, EyouSoft.Model.Enum.AdvArea.首页轮换广告,"-1");
             if (top != null && top.Count > 0)
             {
                 for (int i = 0; i < top.Count; i++)
@@ -103,6 +103,10 @@ namespace EyouSoft.Web.UserControl
             serchModel.WeiZhi = new List<EyouSoft.Model.Enum.XianShiWeiZhi> { EyouSoft.Model.Enum.XianShiWeiZhi.网站首页, EyouSoft.Model.Enum.XianShiWeiZhi.以上全部};
             serchModel.ProductSort = 0;
             var list = new EyouSoft.BLL.OtherStructure.BTuanGou().GetList(10, serchModel);
+            if (list.Count > 2 && list.Count % 2 != 0)
+            {
+                list.Remove(list[list.Count - 1]);
+            }
             CuXiao.DataSource = list;
             CuXiao.DataBind();
         }

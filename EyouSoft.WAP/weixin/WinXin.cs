@@ -7,6 +7,7 @@ using Weixin.Mp.Sdk.Response;
 using Weixin.Mp.Sdk.Request;
 using Weixin.Mp.Sdk.Util;
 using System.Collections;
+using EyouSoft.Common;
 
 namespace Eyousoft_yhq.Web.BsendMsg
 {
@@ -19,6 +20,17 @@ namespace Eyousoft_yhq.Web.BsendMsg
         private static string appId = System.Configuration.ConfigurationManager.AppSettings["slejAppId"].Trim();
         private static string appSecret = System.Configuration.ConfigurationManager.AppSettings["slejAppSecret"].Trim();
         #region 菜单
+
+        // <summary>
+        /// 返回OAUTH 2.0网页直连
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private static string OAuth2UrlRewrite(string url)
+        {
+            return "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http://mm.slej.cn/weixin/OauthRedirectUri.aspx&response_type=code&scope=snsapi_base&state=" + url + "#wechat_redirect";
+        }
+
         /// <summary>
         /// 创建菜单
         /// </summary>
@@ -41,21 +53,23 @@ namespace Eyousoft_yhq.Web.BsendMsg
                 Menu menu = new Menu();
                 List<Button> button = new List<Weixin.Mp.Sdk.Domain.Button>();
                 #region 菜单一 旅游产品
+                //BaseUrl = cpt.DESEncrypt("/JingQu.aspx");
+                //Url = "http://m.slej.cn/weixin/OauthRedirectUri.aspx?BaseUrl=/JingQu.aspx";
                 Button subBtn1 = new Button()
-                {
-                    key = "tejiamenpiao",
-                    name = "特价门票",
-                    sub_button = null,
-                    type = "view",
-                    url = "http://m.slej.cn/JingQu.aspx"
-                };
+               {
+                   key = "tejiamenpiao",
+                   name = "特价门票",
+                   sub_button = null,
+                   type = "view",
+                   url = OAuth2UrlRewrite("/JingQu.aspx")
+               };
                 Button subBtn2 = new Button()
                 {
                     key = "zhoubianlvyou",
                     name = "周边旅游",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Line_List.aspx?type=3"
+                    url = OAuth2UrlRewrite("/Line_List.aspx?type=3")
 
                 };
                 Button subBtn3 = new Button()
@@ -64,7 +78,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                     name = "国内旅游",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Line_List.aspx?type=1"
+                    url = OAuth2UrlRewrite("/Line_List.aspx?type=1")
                 };
                 Button subBtn4 = new Button()
                 {
@@ -72,7 +86,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                     name = "国际旅游",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Line_List.aspx?type=2"
+                    url = OAuth2UrlRewrite("/Line_List.aspx?type=2")
                 };
                 Button subBtn5 = new Button()
                  {
@@ -80,7 +94,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                      name = "单独组团",
                      sub_button = null,
                      type = "view",
-                     url = "http://m.slej.cn/ZuTuanIndex.aspx"
+                     url = OAuth2UrlRewrite("/ZuTuanIndex.aspx")
                  };
                 List<Button> subBtnAll = new List<Button>();
                 subBtnAll.Add(subBtn1);
@@ -107,7 +121,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                     name = "E家商城",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Mall/Default.aspx"
+                    url = OAuth2UrlRewrite("/Mall/Default.aspx")
                 };
                 Button Menu2SubBtn2 = new Button()
                 {
@@ -115,7 +129,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                     name = "机票预订",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Flight/Default.aspx"
+                    url = OAuth2UrlRewrite("/Flight/Default.aspx")
                 };
                 Button Menu2SubBtn3 = new Button()
                 {
@@ -123,7 +137,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                     name = "酒店预订",
                     sub_button = null,
                     type = "view",
-                    url = "http://m.slej.cn/Hotel.aspx"
+                    url = OAuth2UrlRewrite("/Hotel.aspx")
                 };
 
                 Button Menu2SubBtn4 = new Button()
@@ -132,7 +146,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
                    name = "汽车包租",
                    sub_button = null,
                    type = "view",
-                   url = "http://m.slej.cn/CarList.aspx"
+                   url = OAuth2UrlRewrite("/CarList.aspx")
                };
                 List<Button> subBtnAll2 = new List<Button>();
                 subBtnAll2.Add(Menu2SubBtn1);
@@ -151,30 +165,29 @@ namespace Eyousoft_yhq.Web.BsendMsg
                 button.Add(btn);
 
                 #endregion
-                #region 菜单三 惠旅游
-                Button Menu3SubBtn1 = new Button()
-                {
-                    key = "wodeweidian",
-                    name = "我的微店",
-                    sub_button = null,
-                    type = "click"
-                };
+                #region 菜单三 会员服务
+                //Button Menu3SubBtn1 = new Button()
+                //{
+                //    key = "wodeweidian",
+                //    name = "我的微店",
+                //    sub_button = null,
+                //    type = "click"
+                //};
 
-                Button Menu3SubBtn2 = new Button()
-                {
-                    key = "weidianzhongxin",
-                    name = "绑定微店",
-                    sub_button = null,
-                    type = "view",
-                    url = "http://m.slej.cn/WinXinBind.aspx"
-                };
+                //Button Menu3SubBtn2 = new Button()
+                //{
+                //    key = "weidianzhongxin",
+                //    name = "绑定微店",
+                //    sub_button = null,
+                //    type = "click"
+                //};
                 Button Menu3SubBtn3 = new Button()
                   {
                       key = "Eebao",
                       name = "E额宝",
                       sub_button = null,
                       type = "view",
-                      url = "http://m.slej.cn/EBao.aspx"
+                      url = OAuth2UrlRewrite("/EBao.aspx")
                   };
                 Button Menu3SubBtn4 = new Button()
                    {
@@ -182,12 +195,12 @@ namespace Eyousoft_yhq.Web.BsendMsg
                        name = "后台管理",
                        sub_button = null,
                        type = "view",
-                       url = "http://m.slej.cn/Member/UserCenter.aspx"
+                       url = OAuth2UrlRewrite("/Member/UserCenter.aspx")
                    };
 
                 List<Button> subBtnAll3 = new List<Button>();
-                subBtnAll3.Add(Menu3SubBtn1);
-                subBtnAll3.Add(Menu3SubBtn2);
+                //subBtnAll3.Add(Menu3SubBtn1);
+                //subBtnAll3.Add(Menu3SubBtn2);
                 subBtnAll3.Add(Menu3SubBtn3);
                 subBtnAll3.Add(Menu3SubBtn4);
                 btn = new Button()
@@ -429,6 +442,8 @@ namespace Eyousoft_yhq.Web.BsendMsg
             string msg = "";
             switch (EventKey)
             {
+                case "weidianzhongxin":
+                    return BindWeiDian(ToUserName, FromUserName);
                 case "dingdanguanli":
                     return OrderListBind(ToUserName, FromUserName);
                 case "wodeweidian"://用户注册绑定
@@ -464,7 +479,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
         /// <returns></returns>
         private bool RegisterBind(string ToUserName, string FromUserName)
         {
-
+            Utils.setOpenidCookie(FromUserName);
 
             List<NewsReplyMessageItem> items = new List<NewsReplyMessageItem>();
             NewsReplyMessageItem NewsPicHeader = new NewsReplyMessageItem();
@@ -477,7 +492,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
             if (bangding != null)
             {
                 NewsPicHeader.Description = "进入我的微店";
-                NewsPicHeader.Url = bangding.ShopUrl;
+                NewsPicHeader.Url = bangding.ShopUrl + "/default.aspx";
                 //  PicUrl = "http://oa.finawin.cn/APP/Images/Img01.jpg",
                 NewsPicHeader.Title = "我的微店";
             }
@@ -493,7 +508,40 @@ namespace Eyousoft_yhq.Web.BsendMsg
             MessageHandler.SendReplyMessage(replyMsg);
             return true;
         }
+
+
         #endregion
+
+        /// <summary>
+        /// 帮定微店
+        /// </summary>
+        /// <param name="ToUserName">请求人</param>
+        /// <param name="FromUserName">服务号OpenId</param>
+        /// <returns></returns>
+        private bool BindWeiDian(string ToUserName, string FromUserName)
+        {
+            Utils.setOpenidCookie(FromUserName);
+
+            List<NewsReplyMessageItem> items = new List<NewsReplyMessageItem>();
+            NewsReplyMessageItem NewsPicHeader = new NewsReplyMessageItem();
+            NewsPicHeader.Description = "绑定我的微店";
+            NewsPicHeader.Url = "http://m.slej.cn/WinXinBind.aspx?OpenId=" + FromUserName;
+            //  PicUrl = "http://oa.finawin.cn/APP/Images/Img01.jpg",
+            NewsPicHeader.Title = "绑定微店";
+
+
+            items.Add(NewsPicHeader);
+            NewsReplyMessage replyMsg = new NewsReplyMessage()
+           {
+               CreateTime = Tools.ConvertDateTimeInt(DateTime.Now),
+               FromUserName = ToUserName,
+               ToUserName = FromUserName,
+               Articles = items
+           };
+            MessageHandler.SendReplyMessage(replyMsg);
+            return true;
+        }
+
         #region 账户查询
         /// <summary>
         /// 订单管理
@@ -801,7 +849,7 @@ namespace Eyousoft_yhq.Web.BsendMsg
         public bool ProcessSubscribeEvent(SubscribeEventMessage msg, params object[] args)
         {
             //这里回应1条文本消息，当然您也可以回应其他消息
-            MessageHandler.SendTextReplyMessage(msg.ToUserName, msg.FromUserName, "改成欢迎使用商旅E家");
+            MessageHandler.SendTextReplyMessage(msg.ToUserName, msg.FromUserName, "欢迎使用金奥旅游");
             return true;
         }
 

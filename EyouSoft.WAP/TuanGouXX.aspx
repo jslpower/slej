@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
  
-<title>促销秒杀</title>
+<title><%=FenXiangBiaoTi %></title>
 
 <script src="js/jq.mobi.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/slogin.js"></script>

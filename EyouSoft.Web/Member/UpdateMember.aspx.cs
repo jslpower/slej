@@ -170,23 +170,23 @@ namespace EyouSoft.Web.Member
             }
             #endregion
 
-            if (HuiYuanInfo.UserType == MemberTypes.代理 || HuiYuanInfo.UserType == MemberTypes.员工)
-            {
-                EyouSoft.Model.SystemStructure.MSupplier supmodel = new EyouSoft.Model.SystemStructure.MSupplier();
-                supmodel = new EyouSoft.BLL.SystemStructure.BSupplier().GetSupplierModel("G" + HuiYuanInfo.Username);
-                if (supmodel != null)
-                {
-                    supmodel.ContactMail = Model.Email;
-                    supmodel.ContactMobile = Model.Mobile;
-                    supmodel.ContactName = Model.MemberName;
-                    supmodel.ContactPhone = Model.Contact;
-                    supmodel.ContactQQ = Model.qq;
-                    supmodel.SuppAddress = Model.Address;
-                    supmodel.SuppName = "G" + Model.Account;
-                    supmodel.SuppPwd = Model.PassWord;
-                    new EyouSoft.BLL.SystemStructure.BSupplier().Update(supmodel);
-                }
-            }
+            //if (HuiYuanInfo.UserType == MemberTypes.代理 || HuiYuanInfo.UserType == MemberTypes.员工)
+            //{
+            //    EyouSoft.Model.SystemStructure.MSupplier supmodel = new EyouSoft.Model.SystemStructure.MSupplier();
+            //    supmodel = new EyouSoft.BLL.SystemStructure.BSupplier().GetSupplierModel("G" + HuiYuanInfo.Username);
+            //    if (supmodel != null)
+            //    {
+            //        supmodel.ContactMail = Model.Email;
+            //        supmodel.ContactMobile = Model.Mobile;
+            //        supmodel.ContactName = Model.MemberName;
+            //        supmodel.ContactPhone = Model.Contact;
+            //        supmodel.ContactQQ = Model.qq;
+            //        supmodel.SuppAddress = Model.Address;
+            //        supmodel.SuppName = "G" + Model.Account;
+            //        supmodel.SuppPwd = Model.PassWord;
+            //        new EyouSoft.BLL.SystemStructure.BSupplier().Update(supmodel);
+            //    }
+            //}
 
 
             iscount = membll.UpdateMemberInfo(Model);
