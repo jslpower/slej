@@ -98,6 +98,13 @@ namespace EyouSoft.WAP
                     PriceInfo1.FeeType = EyouSoft.Model.Enum.FeeTypes.国际线路;
                 }
 
+                #region 设置微信分享链接
+                //设置图片链接
+                WapHeader1.FenXiangTuPianFilepath = string.IsNullOrEmpty(model.TeSeFilePath) ? "http://" + Request.Url.Host + " /images/line_xx001.jpg" : "http://" + Request.Url.Host + TuPian.F1(model.TeSeFilePath, 210, 70, model.XianLuId);
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = Utils.GetText2(Utils.ConverToStringByHtml(model.RouteName),30,true);
+                WapHeader1.FenXiangMiaoShu = Utils.GetText2(Utils.InputText(model.Description), 30, true);
+                #endregion
+
 
                 var chufadi = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysCityModel(model.DepCityId);
 
@@ -194,6 +201,16 @@ namespace EyouSoft.WAP
                     isNoFlight.Visible = true;
                 }
 
+                //线路广告
+
+                var lineadv = new EyouSoft.BLL.OtherStructure.BSysAreaInfo().GetSysAreaModel(model.AreaId);
+                if (!string.IsNullOrEmpty(lineadv.AdvLink))
+                {
+                    phLineAdv.Visible = true;
+                    hrfLineAdv.NavigateUrl = "http://p." + lineadv.AdvLink;
+                    hrfLineAdv.Text = lineadv.AdvTitle;
+                    imgLineAdv.Src = lineadv.ImgPath;
+                }
 
                 //初始化航班
                 initFlight(model);
@@ -206,14 +223,7 @@ namespace EyouSoft.WAP
                 }
 
                 //初始化团期
-                initTours(model);
-
-                #region 设置微信分享链接
-                //设置图片链接
-                WapHeader1.FenXiangTuPianFilepath = string.IsNullOrEmpty(model.TeSeFilePath) ? "http://" + Request.Url.Host + " /images/line_xx001.jpg" : "http://" + Request.Url.Host + TuPian.F1(model.TeSeFilePath, 210, 70, model.XianLuId);
-                WapHeader1.FenXiangBiaoTi = model.RouteName;
-                WapHeader1.FenXiangMiaoShu = Utils.InputText(model.Description);
-                #endregion
+                initTours(model);                
 
             }
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));

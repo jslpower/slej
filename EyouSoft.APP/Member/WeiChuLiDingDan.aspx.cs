@@ -43,7 +43,7 @@ namespace EyouSoft.WAP.Member
             if (AgencyId != "")
             {
                 Model.fenxiaoid = AgencyId;
-                Model.OrderStatus = new List<EyouSoft.Model.Enum.XianLuStructure.OrderStatus> { EyouSoft.Model.Enum.XianLuStructure.OrderStatus.未处理, EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待付款, EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货, EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货 };
+                Model.OrderStatus = new List<EyouSoft.Model.Enum.XianLuStructure.OrderStatus> {  EyouSoft.Model.Enum.XianLuStructure.OrderStatus.待付款, EyouSoft.Model.Enum.XianLuStructure.OrderStatus.确认收货, EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货 };
             }
             Model.dingdantype = (DingDanType)(-1);
             int TotalCount = 0;

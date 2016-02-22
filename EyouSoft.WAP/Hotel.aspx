@@ -496,9 +496,10 @@ addComp.district + addComp.street + addComp.streetNumber);
             else if (weekday == "Friday") { $("#liweekday").html("周六"); }
             else if (weekday == "Saturday") { $("#liweekday").html("周日"); }
             else if (weekday == "Sunday") { $("#liweekday").html("周一"); }
-            var timeadd = new Date($(this).attr("data-date"));
+            var timeadd = new Date($(this).attr("data-date"));     
+            timeadd.setDate(timeadd.getDate() + 1);
             var mymonth = (parseInt(timeadd.getMonth()) + 1);
-            var myday = (parseInt(timeadd.getDate()) + 1);
+            var myday = (parseInt(timeadd.getDate()));
             if (mymonth < 10) {
                 mymonth = "0" + mymonth;
             }
@@ -506,7 +507,9 @@ addComp.district + addComp.street + addComp.streetNumber);
                 myday = "0" + myday;
             }
             timeadd = timeadd.getFullYear() + "-" + (mymonth) + "-" + (myday);
+
             $("#lidian").val(timeadd);
+
 
         }
         $(".warp").toggle();

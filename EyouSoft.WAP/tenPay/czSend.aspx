@@ -11,8 +11,6 @@
 
     <script type="text/javascript" src="http://res.mail.qq.com/mmr/static/lib/js/jquery.js"></script>
 
-    <script src="http://res.mail.qq.com/mmr/static/lib/js/lazyloadv3.js" type="text/javascript"></script>
-
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
     <script type="text/javascript">
@@ -35,6 +33,8 @@
                     }
                 });
             })
+
+            jQuery("#menus").html("");
         })
     </script>
 
@@ -46,6 +46,7 @@
         <div class="jq_tab zhifu_tab mt10" id="n4Tab">
             <div class="jq_TabContent">
                 <div id="n4Tab_Content0">
+                   <asp:PlaceHolder runat=server ID=phChongZhi Visible=false>
                     <div class="user_form">
                         <ul>
                             <li><span class="label_name"></span><span class="font18 font_yellow">
@@ -67,6 +68,19 @@
                             </li>
                         </ul>
                     </div>
+                    </asp:PlaceHolder>
+                    <asp:PlaceHolder runat=server ID=phOrderPay Visible=true>
+                    <div class="user_form">
+                        <ul>
+                            <li><span class="label_name">订单名称：</span>
+                                <asp:Label ID="lblchanpinmingcheng" runat="server" Text="Label"></asp:Label>
+                            </li>
+                            <li><span class="label_name">订单金额：</span>
+                                <%=lblJinE.Text %>
+                            </li>
+                        </ul>
+                    </div>
+                    </asp:PlaceHolder>
                     <asp:PlaceHolder ID="plaIsWxBow" runat="server">
                         <div class="padd cent">
                             <input name="" type="button" class="y_btn" value="微信支付" id="getBrandWCPayRequest" /></div>

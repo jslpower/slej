@@ -101,6 +101,14 @@
                 <asp:TextBox runat="server" ID="txtBaoJia" class="editText"></asp:TextBox>
             </td>
         </tr>
+           <tr class="lr_hangbg">
+            <td align="right">
+                机票协议：
+            </td>
+            <td align="left" bgcolor="#FFFFFF">
+                <asp:TextBox runat="server" ID="txtJiPiao" class="editText"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td height="35" colspan="2" align="center" bgcolor="#FFFFFF">
                 <table cellspacing="0" cellpadding="0" border="0" align="center">

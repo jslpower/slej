@@ -23,15 +23,29 @@
   </header>
   
   <div class="warp">
-  
+      <% if (!string.IsNullOrEmpty(EyouSoft.Common.Utils.GetQueryStringValue("uid")))
+         { %>
       <div class="padd10">
           <div class="yaoqing_box radius4">
-               <p>请先复制邀请码。</p>
-               <p style="border-bottom:solid 1px #ccc;" class="paddB">邀请码：<span class="font_yellow"><input type="text" readonly style="border:none; vertical-align:middle; background:#fff;"  class="font_yellow" id="liteyqm" runat=server></span></p>
-               <p class="paddT"><a href="javascript:void(0);" id="aXiaZai" class="y_btn radius4">复制完成，立即安装</a></p>
+               <p>请先复制邀请码。</p><p></p><p></p>
+               <p class="paddB">邀请码：<span class="font_yellow"><input type="text" readonly style="border:none; vertical-align:middle; background:#fff;"  class="font_yellow" id="liteyqm" runat=server></span></p>
+                <!--<p style="border-bottom:solid 1px #ccc;" class="paddB">邀请网址：<span class="font_yellow"><input type="text" readonly style="border:none; vertical-align:middle; background:#fff;"  class="font_yellow" id="txturl" runat=server></span></p><p></p><p></p>-->
+               <p class="paddT"><a href="javascript:void(0);" id="aXiaZai" class="y_btn radius4">复制邀请码后点击安装</a></p>
+               <p class="paddT">下载安装步骤说明：</p>
+               <p class="paddT">1、长按选择邀请码，并选择“拷贝”操作：</p>
+               <p class="paddT"><img src="images/MobileCpStep1.jpg" border="0" width="80%"></p>
+               <p class="paddT">2、点击“复制邀请码后点击安装”进行APP下载</p>
+               <p class="paddT">3、安装下载后的APP</p>
           </div>
       </div>
-
+<%}else{ %>
+<div class="padd10">
+          <div class="yaoqing_box radius4">
+            
+               <p class="paddT"><a href="javascript:void(0);" id="aXiaZai" class="y_btn radius4">立即安装</a></p>               
+          </div>
+      </div>
+<%} %>
   </div>
     </form>
     <script type="text/javascript">
@@ -46,7 +60,7 @@
                 }
                 else {
                     alert("IOS版尚在开发中，即将跳转到网页版!");
-                    location.href = "http://m.slej.cn";
+                    location.href = "http://<%= yuMing%>";
                 }
 
             }

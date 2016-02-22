@@ -100,7 +100,7 @@ namespace EyouSoft.WAP
                 if (list == null || list.Count == 0) { XianShi.Text = "没房？房型不适合？调整日期试试看！"; }
                 else
                 {
-                    FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].FirstImageAddress, 320, 240);
+                    WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].FirstImageAddress, 320, 240);
                     Repeater1.DataSource = list;
                     Repeater1.DataBind();
                 }

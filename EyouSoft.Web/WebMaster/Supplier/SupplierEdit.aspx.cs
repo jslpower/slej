@@ -49,6 +49,8 @@ namespace EyouSoft.Web.WebMaster.Supplier
                 if (!string.IsNullOrEmpty(model.VisitPath)) litMingPian.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='upMingPianhidFileName' value='1|{0}' /></span>", model.VisitPath);
                 if (!string.IsNullOrEmpty(model.OtherPath)) litQiTaZhengJian.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='upQiTaZhengJianhidFileName' value='1|{0}' /></span>", model.OtherPath);
                 if (!string.IsNullOrEmpty(model.FormPath)) litBiaoGe.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='upBiaoGehidFileName' value='1|{0}' /></span>", model.FormPath);
+                if (!string.IsNullOrEmpty(model.WapLogo)) litydlogo.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='YdLogohidFileName' value='1|{0}' /></span>", model.WapLogo);
+                if (!string.IsNullOrEmpty(model.WebLogo)) litdnlogo.Text = string.Format("<span style='vertical-align: bottom;'><a href='{0}' target='_blank'>查看图片</a><img alt='' class='pand4' onclick=\"pageData.DelFile(this)\" style='vertical-align: bottom;' src='/images/webmaster/cha.gif' /><input type='hidden' name='DnLogohidFileName' value='1|{0}' /></span>", model.WebLogo);
             }
             strGYSType = Utils.GetEnumDDL(EnumObj.GetList(typeof(EyouSoft.Model.Enum.SupplierType)), gysType.ToString(), false);
         }
@@ -83,11 +85,19 @@ namespace EyouSoft.Web.WebMaster.Supplier
             string[] others = Utils.GetFormValue("upQiTaZhengJianhidFileName").Split('|');
             string[] forms = Utils.GetFormValue("upBiaoGehidFileName").Split('|');
 
+            string[] waplogourl = Utils.GetFormValue("upYdLogohidFileName").Split('|');
+
+            string[] weblogourl = Utils.GetFormValue("upDnLogohidFileName").Split('|');
+
+           
+
             if (cards.Length > 1) model.CardPath = cards[1];
             if (accounts.Length > 1) model.AccountPaht = accounts[1];
             if (visits.Length > 1) model.VisitPath = visits[1];
             if (others.Length > 1) model.OtherPath = others[1];
             if (forms.Length > 1) model.FormPath = forms[1];
+            if (weblogourl.Length > 1) model.WebLogo = weblogourl[1];
+            if (waplogourl.Length > 1) model.WapLogo = waplogourl[1];
 
             Response.Clear();
             if (new EyouSoft.BLL.MemberStructure.BMember().UpdateDaiLiMemberInfo(memberModel) == true && new EyouSoft.BLL.MemberStructure.BMember().UpdateDaiLiSellerInfo(model) == true)

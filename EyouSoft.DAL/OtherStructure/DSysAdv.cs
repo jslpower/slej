@@ -201,13 +201,18 @@ namespace EyouSoft.DAL.OtherStructure
             IList<EyouSoft.Model.MSysAdv> list = new List<EyouSoft.Model.MSysAdv>();
 
             string tableName = "tbl_SysAdv";
-            string fileds = "AdvID, AreaId, ImgPath, AdvLink, AdvTitle, Click, SortId,AgencyId";
+            string fileds = "AdvID, AreaId, ImgPath, AdvLink, AdvTitle, Click, SortId,AgencyId,(select WebSite from tbl_JA_Sellers where ID=tbl_SysAdv.AgencyId) AS WebSiteUrl";
             string orderByString = " SortId desc,IssueTime desc ";
 
             StringBuilder query = new StringBuilder();
             query.Append(" 1=1 ");
             if (Search != null)
             {
+                if (Search.ZongFaBol)
+                {
+                    query.AppendFormat(
+                                          " and (AgencyId='{0}' OR AgencyId='{1}' )", "", "-1");
+                }
                 if (Search.AreaIds != null && Search.AreaIds.Any())
                 {
                     query.AppendFormat(
@@ -222,9 +227,9 @@ namespace EyouSoft.DAL.OtherStructure
                 {
                     query.AppendFormat(" and AgencyId = '{0}' ", Search.AgencyId);
                 }
-                if (!string.IsNullOrEmpty(Search.CompanyJC))
+                if (!string.IsNullOrEmpty(Search.FaBuRen))
                 {
-                    query.AppendFormat(" and AgencyId in (select ID from tbl_JA_Sellers where CompanyJC LIKE '%{0}%')",Search.CompanyJC);
+                    query.AppendFormat(" and AgencyId in (select ID from tbl_JA_Sellers where CompanyJC LIKE '%{0}%' OR WebsiteName LIKE '%{0}%' OR ([CompanyJC]+[WebsiteName]) LIKE '%{0}%')", Search.FaBuRen);
                 }
                 if (!string.IsNullOrEmpty(Search.WebSiteName))
                 {
@@ -245,6 +250,7 @@ namespace EyouSoft.DAL.OtherStructure
                     model.Click = !dr.IsDBNull(dr.GetOrdinal("Click")) ? dr.GetInt32(dr.GetOrdinal("Click")) : 0;
                     model.SortId = !dr.IsDBNull(dr.GetOrdinal("SortId")) ? dr.GetInt32(dr.GetOrdinal("SortId")) : 0;
                     model.AgencyId = !dr.IsDBNull(dr.GetOrdinal("AgencyId")) ? dr.GetString(dr.GetOrdinal("AgencyId")) : null;
+                    model.WebSiteUrl = !dr.IsDBNull(dr.GetOrdinal("WebSiteUrl")) ? dr.GetString(dr.GetOrdinal("WebSiteUrl")) : null;
                     list.Add(model);
                 }
             }

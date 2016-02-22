@@ -97,11 +97,11 @@ namespace EyouSoft.WAP
             var imglist = bll.GetHotelImgList(imgmodel);
 
 
-            WapHeader1.FenXiangBiaoTi = model.HotelName.Trim();
+            WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = model.HotelName.Trim();
             WapHeader1.FenXiangMiaoShu = Utils.GetText2(model.LongDesc, 30, true).Trim();
             if (imglist.Count > 0 && !string.IsNullOrEmpty(imglist[0].FilePath))
             {
-                //WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imglist[0].FilePath, 640, 400);
+                WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(imglist[0].FilePath, 210, 70);
             }
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
 

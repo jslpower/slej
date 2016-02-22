@@ -74,6 +74,12 @@
                 <span class="number"><i class="num-minus"></i>
                     <input type="tel" value="0" name="ets" id="ets" class="inputrs" /><i class="num-add"></i></span></p>
         </div>
+         <asp:PlaceHolder runat=server ID="phLineAdv" Visible=false>
+        <div class="clearfix font16 padd10 mt10" style="background:#fff;">
+            <img class="floatL" style="width:50px; height:44px; padding-right:5px;" id="imgLineAdv" runat=server>
+            <p style="height:24px; overflow:hidden; text-indent:5px; background:#00feff; border:#3fe4e8 solid 1px;padding:9px 0;"><asp:HyperLink CssClass="font_red" runat=server id="hrfLineAdv"></asp:HyperLink></p>
+         </div>      
+         </asp:PlaceHolder>
         <asp:PlaceHolder ID="isNoFlight" runat="server" Visible="false">
             <div class="xx_hangban mt10">
                 <h3 id="moreHB" style="position: relative;" class="paddL R_jiantou">

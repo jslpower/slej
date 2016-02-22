@@ -727,8 +727,8 @@ a.ydin_btn{ background:url(../images/ydin.gif) no-repeat;width:95px; height:32px
 .mall_xxL{width:366px; float:left;display:inline;}
 .mall_xxR{width:672px; float:right; position:relative;}
 
-.mall_xxL .big_img{ width:358px; height:340px; padding:3px; border:#dbdbdb solid 1px;}
-.mall_xxL .big_img img{ width:358px; height:340px;}
+.mall_xxL .big_img{ width:358px; height:270px; padding:3px; border:#dbdbdb solid 1px;}
+.mall_xxL .big_img img{ width:358px; height:270px;}
 .mall_xxL .small_img{ width:366px;height:54px; margin-top:10px; position:relative;}
 .mall_xxL .mall_jtL,.mall_xxL .mall_jtR{ position:absolute; width:17px; height:54px; top:0;}
 .mall_xxL .mall_jtL{ left:0;}

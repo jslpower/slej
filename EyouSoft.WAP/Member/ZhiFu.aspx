@@ -83,14 +83,14 @@
                 <div id="n4Tab_Content1" class="none">
                     <div class="zhifu_type">
                         <ul>
-                            <asp:PlaceHolder ID="plaIsWxBow" runat="server" Visible="false">
+                            
                                 <li id="getBrandWCPayRequest"><s class="weixin"></s>
                                     <h3>
                                         微信支付</h3>
                                     <p>
                                         使用微信支付，安全便捷</p>
                                 </li>
-                            </asp:PlaceHolder>
+                           
                             <li id="alipay"><s class="zfb"></s>
                                 <h3>
                                     支付宝</h3>
@@ -201,6 +201,19 @@
                 <img src="/images/fenqifukuan.jpg">
        </div>
    
+</div>
+ <!---微信支付显示层--->
+<div id="weixinzhifu" class="user-mask" style="display:none;">
+
+   <div class="zhifu-weixin">
+       
+        
+       <div class="cent code_big"><img src="http://m.slej.cn/ErWeiMa.aspx?d=1&codeurl=http://<%=HttpContext.Current.Request.Url.Host%>"></div>
+       
+       <div class="cent font_gray">微信扫描二维码，进入会员中心即可微信支付</div>
+       
+          
+   </div>
 </div>
     </form>
 
@@ -346,29 +359,43 @@
             $("#fenqifukuanbox").click(function() { $("#fenqifukuanbox").hide() });
         });
     </script>
-
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
-    <script type="text/javascript">
-     var wx_jsapi_config=<%=weixin_jsapi_config %>;
-    wx.config(wx_jsapi_config);
-    </script>
+    
 
     <script language="javascript" type="text/javascript">
+        var pageOpt = {
+            parData: {
+                Pay: '<%=EyouSoft.Common. Utils.GetQueryStringValue("Pay") %>',
+                Classid: '<%=EyouSoft.Common. Utils.GetQueryStringValue("Classid") %>',
+                orderid: '<%=EyouSoft.Common. Utils.GetQueryStringValue("id") %>',
+                openid: '<%=OpenID %>',
+                token: '<%=EyouSoft.Common. Utils.GetQueryStringValue("token") %>'
+            }
+        }
+        var inlogo = {
+            iswx: false,
+            isWinXinpd: function() {
 
+                var ua = window.navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                    inlogo.iswx = true;
+                } else {
+                    inlogo.iswx = false;
+                }
+
+            }
+        }
         $(function() {
+            inlogo.isWinXinpd();
             $('#getBrandWCPayRequest').click(function() {
-                wx.chooseWXPay({
-                    timestamp: '<%= _TenPayTradeModel.TimeStamp %>', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                    nonceStr: '<%= _TenPayTradeModel.NonceStr %>', // 支付签名随机串，不长于 32 位
-                    package: 'prepay_id=<%= _TenPayTradeModel.PrepayId %>', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                    paySign: '<%= _TenPayTradeModel.Sign %>', // 支付签名
-                    success: function(res) {
-                        // 支付成功后的回调函数
-                    }
-                });
-            })
+                if (inlogo.iswx) {
+                    window.location.href = "http://m.slej.cn/tenPay/czSend.aspx?" + $.param(pageOpt.parData);
+                }
+                else {
+                    $("#weixinzhifu").show();
+                }
+
+            });
+            $("#weixinzhifu").click(function() { $("#weixinzhifu").hide() });
         })
     </script>
 

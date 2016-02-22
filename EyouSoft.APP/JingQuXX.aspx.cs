@@ -129,7 +129,7 @@ namespace EyouSoft.WAP
                     DistributionPrice = area.TicketInfo.Last().DistributionPrice;
                     ticklist.DataBind();
                 }
-                WapHeader1.FenXiangBiaoTi = area.ScenicName.Trim();
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = area.ScenicName.Trim();
                 WapHeader1.FenXiangMiaoShu = Utils.GetText2(area.Description, 30, true).Trim();
                 WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(area.ImgList[0].Address, 210, 70);
                 WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));

@@ -29,7 +29,7 @@ namespace EyouSoft.WAP
         protected decimal GuiBingDanJia = 0;
         protected decimal DaiLiDanJia = 0;
         protected decimal DaiXiaoDanJia = 0;
-        protected int usercate = 0;//会员级别0-未登录及未注册用户
+        protected int usercate = 1;//会员级别0-未登录及未注册用户
         protected bool isShow = true;
         protected void Page_Load(object sender, EventArgs e)
         {

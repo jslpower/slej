@@ -59,8 +59,8 @@ namespace EyouSoft.WAP.Member
                 ltrNoMsg.Visible = true;
                 PlaceHolder1.Visible = false;
             }
-            WapHeader1.FenXiangBiaoTi = "E家分享";
-            WapHeader1.FenXiangMiaoShu = "E家分享";
+            WapHeader1.FenXiangBiaoTi = "e家分享";
+            WapHeader1.FenXiangMiaoShu = "e家分享";
             WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/2.jpg";
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
         }

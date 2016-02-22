@@ -12,6 +12,8 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Xml;
 using Eyousoft_yhq.AlipayLibrary;
+using EyouSoft.BLL.ScenicStructure;
+using EyouSoft.Common;
 
 namespace Eyousoft_yhq.Web.Alipay
 {
@@ -50,23 +52,129 @@ namespace Eyousoft_yhq.Web.Alipay
                         //交易状态
                         string trade_status = xmlDoc.SelectSingleNode("/notify/trade_status").InnerText;
 
+                        string payAmount = xmlDoc.SelectSingleNode("/notify/total_fee").InnerText;
+
+                        decimal payAccount = Convert.ToDecimal(payAmount) * 100;
+
                         if (trade_status == "TRADE_FINISHED")//交易成功
                         {
-                            Response.Write("success");
                         }
                         else if (trade_status == "TRADE_SUCCESS")//支付成功
                         {
-
-                            string res = string.Empty;
+                            #region
+                            BScenicArea2 bll = new BScenicArea2();
+                            EyouSoft.Model.Enum.DingDanLeiBie DingDanLeiXing;
+                            EyouSoft.Model.OtherStructure.DingDanType OrderType;
+                            string DingDanId;
+                            if (out_trade_no.StartsWith("CZ"))
+                            {
+                                var info = new EyouSoft.BLL.OtherStructure.BChongZhi().GetInfoByCode(out_trade_no);
+                                if (info == null) Utils.RCWE("参数异常");
+                                DingDanId = info.DingDanId;
+                                DingDanLeiXing = EyouSoft.Model.Enum.DingDanLeiBie.充值订单; //订单类型
+                                OrderType = EyouSoft.Model.OtherStructure.DingDanType.充值订单;
+                            }
+                            else
                             {
 
+                                var info = new EyouSoft.BLL.OtherStructure.BDingDan().GetOrderByCodeOrID(new EyouSoft.Model.OtherStructure.MSearchDingDan() { DingDanBianHao = out_trade_no });
+                                if (info == null) Utils.RCWE("参数异常");
+                                DingDanId = info.OrderId;
+                                DingDanLeiXing = UtilsCommons.ConvterOrderType(info.OrderType); //订单类型
+                                OrderType = info.OrderType;
                             }
-                            Response.Redirect("/AppPage/orderlist.aspx");
+
+                            bool addResult = false;
+                            if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.商城订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.商城订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.线路订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.线路订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.酒店订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.酒店订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.门票订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.门票订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.租车订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.租车订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.团购订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.团购订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.充值订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.充值订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.签证订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.签证订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.自组团订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.自组团订单, payAccount, trade_no); }
+                            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.机票订单)
+                            { addResult = insertDetial(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.机票订单, payAccount, trade_no); }
+
+                            if (addResult)
+                            {
+                                switch (DingDanLeiXing)
+                                {
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.线路订单:
+                                        new EyouSoft.BLL.XianLuStructure.BOrder().SheZhiZhiFus(new EyouSoft.Model.XianLuStructure.MOrderInfo() { FuKuanStatus = EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款, Status = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.线路订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.长线订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.商城订单:
+                                        new EyouSoft.BLL.MallStructure.BShangChengDingDan().SheZhiZhiFus(new EyouSoft.Model.MallStructure.MShangChengDingDan() { PayState = EyouSoft.Model.Enum.PaymentState.已支付, OrderState = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderID = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.商城订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiShangJiDaiLiShang(DingDanId);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.商城订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.门票订单:
+                                        new EyouSoft.BLL.ScenicStructure.BScenicArea().SheZhiZhiFus(new EyouSoft.Model.ScenicStructure.MScenicAreaOrder() { FuKuanStatus = EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款, Status = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.门票订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        //门票出票接口????
+                                        bll.SubmitTicketsInterface(DingDanId);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.门票订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.酒店订单:
+                                        new EyouSoft.BLL.HotelStructure.BHotelOrder().SheZhiZhiFus(new EyouSoft.Model.HotelStructure.MHotelOrder() { PaymentState = EyouSoft.Model.Enum.PaymentState.已支付, OrderState = EyouSoft.Model.Enum.OrderState.订单出货, OrderId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.酒店订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.酒店订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.租车订单:
+                                        new EyouSoft.BLL.ZuCheStructure.BZuCheOrder().SheZhiZhiFus(new EyouSoft.Model.ZuCheStructure.MZuCheOrder() { FuKuanStatus = EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款, Status = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.租车订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.租车订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.团购订单:
+                                        new EyouSoft.BLL.OtherStructure.BTuanGouDingDan().SheZhiZhiFus(new EyouSoft.Model.OtherStructure.MTuanGouDingDan() { PayState = EyouSoft.Model.Enum.PaymentState.已支付, OrderState = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, OrderID = int.Parse(DingDanId) });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.团购订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.团购订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.充值订单:
+                                        new EyouSoft.BLL.OtherStructure.BChongZhi().SheZhiYiZhiFu(DingDanId, EyouSoft.Model.Enum.ZhiFuFangShi.支付宝);
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.充值订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.充值);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.签证订单:
+                                        new EyouSoft.BLL.QianZhengStructure.BQianZhengDingDan().SheZhiZhiFus(new EyouSoft.Model.QianZhengStructure.MQianZhengDingDanInfo() { FuKuanStatus = EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款, DingDanStatus = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, DingDanId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.签证订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.签证订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.自组团订单:
+                                        new EyouSoft.BLL.XianLuStructure.BZiZuTuan().SheZhiZhiFus(new EyouSoft.Model.XianLuStructure.MZiZuTuan() { FuKuanStatus = EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.已付款, OrderState = EyouSoft.Model.Enum.XianLuStructure.OrderStatus.订单出货, ZuTuanId = DingDanId });
+                                        new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.自组团订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                        SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.单团订单);
+                                        break;
+                                    case EyouSoft.Model.Enum.DingDanLeiBie.机票订单:
+                                        var OrderOptID = new EyouSoft.BLL.JPStructure.BDingDan().GetInfo(DingDanId);
+                                        if (OrderOptID != null)
+                                        {
+                                            new EyouSoft.BLL.JPStructure.BDingDan().SheZhiDingDanYiZhiFu(DingDanId, OrderOptID.HuiYuanId);
+                                            new EyouSoft.BLL.OtherStructure.BDuanXin().FaSongDingDanDuanXin(DingDanId, EyouSoft.Model.Enum.DingDanLeiBie.机票订单, EyouSoft.Model.Enum.DuanXinFaSongLeiXing.支付);
+                                            SheZhiTuiGuangYiFanLi(DingDanId, EyouSoft.Model.OtherStructure.DingDanType.机票订单);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            #endregion
                         }
-                        else
-                        {
-                            Response.Write(trade_status);
-                        }
+
+
+                        Response.Write("success");
 
                     }
                     catch (Exception exc)
@@ -113,5 +221,156 @@ namespace Eyousoft_yhq.Web.Alipay
 
             return sArray;
         }
+
+        #region 写入交易记录
+        /// <summary>
+        /// 写入交易记录
+        /// </summary>
+        /// <param name="orderid">订单编号</param>
+        /// <param name="dingdanleixing">订单类型</param>
+        /// <param name="jiaoyi"></param>
+        bool insertDetial(string orderid, EyouSoft.Model.Enum.DingDanLeiBie DingDanLeiXing, decimal jiaoyi, string jiaoyihao)
+        {
+            var info = new EyouSoft.Model.OtherStructure.MJiaoYiMingXiInfo();
+            info.ApiJiaoYiHao = jiaoyihao;
+            info.DingDanId = orderid;
+            info.DingDanLeiXing = DingDanLeiXing;
+            info.HuiYuanId = string.Empty;
+            info.JiaoYiHao = string.Empty;
+            info.JiaoYiJinE = jiaoyi / 100M;
+            info.JiaoYiLeiBie = EyouSoft.Model.Enum.JiaoYiLeiBie.消费;
+            info.JiaoYiMiaoShu = string.Empty;
+            info.JiaoYiShiJian = DateTime.Now;
+            info.JiaoYiStatus = EyouSoft.Model.Enum.JiaoYiStatus.交易成功;
+            info.MingXiId = string.Empty;
+            info.ZhiFuFangShi = EyouSoft.Model.Enum.ZhiFuFangShi.支付宝;
+
+            if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.商城订单)
+            {
+                var shangcheng = new EyouSoft.BLL.MallStructure.BShangChengDingDan().GetModel(orderid);
+                if (shangcheng != null)
+                {
+                    info.JiaoYiHao = shangcheng.OrderCode;
+                    info.HuiYuanId = shangcheng.ContactID;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.线路订单)
+            {
+                var xianlu = new EyouSoft.BLL.XianLuStructure.BOrder().GetInfo(orderid);
+                if (xianlu != null)
+                {
+                    info.JiaoYiHao = xianlu.OrderCode;
+                    info.HuiYuanId = xianlu.OperatorId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.酒店订单)
+            {
+                var jiudian = new EyouSoft.BLL.HotelStructure.BHotelOrder().GetModel(orderid);
+                if (jiudian != null)
+                {
+                    info.JiaoYiHao = jiudian.OrderCode;
+                    info.HuiYuanId = jiudian.OperatorId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.门票订单)
+            {
+                var menpiao = new EyouSoft.BLL.ScenicStructure.BScenicArea().GetScenicAreaOrderModel(orderid);
+                if (menpiao != null)
+                {
+                    info.JiaoYiHao = menpiao.OrderCode;
+                    info.HuiYuanId = menpiao.OperatorId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.租车订单)
+            {
+                var zuche = new EyouSoft.BLL.ZuCheStructure.BZuCheOrder().GetModel(orderid);
+                if (zuche != null)
+                {
+                    info.JiaoYiHao = zuche.OrderCode;
+                    info.HuiYuanId = zuche.OperatorId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.团购订单)
+            {
+                var tuangou = new EyouSoft.BLL.OtherStructure.BTuanGouDingDan().GetModel(int.Parse(orderid));
+                if (tuangou != null)
+                {
+                    info.JiaoYiHao = tuangou.OrderCode;
+                    info.HuiYuanId = tuangou.PeopleID;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.签证订单)
+            {
+                var qianzheng = new EyouSoft.BLL.QianZhengStructure.BQianZhengDingDan().GetInfo(orderid);
+                if (qianzheng != null)
+                {
+                    info.JiaoYiHao = qianzheng.DingDanHao;
+                    info.HuiYuanId = qianzheng.XiaDanRenId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.自组团订单)
+            {
+                var zizutuan = new EyouSoft.BLL.XianLuStructure.BZiZuTuan().GetInfo(orderid);
+                if (zizutuan != null)
+                {
+                    info.JiaoYiHao = zizutuan.OrderCode;
+                    info.HuiYuanId = zizutuan.XDRId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.充值订单)
+            {
+                info.JiaoYiLeiBie = EyouSoft.Model.Enum.JiaoYiLeiBie.充值;
+                var chongzhi = new EyouSoft.BLL.OtherStructure.BChongZhi().GetInfo(orderid);
+                if (chongzhi != null)
+                {
+                    info.JiaoYiHao = chongzhi.JiaoYiHao;
+                    info.HuiYuanId = chongzhi.HuiYuanId;
+                }
+            }
+            else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.机票订单)
+            {
+                var JIPIAO = new EyouSoft.BLL.JPStructure.BDingDan().GetInfo(orderid);
+                if (JIPIAO != null)
+                {
+                    info.JiaoYiHao = JIPIAO.JiaoYiHao;
+                    info.HuiYuanId = JIPIAO.HuiYuanId;
+                }
+            }
+
+            return new EyouSoft.BLL.OtherStructure.BJiaoYiMingXi().JiaoYiMingXi_C(info) == 1;
+        }
+
+        /// <summary>
+        /// 设置上级代理商信息
+        /// </summary>
+        /// <param name="dingDanId">商城订单编号</param>
+        void SheZhiShangJiDaiLiShang(string dingDanId)
+        {
+            if (string.IsNullOrEmpty(dingDanId)) return;
+            var info = new EyouSoft.BLL.MallStructure.BShangChengDingDan().GetModel(dingDanId);
+            if (info == null) return;
+            if (string.IsNullOrEmpty(info.ProductID) || string.IsNullOrEmpty(info.ProductID.Trim())) return;
+            if (string.IsNullOrEmpty(info.SupplierID) || string.IsNullOrEmpty(info.SupplierID.Trim())) return;
+            if (string.IsNullOrEmpty(info.ContactID) || string.IsNullOrEmpty(info.ContactID.Trim())) return;
+
+            var daiLiKaiDianShangPinId = EyouSoft.Toolkit.ConfigHelper.ConfigClass.GetConfigString("DaiLiKaiDianShangPinId");
+            if (string.IsNullOrEmpty(daiLiKaiDianShangPinId)) return;
+
+            if (info.ProductID != daiLiKaiDianShangPinId) return;
+
+            new EyouSoft.BLL.OtherStructure.BMember().SheZhiShangJiDaiLiShang(info.ContactID, info.SupplierID);
+        }
+
+        /// <summary>
+        /// 设置返联盟推广返利状态为已返利，返回1成功，其它失败
+        /// </summary>
+        /// <param name="dingDanId">订单编号</param>
+        /// <param name="dingDanLeiXing">订单类型</param>
+        /// <returns></returns>
+        int SheZhiTuiGuangYiFanLi(string dingDanId, EyouSoft.Model.OtherStructure.DingDanType dingDanLeiXing)
+        {
+            return new EyouSoft.BLL.OtherStructure.BTuiGuang().SheZhiTuiGuangYiFanLi(dingDanId, dingDanLeiXing);
+        }
+        #endregion
     }
 }

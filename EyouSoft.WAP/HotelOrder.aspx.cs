@@ -31,7 +31,7 @@ namespace EyouSoft.WAP
         protected int DaysNum = 0;
         protected string MingXi = "";
         protected string HotelRoomName = "";
-        protected int usercate = 0;//会员级别0-未登录及未注册用户
+        protected int usercate = 1;//会员级别0-未登录及未注册用户
         protected bool isShow = true;
         protected void Page_Load(object sender, EventArgs e)
         {

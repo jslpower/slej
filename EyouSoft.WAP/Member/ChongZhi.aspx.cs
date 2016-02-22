@@ -28,8 +28,8 @@ namespace EyouSoft.WAP.Member
             if (!isLogin) Response.Redirect("/default.aspx");
             if (Request.UserAgent.ToLower().Contains("micromessenger"))
             {
-                getOpentID();
-                plaIsWxBow.Visible = true;
+                openid = Utils.getOpenidCookie();
+                
 
             }
 

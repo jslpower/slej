@@ -31,6 +31,8 @@ namespace EyouSoft.WAP
         protected string houtaiurl = "<a href=\"/HuiYuanCenter.aspx\">后台管理</a>";
         protected string CityName = "全国";
         protected int CityId = -1;
+        protected string appurl = "http://m.slej.cn/yaoqing.aspx";
+        public string Logourl = "<img src=\"/images/logo.png\">";
         #region 微信分享
         protected string weixin_jsapi_config = string.Empty
                                     , FenXiangBiaoTi = string.Empty
@@ -40,6 +42,14 @@ namespace EyouSoft.WAP
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.UserAgent.ToLower().Contains("micromessenger"))
+            {
+                if(string.IsNullOrEmpty(EyouSoft.Common.Utils.getOpenidCookie()))
+                {
+                    Response.Redirect(EyouSoft.Common.Utils.redirectUrl(Request.Url.ToString()));
+                }
+            }
+
             GetCityName();
             if (isLogin)
             {
@@ -59,10 +69,20 @@ namespace EyouSoft.WAP
                 //EyouSoft.Model.AccountStructure.MSellers seller = new BSellers().GetMSellersByWebSite("8191.slej.cn");
                 if (seller != null)
                 {
+                    if (!string.IsNullOrEmpty(seller.WapLogo))
+                    {
+                        Logourl = "<img style=\"height: 37px;width: 60px;\" src=\"" + seller.WapLogo + "\">";
+                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + seller.WapLogo;
+                    }
+                    else
+
+                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/logo.jpg";
+
                     var item = new EyouSoft.IDAL.MemberStructure.BMember2().Get(seller.MemberID);
                     if (item != null)
                     {
                         TelNum = item.Mobile;
+                        appurl += "?uid=" + item.Account;
                     }
                     if (seller.NavNum == NavNum.代理商导航)
                     {
@@ -79,7 +99,6 @@ namespace EyouSoft.WAP
             weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
             FenXiangBiaoTi = BanQuan;
             FenXiangMiaoShu = BanQuan;
-            FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/logo.jpg";
             FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
         }
         protected void GetCityName()

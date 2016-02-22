@@ -574,7 +574,7 @@ public partial class Send : System.Web.UI.Page
         payerContact = string.Empty;
         payerName = string.Empty;
         bgUrl = "http://" + Request.Url.Host + "/99bill/receive.aspx";
-        pageUrl = bgUrl;
+       
 
         if (BANK_ZL == "1" && !string.IsNullOrEmpty(BANK_ID))
         {

@@ -21,6 +21,9 @@ namespace EyouSoft.WAP
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            WapHeader1.isfx = true;
+
             if (Request.QueryString["type"] != "")
             {
                 type = Convert.ToInt32(Request.QueryString["type"]);
@@ -118,16 +121,16 @@ namespace EyouSoft.WAP
             {
                 XianShi.Text = "<div class=\"user_dindan_xx\" style=\"margin-top:40px;\"><ul><li class=\"cent font_red\">暂无数据！</li></ul></div>";
             }
-            FenXiangBiaoTi = "促销秒杀";
-            FenXiangMiaoShu = "促销秒杀";
+            WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = "促销秒杀";
+            WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = "促销秒杀";
             if (list[0].ProductImg != null)
             {
                 if (TuPian.F1(list[0].ProductImg, 320, 200) != "")
                 {
-                    FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].ProductImg, 320, 200);
+                    WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(list[0].ProductImg, 320, 200);
                 }
             }
-            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+            WapHeader1.FenXiangLianJie = FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
 
         }
     }

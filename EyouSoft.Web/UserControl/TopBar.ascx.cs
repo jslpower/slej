@@ -11,6 +11,8 @@ namespace EyouSoft.Web.UserControl
     {
         public string erweimapic = @"/Images/slej.png";
         public int uislogin = 0;//0-未登录，1-已登录
+        protected string apppic = "http://m.slej.cn/yaoqing.aspx";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,6 +22,18 @@ namespace EyouSoft.Web.UserControl
             {
                 website = website.Replace(".slej.cn", "").Replace("http://", "");
                 erweimapic = @"/Images/ErWeiMa/" + website + ".png";
+
+                website = HttpContext.Current.Request.Url.Host.ToLower();
+                EyouSoft.Model.AccountStructure.MSellers seller = new EyouSoft.IDAL.AccountStructure.BSellers().GetMSellersByWebSite(website);
+                //EyouSoft.Model.AccountStructure.MSellers seller = new BSellers().GetMSellersByWebSite("8191.slej.cn");
+                 if (seller != null)
+                 {
+                     var item = new EyouSoft.IDAL.MemberStructure.BMember2().Get(seller.MemberID);
+                     if (item != null)
+                     {
+                         apppic += "?uid=" + item.Account;
+                     }
+                 }
             }
         }
 

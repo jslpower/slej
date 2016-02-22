@@ -43,8 +43,9 @@ namespace EyouSoft.WAP
             var weixing_config_info = EyouSoft.Common.Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
             weixin_jsapi_config = Newtonsoft.Json.JsonConvert.SerializeObject(weixing_config_info);
 
-            WapHeader1.FenXiangBiaoTi = EyouSoft.Common.Utils.GetQueryStringValue("CityName") + "景区门票";
-            WapHeader1.FenXiangMiaoShu = EyouSoft.Common.Utils.GetQueryStringValue("CityName") + "景区门票";
+            string CityName = EyouSoft.Common.Utils.GetQueryStringValue("CityName") == "--请选择--" ? string.Empty : EyouSoft.Common.Utils.GetQueryStringValue("CityName");
+            WapHeader1.FenXiangBiaoTi = CityName + "景区门票";
+            WapHeader1.FenXiangMiaoShu = CityName + "景区门票";
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
         }
         private void GetJingQu()

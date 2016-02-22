@@ -38,6 +38,7 @@ namespace EyouSoft.Web.WebMaster
             txtShop.Text = model.ShopXieYi;
             txtTuanGou.Text = model.TuanGouXieYi;
             txtBaoJia.Text = model.BaoJiaXieYi;
+            txtJiPiao.Text = model.JiPiaoXieYi;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace EyouSoft.Web.WebMaster
             model.DuanXianXieYi = Utils.EditInputText(txtDuanXian.Text);
             model.TuanGouXieYi = Utils.EditInputText(txtTuanGou.Text);
             model.BaoJiaXieYi = Utils.EditInputText(txtBaoJia.Text);
+            model.JiPiaoXieYi = Utils.EditInputText(txtJiPiao.Text);
             return model;
         }
     }

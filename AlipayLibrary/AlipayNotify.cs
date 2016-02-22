@@ -65,8 +65,8 @@ namespace Eyousoft_yhq.AlipayLibrary
             bool isSign = GetSignVeryfy(inputPara, sign,true);
 
             //写日志记录（若要调试，请取消下面两行注释）
-            //string sWord = "isSign=" + isSign.ToString() + "\n 返回回来的参数：" + GetPreSignStr(inputPara) + "\n ";
-            //Core.LogResult(sWord);
+            string sWord = "isSign=" + isSign.ToString() + "\n 返回回来的参数：" + GetPreSignStr(inputPara) + "\n ";
+            Core.LogResult(sWord);
 
             //判断isSign是否为true
             //isSign不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
@@ -115,8 +115,8 @@ namespace Eyousoft_yhq.AlipayLibrary
             bool isSign = GetSignVeryfy(inputPara, sign, false);
 
             //写日志记录（若要调试，请取消下面两行注释）
-            //string sWord = "responseTxt=" + responseTxt + "\n isSign=" + isSign.ToString() + "\n 返回回来的参数：" + GetPreSignStr(inputPara) + "\n ";
-            //Core.LogResult(sWord);
+            string sWord = "responseTxt=" + responseTxt + "\n isSign=" + isSign.ToString() + "\n 返回回来的参数：" + GetPreSignStr(inputPara) + "\n ";
+            Core.LogResult(sWord);
 
             //判断responsetTxt是否为true，isSign是否为true
             //responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关

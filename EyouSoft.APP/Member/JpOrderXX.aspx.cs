@@ -35,7 +35,7 @@ namespace EyouSoft.WAP.Member
                 ltrOrderCode.Text = ormodel.ApiDingDanId;
                 ltrFlightName.Text = CityNameBySZM.GetCityNameBySZM(ormodel.ChuFaChengShiSanZiMa) + "-" + CityNameBySZM.GetCityNameBySZM(ormodel.DaoDaChengShiSanZiMa);
                 litLDate.Text = ormodel.ChuFaRiQi.ToString("yyyy-MM-dd");
-                litJinE.Text = (ormodel.JinE + ormodel.ShuiFeiJinE).ToString("f2");
+                litJinE.Text = ormodel.JinE.ToString("f2");
 
                 if (ormodel.FuKuanStatus == EyouSoft.Model.Enum.XianLuStructure.FuKuanStatus.未付款)
                 {

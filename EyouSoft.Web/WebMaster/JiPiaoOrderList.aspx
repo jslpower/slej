@@ -113,7 +113,7 @@
                                     <%#Eval("LXRMoblie")%>
                             </td>
                             <td align="center">
-                                <%# GetStatus(Eval("OrderStatus"), Eval("AgencyId"))%>
+                                <%# GetStatus(Eval("DingDanStatus"), Eval("AgencyId"))%>
                             </td>
                         </tr>
                     </ItemTemplate>

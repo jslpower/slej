@@ -17,7 +17,7 @@
 <body>
     <div class="index_head">
         <div class="logo">
-            <img src="/images/logo.png"></div>
+            <%=Logourl %></div>
         <div class="head_m">
             <a href="tel:<%= TelNum%>">
                 <div class="i_tel">
@@ -103,14 +103,18 @@
         </div>
     </div>
     <div id="ErWeiMaMask" class="user-mask" style="display: none;">
-        <div class="user-mask-i">
+        <div class="user-mask-i" style="height:560px;margin:-300px 0 0 -119px">
             <div class="font18 font_gray cent">
                 扫描收藏我的微名片</div>
             <div class="cent code_big">
                 <img src="/ErWeiMa.aspx?d=1&codeurl=<%=thisurl %>" /></div>
             <div class="cent font_gray">
                 长按二维码保存到手机<br>
-                可印在纸质名片和宣传单上</div>
+                可印在纸质名片和宣传单上</div>                
+            <div class="font18 font_gray cent">
+                <br />扫描二维码下载APP</div>
+            <div class="cent code_big">
+                <img src="http://m.slej.cn/ErWeiMa.aspx?d=1&codeurl=<%=appurl %>" /></div>
         </div>
     </div>
 </body>

@@ -199,7 +199,7 @@ namespace EyouSoft.WAP
                 if (!string.IsNullOrEmpty(lineadv.AdvLink))
                 {
                     phLineAdv.Visible = true;
-                    hrfLineAdv.NavigateUrl = "m." + lineadv.AdvLink;
+                    hrfLineAdv.NavigateUrl = "http://m." + lineadv.AdvLink;
                     hrfLineAdv.Text = lineadv.AdvTitle;
                     imgLineAdv.Src = lineadv.ImgPath;
                 }

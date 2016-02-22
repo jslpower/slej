@@ -29,7 +29,10 @@ namespace EyouSoft.WAP.Member
             EyouSoft.Model.MCompanySetting model = BLL.GetCompanySetting();
             if (model != null)
             {
-                txtXieYi.Text = model.XieYi;
+                
+                    txtXieYi.Text = model.XieYi;
+                
+                
             }
             if (!isLogin) Response.Redirect("/default.aspx");
             if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "1") { GetXuLuModel(); if (model != null) { txtXieYi.Text = model.XieYi; } }
@@ -42,7 +45,7 @@ namespace EyouSoft.WAP.Member
             if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "6") { GetTuanGouModel(); if (model != null) { txtXieYi.Text = model.TuanGouXieYi; } }
             if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "7") { GetQianZhengModel(); if (model != null) { txtXieYi.Text = model.VisaXieYi; } }
             if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "10") { GetZuTuanModel(); if (model != null) { txtXieYi.Text = model.BaoJiaXieYi; } }
-            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "11") { GeJiPiaoModel(); if (model != null) { txtXieYi.Text = model.XieYi; } }
+            if (Utils.GetQueryStringValue("Pay") == "1" && Utils.GetQueryStringValue("Classid") == "11") { GeJiPiaoModel(); if (model != null) { txtXieYi.Text = model.JiPiaoXieYi; } }
         }
         public EyouSoft.Model.XianLuStructure.MOrderInfo GetXuLuModel()
         {

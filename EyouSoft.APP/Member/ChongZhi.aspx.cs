@@ -29,10 +29,10 @@ namespace EyouSoft.WAP.Member
             if (Request.UserAgent.ToLower().Contains("micromessenger"))
             {
                 getOpentID();
-                plaIsWxBow.Visible = true;
+                //plaIsWxBow.Visible = true;
 
             }
-
+           
         }
         /// <summary>
         /// 保存充值信息

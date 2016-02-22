@@ -66,8 +66,8 @@ namespace EyouSoft.WAP
             var model = bll.GetModel(carid);
             if (model == null) Utils.RCWE("异常请求");
             ZuChe = model;
-            CarName = WapHeader1.FenXiangBiaoTi = model.CarName.Trim();
-            WapHeader1.FenXiangMiaoShu = Utils.GetText2(model.Remark, 30, true).Trim();
+            CarName = WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = model.CarName.Trim();
+            WapHeader1.FenXiangMiaoShu = Utils.GetText2(Utils.InputText(model.Remark), 30, true).Trim();
             WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + TuPian.F1(model.ZucheInfoImg[0].FilePath, 210, 70);
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
             CarImg = "<img width='390' height='220' src='" + TuPian.F1(model.ZucheInfoImg[0].FilePath, 640, 400) + "' alt='" + model.CarName + "'>";

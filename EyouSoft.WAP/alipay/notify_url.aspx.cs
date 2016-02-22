@@ -54,7 +54,7 @@ namespace Eyousoft_yhq.Web.Alipay
 
                         string payAmount = xmlDoc.SelectSingleNode("/notify/total_fee").InnerText;
 
-                        decimal payAccount = Convert.ToDecimal(payAmount);
+                        decimal payAccount = Convert.ToDecimal(payAmount)*100;
 
                         if (trade_status == "TRADE_FINISHED")//交易成功
                         {

@@ -60,11 +60,12 @@
                         <select id="advType" name="advType" class="inputselect">
                             <%=EyouSoft.Common.UtilsCommons.GetEnumDDL(EyouSoft.Common.EnumObj.GetList(typeof(EyouSoft.Model.Enum.AdvArea)), EyouSoft.Common.Utils.GetQueryStringValue("advType"))%>
                         </select>
-                        <label>公司简称：</label> 
+                        <label>发布人：</label> 
                         <input type="text" class="inputtext" name="txtCJC" value="<%=EyouSoft.Common.Utils.GetQueryStringValue("txtCJC") %>" />
                         <label>网店名称：</label> 
                         <input type="text" class="inputtext" name="txtWebName" value="<%=EyouSoft.Common.Utils.GetQueryStringValue("txtWebName") %>" />
-                        <input type="submit" class="search-btn" value="" />
+                          <label>总站发布：</label> <input style="vertical-align: bottom;" type="checkbox" class="inputtext" name="checkbol" runat="server" id="checkbol" />
+                        <input style="vertical-align: bottom;" type="submit" class="search-btn" value="" />
                     </div>
                     
                     </form>
@@ -148,7 +149,7 @@
                             </td>
                             <td align="center">
                                
-                                    <%# GetWangDianByID(Eval("AgencyId"))%>
+                                    <%# GetWangDianByID(Eval("AgencyId"), Eval("WebSiteUrl"))%>
                             </td>
                         </tr>
                     </ItemTemplate>

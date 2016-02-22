@@ -88,6 +88,13 @@
                   <span class="number"><i class="num-minus"></i><input id="RoomNum" name="RoomNum" type="tel" value="1"><i class="num-add"></i></span>
                </li>              
          </div>
+         
+         <div class="youhui_box">
+            <ul id="jiagelist">
+               
+            </ul>
+         </div>
+         
          <div class="padd cent"><input id="BtnLogin" type="button" class="y_btn gray_btn" value="非会员直接预订"></div>
    
     <%} %>

@@ -6,7 +6,7 @@
     $(function() {
         $('#code2').bt({
             contentSelector: function() {
-                return "<div class='code2'><a href='#'><img src='<%=erweimapic %>' /></a></div>";
+            return "<div class='code2' style='float:left'>移动版<a href='#'><img src='<%=erweimapic %>' /></a></div><div class='code2' style='float:left'>下载APP<a href='#'><img src='http://m.slej.cn/ErWeiMa.aspx?d=1&codeurl=<%=apppic %>' /></a></div>";
             },
             positions: ['bottom'],
             fill: '#fff',
@@ -15,14 +15,14 @@
             noShadowOpts: { strokeStyle: "#ccc" },
             spikeLength: 6,
             spikeGirth: 12,
-            width: 155,
+            width: 310,
             overlap: 0,
             centerPointY: 14,
             cornerRadius: 0,
             shadow: true,
             shadowColor: 'rgba(0,0,0,.5)',
             padding: 3,
-            cssStyles: { color: '#00387E', 'line-height': '180%' }
+            cssStyles: { color: '#00387E', 'line-height': '180%', 'height': '180px' }
         });
     });
 </script>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using EyouSoft.Common;
+using System.Text;
 
 namespace EyouSoft.Web.WebMaster
 {
@@ -55,8 +56,7 @@ namespace EyouSoft.Web.WebMaster
             txtWapGuiBin.Text = model.WapMakeGuiBin;
             txtWapPuTong.Text = model.WapMakePuTong;
             txtWapYingPin.Text = model.WapMakeYingPing;
-
-
+          
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -95,6 +95,7 @@ namespace EyouSoft.Web.WebMaster
             model.WapMakeGuiBin = Utils.EditInputText(txtWapGuiBin.Text);
             model.WapMakePuTong = Utils.EditInputText(txtWapPuTong.Text);
             model.WapMakeYingPing = Utils.EditInputText(txtWapYingPin.Text);
+            
             return model;
         }
     }

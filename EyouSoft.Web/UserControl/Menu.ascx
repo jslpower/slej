@@ -16,7 +16,14 @@
   { %>
    <%if (companyName != "")
      { %>
-  <div class="logo_fxs"><%=website%></div>
+             <%if (!string.IsNullOrEmpty(Logourl))
+               { %>
+                <div class="logo"><%=Logourl %></div>
+             <%}
+               else
+               {%>
+              <div class="logo_fxs"><%=website%></div>
+              <%} %>
        <div class="head_R">
                   <div class="head_Rtxt">
                   <%= companyName%>

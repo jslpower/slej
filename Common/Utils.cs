@@ -2294,6 +2294,7 @@ namespace EyouSoft.Common
 
             Response.Cookies["openid"].Value = openid;
             Response.Cookies["openid"].Expires = DateTime.MaxValue;
+            Response.Cookies["openid"].Domain = "slej.cn";
         }
 
         /// <summary>

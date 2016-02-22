@@ -84,6 +84,7 @@ namespace EyouSoft.WAP.Flight
             WapHeader1.FenXiangBiaoTi = !string.IsNullOrEmpty(chufa[0]) && !string.IsNullOrEmpty(daoda[0]) ? string.Format("{0}：{1}-{2}机票", chaXun.HangBanRiQi.ToString("MM月dd日"), chufa[0], daoda[0]) : "机票预订";
             WapHeader1.FenXiangMiaoShu = "机票预订";
             WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
+            WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + "/images/logo.jpg"; 
 
         }
 

@@ -33,19 +33,23 @@
         }
 
         function sheZhiLocalUrl(url) {
-            var _options = { s: url, directory: 'slejapp', fileName: 'url.txt', onwrite: function(evt) { window.location.href = url; }, onFail: function() { window.location.href = url; } };
+            var _options = { s: url, directory: 'slejapp', fileName: 'url.txt', onwrite: function(evt) { window.open(url, '_self', 'location=yes');  }, onFail: function() { window.open(url, '_self', 'location=yes'); ; } };
             window.eNow.file.writeFile(_options);
         }
         
         function huoQuYaoQingMa_callback(yaoQingMa) {
             var _url = "/default.aspx";
+            var result = yaoQingMa.toString().match(/^(13|15|18|14|17)\d{9}$/);
+            if (result == null) {
+                window.open(_url, '_self', 'location=yes'); 
+            }
             var _yuMing = huoQuYuMing(yaoQingMa);
             if (_yuMing.length > 0) {
                 _url = "http://" + _yuMing + "/default.aspx";
                 sheZhiLocalUrl(_url);
             }
             else {
-                window.location.href = _url;
+                window.open(_url, '_self', 'location=yes'); 
             }
         }
         
@@ -75,6 +79,7 @@
         }
 
         function init() {
+        setTimeout(function () { navigator.splashscreen.hide(); }, 200);
             huoQuLocalUrl();
         }
 

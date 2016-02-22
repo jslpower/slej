@@ -54,7 +54,7 @@ namespace Eyousoft_yhq.Web.Alipay
 
 
 
-                    decimal payAccount = Convert.ToDecimal(payAmount);
+                    decimal payAccount = Convert.ToDecimal(payAmount)*100;
 
 
                     //int isZhiFuRetCode = new EyouSoft.BLL.OtherStructure.BJiaoYiMingXi().IsZhiFu(DingDanId, DingDanLeiXing);

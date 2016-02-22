@@ -17297,3 +17297,11 @@ alter TABLE [dbo].[tbl_Sysarea]
 	 [AdvLink] [nvarchar](250) NULL,
 	  [AdvTitle] [nvarchar](250) NULL
 GO
+
+INSERT INTO tbl_KV (K,V) VALUES ('JiPiaoXieYi','')
+GO
+
+alter table tbl_JA_Sellers ADD WapLogo nvarchar(250) NULL ;
+GO
+alter table tbl_JA_Sellers ADD WebLogo nvarchar(250) NULL ;
+GO

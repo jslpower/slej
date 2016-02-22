@@ -25,7 +25,7 @@
 <body>
     <div class="index_head">
         <div class="logo">
-            <img src="/images/logo.png"></div>
+            <%=Logourl %></div>
         <div class="head_m">
             <a href="tel:<%= TelNum%>">
                 <div class="i_tel">

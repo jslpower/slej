@@ -249,11 +249,11 @@ namespace EyouSoft.WAP.Mall
                 #region 设置微信分享链接
                 //设置图片链接
                 WapHeader1.FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(model.ProductImgs);
-                WapHeader1.FenXiangBiaoTi = Utils.InputText(model.ProductName);
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = Utils.InputText(model.ProductName);
                 WapHeader1.FenXiangMiaoShu = Utils.InputText(model.Remark);
                 #endregion
 
-                WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+                WapHeader1.FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
             }
         }
         #region 私有方法

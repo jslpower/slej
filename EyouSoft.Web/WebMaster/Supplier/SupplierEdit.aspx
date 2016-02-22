@@ -163,6 +163,24 @@
                     <asp:Literal ID="litBiaoGe" runat="server"></asp:Literal>
                 </td>
             </tr>
+             <tr class="odd">
+                <th width="90" height="30" align="center">
+                    电脑端LOGO：(141*87)
+                </th>
+                <td bgcolor="#E3F1FC">
+                    <uc2:UploadControl ID="upDnLogo" FileTypes="*.jpg;*.gif;*.jpeg;*.png" IsUploadSelf="true"
+                        IsUploadMore="false" runat="server" />
+                    <asp:Literal ID="litdnlogo" runat="server"></asp:Literal>
+                </td>
+                <th width="90" height="30" align="center">
+                    移动端LOGO:(60*37)
+                </th>
+                <td bgcolor="#E3F1FC">
+                    <uc2:UploadControl ID="upYdLogo" FileTypes="*.jpg;" IsUploadSelf="true"
+                        IsUploadMore="false" runat="server" />
+                    <asp:Literal ID="litydlogo" runat="server"></asp:Literal>
+                </td>
+            </tr>
             <tr class="odd">
                 <td height="30" bgcolor="#E3F1FC" align="left" colspan="4">
                     <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">

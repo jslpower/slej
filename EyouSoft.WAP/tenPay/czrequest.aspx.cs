@@ -41,7 +41,7 @@ namespace EyouSoft.WAP.tenPay
 
 
 
-                decimal payAccount = Convert.ToDecimal(model.Totalfee);
+                decimal payAccount = Convert.ToDecimal(model.Totalfee*100);
 
 
                 //int isZhiFuRetCode = new EyouSoft.BLL.OtherStructure.BJiaoYiMingXi().IsZhiFu(DingDanId, DingDanLeiXing);
@@ -168,6 +168,10 @@ namespace EyouSoft.WAP.tenPay
                 }
                 // }
 
+                Response.Clear();
+                Response.Write("<xml><return_code>SUCCESS</return_code></xml>");
+                Response.End();
+                return;
 
                 if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.充值订单)
                 {
@@ -175,7 +179,7 @@ namespace EyouSoft.WAP.tenPay
                     return;
                 }
 
-
+               
 
                 switch (info.OrderType)
                 {

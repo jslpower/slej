@@ -21,3 +21,15 @@
 .fenqifukuan_box{margin:0 auto;}
 .fenqifukuan_box>img{width:94%;}
 	}
+	
+.zhifu-weixin { 
+     width:198px;
+     position:absolute;
+	 top:50%; 
+	 left:50%;
+	 background:#fff;
+	 padding:15px;
+-webkit-transform:translate(-50%,-50%);
+-moz-transform:translate(-50%,-50%);
+	 transform:translate(-50%,-50%);
+	 }

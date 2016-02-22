@@ -75,7 +75,7 @@ namespace EyouSoft.DAL.MemberStructure
         /// <returns></returns>
         public int UpdateDaiLiSellerInfo(EyouSoft.Model.AccountStructure.MSellers model)
         {
-            string sql = "update tbl_JA_Sellers set CompanyName=@CompanyName,CompanyJC=@CompanyJC,SupplierType=@SupplierType,Qualifications=@Qualifications,MapX=@MapX,MapY=@MapY,CardPath=@CardPath,AccountPaht=@AccountPaht,VisitPath=@VisitPath,OtherPath=@OtherPath,FormPath=@FormPath where ID=@ID";
+            string sql = "update tbl_JA_Sellers set CompanyName=@CompanyName,CompanyJC=@CompanyJC,SupplierType=@SupplierType,Qualifications=@Qualifications,MapX=@MapX,MapY=@MapY,CardPath=@CardPath,AccountPaht=@AccountPaht,VisitPath=@VisitPath,OtherPath=@OtherPath,FormPath=@FormPath,WapLogo=@WapLogo,WebLogo=@WebLogo where ID=@ID";
             DbCommand cmd = this._db.GetSqlStringCommand(sql);
 
             this._db.AddInParameter(cmd, "CompanyName", DbType.String, model.CompanyName);
@@ -90,6 +90,8 @@ namespace EyouSoft.DAL.MemberStructure
             this._db.AddInParameter(cmd, "OtherPath", DbType.String, model.OtherPath);
             this._db.AddInParameter(cmd, "FormPath", DbType.String, model.FormPath);
             this._db.AddInParameter(cmd, "ID", DbType.String, model.ID);
+            this._db.AddInParameter(cmd, "WebLogo", DbType.String, model.WebLogo);
+            this._db.AddInParameter(cmd, "WapLogo", DbType.String, model.WapLogo);
 
             int count = DbHelper.ExecuteSql(cmd, this._db);
             return count;
@@ -135,7 +137,7 @@ namespace EyouSoft.DAL.MemberStructure
         /// <returns></returns>
         public int UpdateMemberPass(MMember2 model)
         {
-            string sql = "update tbl_Member set PassWord=@PassWord,MD5Password=@MD5Password where MemberID=@MemberID";
+            string sql = "update tbl_Member set PassWord=@PassWord,MD5Password=@MD5Password where MemberID=@MemberID;UPDATE tbl_Webmaster set Password=@PassWord,MD5Password=@MD5Password WHERE Username=(select top 1 Account from tbl_Member where MemberID=@MemberID) AND LeiXing=2";
             DbCommand cmd = this._db.GetSqlStringCommand(sql);
 
             this._db.AddInParameter(cmd, "PassWord", DbType.String, model.PassWord);

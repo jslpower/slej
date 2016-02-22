@@ -13,6 +13,10 @@
     <script src="/js/jquery_cm.js" type="text/javascript"></script>
 
     <script src="/js/foucs.js" type="text/javascript"></script>
+    
+    <script src="../cordova.js" type="text/javascript"></script>
+
+    <script src="../js/enow.core.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -87,40 +91,6 @@
     })
      $(".nav_ico").click(function(){           window.location ="/Mall/MallType.aspx?MType=1";        })
     $(".main_visual").css("margin-top", "56px");
-</script>
-
-<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
-<script type="text/javascript">
-        var wx_jsapi_config = <%=weixin_jsapi_config %>;
-        wx.config(wx_jsapi_config);
-</script>
-
-<script type="text/javascript">
-        wx.ready(function() {
-            //分享到朋友圈
-            wx.onMenuShareTimeline({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>',
-            });
-            //分享给朋友
-            wx.onMenuShareAppMessage({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>',
-                type: 'link'
-            });
-            //分享到QQ
-            wx.onMenuShareQQ({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>'
-            });
-        });
 </script>
 
 </html>

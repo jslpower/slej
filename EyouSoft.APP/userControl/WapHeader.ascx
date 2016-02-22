@@ -80,7 +80,7 @@
         WeiXinAppId: 'wx23b4841aaff3ad7e',
         WeiXinAppSecret: '75f1353f873294696b1d61588b92d8bd',
         fximgUrl: '<%=FenXiangTuPianFilepath %>',
-        ShareTitle: '<%=FenXiangMiaoShu %>',
+        ShareTitle: '<%=FenXiangBiaoTi %>',
         ShareDescription: '<%=FenXiangMiaoShu %>',
         fxwebpageUrl: '<%=FenXiangLianJie %>'
     }

@@ -223,6 +223,10 @@ namespace EyouSoft.Model
         /// </summary>
         public string BaoJiaXieYi { get; set; }
         /// <summary>
+        /// 机票协议
+        /// </summary>
+        public string JiPiaoXieYi { get; set; }
+        /// <summary>
         /// 关于商旅e家
         /// </summary>
         public string SLEJText { get; set; }

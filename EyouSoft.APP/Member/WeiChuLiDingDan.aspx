@@ -170,6 +170,9 @@
         }
         else if (ordertype == "2") {
             window.location.href = "/Member/XianLuOrderXX.aspx?classid=8&orderid=" + orderid;
+        } 
+        else if (ordertype == "10") {
+            window.location.href = "/Member/JPOrderXX.aspx?classid=10&orderid=" + orderid;
         }
     });
     $("p[data-name=Oname]").click(function() {

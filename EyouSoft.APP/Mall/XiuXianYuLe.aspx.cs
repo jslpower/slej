@@ -27,6 +27,7 @@ namespace EyouSoft.WAP.Mall
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            WapHeader1.isfx = true;
             InitAd();
             initPage();
             IList<string> weixin_jsApiList = new List<string>();
@@ -54,18 +55,18 @@ namespace EyouSoft.WAP.Mall
             {
                 #region 设置微信分享链接
                 //设置图片链接
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ImgFile);
-                FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "休闲娱乐会所" : string.Format("{0}-{1}-休闲娱乐会所", cName, list[0].LeiBieMingCheng);
+                WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ImgFile);
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "休闲娱乐会所" : string.Format("{0}-{1}-休闲娱乐会所", cName, list[0].LeiBieMingCheng);
                 if (leibie != 0)
                 {
                     var leibieModel = new EyouSoft.BLL.MallStructure.BShangChengXiLie().GetModel(leibie);
                     if (leibieModel != null)
                     {
 
-                        FenXiangBiaoTi = string.Format("{0}-休闲娱乐会所", leibieModel.TypeName);
+                        WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.Format("{0}-休闲娱乐会所", leibieModel.TypeName);
                     }
                 }
-                FenXiangMiaoShu = Utils.InputText(list[0].KeyWord);
+                WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = Utils.InputText(list[0].KeyWord);
                 #endregion
                 rptlist.DataSource = list;
                 rptlist.DataBind();
@@ -74,7 +75,7 @@ namespace EyouSoft.WAP.Mall
 
             int itemCount = 0;
 
-            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+            WapHeader1.FenXiangLianJie = FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
 
         }
 

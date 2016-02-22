@@ -102,7 +102,7 @@ public partial class receive : System.Web.UI.Page
 
             string rurl = string.Empty;
             //var YuMingInfo = EyouSoft.Common.Page.HuiYuanPageBase.GetYuMingInfo(); ;
-            rurl = "http://" + Request.Url.Host + "/Default.aspx";
+            rurl = "http://" + Request.Url.Host ;
 
             //string DingDanId = ext1;//订单ID
             decimal payAccount = Convert.ToDecimal(payAmount);
@@ -252,8 +252,7 @@ public partial class receive : System.Web.UI.Page
 
                 if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.充值订单)
                 {
-                    Response.Redirect("/Member/UserCenter.aspx");
-                    return;
+                    rurl += "/Member/UserCenter.aspx";
                 }
 
 
@@ -261,36 +260,38 @@ public partial class receive : System.Web.UI.Page
                 switch (info.OrderType)
                 {
                     case EyouSoft.Model.OtherStructure.DingDanType.长线订单:
-                        Response.Redirect("/Member/XianLuOrderList.aspx?type=1");
+                        rurl += "/Member/XianLuOrderList.aspx?type=1";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.出境订单:
-                        Response.Redirect("/Member/XianLuOrderList.aspx?type=2");
+                        rurl += "/Member/XianLuOrderList.aspx?type=2";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.短线订单:
-                        Response.Redirect("/Member/XianLuOrderList.aspx?type=3");
+                        rurl += "/Member/XianLuOrderList.aspx?type=3";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.单团订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=9");
+                        rurl += "/Member/DingDanList.aspx?OrderType=9";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.机票订单:
-                        Response.Redirect("/Member/JpOrderList.aspx");
+                        rurl += "/Member/JpOrderList.aspx";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.酒店订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=5");
+                        rurl += "/Member/DingDanList.aspx?OrderType=5";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.门票订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=4");
+                        rurl += "/Member/DingDanList.aspx?OrderType=4";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.商城订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=3");
+                        rurl += "/Member/DingDanList.aspx?OrderType=3";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.团购订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=7");
+                        rurl += "/Member/DingDanList.aspx?OrderType=7";
                         break;
                     case EyouSoft.Model.OtherStructure.DingDanType.租车订单:
-                        Response.Redirect("/Member/DingDanList.aspx?OrderType=8");
+                        rurl += "/Member/DingDanList.aspx?OrderType=8";
                         break;
                 }
+
+                Response.Write("<result>1</result>" + "<redirecturl>" + rurl + "</redirecturl>");
             }
             else
             {
@@ -439,6 +440,15 @@ public partial class receive : System.Web.UI.Page
             {
                 info.JiaoYiHao = chongzhi.JiaoYiHao;
                 info.HuiYuanId = chongzhi.HuiYuanId;
+            }
+        }
+        else if (DingDanLeiXing == EyouSoft.Model.Enum.DingDanLeiBie.机票订单)
+        {
+            var jpinfo = new EyouSoft.BLL.JPStructure.BDingDan().GetInfo(orderid);
+            if (jpinfo != null)
+            {
+                info.JiaoYiHao = jpinfo.JiaoYiHao;
+                info.HuiYuanId = jpinfo.HuiYuanId;
             }
         }
 

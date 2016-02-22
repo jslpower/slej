@@ -18,6 +18,7 @@ namespace EyouSoft.Web.WebMaster
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!this.CheckGrantMenu2(EyouSoft.Model.Enum.Privs.Menu2.基础信息管理_站点广告))
             {
                 ToUrl("/webmaster/default.aspx");
@@ -58,7 +59,17 @@ namespace EyouSoft.Web.WebMaster
             }
             if (!string.IsNullOrEmpty(Utils.GetQueryStringValue("txtCJC")))
             {
-                searchModel.CompanyJC = Utils.GetQueryStringValue("txtCJC");
+                searchModel.FaBuRen = Utils.GetQueryStringValue("txtCJC");
+            }
+            var chebol = EyouSoft.Common.Utils.GetQueryStringValue("checkbol");
+            if (chebol.ToLower() == "on")
+            {
+                checkbol.Checked = true;
+                searchModel.ZongFaBol = true;
+            }
+            else
+            {
+                searchModel.ZongFaBol = false;
             }
             IList<EyouSoft.Model.MSysAdv> list = bll.GetList(pageSize, pageIndex, ref recordCount, searchModel);
             if (list != null && list.Count > 0)
@@ -78,9 +89,10 @@ namespace EyouSoft.Web.WebMaster
         /// </summary>
         /// <param name="memberID"></param>
         /// <returns></returns>
-        protected string GetWangDianByID(object AgencyId)
+        protected string GetWangDianByID(object AgencyId,object SiteUrl)
         {
             string id = "";
+            string fhname = "";
             if (AgencyId != null)
             {
                 id = Utils.GetString(AgencyId.ToString(), "");
@@ -92,13 +104,18 @@ namespace EyouSoft.Web.WebMaster
             if (mseller == null) return "金奥";
             if (!string.IsNullOrEmpty(mseller.CompanyJC))
             {
-                return mseller.CompanyJC +  mseller.WebsiteName;
+                fhname= mseller.CompanyJC +  mseller.WebsiteName;
             }
             else
             {
-                return mseller.WebsiteName;
+                fhname= mseller.WebsiteName;
             }
-
+            string WddzUrl = Utils.GetString(SiteUrl.ToString(), "");
+            if (!string.IsNullOrEmpty(WddzUrl))
+            {
+                return string.Format("<a href=\"http://{0}\" target=\"_blank\">{1}</a>", WddzUrl, fhname);
+            }
+            return fhname;
 
         }
         /// <summary>

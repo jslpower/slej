@@ -69,8 +69,8 @@ namespace EyouSoft.WAP.Mall
                     //设置图片链接
                     if (list.Count > 0)
                     {
-                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
-                        FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+                        WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                        WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
 
                         if (leibie != 0)
                         {
@@ -78,10 +78,10 @@ namespace EyouSoft.WAP.Mall
                             if (leibieModel != null)
                             {
 
-                                FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
                             }
                         }
-                        FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                        WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = Utils.InputText(list[0].Remark);
                     }
                     #endregion
 
@@ -95,8 +95,8 @@ namespace EyouSoft.WAP.Mall
                     //设置图片链接
                     if (list.Count > 0)
                     {
-                        FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
-                        FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+                        WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                        WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
 
                         if (leibie != 0)
                         {
@@ -104,10 +104,10 @@ namespace EyouSoft.WAP.Mall
                             if (leibieModel != null)
                             {
 
-                                FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
                             }
                         }
-                        FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                        WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = Utils.InputText(list[0].Remark);
                     }
                     #endregion
 

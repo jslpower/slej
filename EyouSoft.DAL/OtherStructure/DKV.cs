@@ -84,6 +84,7 @@ namespace EyouSoft.DAL.OtherStructure
             strSql.AppendFormat(SqlBcthSetSeting, "DuanXianXieYi", model.DuanXianXieYi);
             strSql.AppendFormat(SqlBcthSetSeting, "TuanGouXieYi", model.TuanGouXieYi);
             strSql.AppendFormat(SqlBcthSetSeting, "BaoJiaXieYi", model.BaoJiaXieYi);
+            strSql.AppendFormat(SqlBcthSetSeting, "JiPiaoXieYi", model.JiPiaoXieYi);
             strSql.AppendFormat(SqlBcthSetSeting, "SLEJText", model.SLEJText);
             strSql.AppendFormat(SqlBcthSetSeting, "MoblieSLEJText", model.MoblieSLEJText);
             strSql.AppendFormat(SqlBcthSetSeting, "DaiLiTiaoKuan", model.DaiLiTiaoKuan);
@@ -211,7 +212,7 @@ namespace EyouSoft.DAL.OtherStructure
                         case "DaiLiTiaoKuan": model.DaiLiTiaoKuan = _v; break;
                         case "WapSet": model.WapSet = _v; break;
                         case "JiaoYiLv": model.JiaoYiLv = Utils.GetDecimal(_v); break;
-
+                        case "JiPiaoXieYi": model.JiPiaoXieYi = _v; break;
                         case "EBaoSSM": model.EBaoSSM = _v; break;
                         case "EBaoYEGL": model.EBaoYEGL = _v; break;
                         case "EBaoCZMX": model.EBaoCZMX = _v; break;

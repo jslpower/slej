@@ -2214,6 +2214,49 @@ namespace EyouSoft.BLL.OtherStructure
         }
         #endregion
 
+        /// <summary>
+        /// 发送团购订单短信，返回10000成功，其它失败
+        /// </summary>
+        /// <param name="dingDanId">订单编号</param>
+        /// <param name="faSongLeiXing">发送类型</param>
+        /// <returns></returns>
+        int FaSongDingDanDuanXin8(string dingDanId, EyouSoft.Model.Enum.DuanXinFaSongLeiXing faSongLeiXing)
+        {
+
+            StringBuilder neiRong = new StringBuilder();
+            string chanPingMingCheng = string.Empty;
+
+            string jinao_dingdanxiaoxi_kefu_shouji = EyouSoft.Toolkit.ConfigHelper.ConfigClass.GetConfigString("JINAO_DINGDANXIAOXI_KEFU_SHOUJI");
+            string jinao_dingdanxiaoxi_kefu_xingming = EyouSoft.Toolkit.ConfigHelper.ConfigClass.GetConfigString("JINAO_DINGDANXIAOXI_KEFU_XINGMING");
+
+            string youKeXingMing = string.Empty;
+            string youKeShouJi = string.Empty;
+
+
+            EyouSoft.Model.OtherStructure.MChongZhi model = new EyouSoft.BLL.OtherStructure.BChongZhi().GetInfo(dingDanId);
+
+
+            youKeXingMing = model.HuiYuanName;
+            youKeShouJi = model.HuiYuanYongHuMing;
+
+            if (model != null)
+            {
+                
+                var duanXinInfo = new EyouSoft.Model.OtherStructure.MDuanXinInfo();
+
+                duanXinInfo.JieShouShouJi = jinao_dingdanxiaoxi_kefu_shouji;
+                duanXinInfo.NeiRong = "您好！手机为" + youKeShouJi + "的用户已经成功充值" + model.JinE.ToString("F2") + "元，请注意查收。【商旅e家】";
+                FaSong(duanXinInfo);
+
+                duanXinInfo.JieShouShouJi = youKeShouJi;
+                duanXinInfo.NeiRong = "您好！您的" + model.JinE.ToString("F2") + "元已经成功充值！感谢支持！电话：4006588180【商旅e家】";
+                FaSong(duanXinInfo);
+            }
+
+
+            return 10000;
+        }
+
         #region public members
         /// <summary>
         /// 发送短信，返回10000成功，其它失败
@@ -2282,6 +2325,7 @@ namespace EyouSoft.BLL.OtherStructure
                 case EyouSoft.Model.Enum.DingDanLeiBie.商城订单: faSongRetCode = FaSongDingDanDuanXin5(dingDanId, faSongLeiXing); break;
                 case EyouSoft.Model.Enum.DingDanLeiBie.团购订单: faSongRetCode = FaSongDingDanDuanXin6(dingDanId, faSongLeiXing); break;
                 case EyouSoft.Model.Enum.DingDanLeiBie.签证订单: faSongRetCode = FaSongDingDanDuanXin7(dingDanId, faSongLeiXing); break;
+                case EyouSoft.Model.Enum.DingDanLeiBie.充值订单: faSongRetCode = FaSongDingDanDuanXin8(dingDanId, faSongLeiXing); break;
                 default: break;
             }
 

@@ -36,7 +36,7 @@ namespace EyouSoft.WAP.Member
             #region
             if (Request.UserAgent.ToLower().Contains("micromessenger"))
             {
-                plaIsWxBow.Visible = true;
+                //plaIsWxBow.Visible = true;
                 var weixin_jsApiList = new List<string>();
                 weixin_jsApiList.Add("chooseWXPay");
                 var weixing_config_info = Utils.get_weixin_jsapi_config_info(weixin_jsApiList);
@@ -46,7 +46,7 @@ namespace EyouSoft.WAP.Member
                 wxModel.openid = OpenID;  
                 if (wxModel == null)
                 {
-                    plaIsWxBow.Visible = false;
+                    //plaIsWxBow.Visible = false;
                 }
             }
             #endregion

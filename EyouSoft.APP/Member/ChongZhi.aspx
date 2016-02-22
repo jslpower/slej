@@ -39,20 +39,21 @@
         </div>
         <div class="zhifu_type">
             <ul>
+              <li id="wxpay" class="R_jiantou"><s class="weixin"></s>
+                        <h3>
+                            微信支付</h3>
+                        <p>
+                            使用微信支付，安全便捷</p>
+                    </li>
                 <li id="epay" class="R_jiantou"><s class="zfb"></s>
                     <h3>
                         支付宝</h3>
                     <p>
                         支持有支付宝，网银的用户使用</p>
                 </li>
-                <asp:PlaceHolder ID="plaIsWxBow" runat="server" Visible="false">
-                    <li id="wxpay" class="R_jiantou"><s class="weixin"></s>
-                        <h3>
-                            微信支付</h3>
-                        <p>
-                            使用微信支付，安全便捷</p>
-                    </li>
-                </asp:PlaceHolder>
+               
+                  
+           
                 <li id="bill99pay" class="R_jiantou"><s class="kq"></s>
                     <h3>
                         快钱支付<span class="font14" style="color: #4d4d4d;">(储蓄卡/信用卡)</span></h3>
@@ -62,6 +63,19 @@
             </ul>
         </div>
     </div>
+    <!---微信支付显示层--->
+<div id="weixinzhifu" class="user-mask" style="display:none;">
+
+   <div class="zhifu-weixin">
+       
+        
+       <div class="cent code_big"><img src="http://m.slej.cn/ErWeiMa.aspx?d=1&codeurl=http://<%=HttpContext.Current.Request.Url.Host.Replace("p.","m.")%>"></div>
+       
+       <div class="cent font_gray">微信扫描二维码，进入会员中心即可微信支付</div>
+       
+          
+   </div>
+</div>
     </form>
 
     <script type="text/javascript">
@@ -113,8 +127,9 @@
                 pageOpt.save("zfb");
             })
             $("#wxpay").click(function() {
-                pageOpt.save("wx");
+                $("#weixinzhifu").show();
             })
+            $("#weixinzhifu").click(function() { $("#weixinzhifu").hide() });
             $("#bill99pay").click(function() {
                 pageOpt.save("kq");
             })

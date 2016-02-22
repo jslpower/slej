@@ -35,20 +35,24 @@ namespace EyouSoft.Web.UserControl
         public string companyName = "";
         public int isquanxian = 0;
         public string website = "";
+        public string Logourl = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             //获取分销商的website
             website = HttpContext.Current.Request.Url.Host.ToLower();
           
             //string website = "8191.slej.cn";
             if (website.IndexOf("slej.cn") > -1 && website.IndexOf("www") < 0)
             {
+               
                 GetQX(website);
                 isfenxiao = 1;
             }
             BKV kv = new BKV();
             menPiaoLinks = kv.GetMenPiaoLinks().Split(' ');
         }
+     
         /// <summary>
         /// 根据分销商的website获取分销商权限
         /// </summary>
@@ -61,6 +65,8 @@ namespace EyouSoft.Web.UserControl
             seller = bsells.GetMSellersByWebSite(website);
             if (seller != null)
             {
+                if(!string.IsNullOrEmpty(seller.WebLogo))
+                    Logourl = "<img src=\"" + seller.WebLogo + "\">";
                 if (seller.NavNum == EyouSoft.Model.Enum.NavNum.代理商导航)
                 {
                     MainNav.Visible = false;

@@ -49,6 +49,10 @@ namespace EyouSoft.Model
         /// 代理商id
         /// </summary>
         public string AgencyId { get; set; }
+        /// <summary>
+        /// 连接地址
+        /// </summary>
+        public string WebSiteUrl { get; set; }
 
     }
 
@@ -77,5 +81,13 @@ namespace EyouSoft.Model
         /// 网点名称
         /// </summary>
         public string WebSiteName { get; set; }
+        /// <summary>
+        /// 发布人
+        /// </summary>
+        public string FaBuRen { get; set; }
+        /// <summary>
+        /// 是否总站发布
+        /// </summary>
+        public bool ZongFaBol { get; set; }
     }
 }

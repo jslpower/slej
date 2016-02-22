@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompanyInfo.aspx.cs" Inherits="EyouSoft.Web.WebMaster.CompanyInfo"
     ValidateRequest="false" %>
-
+<%@ Register Src="/UserControl/UploadControl.ascx" TagName="UploadControl" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -45,6 +45,7 @@
                 <asp:TextBox runat="server" ID="txtContact" class="editText"></asp:TextBox>
             </td>
         </tr>--%>
+       
         <tr class="lr_hangbg">
             <td align="right">
                 我要做分销商：
@@ -225,6 +226,9 @@
 
     <script type="text/javascript">
         var CompanyInfo = {
+            DelFile: function(obj) {
+                $(obj).parent().remove();
+            },
             InitEdit: function() {
                 $("#tableInfo").find(".editText").each(function() {
                     KEditer.init($(this).attr("id"), {

@@ -507,6 +507,7 @@ namespace EyouSoft.Web.WebMaster.MemberCenter
                     bool success = false;
                     Model.MemberID = Request.QueryString["memberid"];
                     MMember2 memmodel = bll.Get(Model.MemberID);
+                    mseller = bsells.Get(Model.MemberID);
                     Model.Account = Account.Text;
                     var webmstermodel = new BLL.OtherStructure.BWebmaster().GetModel(Model.Account);//后台表
                     if (string.IsNullOrEmpty(Address.Text))

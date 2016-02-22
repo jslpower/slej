@@ -28,6 +28,7 @@ namespace EyouSoft.WAP.Mall
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            WapHeader1.isfx = true;
             initPage();
             IList<string> weixin_jsApiList = new List<string>();
             weixin_jsApiList.Add("onMenuShareTimeline");
@@ -82,8 +83,8 @@ namespace EyouSoft.WAP.Mall
 
                 #region 设置微信分享链接
                 //设置图片链接
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
-                FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
+                WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ProductImgs);
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "e家商城" : string.Format("{0}-{1}-e家商城", cName, list[0].TypeName);
 
                 if (leibie != 0)
                 {
@@ -91,15 +92,20 @@ namespace EyouSoft.WAP.Mall
                     if (leibieModel != null)
                     {
 
-                        FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
+                        WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.Format("{0}-e家商城", leibieModel.TypeName);
                     }
                 }
-                FenXiangMiaoShu = Utils.InputText(list[0].Remark);
+                WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = Utils.InputText(list[0].Remark);
                 #endregion
 
                 rptlist.DataSource = list;
                 rptlist.DataBind();
 
+            }
+            else
+            {
+
+                WapHeader1.isfx = false;
             }
 
 
@@ -113,7 +119,7 @@ namespace EyouSoft.WAP.Mall
                 var item = new EyouSoft.IDAL.AccountStructure.BSellers().GetWebSiteName(serchModel.GYSid);
                 lblTypeName.Text = item.CompanyName;
             }
-            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+            WapHeader1.FenXiangLianJie = FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
 
         }
 

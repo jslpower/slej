@@ -32,6 +32,8 @@ namespace EyouSoft.Model.AccountStructure
       private string _companyname;
       private string _companyjc;
       private NavNum _navnum;
+      private string _wapLogo;
+      private string _webLogo;
       /// <summary>
       /// 分销商编号
       /// </summary>
@@ -241,6 +243,14 @@ namespace EyouSoft.Model.AccountStructure
       /// 是否开启总代理配置
       /// </summary>
       public IsZDaiLi IsZDaiLi { get; set; }
+      /// <summary>
+      /// 移动端LOGO
+      /// </summary>
+      public string WapLogo { get; set; }
+      /// <summary>
+      /// 电脑端LOGO
+      /// </summary>
+      public string WebLogo { get; set; }
       #endregion Model
 
    }

@@ -205,6 +205,8 @@ namespace EyouSoft.Web.WebMaster
             DingDanStatus type = (DingDanStatus)state;
             switch (type)
             {
+                case DingDanStatus.取消订单:
+                    return string.Format("<span style='background-color:#906;color:#FFF;'>取消订单</span></a>");
                 case DingDanStatus.等待支付:
                     return string.Format("<span style='background-color:#906;color:#FFF;'>等待付款</span></a>");
                 case DingDanStatus.支付成功:
@@ -212,6 +214,7 @@ namespace EyouSoft.Web.WebMaster
                 case DingDanStatus.出票成功:
                     return string.Format("  <span  style='background-color:#F08C0C;color:#FFF;'>确认出行</span>");
                 default:
+                    return string.Format("  <span  style='background-color:#F08C0C;color:#FFF;'>出票失败</span>");
                     break;
             }
             //switch (state)

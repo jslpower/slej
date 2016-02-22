@@ -28,6 +28,7 @@ namespace EyouSoft.WAP.Mall
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            WapHeader1.isfx = true;
             InitAd();
             initPage();
             IList<string> weixin_jsApiList = new List<string>();
@@ -57,8 +58,8 @@ namespace EyouSoft.WAP.Mall
             {
                 #region 设置微信分享链接
                 //设置图片链接
-                FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ImgFile);
-                FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "购物广场联盟" : string.Format("{0}-{1}-购物广场联盟", cName, list[0].LeiBieMingCheng);
+                WapHeader1.FenXiangTuPianFilepath = FenXiangTuPianFilepath = "http://" + Request.Url.Host + retuImgUrl(list[0].ImgFile);
+                WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.IsNullOrEmpty(cName) ? "购物广场联盟" : string.Format("{0}-{1}-购物广场联盟", cName, list[0].LeiBieMingCheng);
 
                 if (leibie != 0)
                 {
@@ -66,10 +67,10 @@ namespace EyouSoft.WAP.Mall
                     if (leibieModel != null)
                     {
 
-                        FenXiangBiaoTi =   string.Format("{0}-购物广场联盟", leibieModel.TypeName);
+                        WapHeader1.FenXiangBiaoTi = FenXiangBiaoTi = string.Format("{0}-购物广场联盟", leibieModel.TypeName);
                     }
                 }
-                FenXiangMiaoShu = Utils.InputText(list[0].KeyWord);
+                WapHeader1.FenXiangMiaoShu = FenXiangMiaoShu = Utils.InputText(list[0].KeyWord);
                 #endregion
                 rptlist.DataSource = list;
                 rptlist.DataBind();
@@ -77,7 +78,7 @@ namespace EyouSoft.WAP.Mall
             }
 
             int itemCount = 0;
-            FenXiangLianJie =  Utils.redirectUrl(HttpContext.Current.Request.Url.ToString());
+            WapHeader1.FenXiangLianJie = FenXiangLianJie = Utils.redirectUrl(HttpContext.Current.Request.Url.ToString().Replace("p.", "m."));
         }
 
         /// 绑定页面广告

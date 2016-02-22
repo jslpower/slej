@@ -137,39 +137,5 @@
         })
     </script>
 
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
-    <script type="text/javascript">
-    var wx_jsapi_config=<%=weixin_jsapi_config %>;
-    wx.config(wx_jsapi_config);
-    </script>
-
-    <script type="text/javascript">
-        wx.ready(function() {
-            //分享到朋友圈
-            wx.onMenuShareTimeline({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>'
-            });
-            //分享给朋友
-            wx.onMenuShareAppMessage({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>',
-                type: 'link'
-            });
-            //分享到QQ
-            wx.onMenuShareQQ({
-                title: '<%=FenXiangBiaoTi %>',
-                desc: '<%=FenXiangMiaoShu %>',
-                link: '<%= FenXiangLianJie %>',
-                imgUrl: '<%=FenXiangTuPianFilepath %>'
-            });
-        });
-    </script>
-
 </body>
 </html>
